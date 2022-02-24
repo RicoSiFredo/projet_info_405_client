@@ -1,7 +1,7 @@
 {
   "name": "projet_info_405_client",
   "version": "0.1.0",
-  "homepage": "./app/l2_info_9/",
+  "homepage": "app/l2_info_9/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
