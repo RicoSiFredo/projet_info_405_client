@@ -5,7 +5,6 @@ const TYPE = {
     SKILL: 0
 };
 function SkillList({skillList}){
-    console.log(skillList)
     function count(){
         return skillList.size();
         // donne le nombre d'élément

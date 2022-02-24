@@ -23,6 +23,8 @@ export default class User extends ObjectEats {
         Data.setRefreshToken(undefined);
         // supprime les tokens
 
+        this.reset();
+        // On retire ces attributs
         this.logged = false;
         // pas besoin de changer les autre attribut on y accède uniquement si logged == true
 

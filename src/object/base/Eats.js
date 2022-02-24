@@ -81,4 +81,11 @@ export default class Eats{
 
         return res;
     }
+    reset(){
+        let update = this.update;
+        let ref = new this.constructor.prototype.constructor();
+
+        Object.assign(this, ref);
+        this.update = update;
+    }
 }
