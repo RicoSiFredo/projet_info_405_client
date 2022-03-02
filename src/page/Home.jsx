@@ -10,9 +10,13 @@ function Home({user, updatePage}){
         function login(){
             updatePage(PageEnum.Login);
         }
+        function creerProjet(){
+            updatePage(PageEnum.Projet);
+        }
         button = <div>
             <Button variant="primary" onClick={login}>Login</Button>
             <Button variant="primary" onClick={register}>Register</Button>
+            <Button variant="primary" onClick={creerProjet}>Créer un Projet</Button>
         </div>
     }
     else {

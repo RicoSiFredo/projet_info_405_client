@@ -2,7 +2,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import User from './object/User';
-import { Button } from 'react-bootstrap';
 import PageEnum from './enum/PageEnum';
 import Register from './page/Register';
 import Home from './page/Home';
@@ -12,6 +11,7 @@ import HTTP from './utils/HTTP';
 import Constant from './utils/Constant';
 import Profil from './page/Profil';
 import ObjectEats from './object/base/ObjectEats';
+import Projet from './page/Projet';
 
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
@@ -64,6 +64,9 @@ function App() {
     }
     else if(page.equals(PageEnum.Profil)){
         return <Profil user={user} updatePage={updatePage}></Profil>;
+    }
+    else if(page.equals(PageEnum.Projet)){
+        return <Projet user={user} updatePage={updatePage}></Projet>;
     }
 }
 
