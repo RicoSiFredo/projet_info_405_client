@@ -13,6 +13,7 @@ function ProfilField({user, label, name, canEdit, value}){
     const [val, updateVal] = useState(value == undefined ? "" : value /* si il n'y a pas de valeur (undefined) on met "" */);
     // variable qui correspond à l'erreur
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
+
     if(edit){
         // Si l'utilisateur est en train de changé ces données
         function edit(){
@@ -63,7 +64,7 @@ function ProfilField({user, label, name, canEdit, value}){
         if(canEdit){
             // si on a la permission de modifier
             function startEdit(){
-                updateError(ErrorEats.NO_ERROR)
+                updateError(ErrorEats.NO_ERROR);
                 updateEdit(true);
                 // passe à la vue de modification
             }

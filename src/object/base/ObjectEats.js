@@ -18,48 +18,8 @@ export default class ObjectEats extends Eats {
     constructor() {
         super();
     }
-    static fakeUpdate(base){
-        let obj = {...base}
-        Object.setPrototypeOf(obj, base)
-        return obj;
-    }
     canApplyDataDeep(json){
         return json["id_str"]!=undefined&&(this.id_str==undefined||this.id_str==json["id_str"]);
-    }
-    makeRequest(url, params, failed, success){
-        let object = this;
-        HTTP.queryPost(
-            Constant.SERVER_URL + url,
-            params,
-            function(error){
-                failed(error);
-            }, 
-            function(response){
-                if(response["status"]=="success"){
-                    object.applyRequest(response);
-                    if(success!=undefined){
-                        success(response);
-                    }
-                    if(object.update!=undefined){
-                        object.update();
-                    }
-                }
-            }
-        )
-    }
-    applyRequest(response){
-        let data = response["result"];
-        let props = Object.keys(data);
-        for(let i=0; i<props.length; i++){
-            if(Array.isArray(data[props[i]])){
-                for(let j=0; j<data[props[i]].length; j++){
-                    this.applyData(data[props[i]][j], this.parent);
-                }
-            }
-            else if(Utils.getType(data[props[i]])=="object"){
-                this.applyData(data[props[i]], this.parent);
-            }
-        }
     }
     applyData(json, parent){
         if(!this.isFinished()){

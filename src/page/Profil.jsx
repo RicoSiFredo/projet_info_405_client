@@ -21,6 +21,7 @@ function Profil({user, updatePage}){
         <SkillList skillList={user.skillList}>
 
         </SkillList>
+        
         <Button variant="primary">Ajouter un skill</Button>
 
         <Button variant="primary" onClick={back}>Home</Button>

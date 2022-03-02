@@ -16,6 +16,16 @@ export default class ListEats extends Eats {
         this.parent = parent;
         this.compare = compare;
     }
+    static fakeUpdate(base){
+        let obj = new ListEats(base.key, base.parent, base.compare)
+
+        let props = Object.keys(base);
+        for(let i=0; i<props.length; i++){
+            obj[props[i]] = base[props[i]];
+        }
+
+        return obj;
+    }
     map(func){
         return this.list.map(func);
     }
@@ -52,22 +62,29 @@ export default class ListEats extends Eats {
     }
     applyData(json, parent){
         if(!this.isFinished()){
-            let can = Utils.canApplyData(parent, json);
+            let can = Utils.canApplyData(parent, json) || this.key == "";
             if(can){
                 this.parent = parent;
-                if(json[this.key]!=undefined){
-                    for(let i=0; i<json[this.key].length;i++){
+                let jsonAccess;
+                if(this.key == ""){
+                    jsonAccess = json;
+                }
+                else {
+                    jsonAccess = json[this.key];
+                }
+                if(jsonAccess!=undefined){
+                    for(let i=0; i<jsonAccess.length;i++){
                         let found = false;
                         let index = 0;
                         let j = 0;
                         while(!found&&j<this.list.length){
-                            if(this.list[j].equals(json[this.key][i])){
+                            if(this.list[j].equals(jsonAccess[i])){
                                 found = true;
                                 index = j;
                             }
                             j++;
                         }
-                        if(json[this.key][i]["id_del_str"]!=undefined){
+                        if(jsonAccess[i]["id_del_str"]!=undefined){
                             if(found){
                                 this.removeIndex(index);
                             }
@@ -75,12 +92,12 @@ export default class ListEats extends Eats {
                         else {
                             if(!found){
                                 // add only if the elem is owned by the parent
-                                let elem = BuildEats.build(json[this.key][i]);
-                                elem.applyData(json[this.key][i], this.parent);
+                                let elem = BuildEats.build(jsonAccess[i]);
+                                elem.applyData(jsonAccess[i], this.parent);
                                 this.add(elem);
                             }
                             else {
-                                this.list[index].applyData(json[this.key][i], this.parent);
+                                this.list[index].applyData(jsonAccess[i], this.parent);
                                 this.sort();
                             }
                         }

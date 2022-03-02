@@ -1,3 +1,7 @@
+import Constant from "../../utils/Constant";
+import HTTP from "../../utils/HTTP";
+import Utils from "../../utils/Utils";
+
 export default class Eats{
     
     finished = false;
@@ -20,6 +24,13 @@ export default class Eats{
             }
         }
         return arr;
+    }
+    static fakeUpdate(base){
+        let obj = {...base}
+
+        Object.setPrototypeOf(obj, base)
+
+        return obj;
     }
 
     isFinished(){
@@ -80,6 +91,44 @@ export default class Eats{
         this.assignElem(allParent);
 
         return res;
+    }
+    makeRequest(url, params, failed, success){
+        let object = this;
+        HTTP.queryPost(
+            Constant.SERVER_URL + url,
+            params,
+            function(error){
+                failed(error);
+            }, 
+            function(response){
+                if(response["status"]=="success"){
+                    object.applyRequest(response);
+                    if(success!=undefined){
+                        success(response);
+                    }
+                    if(object.update!=undefined){
+                        object.update();
+                    }
+                } else {
+                    failed(response);
+                }
+            }
+        )
+    }
+    applyRequest(response){
+        let data = response["result"];
+        let props = Object.keys(data);
+        for(let i=0; i<props.length; i++){
+            if(Array.isArray(data[props[i]])){
+                this.applyData(data[props[i]], this.parent);
+                for(let j=0; j<data[props[i]].length; j++){
+                    this.applyData(data[props[i]][j], this.parent);
+                }
+            }
+            else if(Utils.getType(data[props[i]])=="object"){
+                this.applyData(data[props[i]], this.parent);
+            }
+        }
     }
     reset(){
         let update = this.update;

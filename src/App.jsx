@@ -10,13 +10,13 @@ import Data from './utils/Data';
 import HTTP from './utils/HTTP';
 import Constant from './utils/Constant';
 import Profil from './page/Profil';
-import ObjectEats from './object/base/ObjectEats';
 import Projet from './page/Projet';
+import Eats from './object/base/Eats';
 
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
     const [user, updateUser] = useState(new User());
-
+    
     useEffect(function(){
         // Cette fonction s'excute uniquement au lancement de la page
         // car [], la fonction s'excute au changement de 1 des éléments de la liste
@@ -45,7 +45,7 @@ function App() {
     }, []);
 
     function refreshPage(){
-        updateUser(ObjectEats.fakeUpdate(user));
+        updateUser(Eats.fakeUpdate(user));
         // fait croire à un changement
     }
 
