@@ -57,7 +57,12 @@ export default class ObjectEats extends Eats {
     
                                 let elem = propsJson[j].substring(propsJson[j].indexOf('.') + 1);
                                 if(props[i] == elem){
-                                    this[props[i]] = json[propsJson[j]];
+                                    if(Utils.isObject(json[propsJson[j]])&&json[propsJson[j]].low!=undefined&&json[propsJson[j]].high!=undefined) {
+                                        this[props[i]] = json[propsJson[j]].low;
+                                    }
+                                    else {
+                                        this[props[i]] = json[propsJson[j]];
+                                    }
                                 }
                             }
                         }

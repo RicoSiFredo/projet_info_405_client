@@ -6,14 +6,11 @@ import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
 
-function Login({user, updatePage}){
+function Login({user, back, updatePage}){
     const [email, updateEmail] = useState("");
     const [password, updatePassword] = useState(""); 
     // variable qui correspond à l'erreur
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
-    function back(){
-        updatePage(PageEnum.Home);
-    }
     function login(){
         updateError(ErrorEats.NO_ERROR);
         // pour l'instant aucune erreur
@@ -60,7 +57,6 @@ function Login({user, updatePage}){
         </Form.Group>
         <p>{error.toString()}</p>
         <Button variant="primary" onClick={login}>Login</Button>
-        <Button variant="primary" onClick={back}>Home</Button>
     </div>
 }
 export default Login;

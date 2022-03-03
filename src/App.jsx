@@ -10,11 +10,14 @@ import Data from './utils/Data';
 import HTTP from './utils/HTTP';
 import Constant from './utils/Constant';
 import Profil from './page/Profil';
-import Projet from './page/Projet';
+import CreateProject from './page/CreateProject';
+import Project from './page/Project';
 import Eats from './object/base/Eats';
+import { Button } from 'react-bootstrap';
 
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
+    const [pageList, updatePageList] = useState([]);
     const [user, updateUser] = useState(new User());
     
     useEffect(function(){
@@ -44,6 +47,23 @@ function App() {
         }
     }, []);
 
+    useEffect(function(){
+        if(pageList.length == 0||
+            !pageList[pageList.length - 1].equals(page)){
+            pageList.push(page);
+            updatePageList([...pageList]);
+        }
+    }, [page]);
+
+    function back(){
+        if(pageList.length>1){
+            pageList.splice(pageList.length - 1, 1)
+            updatePage(pageList[pageList.length - 1]);
+            pageList.splice(pageList.length - 1, 1)
+            updatePageList([...pageList]);
+        }
+    }
+
     function refreshPage(){
         updateUser(Eats.fakeUpdate(user));
         // fait croire à un changement
@@ -53,21 +73,33 @@ function App() {
     // Des que l'utilisateur est mis à jour on appel la fonction refreshPage
     // Permet de recharger la page a chaque appel
 
+    let res;
     if(page.equals(PageEnum.Home)){
-        return <Home user={user} updatePage={updatePage}></Home>;
+        res = <Home user={user} updatePage={updatePage}></Home>;
     }
     else if(page.equals(PageEnum.Login)){
-        return <Login user={user} updatePage={updatePage}></Login>;
+        res = <Login back={back} user={user} updatePage={updatePage}></Login>;
     }
     else if(page.equals(PageEnum.Register)){
-        return <Register user={user} updatePage={updatePage}></Register>;
+        res = <Register back={back} user={user} updatePage={updatePage}></Register>;
     }
     else if(page.equals(PageEnum.Profil)){
-        return <Profil user={user} updatePage={updatePage}></Profil>;
+        res = <Profil back={back} user={user} updatePage={updatePage}></Profil>;
     }
-    else if(page.equals(PageEnum.Projet)){
-        return <Projet user={user} updatePage={updatePage}></Projet>;
+    else if(page.equals(PageEnum.CreateProject)){
+        res = <CreateProject back={back} user={user} updatePage={updatePage}></CreateProject>;
     }
+    else if(page.equals(PageEnum.Project)){
+        res = <Project back={back} project={user.project.get()} updatePage={updatePage}></Project>;
+    }
+    let backButton;
+    if(pageList.length>1){
+        backButton = <Button onClick={back} variant='primary'>Back</Button>
+    }
+    return <div>
+        {backButton}
+        {res}
+    </div>
 }
 
 export default App;

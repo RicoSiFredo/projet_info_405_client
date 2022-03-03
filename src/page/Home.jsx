@@ -22,13 +22,9 @@ function Home({user, updatePage}){
         function profil(){
             updatePage(PageEnum.Profil);
         }
-        function creerProjet(){
-            updatePage(PageEnum.Projet);
-        }
         button = <div>
             <Button variant="primary" onClick={logout}>Logout</Button>
             <Button variant="primary" onClick={profil}>Profil</Button>
-            <Button variant="primary" onClick={creerProjet}>Créer un Projet</Button>
         </div>
     }
     return <div>

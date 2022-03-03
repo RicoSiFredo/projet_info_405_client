@@ -20,4 +20,9 @@ export default class Utils {
     static canApplyData(obj, json){
         return json["id_str"]!=undefined&&(obj.id_str==undefined||obj.id_str==json["id_str"]);
     }
+    static isObject(obj){
+        return typeof obj === 'object' &&
+        !Array.isArray(obj) &&
+        obj !== null
+    }
 }

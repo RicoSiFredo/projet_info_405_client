@@ -6,13 +6,15 @@ export default class PageEnum extends EatsEnum {
     static LoginStr = "page_login"
     static RegisterStr = "page_register"
     static ProfilStr = "page_profil";
-    static ProjetStr = "page_projet";
+    static ProjectStr = "page_projet";
+    static CreateProjectStr = "page_create_projet";
 
     static Home = new PageEnum(PageEnum.HomeStr);
     static Login = new PageEnum(PageEnum.LoginStr);
     static Register = new PageEnum(PageEnum.RegisterStr);
     static Profil = new PageEnum(PageEnum.ProfilStr);
-    static Projet = new PageEnum(PageEnum.ProjetStr);
+    static Project = new PageEnum(PageEnum.ProjectStr);
+    static CreateProject = new PageEnum(PageEnum.CreateProjectStr);
 
     constructor(name) {
         super(name);

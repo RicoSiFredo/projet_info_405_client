@@ -1,4 +1,6 @@
 import Data from "../utils/Data";
+import CompareEats from "./base/CompareEats";
+import ForeignEats from "./base/ForeignEats";
 import ListEats from "./base/ListEats";
 import ObjectEats from "./base/ObjectEats";
 
@@ -6,11 +8,14 @@ export default class User extends ObjectEats {
 
     static TYPE = "User";
 
+    project = new ForeignEats();
+
     firstname = undefined;
     lastname = undefined;
     description = undefined;
 
     skillList = new ListEats("got_skill", this);
+    actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
 
     logged = false;
 
@@ -54,6 +59,26 @@ export default class User extends ObjectEats {
     getAllSkill(failed, success){
         super.makeRequest(
             "user/get/skill",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+
+    getAllProject(failed, success){
+        super.makeRequest(
+            "user/get/project",
             {
                 access_token: Data.accessToken(),
                 id: this.id_str

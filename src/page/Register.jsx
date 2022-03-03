@@ -6,16 +6,13 @@ import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
 
-function Register({user, updatePage}){
+function Register({back, user, updatePage}){
     const [email, updateEmail] = useState("");
     const [firstname, updateFirstname] = useState("");
     const [lastname, updateLastname] = useState("");
     const [password, updatePassword] = useState(""); 
     // variable qui correspond à l'erreur
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
-    function back(){
-        updatePage(PageEnum.Home);
-    }
     function register(){
         updateError(ErrorEats.NO_ERROR);
         // pour l'instant aucune erreur
@@ -78,7 +75,6 @@ function Register({user, updatePage}){
         </Form.Group>
         <p>{error.toString()}</p>
         <Button variant="primary" onClick={register}>Register</Button>
-        <Button variant="primary" onClick={back}>Home</Button>
     </div>
 }
 export default Register;

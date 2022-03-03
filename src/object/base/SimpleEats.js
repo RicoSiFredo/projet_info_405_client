@@ -1,4 +1,4 @@
-import { canApplyData } from "../../utils/Utils";
+import Utils from "../../utils/Utils";
 import BuildEats from "./BuildEats";
 import ObjectEats from "./ObjectEats";
 
@@ -20,7 +20,7 @@ export default class SimpleEats extends ObjectEats {
                 super.applyData(json[this.key][0], parent);
             }
             else {
-                if(canApplyData(this.parent, json)){
+                if(Utils.canApplyData(this.parent, json)){
                     let temp = BuildEats.build(json[this.key][0]);
                     this.init = true;
                     super.copy(temp);

@@ -3,13 +3,15 @@ import { Button } from "react-bootstrap";
 import ProfilField from "../component/ProfilField";
 import PageEnum from "../enum/PageEnum";
 import SkillList from "../object/list/SkillList";
+import UserProjectList from "../object/list/UserProjectList";
 
-function Profil({user, updatePage}){
+function Profil({back, user, updatePage}){
     useEffect(function(){
         user.getAllSkill();
-    }, [])
-    function back(){
-        updatePage(PageEnum.Home);
+        user.getAllProject();
+    }, []);
+    function creerProjet(){
+        updatePage(PageEnum.CreateProject);
     }
     return <div>
         <p>Profil</p>
@@ -24,7 +26,13 @@ function Profil({user, updatePage}){
         
         <Button variant="primary">Ajouter un skill</Button>
 
-        <Button variant="primary" onClick={back}>Home</Button>
+        <p>Liste des Projets</p>
+
+        <UserProjectList user={user} updatePage={updatePage} actionList={user.actionList}>
+
+        </UserProjectList>
+
+        <Button variant="primary" onClick={creerProjet}>Créer un Projet</Button>
     </div>
 }
 export default Profil;
