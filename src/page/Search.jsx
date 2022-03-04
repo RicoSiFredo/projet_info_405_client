@@ -21,6 +21,7 @@ function Search({back, user, updatePage}){
         chercher();
     }
     function chercher(){
+        console.log(list);
         list.reset();
         list.makeRequest(
             '/search/element', 
@@ -28,25 +29,12 @@ function Search({back, user, updatePage}){
                 name: name,
             },
             function(error){
-                console.log(error)
             },
             function(response){
-                console.log(response)
-                console.log(list)
-                /*if(Response.isSuccessResponse(response)){
-                    //back();
-                }
-                else {
-                    updateError(new ErrorEats(
-                        Response.error(response)
-                    ));
-                }*/
+                console.log(list);
             }
         )
     }
-    /*
-    <SkillBlock></SkillBlock>
-    */
     return <div>
         <Button variant="primary" onClick={back}>Home</Button>
         <Field name={"name"} label="Nom" val={name} changeValue={chercherEvent}></Field>
