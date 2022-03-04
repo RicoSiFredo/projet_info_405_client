@@ -11,6 +11,7 @@ import HTTP from './utils/HTTP';
 import Constant from './utils/Constant';
 import Profil from './page/Profil';
 import CreateProject from './page/CreateProject';
+import SearchProject from './page/SearchProject';
 import Project from './page/Project';
 import Eats from './object/base/Eats';
 import { Button } from 'react-bootstrap';
@@ -88,6 +89,9 @@ function App() {
     }
     else if(page.equals(PageEnum.CreateProject)){
         res = <CreateProject back={back} user={user} updatePage={updatePage}></CreateProject>;
+    }
+    else if(page.equals(PageEnum.SearchProject)){
+        res = <SearchProject back={back} user={user} updatePage={updatePage}></SearchProject>;
     }
     else if(page.equals(PageEnum.Project)){
         res = <Project back={back} project={user.project.get()} updatePage={updatePage}></Project>;

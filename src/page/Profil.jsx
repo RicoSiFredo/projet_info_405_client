@@ -4,6 +4,7 @@ import ProfilField from "../component/ProfilField";
 import PageEnum from "../enum/PageEnum";
 import SkillList from "../object/list/SkillList";
 import UserProjectList from "../object/list/UserProjectList";
+import Login from "./Login";
 
 function Profil({back, user, updatePage}){
     useEffect(function(){
@@ -13,6 +14,10 @@ function Profil({back, user, updatePage}){
     function creerProjet(){
         updatePage(PageEnum.CreateProject);
     }
+    function chercherProjet(){
+        updatePage(PageEnum.SearchProject);
+    }
+
     return <div>
         <p>Profil</p>
 
@@ -33,6 +38,9 @@ function Profil({back, user, updatePage}){
         </UserProjectList>
 
         <Button variant="primary" onClick={creerProjet}>Créer un Projet</Button>
+
+        <Button variant="primary" onClick={chercherProjet}>Chercher un Projet</Button>
+
     </div>
 }
 export default Profil;
