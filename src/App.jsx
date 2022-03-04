@@ -11,7 +11,7 @@ import HTTP from './utils/HTTP';
 import Constant from './utils/Constant';
 import Profil from './page/Profil';
 import CreateProject from './page/CreateProject';
-import SearchProject from './page/SearchProject';
+import Search from './page/Search';
 import Project from './page/Project';
 import Eats from './object/base/Eats';
 import { Button } from 'react-bootstrap';
@@ -90,8 +90,8 @@ function App() {
     else if(page.equals(PageEnum.CreateProject)){
         res = <CreateProject back={back} user={user} updatePage={updatePage}></CreateProject>;
     }
-    else if(page.equals(PageEnum.SearchProject)){
-        res = <SearchProject back={back} user={user} updatePage={updatePage}></SearchProject>;
+    else if(page.equals(PageEnum.Search)){
+        res = <Search back={back} user={user} updatePage={updatePage}></Search>;
     }
     else if(page.equals(PageEnum.Project)){
         res = <Project back={back} project={user.project.get()} updatePage={updatePage}></Project>;
@@ -100,8 +100,12 @@ function App() {
     if(pageList.length>1){
         backButton = <Button onClick={back} variant='primary'>Back</Button>
     }
+    function chercher(){
+        updatePage(PageEnum.Search);
+    }
     return <div>
         {backButton}
+        <Button onClick={chercher} variant='primary'>Chercher</Button>
         {res}
     </div>
 }

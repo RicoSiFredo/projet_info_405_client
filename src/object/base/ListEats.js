@@ -62,7 +62,7 @@ export default class ListEats extends Eats {
     }
     applyData(json, parent){
         if(!this.isFinished()){
-            let can = Utils.canApplyData(parent, json) || this.key == "";
+            let can = this.key == undefined || this.key == "" || Utils.canApplyData(parent, json);
             if(can){
                 this.parent = parent;
                 let jsonAccess;
@@ -159,5 +159,11 @@ export default class ListEats extends Eats {
             i++;
         }
         return elem;
+    }
+    reset(){
+        this.list = [];
+        if(this.update!=undefined){
+            this.update();
+        }
     }
 }

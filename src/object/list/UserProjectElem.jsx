@@ -3,9 +3,7 @@ import PageEnum from "../../enum/PageEnum";
 
 function UserProjectElem({action, user, updatePage}){
     function openProfil(){
-        console.log(user.project)
         user.project.set(action.project);
-        console.log(user)
         updatePage(PageEnum.Project);
     }
     return <div>

@@ -132,9 +132,14 @@ export default class Eats{
     }
     reset(){
         let update = this.update;
+        console.log(this)
         let ref = new this.constructor.prototype.constructor();
 
         Object.assign(this, ref);
         this.update = update;
+        console.log(this)
+        if(this.update!=undefined){
+            this.update();
+        }
     }
 }
