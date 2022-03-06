@@ -9,6 +9,7 @@ import ListEats from "../object/base/ListEats";
 import Data from "../utils/Data";
 import Response from "../utils/Response";
 
+
 function Search({back, user, updatePage}){
     const [name, updateName] = useState("");
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
@@ -41,11 +42,17 @@ function Search({back, user, updatePage}){
         <Button variant="primary" onClick={chercher}>Chercher</Button>
         {
             list.map(function(object, index) {
+                function openProfil(){
+                    user.project.set(object);
+                    updatePage(PageEnum.Project);
+                }
                 return <div key={index}>
-                    <p>{object.name == undefined ? object.firstname : object.name}</p>
+                    <p>{object.name == undefined ? object.firstname : object.name}</p> 
+                    <Button onClick={openProfil} variant="primary">Voir</Button>
                 </div>
             })
         }
     </div>
 }
 export default Search;
+
