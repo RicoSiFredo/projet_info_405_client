@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
+import AddSkill from "../component/AddSkill";
 import ProfilField from "../component/ProfilField";
 import PageEnum from "../enum/PageEnum";
 import SkillList from "../object/list/SkillList";
@@ -26,7 +27,7 @@ function Profil({back, user, updatePage}){
 
         </SkillList>
         
-        <Button variant="primary">Ajouter un skill</Button>
+        <AddSkill></AddSkill>
 
         <p>Liste des Projets</p>
 

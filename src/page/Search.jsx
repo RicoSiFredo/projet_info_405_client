@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Field from "../component/Field";
 import PageEnum from "../enum/PageEnum";
@@ -9,20 +9,21 @@ import ListEats from "../object/base/ListEats";
 import Data from "../utils/Data";
 import Response from "../utils/Response";
 
-
 function Search({back, user, updatePage}){
     const [name, updateName] = useState("");
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+
+    useEffect(function(){
+        chercher();
+    }, [name])
 
     list.update = function(){
         updateList(Eats.fakeUpdate(list))
     }
     function chercherEvent(e){
         updateName(e.target.value);
-        chercher();
     }
     function chercher(){
-        console.log(list);
         list.reset();
         list.makeRequest(
             '/search/element', 
@@ -32,7 +33,6 @@ function Search({back, user, updatePage}){
             function(error){
             },
             function(response){
-                console.log(list);
             }
         )
     }
