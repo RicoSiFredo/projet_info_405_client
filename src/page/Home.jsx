@@ -20,6 +20,7 @@ function Home({user, updatePage}){
             user.logout();
         }
         function profil(){
+            user.user.set(user);
             updatePage(PageEnum.Profil);
         }
         button = <div>

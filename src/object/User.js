@@ -9,6 +9,7 @@ export default class User extends ObjectEats {
     static TYPE = "User";
 
     project = new ForeignEats();
+    user = new ForeignEats();
 
     firstname = undefined;
     lastname = undefined;
@@ -64,6 +65,7 @@ export default class User extends ObjectEats {
                 id: this.id_str
             },
             function(error){
+                console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }
@@ -94,18 +96,6 @@ export default class User extends ObjectEats {
                 }
             }
         )
-    }
-
-    set(userObject){
-        if (userObject instanceof User){
-            
-            this.firstname = userObject.firstname;
-            this.lastname = userObject.lastname;
-            this.description = userObject.description;
-
-            
-            
-        }
     }
 }
 

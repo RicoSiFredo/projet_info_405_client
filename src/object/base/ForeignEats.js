@@ -10,7 +10,7 @@ export default class ForeignEats extends Eats {
 
     set(elem){
         this.elem = elem;
-        if(this.update!=undefined){
+        if(this.elem.update!=undefined){
             this.update();
         }
     }

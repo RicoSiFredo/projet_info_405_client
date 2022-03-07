@@ -46,9 +46,11 @@ function Search({back, user, updatePage}){
                 function openProfil(){
                     if (object instanceof Project){
                         user.project.set(object);
+                        object.update = user.update;
                         updatePage(PageEnum.Project);
                     }else{
-                        user.set(object);
+                        user.user.set(object);
+                        object.update = user.update;
                         updatePage(PageEnum.Profil);
                     }
                     

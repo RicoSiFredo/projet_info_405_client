@@ -85,7 +85,7 @@ function App() {
         res = <Register back={back} user={user} updatePage={updatePage}></Register>;
     }
     else if(page.equals(PageEnum.Profil)){
-        res = <Profil back={back} user={user} updatePage={updatePage}></Profil>;
+        res = <Profil back={back} user={user.user.get()} updatePage={updatePage}></Profil>;
     }
     else if(page.equals(PageEnum.CreateProject)){
         res = <CreateProject back={back} user={user} updatePage={updatePage}></CreateProject>;
