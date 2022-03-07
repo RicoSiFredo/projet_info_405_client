@@ -28,7 +28,7 @@ function Profil({back, user, updatePage}){
 
         </SkillList>
         
-        <AddSkill></AddSkill>
+        <AddSkill user={user} canEdit ={true}></AddSkill>
 
         <p>Liste des Projets</p>
 
