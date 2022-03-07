@@ -95,5 +95,17 @@ export default class User extends ObjectEats {
             }
         )
     }
+
+    set(userObject){
+        if (userObject instanceof User){
+            
+            this.firstname = userObject.firstname;
+            this.lastname = userObject.lastname;
+            this.description = userObject.description;
+
+            
+            
+        }
+    }
 }
 

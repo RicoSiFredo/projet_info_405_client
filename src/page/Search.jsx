@@ -8,6 +8,7 @@ import ErrorEats from "../object/base/ErrorEats";
 import ListEats from "../object/base/ListEats";
 import Data from "../utils/Data";
 import Response from "../utils/Response";
+import Project from "../object/Project";
 
 function Search({back, user, updatePage}){
     const [name, updateName] = useState("");
@@ -43,8 +44,14 @@ function Search({back, user, updatePage}){
         {
             list.map(function(object, index) {
                 function openProfil(){
-                    user.project.set(object);
-                    updatePage(PageEnum.Project);
+                    if (object instanceof Project){
+                        user.project.set(object);
+                        updatePage(PageEnum.Project);
+                    }else{
+                        user.set(object);
+                        updatePage(PageEnum.Profil);
+                    }
+                    
                 }
                 return <div key={index}>
                     <p>{object.name == undefined ? object.firstname : object.name}</p> 
