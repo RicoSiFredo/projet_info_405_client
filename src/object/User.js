@@ -65,7 +65,6 @@ export default class User extends ObjectEats {
                 id: this.id_str
             },
             function(error){
-                console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }

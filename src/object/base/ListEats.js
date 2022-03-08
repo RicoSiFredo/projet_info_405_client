@@ -84,21 +84,23 @@ export default class ListEats extends Eats {
                             }
                             j++;
                         }
-                        if(jsonAccess[i]["id_del_str"]!=undefined){
-                            if(found){
-                                this.removeIndex(index);
-                            }
-                        }
-                        else {
-                            if(!found){
-                                // add only if the elem is owned by the parent
-                                let elem = BuildEats.build(jsonAccess[i]);
-                                elem.applyData(jsonAccess[i], this.parent);
-                                this.add(elem);
+                        if(jsonAccess[i]!=null){
+                            if(jsonAccess[i]["id_del_str"]!=undefined){
+                                if(found){
+                                    this.removeIndex(index);
+                                }
                             }
                             else {
-                                this.list[index].applyData(jsonAccess[i], this.parent);
-                                this.sort();
+                                if(!found){
+                                    // add only if the elem is owned by the parent
+                                    let elem = BuildEats.build(jsonAccess[i]);
+                                    elem.applyData(jsonAccess[i], this.parent);
+                                    this.add(elem);
+                                }
+                                else {
+                                    this.list[index].applyData(jsonAccess[i], this.parent);
+                                    this.sort();
+                                }
                             }
                         }
                     }
