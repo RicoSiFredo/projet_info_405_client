@@ -4,7 +4,6 @@ import { Button } from "react-bootstrap";
 function ProjectUserCheckElem({project, list, elem}){
 
     const [role, updateRole] = useState(undefined);
-    const [role, updateRole] = useState(undefined);
 
     let action;
     if(elem.actionList.size()>0){
@@ -12,7 +11,7 @@ function ProjectUserCheckElem({project, list, elem}){
     }
 
     function inviter(){
-        list.makeRequest
+        //list.makeRequest
     }
 
     let content;
