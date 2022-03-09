@@ -78,6 +78,7 @@ export default class User extends ObjectEats {
     }
 
     getAllProject(failed, success){
+        let obj = this;
         super.makeRequest(
             "user/get/project",
             {
@@ -90,6 +91,7 @@ export default class User extends ObjectEats {
                 }
             },
             function(response){
+                console.log(obj)
                 if(success!=undefined){
                     success(response);
                 }

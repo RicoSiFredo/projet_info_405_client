@@ -105,6 +105,9 @@ function AddSkill({user,canEdit}){
                 <Button variant="primary" onClick={startEdit}>Ajouter un skill</Button>
             </div>
         }
+        else {
+            return <p></p>
+        }
     }
 }
 export default AddSkill;

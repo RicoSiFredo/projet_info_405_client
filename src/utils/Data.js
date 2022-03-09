@@ -15,4 +15,7 @@ export default class Data {
         // change le refresh token pour renouveller une session
         return localStorage.setItem("refresh_token", token);
     }
+    static isMe(user){
+        return user.logged;
+    }
 }

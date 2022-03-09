@@ -32,12 +32,15 @@ function SkillList({skillList}){
         return "skill-"+index;
         // la clé de chaque élément de la liste
     }
-    return <List
-        count={count}
-        type={type}
-        compute={compute}
-        generateKey={key}>
+    return <div>
+        <p>Liste des skills : </p>
+        <List
+            count={count}
+            type={type}
+            compute={compute}
+            generateKey={key}>
 
-    </List>
+        </List>
+    </div>
 }
 export default SkillList;

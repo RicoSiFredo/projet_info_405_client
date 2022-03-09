@@ -79,6 +79,6 @@ export default class ObjectEats extends Eats {
         }
     }
     equals(json){
-        return json["id_str"] == this.id_str;
+        return json != undefined && json["id_str"] == this.id_str;
     }
 }

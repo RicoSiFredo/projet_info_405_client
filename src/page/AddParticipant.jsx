@@ -7,13 +7,19 @@ import ListEats from "../object/base/ListEats";
 import ProjectUserCheckList from "../object/list/ProjectUserCheckList";
 import Data from "../utils/Data";
 
-function AddParticipant({project, url, param}){
+function AddParticipant({project,}){
+
     const [name, updateName] = useState("");
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
 
     useEffect(function(){
         chercher();
     }, [name])
+
+    let url = '/project/add/user/search';
+    let param = {
+        "id_project": project.id_str
+    };
 
     list.update = function(){
         updateList(Eats.fakeUpdate(list))
