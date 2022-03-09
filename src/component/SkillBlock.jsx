@@ -16,8 +16,13 @@ function SkillBlock(){
     function refresh(){
         updateList(ListEats.fakeUpdate(list));
     }
-    return <div>
-        <SkillList skillList={list}></SkillList>
-    </div>
+    if(list!=undefined){   
+        return <div>
+            <SkillList skillList={list}></SkillList>
+        </div>
+    }
+    else {
+        return <div></div>
+    }
 }
 export default SkillBlock;

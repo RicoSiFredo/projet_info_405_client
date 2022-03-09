@@ -27,7 +27,6 @@ function AddSkill({user,canEdit}){
     }
     
     function chercher(){
-        console.log("1");
         list.reset();
         list.makeRequest(
             '/search/skill', 
@@ -77,9 +76,11 @@ function AddSkill({user,canEdit}){
                     value: name
                 },
                 function(error){
+                    console.log(error)
                     updateError(ErrorEats.WENT_WRONG);
                 },
                 function(response){
+                    console.log(response)
                     if(Response.isSuccessResponse(response)){
                         updateEdit(false);
                         

@@ -9,6 +9,7 @@ const TYPE = {
     PROJECT: 0
 };
 function UserProjectList({typeAction, user, updatePage, actionList}){
+    console.log(actionList)
     function getList(){
         let list = [];
         for(let i = 0; i < actionList.size(); i++){

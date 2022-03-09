@@ -27,6 +27,18 @@ export default class Project extends ObjectEats {
         }
         return res;
     }
+    
+
+    actionType(actionType){
+        let res;
+        if(this.action.init){
+            res = actionType.is(this.action.type);
+        }
+        else {
+            res = false;
+        }
+        return res;
+    }
 
     isIn(){
         return this.action.init && this.action.type == 0
@@ -47,6 +59,7 @@ export default class Project extends ObjectEats {
                 }
             },
             function(response){
+                console.log(response)
                 console.log(obj)
                 if(success!=undefined){
                     success(response);

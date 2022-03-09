@@ -38,11 +38,9 @@ export default class ObjectEats extends Eats {
             // get all properties of this object including propreties of child class
 
             if(can){
-
                 for(let i=0; i<props.length; i++){
                     if(!(this[props[i]] instanceof Eats)&&
                     (this[props[i]]!=parent||parent==undefined)){
-                        
                         if(Array.isArray(this[props[i]])){
                             for(let i1=0;i1<this[props[i]].length; i1++){
                                 if(this[props[i]][i1] instanceof Eats){
@@ -72,7 +70,9 @@ export default class ObjectEats extends Eats {
             for(let i=0; i<props.length; i++){
                 if((this[props[i]]!=parent||parent==undefined)){
                     if(this[props[i]] instanceof Eats){
+                        
                         this[props[i]].applyData(json, this);
+                        
                     }
                 }
             }

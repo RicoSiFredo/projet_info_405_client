@@ -10,7 +10,7 @@ import Data from "../utils/Data";
 function AddParticipant({project,}){
 
     const [name, updateName] = useState("");
-    const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+    const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC), "User"));
 
     useEffect(function(){
         chercher();

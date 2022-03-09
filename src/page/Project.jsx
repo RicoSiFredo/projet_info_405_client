@@ -7,7 +7,7 @@ import PermEnum from "../enum/PermEnum";
 import ProjectActionList from "../object/list/ProjectActionList";
 import Data from "../utils/Data";
 
-function Project({project, updatePage}){
+function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
     const [comment, updateComment] = useState("");
     useEffect(function(){
@@ -27,6 +27,7 @@ function Project({project, updatePage}){
             updateEdit(!edit);
         }
         function joinSend(){
+            console.log("joinSend")
             project.makeRequest(
                 'user/add/project',
                 {
@@ -35,37 +36,35 @@ function Project({project, updatePage}){
                     description: comment
                 },
                 function(error){
-
+                    console.log(error)
                 },
                 function(response){
-                    if(!project.action.init){
-                        let found = false;
-                        let i = 0;
-                        while(!found&&i<project.actionList.size()){
-                            if(project.actionList.get(i).user.id_str==project.parent.id_str){
-                                project.action.set(project.actionList.get(i));
-                                found = true;
-                            }
-                            i++;
-                        }
-                    }
+                    console.log(response)
+                    console.log(project)
+                    console.log(project.action)
                     updateEdit(false)
+                    updateComment("")
                 }
             )
         }
-        if(!edit){
-            joinBlock = <div>
-                <Button onClick={join}>Rejoindre le projet</Button>
-            </div>
-        } else {
-            function changeComment(e){
-                updateComment(e.target.value);
+        if(project.actionType(ActionEnum.USER_ASK_TO_PROJECT)){
+            joinBlock = <p>Vous avez demandé à rejoindre ce groupe</p>
+        }
+        else {
+            if(!edit){
+                joinBlock = <div>
+                    <Button onClick={join}>Rejoindre le projet</Button>
+                </div>
+            } else {
+                function changeComment(e){
+                    updateComment(e.target.value);
+                }
+                joinBlock = <div>
+                    <Field name="comment" label={"Commentaire"} changeValue={changeComment} val={comment}></Field>
+                    <Button onClick={joinSend}>Rejoindre le projet</Button>
+                    <Button onClick={join}>Annuler</Button>
+                </div>
             }
-            joinBlock = <div>
-                <Field name="comment" label={"Commentaire"} changeValue={changeComment} val={comment}></Field>
-                <Button onClick={joinSend}>Rejoindre le projet</Button>
-                <Button onClick={join}>Annuler</Button>
-            </div>
         }
     }
     return <div>

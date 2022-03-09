@@ -95,7 +95,7 @@ function App() {
         res = <Search back={back} user={user} updatePage={updatePage}></Search>;
     }
     else if(page.equals(PageEnum.Project)){
-        res = <Project back={back} project={user.project.get()} updatePage={updatePage}></Project>;
+        res = <Project back={back} project={user.project.get()} user={user} updatePage={updatePage}></Project>;
     }
     else if(page.equals(PageEnum.Add)){
         res = <AddParticipant back={back} updatePage={updatePage} project={user.project.get()}>
