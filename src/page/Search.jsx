@@ -37,10 +37,11 @@ function Search({back, user, updatePage}){
             }
         )
     }
+    /*inutile ? <Button variant="primary" onClick={back}>Home</Button>*/
     return <div>
-        <Button variant="primary" onClick={back}>Home</Button>
+        
         <Field name={"name"} label="Nom" val={name} changeValue={chercherEvent}></Field>
-        <Button variant="primary" onClick={chercher}>Chercher</Button>
+        <Button variant="primary" onClick={chercher}>Rechercher</Button>
         {
             list.map(function(object, index) {
                 function openProfil(){

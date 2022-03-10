@@ -44,8 +44,9 @@ function CreateProjet({back, user, updatePage}){
     /*
     <SkillBlock></SkillBlock>
     */
+    /*inutile ? <Button variant="primary" onClick={back}>Home</Button>*/
     return <div>
-        <Button variant="primary" onClick={back}>Home</Button>
+        
         <Field name={"name"} label="Nom" val={name} changeValue={changeValueName}></Field>
         <Field name={"description"} label="Description" val={description} changeValue={changeValueDescription}></Field>
         <Button variant="primary" onClick={creer}>Creer</Button>

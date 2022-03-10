@@ -111,14 +111,14 @@ function App() {
     }
     let backButton;
     if(pageList.length>1){
-        backButton = <Button onClick={back} variant='primary'>Back</Button>
+        backButton = <Button onClick={back} variant='primary'>Retour</Button>
     }
     function chercher(){
         updatePage(PageEnum.Search);
     }
     return <div>
         {backButton}
-        <Button onClick={chercher} variant='primary'>Chercher</Button>
+        <Button onClick={chercher} variant='primary'>Rechercher</Button>
         {res}
     </div>
 }

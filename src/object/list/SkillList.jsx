@@ -33,7 +33,7 @@ function SkillList({skillList}){
         // la clé de chaque élément de la liste
     }
     return <div>
-        <p>Liste des skills : </p>
+        <p>Liste des compétences : </p>
         <List
             count={count}
             type={type}

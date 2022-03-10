@@ -11,8 +11,8 @@ function Home({user, updatePage}){
             updatePage(PageEnum.Login);
         }
         button = <div>
-            <Button variant="primary" onClick={login}>Login</Button>
-            <Button variant="primary" onClick={register}>Register</Button>
+            <Button variant="primary" onClick={login}>Connexion</Button>
+            <Button variant="primary" onClick={register}>S’enregistrer</Button>
         </div>
     }
     else {
@@ -24,12 +24,12 @@ function Home({user, updatePage}){
             updatePage(PageEnum.Profil);
         }
         button = <div>
-            <Button variant="primary" onClick={logout}>Logout</Button>
+            <Button variant="primary" onClick={logout}>Déconnexion</Button>
             <Button variant="primary" onClick={profil}>Profil</Button>
         </div>
     }
     return <div>
-        <p>Home</p>
+        <p>Page d'accueil</p>
         {button}
     </div>
 }

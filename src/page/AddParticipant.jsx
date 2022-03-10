@@ -42,7 +42,7 @@ function AddParticipant({project,}){
     }
     return <div>
         <Field name={"name"} label="Nom" val={name} changeValue={chercherEvent}></Field>
-        <Button variant="primary" onClick={chercher}>Chercher</Button>
+        <Button variant="primary" onClick={chercher}>Rechercher</Button>
         <ProjectUserCheckList project={project} listElem={list}>
         </ProjectUserCheckList> 
     </div>

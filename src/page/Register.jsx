@@ -56,22 +56,22 @@ function Register({back, user, updatePage}){
         updateFirstname(e.target.value);
     }
     return <div>
-        <p>Register</p>
+        <p>Création de compte</p>
         <Form.Group className="mb-3" controlId="register_email">
-            <Form.Label>Firstname</Form.Label>
-            <Form.Control value={firstname} onInput={eventFirstname} type="text" placeholder="Firstname" />
+            <Form.Label>Prénom</Form.Label>
+            <Form.Control value={firstname} onInput={eventFirstname} type="text" placeholder="Prénom" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="register_email">
-            <Form.Label>Lastname</Form.Label>
-            <Form.Control value={lastname} onInput={eventLastname} type="text" placeholder="Lastname" />
+            <Form.Label>Nom</Form.Label>
+            <Form.Control value={lastname} onInput={eventLastname} type="text" placeholder="Nom" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="register_email">
             <Form.Label>Email</Form.Label>
             <Form.Control value={email} onInput={eventEmail} type="email" placeholder="Email" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="register_password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Password" />
+            <Form.Label>Mot de passe</Form.Label>
+            <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Mot de passe" />
         </Form.Group>
         <p>{error.toString()}</p>
         <Button variant="primary" onClick={register}>Register</Button>

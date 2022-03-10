@@ -46,17 +46,17 @@ function Login({user, back, updatePage}){
         updateEmail(e.target.value);
     }
     return <div>
-        <p>Login</p>
+        <p>Connexion</p>
         <Form.Group className="mb-3" controlId="login_email">
             <Form.Label>Email</Form.Label>
             <Form.Control value={email} onInput={eventEmail} type="email" placeholder="Email" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="login_password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Password" />
+            <Form.Label>Mot de passe</Form.Label>
+            <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Mot de passe" />
         </Form.Group>
         <p>{error.toString()}</p>
-        <Button variant="primary" onClick={login}>Login</Button>
+        <Button variant="primary" onClick={login}>Connexion</Button>
     </div>
 }
 export default Login;
