@@ -23,7 +23,7 @@ export default class Project extends ObjectEats {
             res = false;
         }
         else {
-            res = true;
+            res = this.action.root || this.action.havePermission(perm);
         }
         return res;
     }
