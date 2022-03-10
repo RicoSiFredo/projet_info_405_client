@@ -29,15 +29,16 @@ function AddSkill({user,canEdit}){
     function chercher(){
         list.reset();
         list.makeRequest(
-            '/search/skill', 
+            '/search/skill',
             {
                 name: val,
+                user: user.id_str
             },
             function(error){
-                console.log(error)
+            
             },
             function(response){
-                console.log(response)
+            
             }
         )
     }
@@ -52,11 +53,11 @@ function AddSkill({user,canEdit}){
                     value: val
                 },
                 function(error){
-                    console.log(error)
+                    
                     updateError(ErrorEats.WENT_WRONG);
                 },
                 function(response){
-                    console.log(response)
+                    
                     if(Response.isSuccessResponse(response)){
                         updateEdit(false);
                         
@@ -80,11 +81,11 @@ function AddSkill({user,canEdit}){
                     value: name
                 },
                 function(error){
-                    console.log(error)
+                    
                     updateError(ErrorEats.WENT_WRONG);
                 },
                 function(response){
-                    console.log(response)
+                    
                     if(Response.isSuccessResponse(response)){
                         updateEdit(false);
                         
