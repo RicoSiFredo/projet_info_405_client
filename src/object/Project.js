@@ -15,6 +15,9 @@ export default class Project extends ObjectEats {
     description = undefined;
     date = undefined;
 
+    permissionList = new ListEats("", undefined, CompareEats.compareInt("type", CompareEats.ASC), "", true)
+
+    roleList = new ListEats("own_role", undefined, CompareEats.compareInt("date", CompareEats.DESC))
     tecnoList = new ListEats("use", this);
     actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
 
@@ -54,7 +57,25 @@ export default class Project extends ObjectEats {
                 id: this.id_str
             },
             function(error){
-                console.log(error)
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+    getAllPermission(failed, success){
+        let obj = this;
+        this.permissionList.makeRequest(
+            "permission/get",
+            {
+                access_token: Data.accessToken()
+            },
+            function(error){
                 if(failed!=undefined){
                     failed(error);
                 }
@@ -96,13 +117,11 @@ export default class Project extends ObjectEats {
                 id: this.id_str
             },
             function(error){
-                console.log(error);
                 if(failed!=undefined){
                     failed(error);
                 }
             },
             function(response){
-                console.log(response);
                 
                 if(success!=undefined){
                     success(response);

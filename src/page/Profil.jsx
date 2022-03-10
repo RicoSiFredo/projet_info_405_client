@@ -28,9 +28,11 @@ function Profil({back, user, updatePage}){
         <p>-----------------------------------------------</p>
         
         <p>Liste des competences</p>
-        <SkillList skillList={user.skillList}>
+        {user.skillList!=undefined&&(
+            <SkillList skillList={user.skillList}>
             
-        </SkillList>
+            </SkillList>
+        )}
         
         <AddSkill user={user} canEdit={canEdit}></AddSkill>
         

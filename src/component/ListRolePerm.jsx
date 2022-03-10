@@ -5,14 +5,14 @@ import Eats from "../object/base/Eats";
 import ListEats from "../object/base/ListEats";
 import Data from "../utils/Data";
 import Field from "./Field";
+import RolePerm from "./RolePerm";
 
-function SelectRole({updateRole, project}){
+function ListRolePerm({project}){
     const [val, updateVal] = useState("");
     const [create, updateCreate] = useState(false);
-    const [list, updateList] = useState(new ListEats("own_role", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
 
     useEffect(function(){
-        list.makeRequest(
+        project.makeRequest(
             "project/get/role",
             {
                 access_token: Data.accessToken(),
@@ -28,7 +28,7 @@ function SelectRole({updateRole, project}){
     }, []);
 
     function addRole(){
-        list.makeRequest(
+        project.makeRequest(
             "project/add/role",
             {
                 access_token: Data.accessToken(),
@@ -39,13 +39,10 @@ function SelectRole({updateRole, project}){
 
             },
             function(response){
-
+                updateVal("")
+                updateCreate(false)
             }
         )
-    }
-
-    list.update = function(){
-        updateList(Eats.fakeUpdate(list))
     }
 
     function updateName(e){
@@ -65,11 +62,8 @@ function SelectRole({updateRole, project}){
             <Button onClick={addRole}>Ajouter</Button><Button onClick={startAdd}>Annuler</Button>
         </div>
     }
-    function selectRole(id){
-        updateRole(id)
-    }
     let listContent;
-    if(list.size()==0){
+    if(project.roleList.size()==0){
         listContent = <div>
             <p>Aucun rôle, vous devez en ajouter un</p>
         </div>
@@ -77,13 +71,10 @@ function SelectRole({updateRole, project}){
     else {
         listContent = <div>
             {
-                list.map(function(object, index){
+                project.roleList.map(function(object, index){
                     if(object.root==undefined){
                         return <div key={object.id_str}>
-                            <label>
-                                <input onChange={function(){selectRole(object.id_str)}} name="radio" type="radio"/>
-                                {object.name}
-                            </label>
+                            <RolePerm project={project} role={object}></RolePerm>
                         </div>
                     }
                 })
@@ -95,4 +86,4 @@ function SelectRole({updateRole, project}){
         {listContent}
     </div>
 }
-export default SelectRole;
+export default ListRolePerm;

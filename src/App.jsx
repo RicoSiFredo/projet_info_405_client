@@ -16,12 +16,13 @@ import Project from './page/Project';
 import Eats from './object/base/Eats';
 import { Button } from 'react-bootstrap';
 import AddParticipant from './page/AddParticipant';
+import ManageRole from './page/ManageRole';
 
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
     const [pageList, updatePageList] = useState([]);
     const [user, updateUser] = useState(new User());
-    
+
     useEffect(function(){
         // Cette fonction s'excute uniquement au lancement de la page
         // car [], la fonction s'excute au changement de 1 des éléments de la liste
@@ -72,6 +73,7 @@ function App() {
     }
 
     user.update = refreshPage;
+    user.updatePage = updatePage;
     // Des que l'utilisateur est mis à jour on appel la fonction refreshPage
     // Permet de recharger la page a chaque appel
 
@@ -101,6 +103,11 @@ function App() {
         res = <AddParticipant back={back} updatePage={updatePage} project={user.project.get()}>
 
         </AddParticipant>
+    }
+    else if(page.equals(PageEnum.ManageRole)){
+        res = <ManageRole back={back} updatePage={updatePage} project={user.project.get()}>
+
+        </ManageRole>
     }
     let backButton;
     if(pageList.length>1){

@@ -6,7 +6,7 @@ const TYPE = {
     ACTION: 0
 }
 
-function ProjectActionList({project, typeAction, updatePage, actionList}){
+function ProjectActionList({user, project, typeAction, updatePage, actionList}){
     function getList(){
         let list = [];
         for(let i = 0; i < actionList.size(); i++){
@@ -33,7 +33,7 @@ function ProjectActionList({project, typeAction, updatePage, actionList}){
         let res;
         
         if(typeLay==TYPE.ACTION){
-            res = <ProjectActionElem typeAction={typeAction} project={project} updatePage={updatePage} action={getList()[index]}>
+            res = <ProjectActionElem user={user} typeAction={typeAction} project={project} updatePage={updatePage} action={getList()[index]}>
 
             </ProjectActionElem>
         }

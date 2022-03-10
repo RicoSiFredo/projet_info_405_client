@@ -1,4 +1,5 @@
 import Action from "../Action";
+import Permission from "../Permission";
 import Project from "../Project";
 import Role from "../Role";
 import Skill from "../Skill";
@@ -27,6 +28,9 @@ export default class BuildEats {
         }
         else if(json==Tecno.TYPE||json["_type"]==Tecno.TYPE){
             res = new Tecno();
+        }
+        else if(json==Permission.TYPE||json["_type"]==Permission.TYPE){
+            res = new Permission();
         }
         else {
             res = new ObjectEats();

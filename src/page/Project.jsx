@@ -17,9 +17,13 @@ function Project({project, user, updatePage}){
         project.getBase();
         project.getAllAction();
         project.getAllTecno();
+        project.getAllPermission();
     }, []);
     function addParticipant(){
         updatePage(PageEnum.Add);
+    }
+    function manageRole(){
+        updatePage(PageEnum.ManageRole);
     }
 //<<<<<<< HEAD
         /*return <div>
@@ -96,11 +100,19 @@ function Project({project, user, updatePage}){
             addParticipantBlock
         }
 
-        <ProjectActionList typeAction={[ActionEnum.IN_PROJECT]} project={project} actionList={project.actionList}></ProjectActionList>
+        {
+            project.havePermission(PermEnum.MANAGE_ROLE) && (
+                <div>
+                    <Button onClick={manageRole}>Gérer les role</Button>
+                </div>
+            )
+        }
+
+        <ProjectActionList typeAction={[ActionEnum.IN_PROJECT]} updatePage={updatePage} user={user} project={project} actionList={project.actionList}></ProjectActionList>
 
         {
             project.havePermission(PermEnum.MANAGE_MEMBERS) && (
-                <ProjectActionList typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} actionList={project.actionList}></ProjectActionList>
+                <ProjectActionList user={user} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
             )
         }
             

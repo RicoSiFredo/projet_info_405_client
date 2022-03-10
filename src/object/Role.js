@@ -13,4 +13,18 @@ export default class Role extends ObjectEats {
     constructor(){
         super();
     }
+
+    havePermission(perm){
+        let found = false;
+        let i = 0;
+        if(this.init&&this.permissionList!=undefined){
+            while(!found&&i<this.permissionList.size()){
+                if(perm.is(this.permissionList.get(i).type)){
+                    found = true;   
+                }
+                i++;
+            }
+        }
+        return found;
+    }
 }

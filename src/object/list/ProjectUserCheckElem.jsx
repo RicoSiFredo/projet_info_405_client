@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Field from "../../component/Field";
-import SelectRole from "../../component/SelectRole";
+import SelectRole from "../../component/ListRolePerm";
 import Data from "../../utils/Data";
 
 function ProjectUserCheckElem({project, list, elem}){
@@ -86,9 +86,28 @@ function ProjectUserCheckElem({project, list, elem}){
         </div>
     }
     else if(action.type==1){
+        function refuserInviterSend(){
+            updateError("");
+            project.makeRequest(
+                'project/del/user',
+                {
+                    access_token: Data.accessToken(),
+                    id_project: project.id_str,
+                    id_user: elem.id_str
+                },
+                function(err){
+                    console.log(err)
+                    updateError("Un problème est survenue");
+                },
+                function(response){
+                    list.applyRequest(response)
+                }
+            )
+        }
         content =  <div>
             <p>{elem.firstname + " "+ elem.lastname}</p>
             <p>Demande à rejoindre le projet</p>
+            <Button onClick={refuserInviterSend}>Refuser</Button>
             <Button onClick={inviterSend}>Accepter</Button>
         </div>
     }

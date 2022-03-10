@@ -69,7 +69,8 @@ export default class ObjectEats extends Eats {
             }
             for(let i=0; i<props.length; i++){
                 if((this[props[i]]!=parent||parent==undefined)){
-                    if(this[props[i]] instanceof Eats){
+                    if(this[props[i]] instanceof Eats&&
+                        !this[props[i]].prevent){
                         
                         this[props[i]].applyData(json, this);
                         

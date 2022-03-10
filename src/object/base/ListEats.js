@@ -11,12 +11,13 @@ export default class ListEats extends Eats {
     compare = undefined;
     list = [];
     type = "";
-    constructor(key, parent, compare, type = ""){
+    constructor(key, parent, compare, type = "", prevent = false){
         super();
         this.key = key;
         this.parent = parent;
         this.compare = compare;
         this.type = type;
+        this.prevent = prevent;
     }
     static fakeUpdate(base){
         let obj = new ListEats(base.key, base.parent, base.compare)

@@ -6,6 +6,7 @@ export default class Eats{
     
     finished = false;
     update = undefined;
+    prevent = false
 
     constructor(){
     }

@@ -16,14 +16,10 @@ export default class Action extends ObjectEats {
     role = new SimpleEats("got_role", this);
 
     havePermission(perm){
-        let found = false;
-        let i = 0;
-        while(!found&&i<this.role.permissionList.size()){
-            if(this.role.permissionList.get(i).type==perm){
-                found = true;   
-            }
-            i++;
+        let res = false;
+        if(this.role.init){
+            res = this.role.havePermission(perm);
         }
-        return found;
+        return res;
     }
 }

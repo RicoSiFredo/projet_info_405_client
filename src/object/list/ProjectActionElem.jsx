@@ -1,9 +1,10 @@
 import { Button } from "react-bootstrap";
 import { ActionEnum } from "../../enum/ActionEnum";
+import PageEnum from "../../enum/PageEnum";
 import PermEnum from "../../enum/PermEnum";
 import Data from "../../utils/Data";
 
-function ProjectActionElem({typeAction, project, action}){
+function ProjectActionElem({user, updatePage, typeAction, project, action}){
     
     function exclure(){
         project.makeRequest(
@@ -22,6 +23,12 @@ function ProjectActionElem({typeAction, project, action}){
         )
     }
 
+    function openProfil(){
+        action.user.update = project.update;
+        user.user.set(action.user);
+        updatePage(PageEnum.Profil);
+    }
+    
     let button;
     let text;
     if (ActionEnum.IN_PROJECT.got(typeAction)){
@@ -80,6 +87,7 @@ function ProjectActionElem({typeAction, project, action}){
         <p>{action.user.firstname + " " + action.user.lastname}</p>
         {text}
         {button}
+        <Button onClick={openProfil}>Voir</Button>
         <p>------------------------------</p>
     </div>
 }
