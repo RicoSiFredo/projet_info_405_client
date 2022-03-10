@@ -3,7 +3,6 @@ export default class Gesture{
     static onScrollBottom(listInnerRef, merge){
         if (listInnerRef.current) {
             const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-            console.log(scrollHeight);
             return scrollTop + clientHeight <= scrollHeight + merge && scrollTop + clientHeight >= scrollHeight - merge;
         }
     }

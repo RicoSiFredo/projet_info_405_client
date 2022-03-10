@@ -10,11 +10,13 @@ export default class ListEats extends Eats {
     parent = undefined;
     compare = undefined;
     list = [];
-    constructor(key, parent, compare){
+    type = "";
+    constructor(key, parent, compare, type = ""){
         super();
         this.key = key;
         this.parent = parent;
         this.compare = compare;
+        this.type = type;
     }
     static fakeUpdate(base){
         let obj = new ListEats(base.key, base.parent, base.compare)
@@ -62,7 +64,7 @@ export default class ListEats extends Eats {
     }
     applyData(json, parent){
         if(!this.isFinished()){
-            let can = this.key == undefined || this.key == "" || Utils.canApplyData(parent, json);
+            let can = this.parent == undefined || this.key == undefined || this.key == "" || Utils.canApplyData(parent, json);
             if(can){
                 this.parent = parent;
                 let jsonAccess;
@@ -92,10 +94,12 @@ export default class ListEats extends Eats {
                             }
                             else {
                                 if(!found){
-                                    // add only if the elem is owned by the parent
-                                    let elem = BuildEats.build(jsonAccess[i]);
-                                    elem.applyData(jsonAccess[i], this.parent);
-                                    this.add(elem);
+                                    if(this.type==""||this.type==undefined||this.type==jsonAccess[i]["_type"]){
+                                        // add only if the elem is owned by the parent
+                                        let elem = BuildEats.build(jsonAccess[i]);
+                                        elem.applyData(jsonAccess[i], this.parent);
+                                        this.add(elem);
+                                    }
                                 }
                                 else {
                                     this.list[index].applyData(jsonAccess[i], this.parent);

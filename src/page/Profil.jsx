@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import AddSkill from "../component/AddSkill";
 import ProfilField from "../component/ProfilField";
+import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import SkillList from "../object/list/SkillList";
 import UserProjectList from "../object/list/UserProjectList";
+import Data from "../utils/Data";
 import Login from "./Login";
 
 function Profil({back, user, updatePage}){
@@ -12,31 +14,41 @@ function Profil({back, user, updatePage}){
         user.getAllSkill();
         user.getAllProject();
     }, []);
-    function creerProjet(){
-        updatePage(PageEnum.CreateProject);
-    }
 
+    let canEdit = Data.isMe(user);
     return <div>
         <p>Profil</p>
+        <p>-----------------------------------------------</p>
 
-        <ProfilField user={user} label={"Prénom"} name={"firstname"} canEdit={true} value={user.firstname}></ProfilField>
-        <ProfilField user={user} label={"Nom"} name={"lastname"} canEdit={true} value={user.lastname}></ProfilField>
-        <ProfilField user={user} label={"Description"} name={"description"} canEdit={true} value={user.description}></ProfilField>
+        <ProfilField user={user} label={"Prénom"} name={"firstname"} canEdit={canEdit} value={user.firstname}></ProfilField>
+        <p>-----------------------------------------------</p>
+        <ProfilField user={user} label={"Nom"} name={"lastname"} canEdit={canEdit} value={user.lastname}></ProfilField>
+        <p>-----------------------------------------------</p>
+        <ProfilField user={user} label={"Description"} name={"description"} canEdit={canEdit} value={user.description}></ProfilField>
+        <p>-----------------------------------------------</p>
         
         <p>Liste des competences</p>
         <SkillList skillList={user.skillList}>
             
         </SkillList>
         
-        <AddSkill user={user} canEdit ={true}></AddSkill>
+        <AddSkill user={user} canEdit={canEdit}></AddSkill>
+        
+        <p>-----------------------------------------------</p>
 
-        <p>Liste des Projets</p>
-
-        <UserProjectList user={user} updatePage={updatePage} actionList={user.actionList}>
+        <UserProjectList typeAction={[ActionEnum.IN_PROJECT]} user={user} updatePage={updatePage} actionList={user.actionList}>
 
         </UserProjectList>
 
-        <Button variant="primary" onClick={creerProjet}>Créer un Projet</Button>
+        {
+            canEdit && ( 
+            <div>  
+                <p>-----------------------------------------------</p> 
+                <UserProjectList typeAction={[ActionEnum.PROJECT_ASK_TO_USER, ActionEnum.PROJECT_ASK_TO_USER_REFUSE]} user={user} updatePage={updatePage} actionList={user.actionList}>
+
+                </UserProjectList>
+            </div> )
+        }
     </div>
 }
 export default Profil;

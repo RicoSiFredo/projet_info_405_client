@@ -5,6 +5,7 @@ import ObjectEats from "./ObjectEats";
 export default class SimpleEats extends ObjectEats {
     key = "";
     init = false;
+    elem = undefined;
     constructor(key, parent){
         super();
         this.key = key;
@@ -22,9 +23,16 @@ export default class SimpleEats extends ObjectEats {
             else {
                 if(Utils.canApplyData(this.parent, json)){
                     let temp = BuildEats.build(json[this.key][0]);
+                    
+                    let applyDataTemp = this.applyData;
+                    
                     this.init = true;
                     super.copy(temp);
+                    this.parent = parent;
                     super.applyData(json[this.key][0], this.parent);
+                    this.init = true;
+                    this.parent = parent;
+                    this.applyData = applyDataTemp;
                 }
             }
         }

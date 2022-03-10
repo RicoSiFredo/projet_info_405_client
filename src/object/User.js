@@ -34,6 +34,9 @@ export default class User extends ObjectEats {
         this.logged = false;
         // pas besoin de changer les autre attribut on y accède uniquement si logged == true
 
+        Data.setUserId("");
+        // change les tokens
+
         if(this.update!=undefined){
             this.update();
         }
@@ -51,6 +54,9 @@ export default class User extends ObjectEats {
         this.applyRequest(response);
         // applique les données de la requete a l'utilisateur automatiquement
         
+        Data.setUserId(this.id_str);
+        // change les tokens
+
         if(this.update!=undefined){
             this.update();
         }
@@ -78,6 +84,7 @@ export default class User extends ObjectEats {
     }
 
     getAllProject(failed, success){
+        let obj = this;
         super.makeRequest(
             "user/get/project",
             {
@@ -90,6 +97,7 @@ export default class User extends ObjectEats {
                 }
             },
             function(response){
+                console.log(obj)
                 if(success!=undefined){
                     success(response);
                 }

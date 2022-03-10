@@ -14,6 +14,20 @@ export default class EatsEnum{
         return res;
     }
 
+    got(array){
+        let found = false;
+        let i = 0;
+        while(!found&&i<array.length){
+            found = array[i].equals(this); 
+            i++;
+        }
+        return found;
+    }
+
+    is(name){
+        return name == this.name;
+    }
+
     static recreate(obj){
         return new EatsEnum(obj.name);
     }

@@ -15,6 +15,7 @@ import Search from './page/Search';
 import Project from './page/Project';
 import Eats from './object/base/Eats';
 import { Button } from 'react-bootstrap';
+import AddParticipant from './page/AddParticipant';
 
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
@@ -94,7 +95,12 @@ function App() {
         res = <Search back={back} user={user} updatePage={updatePage}></Search>;
     }
     else if(page.equals(PageEnum.Project)){
-        res = <Project back={back} project={user.project.get()} updatePage={updatePage}></Project>;
+        res = <Project back={back} project={user.project.get()} user={user} updatePage={updatePage}></Project>;
+    }
+    else if(page.equals(PageEnum.Add)){
+        res = <AddParticipant back={back} updatePage={updatePage} project={user.project.get()}>
+
+        </AddParticipant>
     }
     let backButton;
     if(pageList.length>1){

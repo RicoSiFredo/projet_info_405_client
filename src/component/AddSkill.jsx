@@ -21,9 +21,12 @@ function AddSkill({user,canEdit}){
     useEffect(function(){
         chercher();
     }, [val])
+
+    list.update = function(){
+        updateList(Eats.fakeUpdate(list))
+    }
     
     function chercher(){
-        console.log("1");
         list.reset();
         list.makeRequest(
             '/search/skill', 
@@ -38,7 +41,6 @@ function AddSkill({user,canEdit}){
     }
 
     if(edit){
-        // Si l'utilisateur est en train de changer ses données
         function edit(){
 
             user.makeRequest(
@@ -64,6 +66,34 @@ function AddSkill({user,canEdit}){
             )
            
         }
+
+        function addRelation(name) {
+
+            user.makeRequest(
+                "user/add/skillrelation", 
+                {
+                    access_token: Data.accessToken(),
+                    value: name
+                },
+                function(error){
+                    console.log(error)
+                    updateError(ErrorEats.WENT_WRONG);
+                },
+                function(response){
+                    console.log(response)
+                    if(Response.isSuccessResponse(response)){
+                        updateEdit(false);
+                        
+                    }
+                    else {
+                        updateError(new ErrorEats(
+                            Response.error(response)
+                        ));
+                    }
+                }
+            )
+
+        }
         function chercherEvent(e){
             updateVal(e.target.value);
             // Change la valeur du texte
@@ -72,24 +102,30 @@ function AddSkill({user,canEdit}){
             updateEdit(false);
             // Annule le changement on retourne sur la vue de présentation
         }
+
+        let button;
+            if(list.size() === 0){
+                button = <Button onClick={edit} variant="primary">Ajouter le skill</Button>
+            }
+
         return <div>
             <Form.Group className="mb-3">
                 <Form.Control value={val} onChange={chercherEvent} type="text"/>
             </Form.Group>
             <p>{error.toString()}</p>
-            <Button onClick={edit} variant="primary">Ajouter le skill</Button>
             <Button onClick={cancelEdit} variant="primary">Annuler</Button>
             {
             list.map(function(object, index) {
-                console.log(list);
                 return <div key={index}>
                     <p>{object.name}</p> 
-                    <Button onClick={() => updateVal(object.name)} variant="primary">selectionner</Button>
+                    <Button onClick={()=>addRelation(object.name)} variant="primary">Selectionner</Button>
+
                 </div>
             })
-        }
-
+            }
+            {button}
         </div>
+
     }
     else {
         // vue de présentation
@@ -104,6 +140,9 @@ function AddSkill({user,canEdit}){
             return <div>
                 <Button variant="primary" onClick={startEdit}>Ajouter un skill</Button>
             </div>
+        }
+        else {
+            return <p></p>
         }
     }
 }

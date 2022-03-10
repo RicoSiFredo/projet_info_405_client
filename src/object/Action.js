@@ -8,6 +8,8 @@ export default class Action extends ObjectEats {
 
     date = undefined;
     type = undefined;
+    root = undefined;
+    description = undefined;
 
     project = new SimpleEats("act", this);
     user = new SimpleEats("do", this);

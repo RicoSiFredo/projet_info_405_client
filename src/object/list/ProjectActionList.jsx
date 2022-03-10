@@ -1,3 +1,4 @@
+import { ActionEnum } from "../../enum/ActionEnum";
 import List from "./List";
 import ProjectActionElem from "./ProjectActionElem";
 
@@ -9,20 +10,14 @@ function ProjectActionList({project, typeAction, updatePage, actionList}){
     function getList(){
         let list = [];
         for(let i = 0; i < actionList.size(); i++){
-            if(actionList.get(i).type == typeAction){
+            if((new ActionEnum(actionList.get(i).type)).got(typeAction)){
                 list.push(actionList.get(i));
             }
         }
         return list
     }
     function count(){
-        let countAct = 0;
-        for(let i = 0; i < actionList.size(); i++){
-            if(actionList.get(i).type == typeAction){
-                countAct++;   
-            }
-        }
-        return countAct;
+        return getList().length;
         // donne le nombre d'élément
     }
     function type(index){
@@ -38,7 +33,7 @@ function ProjectActionList({project, typeAction, updatePage, actionList}){
         let res;
         
         if(typeLay==TYPE.ACTION){
-            res = <ProjectActionElem project={project} updatePage={updatePage} action={getList()[index]}>
+            res = <ProjectActionElem typeAction={typeAction} project={project} updatePage={updatePage} action={getList()[index]}>
 
             </ProjectActionElem>
         }
@@ -49,18 +44,30 @@ function ProjectActionList({project, typeAction, updatePage, actionList}){
         // la clé de chaque élément de la liste
     }
     let head;
-    if(typeAction == 0){
+    let text;
+    if(ActionEnum.IN_PROJECT.got(typeAction)){
         head = <p>Liste des participants</p>
     }
-    return <div>
-        {head}
-        <List
-            count={count}
-            type={type}
-            compute={compute}
-            generateKey={key}>
-
-        </List>
-    </div>
+    else if(ActionEnum.USER_ASK_TO_PROJECT.got(typeAction)){
+        head = <p>Utilisateurs qui veulent rejoindre le projet</p>
+        text = <p>Aucune demande</p>
+    }
+    if(count()>0){
+        return <div>
+            {head}
+            <List
+                count={count}
+                type={type}
+                compute={compute}
+                generateKey={key}>
+    
+            </List>
+        </div>
+    } else {
+        return <div>
+            {head}
+            {text}
+        </div>
+    }
 }
 export default ProjectActionList;

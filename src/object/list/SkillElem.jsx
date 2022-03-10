@@ -1,4 +1,6 @@
 function SkillElem({skill}){
-    return <p>{skill.name}</p>
+    return <div>
+        <p>{skill.name}</p>
+    </div>
 }
 export default SkillElem;
