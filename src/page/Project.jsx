@@ -103,11 +103,11 @@ function Project({project, user, updatePage}){
                 <ProjectActionList typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} actionList={project.actionList}></ProjectActionList>
             )
         }
+            
+        <p>Liste des technologies utilisées</p>
+        <TecnoList tecnolist={project.tecnolist}></TecnoList>
 
     </div>
-    /*
-    
-        <p>Liste des technologies utilisées</p>
-        <TecnoList tecnolist={project.tecnolist}></TecnoList> */
+
 }
 export default Project;
