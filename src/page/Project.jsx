@@ -5,19 +5,14 @@ import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import PermEnum from "../enum/PermEnum";
 import ProjectActionList from "../object/list/ProjectActionList";
-<<<<<<< HEAD
+import Data from "../utils/Data";
 import AddParticipant from "./AddParticipant";
 import TecnoList from "../object/list/TecnoList";
-
-function Project({project}){
-    const [pageProject, updatePageProject] = useState(ProjectEnum.Home)
-=======
-import Data from "../utils/Data";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
     const [comment, updateComment] = useState("");
->>>>>>> d7766fd4c0f8e4b40cefda4ad3d31bbd1600795d
+//>>>>>>> d7766fd4c0f8e4b40cefda4ad3d31bbd1600795d
     useEffect(function(){
         project.getBase();
         project.getAllAction();
@@ -26,26 +21,19 @@ function Project({project, user, updatePage}){
     function addParticipant(){
         updatePage(PageEnum.Add);
     }
-<<<<<<< HEAD
-    if(pageProject.equals(ProjectEnum.Home)){
-        return <div>
+//<<<<<<< HEAD
+        /*return <div>
             <p>Nom : {project.name}</p>
             <p>Description : {project.description}</p>
             <Button onClick={addParticipant}>Ajouter des participants</Button>
             <ProjectActionList typeAction={0} actionList={project.actionList}></ProjectActionList>
             
-            <p>Liste des technologies utilisées</p>
-            <TecnoList tecnolist={project.tecnolist}></TecnoList>
-        </div>
-    } else {
-        return <AddParticipant param={{id_project: project.id_str}} url={'/project/add/user/search'}>
-
-        </AddParticipant>
-=======
+        
+        </div>*/
+//=======
     let addParticipantBlock;
     if(project.havePermission(PermEnum.MANAGE_MEMBERS)){
         addParticipantBlock = <Button onClick={addParticipant}>Ajouter des participants</Button>
->>>>>>> d7766fd4c0f8e4b40cefda4ad3d31bbd1600795d
     }
     let joinBlock;
     if(!project.isIn()){
@@ -115,8 +103,9 @@ function Project({project, user, updatePage}){
                 <ProjectActionList typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} actionList={project.actionList}></ProjectActionList>
             )
         }
+
+        <p>Liste des technologies utilisées</p>
+        <TecnoList tecnolist={project.tecnolist}></TecnoList>
     </div>
 }
 export default Project;
-
-
