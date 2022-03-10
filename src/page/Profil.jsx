@@ -27,9 +27,9 @@ function Profil({back, user, updatePage}){
         <ProfilField user={user} label={"Description"} name={"description"} canEdit={canEdit} value={user.description}></ProfilField>
         <p>-----------------------------------------------</p>
         
-        
+        <p>Liste des competences</p>
         <SkillList skillList={user.skillList}>
-
+            
         </SkillList>
         
         <AddSkill user={user} canEdit={canEdit}></AddSkill>

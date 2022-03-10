@@ -86,4 +86,25 @@ export default class Project extends ObjectEats {
             }
         )
     }
+
+    getAllTecno(failed, success){
+        super.makeRequest(
+            "/project/get/tecno",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+
 }

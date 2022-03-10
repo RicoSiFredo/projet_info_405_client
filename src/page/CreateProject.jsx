@@ -23,6 +23,7 @@ function CreateProjet({back, user, updatePage}){
                 updateError(ErrorEats.WENT_WRONG);
             },
             function(response){
+                console.log(response)
                 if(Response.isSuccessResponse(response)){
                     back();
                 }

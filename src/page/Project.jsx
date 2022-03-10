@@ -6,17 +6,31 @@ import PageEnum from "../enum/PageEnum";
 import PermEnum from "../enum/PermEnum";
 import ProjectActionList from "../object/list/ProjectActionList";
 import Data from "../utils/Data";
+import AddParticipant from "./AddParticipant";
+import TecnoList from "../object/list/TecnoList";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
     const [comment, updateComment] = useState("");
+//>>>>>>> d7766fd4c0f8e4b40cefda4ad3d31bbd1600795d
     useEffect(function(){
         project.getBase();
         project.getAllAction();
+        project.getAllTecno();
     }, []);
     function addParticipant(){
         updatePage(PageEnum.Add);
     }
+//<<<<<<< HEAD
+        /*return <div>
+            <p>Nom : {project.name}</p>
+            <p>Description : {project.description}</p>
+            <Button onClick={addParticipant}>Ajouter des participants</Button>
+            <ProjectActionList typeAction={0} actionList={project.actionList}></ProjectActionList>
+            
+        
+        </div>*/
+//=======
     let addParticipantBlock;
     if(project.havePermission(PermEnum.MANAGE_MEMBERS)){
         addParticipantBlock = <Button onClick={addParticipant}>Ajouter des participants</Button>
@@ -89,8 +103,10 @@ function Project({project, user, updatePage}){
                 <ProjectActionList typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} actionList={project.actionList}></ProjectActionList>
             )
         }
+            
+
+
     </div>
+
 }
 export default Project;
-
-
