@@ -15,6 +15,7 @@ export default class Project extends ObjectEats {
     description = undefined;
     date = undefined;
 
+    tecnoList = new ListEats("use", this);
     actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
 
     havePermission(perm){
@@ -89,17 +90,20 @@ export default class Project extends ObjectEats {
 
     getAllTecno(failed, success){
         super.makeRequest(
-            "/project/get/tecno",
+            "project/get/tecno",
             {
                 access_token: Data.accessToken(),
                 id: this.id_str
             },
             function(error){
+                console.log(error);
                 if(failed!=undefined){
                     failed(error);
                 }
             },
             function(response){
+                console.log(response);
+                
                 if(success!=undefined){
                     success(response);
                 }

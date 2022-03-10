@@ -104,6 +104,10 @@ function Project({project, user, updatePage}){
             )
         }
             
+        
+    
+        <p>Liste des technologies utilisées</p>
+        <TecnoList tecnoList={project.tecnoList}></TecnoList>
 
 
     </div>
