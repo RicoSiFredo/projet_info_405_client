@@ -4,7 +4,7 @@ import SkillElem from "./SkillElem";
 const TYPE = {
     SKILL: 0
 };
-function SkillList({skillList}){
+function SkillList({skillList,user,canEdit}){
     function count(){
         return skillList.size();
         // donne le nombre d'élément
@@ -22,8 +22,7 @@ function SkillList({skillList}){
         let res;
         
         if(typeLay==TYPE.SKILL){
-            res = <SkillElem skill={skillList.get(index)}>
-
+            res = <SkillElem skill={skillList.get(index)} user={user} canEdit={canEdit}>
             </SkillElem>
         }
         return res;

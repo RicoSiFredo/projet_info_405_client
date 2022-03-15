@@ -23,8 +23,9 @@ function AddSkill({user,canEdit}){
     }, [val])
 
     list.update = function(){
-        updateList(Eats.fakeUpdate(list))
+        updateList(Eats.fakeUpdate(list));
     }
+
     
     function chercher(){
         list.reset();
@@ -60,7 +61,6 @@ function AddSkill({user,canEdit}){
                     
                     if(Response.isSuccessResponse(response)){
                         updateEdit(false);
-                        
                     }
                     else {
                         updateError(new ErrorEats(
@@ -87,8 +87,7 @@ function AddSkill({user,canEdit}){
                 function(response){
                     
                     if(Response.isSuccessResponse(response)){
-                        updateEdit(false);
-                        
+                        updateEdit(false);  
                     }
                     else {
                         updateError(new ErrorEats(
@@ -110,7 +109,7 @@ function AddSkill({user,canEdit}){
 
         let button;
             if(list.size() === 0){
-                button = <Button onClick={edit} variant="primary">Ajouter le skill</Button>
+                button = <Button onClick={edit} variant="primary">Creer la compétence</Button>
             }
 
         return <div>
@@ -143,7 +142,7 @@ function AddSkill({user,canEdit}){
                 // passe à la vue de modification
             }
             return <div>
-                <Button variant="primary" onClick={startEdit}>Ajouter un skill</Button>
+                <Button variant="primary" onClick={startEdit}>Ajouter une compétence</Button>
             </div>
         }
         else {
