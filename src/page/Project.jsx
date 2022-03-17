@@ -8,6 +8,7 @@ import ProjectActionList from "../object/list/ProjectActionList";
 import Data from "../utils/Data";
 import AddParticipant from "./AddParticipant";
 import TecnoList from "../object/list/TecnoList";
+import AddTecno from "../component/AddTecno";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
@@ -19,6 +20,7 @@ function Project({project, user, updatePage}){
         project.getAllTecno();
         project.getAllPermission();
     }, []);
+    let canEdit = Data.isMe(user);
     function addParticipant(){
         updatePage(PageEnum.Add);
     }
@@ -121,6 +123,7 @@ function Project({project, user, updatePage}){
         <p>Liste des technologies utilisées</p>
         <TecnoList tecnoList={project.tecnoList}></TecnoList>
 
+        <AddTecno project={project} canEdit={canEdit}></AddTecno>
 
     </div>
 
