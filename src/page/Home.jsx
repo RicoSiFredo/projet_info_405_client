@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import PageEnum from "../enum/PageEnum";
+import Message from "./Message";
 
 function Home({user, updatePage}){
     let button;
@@ -23,9 +24,13 @@ function Home({user, updatePage}){
             user.user.set(user);
             updatePage(PageEnum.Profil);
         }
+        function messages(){
+            updatePage(PageEnum.Messenger);
+        }
         button = <div>
             <Button variant="primary" onClick={logout}>Déconnexion</Button>
             <Button variant="primary" onClick={profil}>Profil</Button>
+            <Button variant="primary" onClick={messages}>Messages</Button>
         </div>
     }
     return <div>
