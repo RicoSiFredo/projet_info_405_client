@@ -30,7 +30,7 @@ function ProfilField({user, isProject, label, name, canEdit, value}){
                 {
                     access_token: Data.accessToken(),
                     value: val,
-                    id: user.project_id
+                    id: user.id_str
                 },
                 function(error){
                     updateError(ErrorEats.WENT_WRONG);
