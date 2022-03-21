@@ -1,13 +1,10 @@
 import { useEffect,useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import PageEnum from "../enum/PageEnum";
 import ErrorEats from "../object/base/ErrorEats";
 import CompareEats from "../object/base/CompareEats";
 import ListEats from "../object/base/ListEats";
 import Eats from "../object/base/Eats";
 import Data from "../utils/Data";
-import Constant from "../utils/Constant";
-import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
 
 function AddSkill({user,canEdit}){
