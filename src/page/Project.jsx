@@ -88,6 +88,7 @@ function Project({project, user, updatePage}){
             }
         }
     }
+    console.log(Data.accessToken());
     return <div>
         <ProfilField user={project} isProject={true} label={"Nom"} name={"nom"} canEdit={canEdit} value={project.name}></ProfilField>
         <p>--------------------------------------</p>
