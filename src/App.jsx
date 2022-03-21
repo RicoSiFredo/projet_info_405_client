@@ -18,6 +18,7 @@ import { Button } from 'react-bootstrap';
 import AddParticipant from './page/AddParticipant';
 import ManageRole from './page/ManageRole';
 import NotifPage from './page/NotifPage';
+import Messenger from './page/Messenger';
 
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
@@ -114,6 +115,9 @@ function App() {
         res = <NotifPage back={back} updatePage={updatePage}>
 
         </NotifPage>
+    }
+    else if(page.equals(PageEnum.Messenger)){
+        res = <Messenger back={back} user={user} updatePage={updatePage}></Messenger>;
     }
     let backButton;
     if(pageList.length>1){

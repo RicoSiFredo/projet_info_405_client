@@ -12,6 +12,7 @@ export default class PageEnum extends EatsEnum {
     static AddStr = "add";
     static ManageRoleStr = "manage_role";
     static NotifStr = "notif";
+    static MessengerStr = "messenger";
 
     static Home = new PageEnum(PageEnum.HomeStr);
     static Login = new PageEnum(PageEnum.LoginStr);
@@ -23,6 +24,7 @@ export default class PageEnum extends EatsEnum {
     static Add = new PageEnum(PageEnum.AddStr);
     static ManageRole = new PageEnum(PageEnum.ManageRoleStr);
     static Notif = new PageEnum(PageEnum.NotifStr);
+    static Messenger = new PageEnum(PageEnum.MessengerStr);
 
     constructor(name) {
         super(name);

@@ -10,7 +10,7 @@ import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
 
-function AddSkill({user,canEdit}){
+function AddTecno({project,canEdit}){
 
     const [edit, updateEdit] = useState(false);
     const [val, updateVal] = useState("");
@@ -23,23 +23,23 @@ function AddSkill({user,canEdit}){
     }, [val])
 
     list.update = function(){
-        updateList(Eats.fakeUpdate(list));
+        updateList(Eats.fakeUpdate(list))
     }
-
     
     function chercher(){
+        console.log("chercher");
         list.reset();
         list.makeRequest(
-            '/search/skill',
+            'search/tecno',
             {
                 name: val,
-                user: user.id_str
+                project: project.id_str
             },
             function(error){
             
             },
             function(response){
-            
+                console.log(list);
             }
         )
     }
@@ -47,8 +47,8 @@ function AddSkill({user,canEdit}){
     if(edit){
         function edit(){
 
-            user.makeRequest(
-                "user/add/skill", 
+            project.makeRequest(
+                "project/add/tecno", 
                 {
                     access_token: Data.accessToken(),
                     value: val
@@ -61,6 +61,7 @@ function AddSkill({user,canEdit}){
                     
                     if(Response.isSuccessResponse(response)){
                         updateEdit(false);
+                        
                     }
                     else {
                         updateError(new ErrorEats(
@@ -73,21 +74,23 @@ function AddSkill({user,canEdit}){
         }
 
         function addRelation(name) {
-
-            user.makeRequest(
-                "user/add/skillrelation", 
+            console.log("J'add");
+            project.makeRequest(
+                "project/add/tecnorelation", 
                 {
                     access_token: Data.accessToken(),
-                    value: name
+                    value: name,
+                    id_project : project.id_str
                 },
                 function(error){
-                    
+                    console.log(error);
                     updateError(ErrorEats.WENT_WRONG);
                 },
                 function(response){
-                    
+                    console.log(response);
                     if(Response.isSuccessResponse(response)){
-                        updateEdit(false);  
+                        updateEdit(false);
+                        
                     }
                     else {
                         updateError(new ErrorEats(
@@ -109,7 +112,7 @@ function AddSkill({user,canEdit}){
 
         let button;
             if(list.size() === 0){
-                button = <Button onClick={edit} variant="primary">Creer la compétence</Button>
+                button = <Button onClick={edit} variant="primary">Ajouter la tecnologie</Button>
             }
 
         return <div>
@@ -142,7 +145,7 @@ function AddSkill({user,canEdit}){
                 // passe à la vue de modification
             }
             return <div>
-                <Button variant="primary" onClick={startEdit}>Ajouter une compétence</Button>
+                <Button variant="primary" onClick={startEdit}>Ajouter une tecnologie</Button>
             </div>
         }
         else {
@@ -150,4 +153,4 @@ function AddSkill({user,canEdit}){
         }
     }
 }
-export default AddSkill;
+export default AddTecno;

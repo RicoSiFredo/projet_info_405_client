@@ -29,7 +29,7 @@ function Profil({back, user, updatePage}){
         
         
         {user.skillList!=undefined&&(
-            <SkillList skillList={user.skillList}>
+            <SkillList skillList={user.skillList} user={user} canEdit={canEdit}>
             
             </SkillList>
         )}
