@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap";
 import HeadLittleProfil from "./HeadLittleProfil";
 
 function Notif(){
@@ -16,6 +17,10 @@ function Notif(){
             
         </HeadLittleProfil>
         <p>Vous invite à rejoindre le Projet Google</p>
+        <div>
+            <Button variant="primary rounded-pill">Accepeter</Button>
+            <Button variant="outline-primary rounded-pill">Refuser</Button>
+        </div>
     </div>
 }
 export default Notif;
