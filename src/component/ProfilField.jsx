@@ -6,7 +6,7 @@ import Data from "../utils/Data";
 import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
 
-function ProfilField({user, label, name, canEdit, value}){
+function ProfilField({user, isProject, label, name, canEdit, value}){
     // canEdit est vrai uniquement si c'est mon profil
     const [edit, updateEdit] = useState(false);
     // variable qui correspond à savoir si on edit la valeur
@@ -17,9 +17,16 @@ function ProfilField({user, label, name, canEdit, value}){
     if(edit){
         // Si l'utilisateur est en train de changé ces données
         function edit(){
+            let url = "";
             // makeRequest applique automatiquement le resultat de la requete sur l'objet
+            if(isProject){
+                url = "project/set/"+name;
+            }
+            else {
+                url = "user/set/"+name;
+            }
             user.makeRequest(
-                "user/set/"+name, 
+                url,
                 {
                     access_token: Data.accessToken(),
                     value: val

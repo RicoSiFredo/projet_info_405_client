@@ -20,11 +20,11 @@ function Profil({back, user, updatePage}){
         <p>Profil</p>
         <p>-----------------------------------------------</p>
 
-        <ProfilField user={user} label={"Prénom"} name={"firstname"} canEdit={canEdit} value={user.firstname}></ProfilField>
+        <ProfilField user={user} isProject={false} label={"Prénom"} name={"firstname"} canEdit={canEdit} value={user.firstname}></ProfilField>
         <p>-----------------------------------------------</p>
-        <ProfilField user={user} label={"Nom"} name={"lastname"} canEdit={canEdit} value={user.lastname}></ProfilField>
+        <ProfilField user={user} isProject={false} label={"Nom"} name={"lastname"} canEdit={canEdit} value={user.lastname}></ProfilField>
         <p>-----------------------------------------------</p>
-        <ProfilField user={user} label={"Description"} name={"description"} canEdit={canEdit} value={user.description}></ProfilField>
+        <ProfilField user={user} isProject={false} label={"Description"} name={"description"} canEdit={canEdit} value={user.description}></ProfilField>
         <p>-----------------------------------------------</p>
         
         

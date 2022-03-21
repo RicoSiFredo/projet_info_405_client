@@ -88,9 +88,9 @@ function Project({project, user, updatePage}){
         }
     }
     return <div>
-        <p>Nom : {project.name}</p>
+        <ProfilField project={project} isProject={true} label={"Nom"} name={"nom"} canEdit={canEdit} value={project.name}></ProfilField>
         <p>--------------------------------------</p>
-        <p>Description : {project.description}</p>
+        <ProfilField project={project} isProject={true} label={"Description"} name={"description"} canEdit={canEdit} value={project.description}></ProfilField>
         <p>--------------------------------------</p>
 
         {
