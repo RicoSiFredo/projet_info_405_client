@@ -9,6 +9,7 @@ import Data from "../utils/Data";
 import AddParticipant from "./AddParticipant";
 import TecnoList from "../object/list/TecnoList";
 import AddTecno from "../component/AddTecno";
+import ProfilField from "../component/ProfilField";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
