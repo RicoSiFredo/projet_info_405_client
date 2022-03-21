@@ -17,6 +17,7 @@ import Eats from './object/base/Eats';
 import { Button } from 'react-bootstrap';
 import AddParticipant from './page/AddParticipant';
 import ManageRole from './page/ManageRole';
+import NotifPage from './page/NotifPage';
 
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
@@ -108,6 +109,11 @@ function App() {
         res = <ManageRole back={back} updatePage={updatePage} project={user.project.get()}>
 
         </ManageRole>
+    }
+    else if(page.equals(PageEnum.Notif)){
+        res = <NotifPage back={back} updatePage={updatePage}>
+
+        </NotifPage>
     }
     let backButton;
     if(pageList.length>1){

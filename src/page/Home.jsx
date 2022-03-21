@@ -23,9 +23,13 @@ function Home({user, updatePage}){
             user.user.set(user);
             updatePage(PageEnum.Profil);
         }
+        function notif(){
+            updatePage(PageEnum.Notif);
+        }
         button = <div>
             <Button variant="primary" onClick={logout}>Déconnexion</Button>
             <Button variant="primary" onClick={profil}>Profil</Button>
+            <Button variant="primary" onClick={notif}>Notification</Button>
         </div>
     }
     return <div>
