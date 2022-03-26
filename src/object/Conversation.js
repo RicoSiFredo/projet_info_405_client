@@ -9,6 +9,29 @@ export default class Conversation extends ObjectEats {
 
     static TYPE = "Conversation";
 
-    senderId = undefined;
-    receiverId = undefined
+    members = new ListEats("is_member", this);
+
+    constructor(){ 
+        super();
+    }
+
+    getAllMembers(failed, success){
+        super.makeRequest(
+            "user/get/members",
+            {
+                access_token: Data.accessToken(),
+                idConv: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
 }

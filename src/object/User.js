@@ -17,6 +17,7 @@ export default class User extends ObjectEats {
 
     skillList = new ListEats("got_skill", this);
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
+    convList = new ListEats("is_member", this);
 
     logged = false;
 
@@ -98,6 +99,26 @@ export default class User extends ObjectEats {
             },
             function(response){
                 console.log(obj)
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+
+    getAllConv(failed, success){
+        super.makeRequest(
+            "/user/get/conversation",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
                 if(success!=undefined){
                     success(response);
                 }

@@ -15,6 +15,7 @@ function Profil({back, user, updatePage}){
         user.getAllProject();
     }, []);
 
+    console.log(user);
     let canEdit = Data.isMe(user);
     return <div>
         <p>Profil</p>

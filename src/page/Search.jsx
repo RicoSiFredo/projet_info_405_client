@@ -13,7 +13,7 @@ import Project from "../object/Project";
 function Search({back, user, updatePage}){
     const [name, updateName] = useState("");
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
-
+    
     useEffect(function(){
         chercher();
     }, [name])
