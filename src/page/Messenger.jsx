@@ -23,7 +23,9 @@ function Messenger({back, user, updatePage}){
         user.getAllConv();
     }, []);
 
+    
     const conversations = user.convList.list;
+
     
     
     
@@ -34,7 +36,7 @@ function Messenger({back, user, updatePage}){
                 <div className="chatMenuWrapper">
                     <input placeholder="Rechercher des amis" className="chatMenuInput" />
                         {conversations.map((c) => (
-                            <Conversation conversation={c}/>
+                            <Conversation key={c.id_str} conversation={c}/>
                         ))}
                     <h1>menu</h1>
                    

@@ -1,3 +1,4 @@
+import Conversation from "../Conversation";
 import Action from "../Action";
 import Permission from "../Permission";
 import Project from "../Project";
@@ -31,6 +32,9 @@ export default class BuildEats {
         }
         else if(json==Permission.TYPE||json["_type"]==Permission.TYPE){
             res = new Permission();
+        }
+        else if(json==Conversation.TYPE||json["_type"]==Conversation.TYPE){
+            res = new Conversation();
         }
         else {
             res = new ObjectEats();

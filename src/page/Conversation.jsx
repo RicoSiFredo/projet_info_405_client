@@ -15,17 +15,25 @@ import ListEats from "../object/base/ListEats";
 
 
 
+
+
 function Conversation(conversation,updatePage){
-    const [user,setUser] = useState(null);
-
+    
+    conversation = conversation.conversation;
+    const currentUser = conversation.parent;
     
 
-    console.log(conversation.conversation.id_str);
+    useEffect(function(){
+        conversation.getAllMembers();
+    }, []);
+
+    const friendId = (conversation.members.list.find((m) => m !== currentUser.id_str));
     
+    console.log(conversation);
+
     return(
         <div className="conversation">
-
-            <span className="conversationName">John Doe</span>
+            <span className="conversationName">{friendId.firstname}</span>
             
         </div>
     )
