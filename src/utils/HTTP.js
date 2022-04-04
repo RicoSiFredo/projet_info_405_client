@@ -8,6 +8,7 @@ export default class HTTP {
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(params)
         };
+        fetch(url, requestOptions)
             .then(function(response){
                 return response.json()
             })
