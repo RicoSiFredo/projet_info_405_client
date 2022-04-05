@@ -18,6 +18,7 @@ export default class User extends ObjectEats {
     skillList = new ListEats("got_skill", this);
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
     convList = new ListEats("is_member", this);
+    notifList = new ListEats("notif", this);
 
     logged = false;
 
@@ -62,6 +63,27 @@ export default class User extends ObjectEats {
             this.update();
         }
         // les données on changé si un fonction de mise a jour est definie on l'execute
+        return true
+    }
+
+    getNotif(failed, success){
+        super.makeRequest(
+            "user/get/notif",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
     }
 
     getAllSkill(failed, success){

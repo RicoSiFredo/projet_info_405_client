@@ -18,8 +18,8 @@ function Notif(){
         </HeadLittleProfil>
         <p>Vous invite à rejoindre le Projet Google</p>
         <div>
-            <Button variant="primary rounded-pill">Accepeter</Button>
-            <Button variant="outline-primary rounded-pill">Refuser</Button>
+            <Button variant="primary">Accepeter</Button>
+            <Button variant="outline-primary">Refuser</Button>
         </div>
     </div>
 }

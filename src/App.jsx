@@ -20,10 +20,30 @@ import ManageRole from './page/ManageRole';
 import NotifPage from './page/NotifPage';
 import Messenger from './page/Messenger';
 
+const NOTIF_FETCH = 15000
+
 function App() {
     const [page, updatePage] = useState(PageEnum.Home);
     const [pageList, updatePageList] = useState([]);
     const [user, updateUser] = useState(new User());
+    const [log, updateLog] = useState(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if(user.logged) {
+                user.getNotif();
+            }
+        }, NOTIF_FETCH);
+        return () => clearInterval(interval);
+    }, []);
+    
+
+    useEffect(function(){
+        // Si il y a changement de l'utilisateur on regarde si il y a des notifs
+        if(log){
+            user.getNotif();
+        }
+    }, [log])
 
     useEffect(function(){
         // Cette fonction s'excute uniquement au lancement de la page
@@ -43,9 +63,7 @@ function App() {
                 },
                 function(data){
                     let fait = user.login(data);
-                    if(fait){
-
-                    }
+                    updateLog(true)
                 }
             )
             // on demande au server une session
@@ -112,7 +130,7 @@ function App() {
         </ManageRole>
     }
     else if(page.equals(PageEnum.Notif)){
-        res = <NotifPage back={back} updatePage={updatePage}>
+        res = <NotifPage user={user} back={back} updatePage={updatePage}>
 
         </NotifPage>
     }
