@@ -17,26 +17,32 @@ import ListEats from "../object/base/ListEats";
 
 
 
-function Conversation(conversation,updatePage){
-    
-    conversation = conversation.conversation;
+function Conversation({conversation,updatePage}){
     const currentUser = conversation.parent;
-    
+    conversation.update = currentUser.update;
 
     useEffect(function(){
         conversation.getAllMembers();
+        
     }, []);
 
-    const friendId = (conversation.members.list.find((m) => m !== currentUser.id_str));
-    
-    console.log(conversation);
+        const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
+        if (friend != undefined) {
+            return(
+                <div className="conversation">
+                    <span className="conversationName">{friend.firstname}</span>
+                </div>
+            )
 
-    return(
-        <div className="conversation">
-            <span className="conversationName">{friendId.firstname}</span>
-            
-        </div>
-    )
+        }else{
+            return(
+            <p>Chargement</p>
+            )
+        }
+    
+
+   
+
 
 
 
