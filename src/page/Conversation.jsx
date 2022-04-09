@@ -23,7 +23,7 @@ function Conversation({conversation,updatePage}){
 
     useEffect(function(){
         conversation.getAllMembers();
-        
+        conversation.getAllMessages();
     }, []);
 
         const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
@@ -31,6 +31,7 @@ function Conversation({conversation,updatePage}){
             return(
                 <div className="conversation">
                     <span className="conversationName">{friend.firstname}</span>
+                    <Button variant="primary">Voir conv</Button>
                 </div>
             )
 

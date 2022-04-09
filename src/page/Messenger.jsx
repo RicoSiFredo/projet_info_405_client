@@ -17,6 +17,8 @@ import Conversation from "./Conversation";
 
 
 function Messenger({back, user, updatePage}){
+    const [currentChat, setCurrentChat] = useState(null);
+    const [messages, setMessages] = useState([]);
     
 
     useEffect(function(){
@@ -26,8 +28,8 @@ function Messenger({back, user, updatePage}){
     
     const conversations = user.convList.list;
 
-    
-    
+
+    console.log(currentChat);
     
 
     return (
@@ -36,7 +38,9 @@ function Messenger({back, user, updatePage}){
                 <div className="chatMenuWrapper">
                     <input placeholder="Rechercher des amis" className="chatMenuInput" />
                         {conversations.map((c) => (
-                            <Conversation key={c.id_str} conversation={c}/>
+                            <div onClick={() => setCurrentChat(c)}>
+                                <Conversation key={c.id_str} conversation={c}/>
+                            </div>
                         ))}
                     <h1>menu</h1>
                    
@@ -46,12 +50,21 @@ function Messenger({back, user, updatePage}){
             <div className="chatBox">
                 <div className="chatBoxWrapper">
                     <h1>box</h1>
+                    {
+                        currentChat ?
+                    (<>
                     <div className="chatBoxTop">
+                        <Message />
+                        <Message own={true} />
+                        <Message /> 
                     </div>
                     <div className="cahtBoxBottom">
                         <textarea className="chatMessageInput" placeholder="ecrivez quelque chose..."></textarea>
                         <button className="chatSubmitButton">Envoyer</button>
-                    </div>
+                    </div></>
+                    ) : (
+                    <span className="noConversationText">Open a conversation to start a chat.</span>
+                    )}
                 </div>
             </div>
     

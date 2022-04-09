@@ -9,7 +9,10 @@ export default class Message extends ObjectEats {
 
     static TYPE = "Message";
 
-    conversationID = undefined;
-    sender = undefined;
-    text = undefined;
+
+    constructor(){ 
+        super();
+    }
+
+
 }
