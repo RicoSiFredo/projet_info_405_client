@@ -10,7 +10,7 @@ export default class Conversation extends ObjectEats {
     static TYPE = "Conversation";
 
     members = new ListEats("is_member", this);
-    messages = new ListEats("send_msg", this);
+    message = new ListEats("send_msg", this);
 
     constructor(){ 
         super();

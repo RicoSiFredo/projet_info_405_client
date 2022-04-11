@@ -1,4 +1,3 @@
-import Message from "./Message";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
@@ -13,7 +12,7 @@ import HTTP from "../utils/HTTP";
 import Constant from "../utils/Constant";
 import ListEats from "../object/base/ListEats";
 import Conversation from "./Conversation";
-
+import Message from "./Message";
 
 
 function Messenger({back, user, updatePage}){
@@ -27,9 +26,23 @@ function Messenger({back, user, updatePage}){
 
     
     const conversations = user.convList.list;
+    
 
-
-    console.log(currentChat);
+    useEffect(() => {
+        const getMessages = async () =>{
+            try{
+                if (currentChat != null){
+                    const res = currentChat.message;
+                    setMessages(res);
+                }
+            }catch(err){
+                console.log(err);
+            }
+        };
+        getMessages();
+    },[currentChat]);
+    
+    
     
 
     return (
@@ -54,9 +67,9 @@ function Messenger({back, user, updatePage}){
                         currentChat ?
                     (<>
                     <div className="chatBoxTop">
-                        <Message />
-                        <Message own={true} />
-                        <Message /> 
+                    {messages.map((m) => (
+                            <Message key={m.id_str} message={m}/>
+                        ))}
                     </div>
                     <div className="cahtBoxBottom">
                         <textarea className="chatMessageInput" placeholder="ecrivez quelque chose..."></textarea>

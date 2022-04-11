@@ -13,9 +13,11 @@ import Constant from "../utils/Constant";
 import ListEats from "../object/base/ListEats";
 
 
-function Message({conversation,updatePage}){
 
+function Message({message,own,updatePage}){
 
+      
+    console.log(message);
 
 
 
@@ -23,7 +25,7 @@ function Message({conversation,updatePage}){
     return(
         <div className="message">
             <div className="messageTop">
-                <p className="messageText">This is a message</p>
+                <p className="messageText">id du message : {message.id_str}</p>
             </div>
             <div className="messageBottom">1 hour ago</div>
         </div>
