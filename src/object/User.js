@@ -19,7 +19,6 @@ export default class User extends ObjectEats {
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
     convList = new ListEats("is_member", this);
     notifList = new ListEats("notif", this);
-
     logged = false;
 
     constructor(){ 
@@ -130,7 +129,7 @@ export default class User extends ObjectEats {
 
     getAllConv(failed, success){
         super.makeRequest(
-            "/user/get/conversation",
+            "user/get/conversation",
             {
                 access_token: Data.accessToken(),
                 id: this.id_str

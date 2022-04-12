@@ -3,21 +3,23 @@ import CompareEats from "./base/CompareEats";
 import ForeignEats from "./base/ForeignEats";
 import ListEats from "./base/ListEats";
 import ObjectEats from "./base/ObjectEats";
-import List from "./list/List";
+import SimpleEats from "./base/SimpleEats";
+
 
 export default class Message extends ObjectEats {
 
     static TYPE = "Message";
 
-    message = new ListEats("send_msg", this);
+    text = undefined;
+    auteur = new ListEats("member", this);
 
     constructor(){ 
         super();
     }
 
-    getMessagesConv(failed, success){
+    getMessageWriter(failed, success){
         super.makeRequest(
-            "user/get/messagesUser",
+            "user/get/messageWriter",
             {
                 access_token: Data.accessToken(),
                 idMessage: this.id_str
@@ -34,5 +36,4 @@ export default class Message extends ObjectEats {
             }
         )
     }
-
 }

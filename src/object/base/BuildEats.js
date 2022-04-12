@@ -1,3 +1,4 @@
+import Message from "../Message";
 import Conversation from "../Conversation";
 import Action from "../Action";
 import Permission from "../Permission";
@@ -7,7 +8,7 @@ import Skill from "../Skill";
 import Tecno from "../Tecno";
 import User from "../User";
 import ObjectEats from "./ObjectEats";
-import Message from "../Message";
+
 
 export default class BuildEats {
 

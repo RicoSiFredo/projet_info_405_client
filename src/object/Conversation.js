@@ -5,36 +5,42 @@ import ListEats from "./base/ListEats";
 import ObjectEats from "./base/ObjectEats";
 
 
+
 export default class Conversation extends ObjectEats {
 
     static TYPE = "Conversation";
 
     members = new ListEats("is_member", this);
-    message = new ListEats("send_msg", this);
+    conversation_list = new ListEats("send_msg", this);
+    message_list = new ListEats("is_msg", this);
+    
+    
+    
+    
 
     constructor(){ 
         super();
     }
 
-    getAllMembers(failed, success){
-        super.makeRequest(
-            "user/get/members",
-            {
-                access_token: Data.accessToken(),
-                idConv: this.id_str
-            },
-            function(error){
-                if(failed!=undefined){
-                    failed(error);
-                }
-            },
-            function(response){
-                if(success!=undefined){
-                    success(response);
-                }
-            }
-        )
-    }
+     getAllMembers(failed, success){
+         super.makeRequest(
+             "user/get/members",
+             {
+                 access_token: Data.accessToken(),
+                 idConv: this.id_str
+             },
+             function(error){
+                 if(failed!=undefined){
+                     failed(error);
+                 }
+             },
+             function(response){
+                 if(success!=undefined){
+                     success(response);
+                 }
+             }
+         )
+     }
 
     getAllMessages(failed, success){
         super.makeRequest(
@@ -54,5 +60,5 @@ export default class Conversation extends ObjectEats {
                 }
             }
         )
-    }
+    } 
 }

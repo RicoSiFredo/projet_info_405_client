@@ -26,20 +26,23 @@ function Conversation({conversation,updatePage}){
         conversation.getAllMessages();
     }, []);
 
-        const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
-        if (friend != undefined) {
-            return(
-                <div className="conversation">
-                    <span className="conversationName">{friend.firstname}</span>
-                    <Button variant="primary">Voir conv</Button>
-                </div>
-            )
+            const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
+            if (friend != undefined) {
+                return(
+                    <div className="conversation">
+                        <span className="conversationName">{friend.firstname}</span>
+                        <Button variant="primary">Voir conv</Button>
+                    </div>
+                )
 
-        }else{
+            }else{
+
+        
             return(
             <p>Chargement</p>
             )
-        }
+    }
+        
     
 
    

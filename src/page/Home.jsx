@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import PageEnum from "../enum/PageEnum";
-import Message from "./Message";
+
 
 function Home({user, updatePage}){
     let button;

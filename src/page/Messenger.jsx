@@ -32,7 +32,7 @@ function Messenger({back, user, updatePage}){
         const getMessages = async () =>{
             try{
                 if (currentChat != null){
-                    const res = currentChat.message;
+                    const res = currentChat.message_list.list;
                     setMessages(res);
                 }
             }catch(err){
@@ -43,7 +43,7 @@ function Messenger({back, user, updatePage}){
     },[currentChat]);
     
     
-    
+    console.log(conversations);
 
     return (
         <div className="Messsenger">
