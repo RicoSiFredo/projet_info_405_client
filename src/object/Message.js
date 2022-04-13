@@ -11,7 +11,7 @@ export default class Message extends ObjectEats {
     static TYPE = "Message";
 
     text = undefined;
-    auteur = new ListEats("member", this);
+    auteur = new SimpleEats("send_msg", this);
 
     constructor(){ 
         super();

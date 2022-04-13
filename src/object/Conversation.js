@@ -11,7 +11,6 @@ export default class Conversation extends ObjectEats {
     static TYPE = "Conversation";
 
     members = new ListEats("is_member", this);
-    conversation_list = new ListEats("send_msg", this);
     message_list = new ListEats("is_msg", this);
     
     
