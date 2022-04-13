@@ -18,6 +18,7 @@ import Message from "./Message";
 function Messenger({back, user, updatePage}){
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
+    const [newMessage,setNewMessage] = useState("");
     
 
     useEffect(function(){
@@ -42,8 +43,32 @@ function Messenger({back, user, updatePage}){
         getMessages();
     },[currentChat]);
     
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const message = {
+            senderId: user.id_str,
+            text: newMessage,
+            conversationId: currentChat.id_str,
+        };
+        
+        try{
+            if (message != undefined){
+                const res = message;
+                setNewMessage(res);
+                console.log(res);
+                
+            }
+            
+        }catch(err){
+            console.log(err);
+        }
+    };
+
     
-    console.log(conversations);
+    
+    
+    console.log(currentChat);
 
     return (
         <div className="Messsenger">
@@ -72,8 +97,11 @@ function Messenger({back, user, updatePage}){
                         ))}
                     </div>
                     <div className="cahtBoxBottom">
-                        <textarea className="chatMessageInput" placeholder="ecrivez quelque chose..."></textarea>
-                        <button className="chatSubmitButton">Envoyer</button>
+                        <textarea className="chatMessageInput" placeholder="ecrivez quelque chose..."
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        value={newMessage}
+                        ></textarea>
+                        <button className="chatSubmitButton" onClick={handleSubmit}>Envoyer</button>
                     </div></>
                     ) : (
                     <span className="noConversationText">Open a conversation to start a chat.</span>

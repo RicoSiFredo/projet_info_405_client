@@ -16,11 +16,6 @@ import ListEats from "../object/base/ListEats";
 
 function Message({message,own,updatePage}){
 
-    useEffect(function(){
-        message.getMessageWriter();
-    }, []);
-    
-    console.log(message);
     
 
 
@@ -28,7 +23,7 @@ function Message({message,own,updatePage}){
     return(
         <div className="message">
             <div className="messageTop">
-                <p className="messageText">Message : {message.text} écrit par :</p>
+                <p className="messageText">Message : {message.text} écrit par : {message.auteur.firstname}</p>
             </div>
             <div className="messageBottom">1 hour ago</div>
         </div>

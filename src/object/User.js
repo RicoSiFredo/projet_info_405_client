@@ -146,5 +146,25 @@ export default class User extends ObjectEats {
             }
         )
     }
+
+    createMessage(failed, success){
+        super.makeRequest(
+            "user/create/message",
+            {
+                access_token: Data.accessToken(),
+                senderId: this.id_str, 
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
 }
 

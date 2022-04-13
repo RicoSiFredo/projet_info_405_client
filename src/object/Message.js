@@ -17,12 +17,13 @@ export default class Message extends ObjectEats {
         super();
     }
 
-    getMessageWriter(failed, success){
+
+    createMessage(failed, success){
         super.makeRequest(
-            "user/get/messageWriter",
+            "user/create/message",
             {
                 access_token: Data.accessToken(),
-                idMessage: this.id_str
+                senderId: this.id_str, 
             },
             function(error){
                 if(failed!=undefined){
