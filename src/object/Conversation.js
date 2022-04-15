@@ -60,4 +60,26 @@ export default class Conversation extends ObjectEats {
             }
         )
     } 
+
+    envoyerMessage(message,failed, success){
+        super.makeRequest(
+            "user/create/message",
+            {
+                access_token: Data.accessToken(),
+                conversationId: this.id_str,
+                message: message
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    } 
+
 }

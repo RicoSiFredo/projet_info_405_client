@@ -13,6 +13,7 @@ import Constant from "../utils/Constant";
 import ListEats from "../object/base/ListEats";
 import Conversation from "./Conversation";
 import Message from "./Message";
+import Utils from "../utils/Utils";
 
 
 function Messenger({back, user, updatePage}){
@@ -64,26 +65,11 @@ function Messenger({back, user, updatePage}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const message = {
-            senderId: user.id_str,
-            text: newMessage,
-            conversationId: currentChat.id_str,
-        };
         
         try{
-            if (message != undefined){
-                const res = message;
-                setNewMessage(res);
-                console.log(res);
-                res.makeRequest(
-                    'user/create/message',
-                    {
-                        senderId: res.senderId,
-                        conversationId: res.conversationId,
-                        message: res.text
-                    },
-                )
-                
+            if (newMessage != ("")){
+                setNewMessage("");
+                currentChat.envoyerMessage(newMessage);      
             }
 
         }catch(err){
