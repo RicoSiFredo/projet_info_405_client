@@ -42,6 +42,24 @@ function Messenger({back, user, updatePage}){
         };
         getMessages();
     },[currentChat]);
+
+
+
+    // function createMessage(){
+        
+    //         function(error){
+    //             if(failed!=undefined){
+    //                 failed(error);
+    //             }
+    //         },
+    //         function(response){
+    //             if(success!=undefined){
+    //                 success(response);
+    //             }
+    //         }
+    //     )
+    // }
+
     
 
     const handleSubmit = (e) => {
@@ -57,9 +75,17 @@ function Messenger({back, user, updatePage}){
                 const res = message;
                 setNewMessage(res);
                 console.log(res);
+                res.makeRequest(
+                    'user/create/message',
+                    {
+                        senderId: res.senderId,
+                        conversationId: res.conversationId,
+                        message: res.text
+                    },
+                )
                 
             }
-            
+
         }catch(err){
             console.log(err);
         }
