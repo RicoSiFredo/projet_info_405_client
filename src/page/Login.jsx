@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import PageEnum from "../enum/PageEnum";
+import React from "react"
 import ErrorEats from "../object/base/ErrorEats";
 import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";

@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import CompareEats from "../object/base/CompareEats";
-import Eats from "../object/base/Eats";
-import ListEats from "../object/base/ListEats";
 import Data from "../utils/Data";
 import Field from "./Field";
 import RolePerm from "./RolePerm";

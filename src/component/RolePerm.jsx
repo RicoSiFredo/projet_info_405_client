@@ -1,6 +1,5 @@
-import Role from "../object/Role";
 import Data from "../utils/Data";
-import HTTP from "../utils/HTTP";
+import React from "react"
 
 function RolePerm({role, project}){
     return <div>

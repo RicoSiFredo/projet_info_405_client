@@ -9,6 +9,7 @@ import ListEats from "../object/base/ListEats";
 import Data from "../utils/Data";
 import Response from "../utils/Response";
 import Project from "../object/Project";
+import React from "react"
 
 function Search({back, user, updatePage}){
     const [name, updateName] = useState("");

@@ -1,5 +1,6 @@
 import List from "./List";
 import TecnoElem from "./TecnoElem";
+import React from "react"
 
 const TYPE = {
     TECNO: 0

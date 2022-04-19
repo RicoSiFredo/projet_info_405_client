@@ -4,6 +4,7 @@ import PageEnum from "../enum/PageEnum";
 import ErrorEats from "../object/base/ErrorEats";
 import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
+import React from "react"
 import Response from "../utils/Response";
 
 function Register({back, user, updatePage}){

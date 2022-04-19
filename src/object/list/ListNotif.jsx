@@ -1,6 +1,7 @@
 import { ListGroup } from "react-bootstrap";
 import ProjectNotif from "../../component/notif/ProjectNotif";
 import List from "./List";
+import React from "react"
 
 const TYPE = {
     PROJECT: 0,

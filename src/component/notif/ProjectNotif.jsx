@@ -1,8 +1,8 @@
 import { Button, ListGroup } from "react-bootstrap";
 import { ActionEnum } from "../../enum/ActionEnum";
+import React from "react"
 
 function ProjectNotif({notif, user}){
-    console.log(notif)
 
     function openProject(){
         //window.location.href = "/project/"+notif.project.id;

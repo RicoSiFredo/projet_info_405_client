@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import React, { useEffect,useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import PageEnum from "../enum/PageEnum";
 import ErrorEats from "../object/base/ErrorEats";

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Eats from "../object/base/Eats";
 import ListEats from "../object/base/ListEats";
 import SkillList from "../object/list/SkillList";
+import React from "react"
 
 function SkillBlock(){
     const [list, updateList] = useState(new ListEats("", this))

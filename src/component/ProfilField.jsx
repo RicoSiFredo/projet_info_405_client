@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import ErrorEats from "../object/base/ErrorEats";
-import Constant from "../utils/Constant";
 import Data from "../utils/Data";
-import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
+import React from "react"
 
 function ProfilField({user, isProject, label, name, canEdit, value}){
     // canEdit est vrai uniquement si c'est mon profil

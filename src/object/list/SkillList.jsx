@@ -1,5 +1,6 @@
 import List from "./List";
 import SkillElem from "./SkillElem";
+import React from "react"
 
 const TYPE = {
     SKILL: 0

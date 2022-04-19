@@ -14,6 +14,7 @@ import ListEats from "../object/base/ListEats";
 import Conversation from "./Conversation";
 import Message from "./Message";
 import Utils from "../utils/Utils";
+import React from "react"
 
 
 function Messenger({back, user, updatePage}){

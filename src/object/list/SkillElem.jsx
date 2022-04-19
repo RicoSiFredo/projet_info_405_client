@@ -2,6 +2,7 @@ import {useState } from "react";
 import Data from "../../utils/Data";
 import Response from "../../utils/Response";
 import {Button} from "react-bootstrap";
+import React from "react"
 
 import ErrorEats from "../../object/base/ErrorEats";
 

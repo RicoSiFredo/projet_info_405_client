@@ -25,4 +25,7 @@ export default class Utils {
         !Array.isArray(obj) &&
         obj !== null
     }
+    static changeUrl(title, url){
+        window.history.replaceState(null, title, url);
+    }
 }

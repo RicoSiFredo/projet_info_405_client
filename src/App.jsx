@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import User from './object/User';
 import PageEnum from './enum/PageEnum';
 import Register from './page/Register';
@@ -19,6 +19,7 @@ import AddParticipant from './page/AddParticipant';
 import ManageRole from './page/ManageRole';
 import NotifPage from './page/NotifPage';
 import Messenger from './page/Messenger';
+import Header from './component/Header';
 
 const NOTIF_FETCH = 15000
 
@@ -59,11 +60,12 @@ function App() {
                     refresh_token: refreshToken
                 },
                 function(err){
-
                 },
                 function(data){
-                    let fait = user.login(data);
-                    updateLog(true)
+                    if(data["status"]=="success"){
+                        let fait = user.login(data);
+                        updateLog(true)
+                    }
                 }
             )
             // on demande au server une session
@@ -96,6 +98,8 @@ function App() {
     user.updatePage = updatePage;
     // Des que l'utilisateur est mis à jour on appel la fonction refreshPage
     // Permet de recharger la page a chaque appel
+
+    user.back = back;
 
     let res;
     if(page.equals(PageEnum.Home)){
@@ -144,11 +148,11 @@ function App() {
     function chercher(){
         updatePage(PageEnum.Search);
     }
-    return <div>
-        {backButton}
-        <Button onClick={chercher} variant='primary'>Rechercher</Button>
+    let head = <Header user={user} updatePage={updatePage}></Header>;
+    return (<div>
+        {head}
         {res}
-    </div>
+    </div>)
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Field from "../component/Field";
-import PageEnum from "../enum/PageEnum";
+import React from "react"
 import ErrorEats from "../object/base/ErrorEats";
 import Data from "../utils/Data";
 import Response from "../utils/Response";

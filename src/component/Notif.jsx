@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import HeadLittleProfil from "./HeadLittleProfil";
+import React from "react"
 
 function Notif(){
     let test = {

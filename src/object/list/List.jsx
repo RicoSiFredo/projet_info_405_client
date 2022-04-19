@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Gesture from "../../utils/Gesture";
 
 function List({count, generateKey, type, compute, onbottom}){

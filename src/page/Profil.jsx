@@ -8,6 +8,8 @@ import SkillList from "../object/list/SkillList";
 import UserProjectList from "../object/list/UserProjectList";
 import Data from "../utils/Data";
 import Login from "./Login";
+import React from "react"
+
 
 function Profil({back, user, updatePage}){
     useEffect(function(){
