@@ -31,7 +31,7 @@ function Messenger({back, user, updatePage}){
     
 
     useEffect(() => {
-        const getMessages = async () =>{
+        const getMessages = async () => {
             try{
                 if (currentChat != null){
                     const res = currentChat.message_list.list;
