@@ -12,11 +12,63 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.bottom-right{
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+}
+.profil{
+  z-index: 999;
+  margin-top: -45px;
+  margin-left: 15px;
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.profil img{
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+}
+.center-crop{
+  object-fit: cover;
+}
+.left-div{
+  max-width: 350px;
+}
+.center-div{
+  flex: 1;
+}
+.banner img{
+  z-index: 998;
+}
+.banner{
+  z-index: 997;
+  height:100px;
+}
+.w-35{
+  width: 35%;
+}
+.w-45{
+  width: 45%;
+}
+.w-30{
+  width: 30%;
+}
+.w-40{
+  width: 40%;
+}
 .click{
   cursor: pointer;
 }
-
+.form-access{
+  width: 100%;
+  max-width: 430px;
+  padding: 15px;
+  margin: auto;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

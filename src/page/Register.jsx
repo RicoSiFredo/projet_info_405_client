@@ -6,6 +6,7 @@ import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
 import React from "react"
 import Response from "../utils/Response";
+import Form405 from "../component/Form405";
 
 function Register({back, user, updatePage}){
     const [email, updateEmail] = useState("");
@@ -56,26 +57,29 @@ function Register({back, user, updatePage}){
     function eventFirstname(e){
         updateFirstname(e.target.value);
     }
-    return <div>
-        <p>Création de compte</p>
+    let content = <div>
         <Form.Group className="mb-3" controlId="register_email">
-            <Form.Label>Prénom</Form.Label>
             <Form.Control value={firstname} onInput={eventFirstname} type="text" placeholder="Prénom" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="register_email">
-            <Form.Label>Nom</Form.Label>
             <Form.Control value={lastname} onInput={eventLastname} type="text" placeholder="Nom" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="register_email">
-            <Form.Label>Email</Form.Label>
             <Form.Control value={email} onInput={eventEmail} type="email" placeholder="Email" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="register_password">
-            <Form.Label>Mot de passe</Form.Label>
             <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Mot de passe" />
         </Form.Group>
-        <p>{error.toString()}</p>
-        <Button variant="primary" onClick={register}>Register</Button>
+    </div>
+    return <div>
+        <Form405
+            error={error}
+            onSubmit={register}
+            title="Inscription"
+            info="Il est nécessaire d'avoir un compte pour créer un projet ou rejoindre un projet."
+            content={content}>
+
+        </Form405>
     </div>
 }
 export default Register;

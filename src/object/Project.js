@@ -13,6 +13,8 @@ export default class Project extends ObjectEats {
 
     name = undefined;
     description = undefined;
+    profile = undefined;
+    banner = undefined;
     date = undefined;
 
     permissionList = new ListEats("", undefined, CompareEats.compareInt("type", CompareEats.ASC), "", true)

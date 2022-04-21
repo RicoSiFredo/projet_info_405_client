@@ -9,6 +9,7 @@ import UserProjectList from "../object/list/UserProjectList";
 import Data from "../utils/Data";
 import Login from "./Login";
 import React from "react"
+import ProfilView from "../component/ProfilView";
 
 
 function Profil({back, user, updatePage}){
@@ -19,41 +20,39 @@ function Profil({back, user, updatePage}){
 
     console.log(user);
     let canEdit = Data.isMe(user);
-    return <div>
-        <p>Profil</p>
-        <p>-----------------------------------------------</p>
-
-        <ProfilField user={user} isProject={false} label={"Prénom"} name={"firstname"} canEdit={canEdit} value={user.firstname}></ProfilField>
-        <p>-----------------------------------------------</p>
-        <ProfilField user={user} isProject={false} label={"Nom"} name={"lastname"} canEdit={canEdit} value={user.lastname}></ProfilField>
-        <p>-----------------------------------------------</p>
-        <ProfilField user={user} isProject={false} label={"Description"} name={"description"} canEdit={canEdit} value={user.description}></ProfilField>
-        <p>-----------------------------------------------</p>
+    return <div className="d-flex justify-content-center flex-row">
+        <div className="w-30 left-div">
+            <ProfilView elem={user} isProject={false}></ProfilView>
+        </div>
+        <div className="w-45 center-div">
+        </div>
+        <div className="w-25 right-div">
         
         
-        {user.skillList!=undefined&&(
-            <SkillList skillList={user.skillList} user={user} canEdit={canEdit}>
+            {user.skillList!=undefined&&(
+                <SkillList skillList={user.skillList} user={user} canEdit={canEdit}>
+                
+                </SkillList>
+            )}
             
-            </SkillList>
-        )}
-        
-        <AddSkill user={user} canEdit={canEdit}></AddSkill>
-        
-        <p>-----------------------------------------------</p>
+            <AddSkill user={user} canEdit={canEdit}></AddSkill>
+            
+            <p>-----------------------------------------------</p>
 
-        <UserProjectList typeAction={[ActionEnum.IN_PROJECT]} user={user} updatePage={updatePage} actionList={user.actionList}>
+            <UserProjectList typeAction={[ActionEnum.IN_PROJECT]} user={user} updatePage={updatePage} actionList={user.actionList}>
 
-        </UserProjectList>
+            </UserProjectList>
 
-        {
-            canEdit && ( 
-            <div>  
-                <p>-----------------------------------------------</p> 
-                <UserProjectList typeAction={[ActionEnum.PROJECT_ASK_TO_USER, ActionEnum.PROJECT_ASK_TO_USER_REFUSE]} user={user} updatePage={updatePage} actionList={user.actionList}>
+            {
+                canEdit && ( 
+                <div>  
+                    <p>-----------------------------------------------</p> 
+                    <UserProjectList typeAction={[ActionEnum.PROJECT_ASK_TO_USER, ActionEnum.PROJECT_ASK_TO_USER_REFUSE]} user={user} updatePage={updatePage} actionList={user.actionList}>
 
-                </UserProjectList>
-            </div> )
-        }
+                    </UserProjectList>
+                </div> )
+            }
+        </div>
     </div>
 }
 export default Profil;

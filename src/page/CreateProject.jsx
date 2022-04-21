@@ -5,6 +5,7 @@ import React from "react"
 import ErrorEats from "../object/base/ErrorEats";
 import Data from "../utils/Data";
 import Response from "../utils/Response";
+import Form405 from "../component/Form405";
 
 
 function CreateProjet({back, user, updatePage}){
@@ -45,11 +46,19 @@ function CreateProjet({back, user, updatePage}){
     <SkillBlock></SkillBlock>
     */
     /*inutile ? <Button variant="primary" onClick={back}>Home</Button>*/
-    return <div>
-        
+    let content = <div>
         <Field name={"name"} label="Nom" val={name} changeValue={changeValueName}></Field>
         <Field name={"description"} label="Description" val={description} changeValue={changeValueDescription}></Field>
-        <Button variant="primary" onClick={creer}>Creer</Button>
+    </div>
+    return <div>
+        <Form405 
+            error={error}
+            content={content}
+            onSubmit={creer}
+            info="Commencer à réaliser votre idée !"
+            title="Créer un projet">
+
+        </Form405>
     </div>
 }
 export default CreateProjet;

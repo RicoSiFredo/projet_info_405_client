@@ -11,6 +11,7 @@ import TecnoList from "../object/list/TecnoList";
 import AddTecno from "../component/AddTecno";
 import ProfilField from "../component/ProfilField";
 import React from "react"
+import ProfilView from "../component/ProfilView";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
@@ -90,44 +91,45 @@ function Project({project, user, updatePage}){
         }
     }
     
-    return <div>
-        <ProfilField user={project} isProject={true} label={"Nom"} name={"name"} canEdit={canEdit} value={project.name}></ProfilField>
-        <p>--------------------------------------</p>
-        <ProfilField user={project} isProject={true} label={"Description"} name={"description"} canEdit={canEdit} value={project.description}></ProfilField>
-        <p>--------------------------------------</p>
+    return <div className="d-flex justify-content-center flex-row">
+        <div className="w-30 left-div">
+            <ProfilView elem={project} isProject={true}></ProfilView>
+        </div>
+        <div className="w-45 center-div">
+        </div>
+        <div className="w-25 right-div">
+            {
+                joinBlock
+            }
+            <p>-------------------------------</p>
 
-        {
-            joinBlock
-        }
-        <p>--------------------------------------</p>
+            {
+                addParticipantBlock
+            }
 
-        {
-            addParticipantBlock
-        }
+            {
+                project.havePermission(PermEnum.MANAGE_ROLE) && (
+                    <div>
+                        <Button onClick={manageRole}>Gérer les role</Button>
+                    </div>
+                )
+            }
 
-        {
-            project.havePermission(PermEnum.MANAGE_ROLE) && (
-                <div>
-                    <Button onClick={manageRole}>Gérer les role</Button>
-                </div>
-            )
-        }
+            <ProjectActionList typeAction={[ActionEnum.IN_PROJECT]} updatePage={updatePage} user={user} project={project} actionList={project.actionList}></ProjectActionList>
 
-        <ProjectActionList typeAction={[ActionEnum.IN_PROJECT]} updatePage={updatePage} user={user} project={project} actionList={project.actionList}></ProjectActionList>
-
-        {
-            project.havePermission(PermEnum.MANAGE_MEMBERS) && (
-                <ProjectActionList user={user} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
-            )
-        }
+            {
+                project.havePermission(PermEnum.MANAGE_MEMBERS) && (
+                    <ProjectActionList user={user} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
+                )
+            }
+                
             
         
-    
-        <p>Liste des technologies utilisées</p>
-        <TecnoList tecnoList={project.tecnoList}></TecnoList>
+            <p>Liste des technologies utilisées</p>
+            <TecnoList tecnoList={project.tecnoList}></TecnoList>
 
-        <AddTecno project={project} canEdit={canEdit}></AddTecno>
-
+            <AddTecno project={project} canEdit={canEdit}></AddTecno>
+        </div>
     </div>
 
 }

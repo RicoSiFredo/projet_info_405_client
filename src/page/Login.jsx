@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import React from "react"
 import ErrorEats from "../object/base/ErrorEats";
 import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
+import Form405 from "../component/Form405";
 
 function Login({user, back, updatePage}){
     const [email, updateEmail] = useState("");
@@ -31,6 +32,7 @@ function Login({user, back, updatePage}){
                     back();
                 }
                 else {
+                    console.log(response)
                     updateError(new ErrorEats(
                         Response.error(response)
                     ));
@@ -45,18 +47,23 @@ function Login({user, back, updatePage}){
     function eventEmail(e){
         updateEmail(e.target.value);
     }
-    return <div>
-        <p>Connexion</p>
+    let inputContent = <div>
         <Form.Group className="mb-3" controlId="login_email">
-            <Form.Label>Email</Form.Label>
             <Form.Control value={email} onInput={eventEmail} type="email" placeholder="Email" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="login_password">
-            <Form.Label>Mot de passe</Form.Label>
             <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Mot de passe" />
         </Form.Group>
-        <p>{error.toString()}</p>
-        <Button variant="primary" onClick={login}>Connexion</Button>
+    </div> 
+    return <div>
+        <Form405 
+            error={error}
+            onSubmit={login}
+            title="Connexion" 
+            info="Il est nécessaire d'avoir un compte pour créer un projet ou rejoindre un projet."
+            content={inputContent}>
+
+        </Form405>
     </div>
 }
 export default Login;

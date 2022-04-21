@@ -5,16 +5,7 @@ import React from "react"
 function Home({user, updatePage}){
     let button;
     if(!user.logged){
-        function register(){
-            updatePage(PageEnum.Register);
-        }
-        function login(){
-            updatePage(PageEnum.Login);
-        }
-        button = <div>
-            <Button variant="primary" onClick={login}>Connexion</Button>
-            <Button variant="primary" onClick={register}>S’enregistrer</Button>
-        </div>
+        
     }
     else {
         function logout(){
