@@ -10,6 +10,8 @@ import Data from "../utils/Data";
 import Login from "./Login";
 import React from "react"
 import ProfilView from "../component/ProfilView";
+import SkillElem from "../object/list/SkillElem";
+import SkillView from "../component/SkillView";
 
 
 function Profil({back, user, updatePage}){
@@ -18,24 +20,15 @@ function Profil({back, user, updatePage}){
         user.getAllProject();
     }, []);
 
-    console.log(user);
     let canEdit = Data.isMe(user);
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView elem={user} isProject={false}></ProfilView>
+            <SkillView user={user}></SkillView>
         </div>
         <div className="w-45 center-div">
         </div>
         <div className="w-25 right-div">
-        
-        
-            {user.skillList!=undefined&&(
-                <SkillList skillList={user.skillList} user={user} canEdit={canEdit}>
-                
-                </SkillList>
-            )}
-            
-            <AddSkill user={user} canEdit={canEdit}></AddSkill>
             
             <p>-----------------------------------------------</p>
 

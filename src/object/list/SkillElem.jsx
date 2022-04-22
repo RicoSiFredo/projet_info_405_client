@@ -5,6 +5,7 @@ import {Button} from "react-bootstrap";
 import React from "react"
 
 import ErrorEats from "../../object/base/ErrorEats";
+import { BasketFill, Trash3Fill, TrashFill } from "react-bootstrap-icons";
 
 function SkillElem({skill,user,canEdit}){
 
@@ -38,10 +39,12 @@ function SkillElem({skill,user,canEdit}){
     }
 
     if(canEdit) {
-        return <div>
-        <p>{skill.name}</p>
-        <Button onClick={deleteSkill} variant="primary">Supprimer la competence</Button>
-    </div>
+        return <div className="d-flex mt-2">
+            <p className="mb-0">{skill.name}</p>
+            <Button onClick={deleteSkill} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                <Trash3Fill></Trash3Fill>
+            </Button>
+        </div>
     } else {
         return <div>
             <p>{skill.name}</p>

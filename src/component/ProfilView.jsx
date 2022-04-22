@@ -100,7 +100,7 @@ function ProfilView({elem, isProject=false}){
             <div className="mt-3 ms-3 me-2">
                 <ProfilField user={elem} isProject={false} label={"Nom"} name={"lastname"} canEdit={canEdit} value={elem.lastname}></ProfilField>
             </div>
-            <div className="mt-3 mb-2 ms-3 me-2">
+            <div className="mt-3 mb-3 ms-3 me-2">
                 <ProfilField multipleLine={true} user={elem} isProject={isProject} label={"Description"} name={"description"} canEdit={canEdit} value={elem.description}></ProfilField>
             </div>
         </div>

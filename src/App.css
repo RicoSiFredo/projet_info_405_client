@@ -27,6 +27,13 @@
   cursor: pointer;
   border-radius: 50%;
 }
+.img-btn-tiny{
+  width: 13px;
+  height: 13px;
+}
+.img-btn{
+  width: 20px;
+}
 .profil img{
   z-index: 1000;
   height: 100%;
