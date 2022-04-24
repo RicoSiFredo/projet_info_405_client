@@ -6,13 +6,25 @@ import ListEats from "../object/base/ListEats";
 import Eats from "../object/base/Eats";
 import Data from "../utils/Data";
 import Response from "../utils/Response";
+import Project from "../object/Project";
+import ErrorModal from "../object/base/ErrorModal";
 
-function AddSkill({user,canEdit}){
+let modal = new ErrorModal();
+modal.addErrorMessage(
+    ErrorEats.SUCCESS,
+    "L'élément a été ajouté avec succès."
+)
+function AddElem({elem,keyword, handleClose}){
     const [val, updateVal] = useState("");
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
 
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
     
+    let baseKeyword = "user"
+    if(elem instanceof Project){
+        baseKeyword = "project"
+    }
+
     useEffect(function(){
         chercher();
     }, [val])
@@ -22,44 +34,49 @@ function AddSkill({user,canEdit}){
     }
 
     function chercher(){
+        updateError(ErrorEats.NO_ERROR);
         list.reset();
         list.makeRequest(
-            '/search/skill',
+            'search/'+keyword,
             {
                 name: val,
-                user: user.id_str
+                elem: elem.id_str
             },
             function(error){
             
             },
             function(response){
-            
+                console.log(response)
             }
         )
     }
 
-    function edit(){
-        let exist = false;
-        for(let i = 0; i < list.list.length; i++){
-            if(list.list[i].name === val){
-                exist = true;
-            }
-        }
-        if(!exist){
-            user.makeRequest(
-                "user/add/skill", 
+    function addRelation(val){
+        if(val!=""){
+            updateError(ErrorEats.NO_ERROR);
+            elem.makeRequest(
+                baseKeyword+"/add/"+keyword, 
                 {
                     access_token: Data.accessToken(),
-                    value: val
+                    value: val,
+                    elem: elem.id_str
                 },
                 function(error){
-                    
                     updateError(ErrorEats.WENT_WRONG);
                 },
                 function(response){
-                    
                     if(Response.isSuccessResponse(response)){
-                        //updateEdit(false);
+                        let make = false;
+                        let i = 0;
+                        while(!make&&i<list.size()){
+                            if(list.get(i).name==val){
+                                list.removeIndex(i);
+                                make = true;
+                            }
+                            i++;
+                        }
+                        list.update();
+                        updateError(ErrorEats.SUCCESS);
                     }
                     else {
                         updateError(new ErrorEats(
@@ -69,58 +86,29 @@ function AddSkill({user,canEdit}){
                 }
             )
         }
-        else {
-            addRelation(val);
-        }
-    }
-
-    function addRelation(name) {
-
-        user.makeRequest(
-            "user/add/skillrelation", 
-            {
-                access_token: Data.accessToken(),
-                value: name
-            },
-            function(error){
-                
-                updateError(ErrorEats.WENT_WRONG);
-            },
-            function(response){
-                
-                if(Response.isSuccessResponse(response)){
-                    //updateEdit(false);  
-                }
-                else {
-                    updateError(new ErrorEats(
-                        Response.error(response)
-                    ));
-                }
-            }
-        )
-
     }
     function chercherEvent(e){
         updateVal(e.target.value);
         // Change la valeur du texte
     }
     function cancelEdit(){
+        handleClose();
     }
 
     return <div>
-        <div className="mb-3">
+        <div>
             <Form.Group className="mb-3">
                 <Form.Control placeholder="Rechercher une compétence" value={val} onChange={chercherEvent} type="text"/>
             </Form.Group>
-            <p>{error.toString()}</p>
-            <Button onClick={edit} variant="primary">Ajouter</Button>
+            <Button onClick={()=>addRelation(val)} variant="primary">Ajouter</Button>
             <Button className="ms-3" onClick={cancelEdit} variant="primary">Annuler</Button>
+            {modal.getMessage(error)!=""&&<p className="mt-3 mb-0">{modal.getMessage(error)}</p>}
         </div>
         <div>
             {
                 list.map(function(object, index) {
-                    return <div key={index} className="d-flex mt-2">
-                        <p class="mb-0">{object.name}</p> 
+                    return <div key={index} className="d-flex mt-3">
+                        <p className="mb-0">{object.name}</p> 
                         <Button onClick={()=>addRelation(object.name)} className="ms-2 mb-1 pt-1 ps-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
                             <img className="img-btn" src="plus.png"/>
                         </Button>
@@ -130,4 +118,4 @@ function AddSkill({user,canEdit}){
         </div>
     </div>
 }
-export default AddSkill;
+export default AddElem;

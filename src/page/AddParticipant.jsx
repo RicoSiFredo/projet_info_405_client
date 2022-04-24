@@ -4,7 +4,7 @@ import Field from "../component/Field";
 import CompareEats from "../object/base/CompareEats";
 import Eats from "../object/base/Eats";
 import ListEats from "../object/base/ListEats";
-import ProjectUserCheckList from "../object/list/ProjectUserCheckList";
+import ProjectUserCheckList from "../list/ProjectUserCheckList";
 import Data from "../utils/Data";
 import React from "react"
 

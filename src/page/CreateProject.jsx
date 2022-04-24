@@ -7,7 +7,6 @@ import Data from "../utils/Data";
 import Response from "../utils/Response";
 import Form405 from "../component/Form405";
 
-
 function CreateProjet({back, user, updatePage}){
     const [name, updateName] = useState("");
     const [description, updateDescription] = useState("");

@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
-import { ActionEnum } from "../../enum/ActionEnum";
-import PageEnum from "../../enum/PageEnum";
-import PermEnum from "../../enum/PermEnum";
-import Data from "../../utils/Data";
+import { ActionEnum } from "../enum/ActionEnum";
+import PageEnum from "../enum/PageEnum";
+import PermEnum from "../enum/PermEnum";
+import Data from "../utils/Data";
 import React from "react"
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){

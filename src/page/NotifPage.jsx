@@ -1,5 +1,5 @@
 import Notif from "../component/Notif";
-import ListNotif from "../object/list/ListNotif";
+import ListNotif from "../list/ListNotif";
 import React from "react"
 
 function NotifPage({user}){

@@ -4,14 +4,15 @@ import Field from "../component/Field";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import PermEnum from "../enum/PermEnum";
-import ProjectActionList from "../object/list/ProjectActionList";
+import ProjectActionList from "../list/ProjectActionList";
 import Data from "../utils/Data";
 import AddParticipant from "./AddParticipant";
-import TecnoList from "../object/list/TecnoList";
+import TecnoList from "../list/TecnoList";
 import AddTecno from "../component/AddTecno";
 import ProfilField from "../component/ProfilField";
 import React from "react"
 import ProfilView from "../component/ProfilView";
+import ElemView from "../component/ElemView";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
@@ -50,7 +51,6 @@ function Project({project, user, updatePage}){
             updateEdit(!edit);
         }
         function joinSend(){
-            console.log("joinSend")
             project.makeRequest(
                 'user/add/project',
                 {
@@ -62,9 +62,6 @@ function Project({project, user, updatePage}){
                     console.log(error)
                 },
                 function(response){
-                    console.log(response)
-                    console.log(project)
-                    console.log(project.action)
                     updateEdit(false)
                     updateComment("")
                 }
@@ -94,6 +91,16 @@ function Project({project, user, updatePage}){
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView elem={project} isProject={true}></ProfilView>
+            <ElemView 
+                canEdit={canEdit} 
+                parent={project}
+                list={project.tecnoList} 
+                keyword="tecno"
+                title="Technologies"
+                infoNothing="Aucune technologie utilisée"
+                infoNothingEdit="Commencer à ajouter des technologie que votre projet utilise">
+                    
+            </ElemView>
         </div>
         <div className="w-45 center-div">
         </div>
@@ -122,13 +129,6 @@ function Project({project, user, updatePage}){
                     <ProjectActionList user={user} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
                 )
             }
-                
-            
-        
-            <p>Liste des technologies utilisées</p>
-            <TecnoList tecnoList={project.tecnoList}></TecnoList>
-
-            <AddTecno project={project} canEdit={canEdit}></AddTecno>
         </div>
     </div>
 

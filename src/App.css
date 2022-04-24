@@ -17,6 +17,21 @@
   bottom: 5px;
   right: 8px;
 }
+.separator{
+  border-color: #8899BB;
+}
+.click{
+  cursor: pointer;
+}
+.profil-tiny{
+  z-index: 999;
+  height: 45px;
+  margin-top: 2px;
+  width: 45px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 50%;
+}
 .profil{
   z-index: 999;
   margin-top: -45px;

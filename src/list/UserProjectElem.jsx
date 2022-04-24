@@ -1,15 +1,11 @@
 import { Button } from "react-bootstrap";
-import { ActionEnum } from "../../enum/ActionEnum";
-import PageEnum from "../../enum/PageEnum";
-import Data from "../../utils/Data";
+import { ActionEnum } from "../enum/ActionEnum";
+import PageEnum from "../enum/PageEnum";
+import Data from "../utils/Data";
 import React from "react"
+import UserProjectRow from "../component/UserProjectRow";
 
 function UserProjectElem({action, user, updatePage}){
-    function openProfil(){
-        action.project.update = user.update;
-        user.project.set(action.project);
-        updatePage(PageEnum.Project);
-    }
     let bonus;
     if(ActionEnum.IN_PROJECT.is(action.type)){
 
@@ -55,11 +51,11 @@ function UserProjectElem({action, user, updatePage}){
     else if(ActionEnum.PROJECT_ASK_TO_USER_REFUSE.is(action.type)){
         bonus = <p>Vous avez refusé l'invitation</p>
     }
-    return <div>
-        <p>{action.project.name}</p>
-        {bonus}
-        <Button onClick={openProfil} variant="primary">Voir</Button>
-        <p>-----------------------------------------------</p>
-    </div>
+    return <UserProjectRow 
+        user={user} 
+        updatePage={updatePage} 
+        action={action}>
+
+    </UserProjectRow>
 }
 export default UserProjectElem;

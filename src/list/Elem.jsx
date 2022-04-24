@@ -1,30 +1,33 @@
 import {useState } from "react";
-import Data from "../../utils/Data";
-import Response from "../../utils/Response";
+import Data from "../utils/Data";
+import Response from "../utils/Response";
 import {Button} from "react-bootstrap";
 import React from "react"
+import ErrorEats from "../object/base/ErrorEats";
+import { Trash3Fill } from "react-bootstrap-icons";
+import Project from "../object/Project";
 
-import ErrorEats from "../../object/base/ErrorEats";
-import { BasketFill, Trash3Fill, TrashFill } from "react-bootstrap-icons";
+function Elem({elem,parent,keyword,canEdit}){
 
-function SkillElem({skill,user,canEdit}){
-
-    const [val, updateVal] = useState(skill.name);
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
 
-    function deleteSkill() {
-        user.makeRequest(
-            "user/delete/skill", 
+    let baseKeyword = "user"
+    if(parent instanceof Project){
+        baseKeyword = "project"
+    }
+
+    function deleteElem() {
+        parent.makeRequest(
+            baseKeyword+"/delete/"+keyword, 
             {
                 access_token: Data.accessToken(),
-                value: val
+                elem_del: elem.id_str,
+                elem: parent.id_str
             },
             function(error){
                 updateError(ErrorEats.WENT_WRONG);
-                console.log(error)
             },
             function(response){
-                
                 if(Response.isSuccessResponse(response)){
 
                 }
@@ -40,15 +43,15 @@ function SkillElem({skill,user,canEdit}){
 
     if(canEdit) {
         return <div className="d-flex mt-2">
-            <p className="mb-0">{skill.name}</p>
-            <Button onClick={deleteSkill} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+            <p className="mb-0">{elem.name}</p>
+            <Button onClick={deleteElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
                 <Trash3Fill></Trash3Fill>
             </Button>
         </div>
     } else {
         return <div>
-            <p>{skill.name}</p>
+            <p>{elem.name}</p>
         </div>
     }
 }
-export default SkillElem;
+export default Elem;

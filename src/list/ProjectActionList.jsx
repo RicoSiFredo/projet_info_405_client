@@ -1,15 +1,13 @@
-import { Button } from "react-bootstrap";
-import { ActionEnum } from "../../enum/ActionEnum";
-import PageEnum from "../../enum/PageEnum";
-import Data from "../../utils/Data";
+import { ActionEnum } from "../enum/ActionEnum";
 import List from "./List";
-import UserProjectElem from "./UserProjectElem";
+import ProjectActionElem from "./ProjectActionElem";
 import React from "react"
 
 const TYPE = {
-    PROJECT: 0
-};
-function UserProjectList({typeAction, user, updatePage, actionList}){
+    ACTION: 0
+}
+
+function ProjectActionList({user, project, typeAction, updatePage, actionList}){
     function getList(){
         let list = [];
         for(let i = 0; i < actionList.size(); i++){
@@ -24,9 +22,9 @@ function UserProjectList({typeAction, user, updatePage, actionList}){
         // donne le nombre d'élément
     }
     function type(index){
-        return TYPE.PROJECT;
+        return TYPE.ACTION;
         // donne le type d'affichage pour l'index*
-        // il y a que PROJECT ici mais on peut imaginer le dernier
+        // il y a que skill ici mais on peut imaginer le dernier
         // serait un load pour avoir les suivants
     }
     function compute(index){
@@ -35,35 +33,26 @@ function UserProjectList({typeAction, user, updatePage, actionList}){
 
         let res;
         
-        if(typeLay==TYPE.PROJECT){
-            res = <UserProjectElem user={user} updatePage={updatePage} action={getList()[index]}>
+        if(typeLay==TYPE.ACTION){
+            res = <ProjectActionElem user={user} typeAction={typeAction} project={project} updatePage={updatePage} action={getList()[index]}>
 
-            </UserProjectElem>
+            </ProjectActionElem>
         }
         return res;
     }
     function key(index){
-        return "project-"+index;
+        return "skill-"+index;
         // la clé de chaque élément de la liste
     }
     let head;
     let text;
-    let footer;
     if(ActionEnum.IN_PROJECT.got(typeAction)){
-        function creerProjet(){
-            updatePage(PageEnum.CreateProject);
-        }
-        head = <p>Liste des projets : </p>
-        text = <p>Aucun projet</p>
-        if(Data.isMe(user)){
-            footer = <Button variant="primary" onClick={creerProjet}>Créer un Projet</Button>
-        }
+        head = <p>Liste des participants</p>
     }
-    else if(ActionEnum.PROJECT_ASK_TO_USER.got(typeAction)||ActionEnum.PROJECT_ASK_TO_USER_REFUSE.got(typeAction)){
-        head = <p>Invitation : </p>
-        text = <p>Aucune invitation</p>
+    else if(ActionEnum.USER_ASK_TO_PROJECT.got(typeAction)){
+        head = <p>Utilisateurs qui veulent rejoindre le projet</p>
+        text = <p>Aucune demande</p>
     }
-        
     if(count()>0){
         return <div>
             {head}
@@ -72,17 +61,14 @@ function UserProjectList({typeAction, user, updatePage, actionList}){
                 type={type}
                 compute={compute}
                 generateKey={key}>
-
+    
             </List>
-            {footer}
         </div>
-    }
-    else {
+    } else {
         return <div>
             {head}
             {text}
-            {footer}
         </div>
     }
 }
-export default UserProjectList;
+export default ProjectActionList;

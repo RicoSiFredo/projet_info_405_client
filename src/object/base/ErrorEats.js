@@ -1,5 +1,9 @@
 export default class ErrorEats{
 
+    static SUCCESS_STR = "success";
+    static SUCCESS = new ErrorEats(ErrorEats.SUCCESS_STR);
+    // quand la requête a réussi
+
     static NO_ERROR_STR = "";
     static NO_ERROR = new ErrorEats(ErrorEats.NO_ERROR_STR);
     // L'erreur null
@@ -39,6 +43,9 @@ export default class ErrorEats{
                 break;
             case ErrorEats.NOT_FOUND_STR:
                 res = "L'élément est introuvable.";
+                break;
+            case ErrorEats.SUCCESS_STR:
+                res = "Le projet a été créé avec succès.";
                 break;
             case ErrorEats.NO_ERROR_STR:
                 res = "";

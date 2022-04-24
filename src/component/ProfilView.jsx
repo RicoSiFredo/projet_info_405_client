@@ -8,6 +8,7 @@ import ErrorShow from "./ErrorShow";
 import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
 import Data from "../utils/Data";
+import ImgProfile from "./ImgProfile";
 
 const NONE_ERROR = -1;
 const SIZE_ERROR = 0;
@@ -105,16 +106,6 @@ function ProfilView({elem, isProject=false}){
             </div>
         </div>
     }
-    let profil;
-    if(elem.profile){
-        profil = <img src={Constant.IMAGE_URL+elem.profile} className="center-crop" alt=""/>
-    }
-    else if(!isProject){
-        profil = <img src="profile_empty.png" className="center-crop w-100 h-100" alt=""/>
-    }
-    else {
-        profil = <img src="project_empty.png" className="center-crop w-100 h-100" alt=""/>
-    }
     return <div>
         <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
             <div className="banner border-bottom border-4 border-primary position-relative">
@@ -126,7 +117,7 @@ function ProfilView({elem, isProject=false}){
                 <input onChange={handleFileBannerInput} type={"file"} id="file-banner" className="d-none"/>
             </div>
             <div className="profil bg-light bg-light" onClick={addProfil}>   
-                {profil}
+                <ImgProfile elem={elem}></ImgProfile>
                 <input onChange={handleFileProfilInput} type={"file"} id="file-profil" className="d-none"/>
             </div>
             {field}

@@ -1,13 +1,13 @@
 import List from "./List";
-import SkillElem from "./SkillElem";
+import Elem from "./Elem";
 import React from "react"
 
 const TYPE = {
     SKILL: 0
 };
-function SkillList({skillList,user,canEdit}){
+function ElemList({list,parent,keyword,canEdit}){
     function count(){
-        return skillList.size();
+        return list.size();
         // donne le nombre d'élément
     }
     function type(index){
@@ -23,8 +23,8 @@ function SkillList({skillList,user,canEdit}){
         let res;
         
         if(typeLay==TYPE.SKILL){
-            res = <SkillElem skill={skillList.get(index)} user={user} canEdit={canEdit}>
-            </SkillElem>
+            res = <Elem keyword={keyword} elem={list.get(index)} parent={parent} canEdit={canEdit}>
+            </Elem>
         }
         return res;
     }
@@ -42,4 +42,4 @@ function SkillList({skillList,user,canEdit}){
         </List>
     </div>
 }
-export default SkillList;
+export default ElemList;
