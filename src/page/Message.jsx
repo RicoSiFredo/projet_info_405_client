@@ -14,18 +14,26 @@ import React from "react"
 
 
 
+
+
 function Message({message,own,updatePage}){
 
+
+    let test = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + "83e999df-eda8-412a-8d54-73b8deb656fb.jpeg";
+
     
-
-
-
     return(
-        <div className="message">
+        
+        <div className={own ? "message own" : "message"}>
             <div className="messageTop">
+                <img
+                    className="messageImg"
+                    src={test}
+                    alt=""
+                />
                 <p className="messageText">Message : {message.text} écrit par : {message.auteur.firstname}</p>
             </div>
-            <div className="messageBottom">1 hour ago</div>
+            <div className="messageBottom"><p>1 hour ago</p></div>
         </div>
     )
 }

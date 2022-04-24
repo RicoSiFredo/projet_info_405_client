@@ -1,3 +1,4 @@
+import '../App.css';
 import { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
@@ -22,6 +23,7 @@ function Messenger({back, user, updatePage}){
     const [newMessage,setNewMessage] = useState("");
     
 
+    
     useEffect(function(){
         user.getAllConv();
     }, []);
@@ -45,22 +47,6 @@ function Messenger({back, user, updatePage}){
     },[currentChat]);
 
 
-
-    // function createMessage(){
-        
-    //         function(error){
-    //             if(failed!=undefined){
-    //                 failed(error);
-    //             }
-    //         },
-    //         function(response){
-    //             if(success!=undefined){
-    //                 success(response);
-    //             }
-    //         }
-    //     )
-    // }
-
     
 
     const handleSubmit = (e) => {
@@ -79,11 +65,9 @@ function Messenger({back, user, updatePage}){
 
     
     
-    
-    console.log(currentChat);
 
     return (
-        <div className="Messsenger">
+        <div className="Messenger">
             <div className="chatMenu">
                 <div className="chatMenuWrapper">
                     <input placeholder="Rechercher des amis" className="chatMenuInput" />
@@ -92,7 +76,6 @@ function Messenger({back, user, updatePage}){
                                 <Conversation key={c.id_str} conversation={c}/>
                             </div>
                         ))}
-                    <h1>menu</h1>
                    
                 </div>
             </div>
@@ -105,10 +88,11 @@ function Messenger({back, user, updatePage}){
                     (<>
                     <div className="chatBoxTop">
                     {messages.map((m) => (
-                            <Message key={m.id_str} message={m}/>
+                            console.log(m),
+                            <Message key={m.id_str} message={m} own={m.auteur.id_str === user.id_str}/>
                         ))}
                     </div>
-                    <div className="cahtBoxBottom">
+                    <div className="chatBoxBottom">
                         <textarea className="chatMessageInput" placeholder="ecrivez quelque chose..."
                         onChange={(e) => setNewMessage(e.target.value)}
                         value={newMessage}

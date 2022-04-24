@@ -15,11 +15,17 @@ function Conversation({conversation,updatePage}){
     }, []);
 
             const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
+
+            let test = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + "83e999df-eda8-412a-8d54-73b8deb656fb.jpeg";
             if (friend != undefined) {
                 return(
                     <div className="conversation">
+                        <img
+                        className="conversationImg"
+                        src={test}
+                        alt=""
+                        />
                         <span className="conversationName">{friend.firstname}</span>
-                        <Button variant="primary">Voir conv</Button>
                     </div>
                 )
 
