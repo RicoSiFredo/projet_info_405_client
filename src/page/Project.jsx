@@ -99,7 +99,7 @@ function Project({project, user, updatePage}){
                 keyword="tecno"
                 title="Technologies"
                 infoNothing="Aucune technologie utilisée"
-                infoNothingEdit="Commencer à ajouter des technologie que votre projet utilise">
+                infoNothingEdit="Commencez à ajouter les technologies utilisées par votre projet                ">
                     
             </ElemView>
         </div>
