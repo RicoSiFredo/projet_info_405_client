@@ -17,8 +17,14 @@
   bottom: 5px;
   right: 8px;
 }
+.modal-z-2{
+  z-index: 1191 !important;
+}
 .separator{
   border-color: #8899BB;
+}
+.loader{
+  height: 200px;
 }
 .click{
   cursor: pointer;
@@ -31,6 +37,12 @@
   overflow: hidden;
   cursor: pointer;
   border-radius: 50%;
+}
+.height-38{
+  height: 38px;
+}
+.flex-1{
+  flex: 1;
 }
 .profil{
   z-index: 999;

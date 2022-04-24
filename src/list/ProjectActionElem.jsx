@@ -4,6 +4,7 @@ import PageEnum from "../enum/PageEnum";
 import PermEnum from "../enum/PermEnum";
 import Data from "../utils/Data";
 import React from "react"
+import SimpleProfile from "../component/SimpleProfile";
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
     
@@ -84,12 +85,12 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
             <Button onClick={refuser}>Refuser</Button>
         </div>
     }
-    return <div>
-        <p>{action.user.firstname + " " + action.user.lastname}</p>
-        {text}
-        {button}
-        <Button onClick={openProfil}>Voir</Button>
-        <p>------------------------------</p>
-    </div>
+    return <SimpleProfile
+        user={user} 
+        action={action} 
+        updatePage={updatePage} 
+        isProject={false}>
+
+    </SimpleProfile>
 }
 export default ProjectActionElem;

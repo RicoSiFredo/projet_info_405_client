@@ -3,7 +3,7 @@ import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import Data from "../utils/Data";
 import React from "react"
-import UserProjectRow from "../component/UserProjectRow";
+import SimpleProfile from "../component/SimpleProfile";
 
 function UserProjectElem({action, user, updatePage}){
     let bonus;
@@ -51,11 +51,12 @@ function UserProjectElem({action, user, updatePage}){
     else if(ActionEnum.PROJECT_ASK_TO_USER_REFUSE.is(action.type)){
         bonus = <p>Vous avez refusé l'invitation</p>
     }
-    return <UserProjectRow 
+    return <SimpleProfile 
         user={user} 
+        isProject={true}
         updatePage={updatePage} 
         action={action}>
 
-    </UserProjectRow>
+    </SimpleProfile>
 }
 export default UserProjectElem;

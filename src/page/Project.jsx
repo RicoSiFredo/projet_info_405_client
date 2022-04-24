@@ -13,6 +13,7 @@ import ProfilField from "../component/ProfilField";
 import React from "react"
 import ProfilView from "../component/ProfilView";
 import ElemView from "../component/ElemView";
+import ProjectActionView from "../component/ProjectActionView";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
@@ -105,6 +106,14 @@ function Project({project, user, updatePage}){
         <div className="w-45 center-div">
         </div>
         <div className="w-25 right-div">
+            <ProjectActionView 
+                typeAction={[ActionEnum.IN_PROJECT]} 
+                updatePage={updatePage} 
+                user={user} 
+                project={project} 
+                actionList={project.actionList}>
+
+            </ProjectActionView>
             {
                 joinBlock
             }
@@ -121,8 +130,6 @@ function Project({project, user, updatePage}){
                     </div>
                 )
             }
-
-            <ProjectActionList typeAction={[ActionEnum.IN_PROJECT]} updatePage={updatePage} user={user} project={project} actionList={project.actionList}></ProjectActionList>
 
             {
                 project.havePermission(PermEnum.MANAGE_MEMBERS) && (

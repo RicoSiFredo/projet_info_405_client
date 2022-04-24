@@ -46,39 +46,15 @@ function UserProjectList({typeAction, user, updatePage, actionList}){
         return "project-"+index;
         // la clé de chaque élément de la liste
     }
-    let head;
-    let text;
-    let footer;
-    if(ActionEnum.IN_PROJECT.got(typeAction)){
-        function creerProjet(){
-            updatePage(PageEnum.CreateProject);
-        }
-        if(Data.isMe(user)){
-            footer = <Button variant="primary" onClick={creerProjet}>Créer un Projet</Button>
-        }
-    }
-    else if(ActionEnum.PROJECT_ASK_TO_USER.got(typeAction)||ActionEnum.PROJECT_ASK_TO_USER_REFUSE.got(typeAction)){
-        head = <p>Invitation : </p>
-        text = <p>Aucune invitation</p>
-    }
-        
-    if(count()>0){
-        return <div>
-            <List
-                count={count}
-                type={type}
-                compute={compute}
-                generateKey={key}>
+    
+    return <div>
+        <List
+            count={count}
+            type={type}
+            compute={compute}
+            generateKey={key}>
 
-            </List>
-        </div>
-    }
-    else {
-        return <div>
-            {head}
-            {text}
-            {footer}
-        </div>
-    }
+        </List>
+    </div>
 }
 export default UserProjectList;

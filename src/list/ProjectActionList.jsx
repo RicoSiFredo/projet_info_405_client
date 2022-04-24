@@ -44,31 +44,15 @@ function ProjectActionList({user, project, typeAction, updatePage, actionList}){
         return "skill-"+index;
         // la clé de chaque élément de la liste
     }
-    let head;
-    let text;
-    if(ActionEnum.IN_PROJECT.got(typeAction)){
-        head = <p>Liste des participants</p>
-    }
-    else if(ActionEnum.USER_ASK_TO_PROJECT.got(typeAction)){
-        head = <p>Utilisateurs qui veulent rejoindre le projet</p>
-        text = <p>Aucune demande</p>
-    }
-    if(count()>0){
-        return <div>
-            {head}
-            <List
-                count={count}
-                type={type}
-                compute={compute}
-                generateKey={key}>
+    return <div>
+        <List
+            count={count}
+            type={type}
+            compute={compute}
+            generateKey={key}>
+
+        </List>
+    </div>
     
-            </List>
-        </div>
-    } else {
-        return <div>
-            {head}
-            {text}
-        </div>
-    }
 }
 export default ProjectActionList;
