@@ -117,12 +117,6 @@ function Project({project, user, updatePage}){
             {
                 joinBlock
             }
-            <p>-------------------------------</p>
-
-            {
-                addParticipantBlock
-            }
-
             {
                 project.havePermission(PermEnum.MANAGE_ROLE) && (
                     <div>

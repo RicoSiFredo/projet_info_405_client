@@ -71,7 +71,7 @@ function UserProjectView({user, updatePage}){
                 <Form.Group>
                     <Form.Control placeholder="Nom" value={val} onChange={handleChange} type="text"/>
                 </Form.Group>
-                {error.toString()!=""&&<p>{error.toString()}</p>}
+                {error.toString()!=""&&<p className="mb-0 mt-2 ms-1">{error.toString()}</p>}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" onClick={createProject}>

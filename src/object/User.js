@@ -14,6 +14,8 @@ export default class User extends ObjectEats {
     firstname = undefined;
     lastname = undefined;
     description = undefined;
+    profile = undefined;
+    banner = undefined;
 
     skillList = new ListEats("got_skill", this);
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));

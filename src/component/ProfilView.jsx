@@ -34,6 +34,13 @@ function ProfilView({elem, isProject=false}){
     const handleFileProfilInput = function(e){
         sendFile("profile", e.target.files[0])
     }
+    let key;
+    if(isProject){
+        key = "project";
+    }
+    else{
+        key = "user";
+    }
     function sendFile(type, file){
         console.log(file.size)
         if (file.size > 8192000){
@@ -49,16 +56,18 @@ function ProfilView({elem, isProject=false}){
             }
             if(goodExt){
                 const formData = new FormData();
+                console.log(Constant.SERVER_URL + key + "/set/"+type)
                 formData.append('file', file);
                 formData.append('id', elem.id_str);
                 formData.append('access_token', Data.accessToken());
                 HTTP.queryPostFromData(
-                    Constant.SERVER_URL + "project/set/"+type,
+                    Constant.SERVER_URL + key + "/set/" + type,
                     formData,
                     function(err){
                         console.log(err)
                     },
                     function(result){
+                        console.log(result)
                         if(result["status"] == "success"){
                             elem.applyRequest(result);
                         }
