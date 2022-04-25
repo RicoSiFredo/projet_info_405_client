@@ -20,7 +20,7 @@ export default class User extends ObjectEats {
     skillList = new ListEats("got_skill", this);
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
     convList = new ListEats("is_member", this);
-    notifList = new ListEats("notif", this);
+    notifList = new ListEats(["target", "view"], this);
     logged = false;
 
     constructor(){ 
@@ -72,7 +72,26 @@ export default class User extends ObjectEats {
             "user/get/notif",
             {
                 access_token: Data.accessToken(),
-                id: this.id_str
+                id_user: this.id_str
+            },
+            function(error){
+                console.log(error)
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+    getMyNotif(failed, success){
+        super.makeRequest(
+            "user/get/mynotif",
+            {
+                access_token: Data.accessToken()
             },
             function(error){
                 if(failed!=undefined){

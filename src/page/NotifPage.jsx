@@ -1,13 +1,13 @@
 import Notif from "../component/Notif";
-import ListNotif from "../list/ListNotif";
 import React from "react"
+import NotifList from "../list/NotifList";
 
 function NotifPage({user}){
     console.log(user.notifList)
     return <div>
-        <ListNotif listNotif={user.notifList}>
+        <NotifList listNotif={user.notifList}>
 
-        </ListNotif>
+        </NotifList>
     </div>
 }
 export default NotifPage;

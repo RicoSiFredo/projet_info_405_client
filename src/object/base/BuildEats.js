@@ -8,6 +8,7 @@ import Skill from "../Skill";
 import Tecno from "../Tecno";
 import User from "../User";
 import ObjectEats from "./ObjectEats";
+import Notif from "../Notif";
 
 
 export default class BuildEats {
@@ -40,6 +41,9 @@ export default class BuildEats {
         }
         else if(json==Message.TYPE||json["_type"]==Message.TYPE){
             res = new Message();
+        }
+        else if(json==Notif.TYPE||json["_type"]==Notif.TYPE){
+            res = new Notif();
         }
         else {
             res = new ObjectEats();

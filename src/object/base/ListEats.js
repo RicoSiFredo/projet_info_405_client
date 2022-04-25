@@ -72,8 +72,16 @@ export default class ListEats extends Eats {
                 if(this.key == ""){
                     jsonAccess = json;
                 }
-                else {
+                else if(!Array.isArray(this.key)){
                     jsonAccess = json[this.key];
+                }
+                else {
+                    jsonAccess = [];
+                    for(let i=0; i<this.key.length; i++){
+                        if(json[this.key[i]]!=undefined){
+                            jsonAccess.push(...json[this.key[i]]);
+                        }
+                    }
                 }
                 if(jsonAccess!=undefined){
                     for(let i=0; i<jsonAccess.length;i++){
