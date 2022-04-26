@@ -31,6 +31,7 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
                 typeAction={typeAction} 
                 updatePage={updatePage} 
                 user={user} 
+                project={project}
                 actionList={actionList}>
 
             </ProjectActionList>
