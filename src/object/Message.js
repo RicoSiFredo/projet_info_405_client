@@ -12,6 +12,7 @@ export default class Message extends ObjectEats {
 
     text = undefined;
     auteur = new SimpleEats("send_msg", this);
+    date = undefined;
 
     constructor(){ 
         super();

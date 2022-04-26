@@ -21,7 +21,6 @@ function Messenger({back, user, updatePage}){
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage,setNewMessage] = useState("");
-    
 
     
     useEffect(function(){
@@ -88,7 +87,6 @@ function Messenger({back, user, updatePage}){
                     (<>
                     <div className="chatBoxTop">
                     {messages.map((m) => (
-                            console.log(m),
                             <Message key={m.id_str} message={m} own={m.auteur.id_str === user.id_str}/>
                         ))}
                     </div>
