@@ -5,7 +5,7 @@ import Notif from "./Notif";
 const TYPE = {
     NOTIF: 0
 };
-function NotifList({list}){
+function NotifList({list, updatePage}){
     function count(){
         return list.size();
         // donne le nombre d'élément
@@ -22,7 +22,9 @@ function NotifList({list}){
 
         let res;
         if(typeLay==TYPE.NOTIF){
-            res = <Notif notif={list.get(index)}>
+            res = <Notif 
+                notif={list.get(index)}
+                updatePage={updatePage}>
             </Notif>
         }
         return res;

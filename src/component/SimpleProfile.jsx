@@ -4,7 +4,7 @@ import ImgProfile from "./ImgProfile";
 import PageEnum from "../enum/PageEnum";
 import User from "../object/User";
 
-function SimpleProfile({content, elem, user, action, updatePage, isProject}){
+function SimpleProfile({content, elem, user, action, updatePage, isProject, border=true}){
     if(action!=undefined){
         function openElem(){
             if(isProject){
@@ -39,7 +39,7 @@ function SimpleProfile({content, elem, user, action, updatePage, isProject}){
         else {
             url = "/user/" + action.user.id_str
         }
-        return <div className="d-flex pb-2 border-top separator pt-2 ps-3 pe-2">
+        return <div className={"d-flex pb-2" + ( border && "border-top separator" ) + "pt-2 ps-3 pe-2" }>
             <a href="#" class="text-decoration-none link-dark">
                 <div onClick={openElem} className="profil-tiny bg-light bg-light">
                     {profile}
@@ -62,7 +62,7 @@ function SimpleProfile({content, elem, user, action, updatePage, isProject}){
             name = elem.name
         }
         //flex view
-        return <div className="d-flex pb-2 border-top separator pt-2 ps-3 pe-2">
+        return <div className={"d-flex pb-2" + ( border && "border-top separator" ) + "pt-2 ps-3 pe-2" }>
             <div className="profil-tiny bg-light bg-light">
                 <ImgProfile elem={elem}></ImgProfile>
             </div>

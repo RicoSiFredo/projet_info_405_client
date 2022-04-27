@@ -40,10 +40,13 @@ function Profil({back, user, updatePage}){
             </ElemView>
         </div>
         <div className="w-45 center-div">
-            <NotifList
-                list={user.notifList}>
+            <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
+                <NotifList
+                    updatePage={updatePage} 
+                    list={user.notifList}>
 
-            </NotifList>
+                </NotifList>
+            </div>
         </div>
         <div className="w-25 right-div">
             <UserProjectView 
