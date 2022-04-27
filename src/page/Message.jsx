@@ -20,20 +20,23 @@ function Message({message,own,updatePage}){
 
 
     let image = message.auteur.banner;
-    let test = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + image;
+    let profilPic = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + image;
+    
+    let dateMessage = new Date(message.date * 1000).toLocaleString();
 
+    console.log(message);
     return(
         
         <div className={own ? "message own" : "message"}>
             <div className="messageTop">
                 <img
                     className="messageImg"
-                    src={test}
+                    src={profilPic}
                     alt=""
                 />
                 <p className="messageText">Message : {message.text} écrit par : {message.auteur.firstname}</p>
             </div>
-            <div className="messageBottom"><p>{message.date}</p></div>
+            <div className="messageBottom"><p>{dateMessage}</p></div>
         </div>
     )
 }
