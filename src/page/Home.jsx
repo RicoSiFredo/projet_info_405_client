@@ -21,15 +21,15 @@ function Home({user, updatePage}){
         function messages(){
             updatePage(PageEnum.Messenger);
         }
-        button = <div>
-            <Button variant="primary" onClick={logout}>Déconnexion</Button>
-            <Button variant="primary" onClick={profil}>Profil</Button>
-            <Button variant="primary" onClick={notif}>Notification</Button>
-            <Button variant="primary" onClick={messages}>Messages</Button>
+        button = <div >
+            <Button className="m-1" variant="primary" onClick={logout}>Déconnexion</Button>
+            <Button className="m-1" variant="primary" onClick={profil}>Profil</Button>
+            <Button className="m-1" variant="primary" onClick={notif}>Notification</Button>
+            <Button className="m-1" variant="primary" onClick={messages}>Messages</Button>
         </div>
     }
-    return <div>
-        <p>Page d'accueil</p>
+    return <div className="card m-2 p-2 d-flex align-items-center">
+        <h2 >Page d'accueil</h2>
         {button}
     </div>
 }
