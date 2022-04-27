@@ -16,14 +16,13 @@ import UserProjectView from "../component/UserProjectView";
 import NotifList from "../list/NotifList";
 
 
-function Profil({back, user, updatePage}){
+function Profil({back, rootUser, user, updatePage}){
     useEffect(function(){
         user.getAllSkill();
         user.getAllProject();
         user.getNotif();
     }, []);
 
-    console.log(user.notifList)
     let canEdit = Data.isMe(user);
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
@@ -40,13 +39,13 @@ function Profil({back, user, updatePage}){
             </ElemView>
         </div>
         <div className="w-45 center-div">
-            <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
-                <NotifList
-                    updatePage={updatePage} 
-                    list={user.notifList}>
+            <NotifList
+                rootUser={rootUser}
+                you={false}
+                updatePage={updatePage} 
+                list={user.notifList}>
 
-                </NotifList>
-            </div>
+            </NotifList>
         </div>
         <div className="w-25 right-div">
             <UserProjectView 

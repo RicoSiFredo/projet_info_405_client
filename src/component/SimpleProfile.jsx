@@ -4,7 +4,7 @@ import ImgProfile from "./ImgProfile";
 import PageEnum from "../enum/PageEnum";
 import User from "../object/User";
 
-function SimpleProfile({content, elem, user, action, updatePage, isProject, border=true}){
+function SimpleProfile({content, elem, user, action, updatePage, isProject, rootUser, border=true}){
     if(action!=undefined){
         function openElem(){
             if(isProject){
@@ -39,21 +39,33 @@ function SimpleProfile({content, elem, user, action, updatePage, isProject, bord
         else {
             url = "/user/" + action.user.id_str
         }
-        return <div className={"d-flex pb-2" + ( border && "border-top separator" ) + "pt-2 ps-3 pe-2" }>
+        return <div className={"d-flex pb-2 " + ( border ? "border-top separator" : "" ) + " pt-2 ps-3 pe-2" }>
             <a href="#" class="text-decoration-none link-dark">
                 <div onClick={openElem} className="profil-tiny bg-light bg-light">
                     {profile}
                 </div>
             </a>
-            <div className="ms-3">
+            <div className="ms-3 flex align-items-center">
                 <a href="#" class="text-decoration-none link-dark">
                     <h5 onClick={openElem} className="click mb-1">{name}</h5>
                 </a>
-                <p className="mb-0">{action.role.name}</p>
+                {action.role.name!=""&&<p className="mb-0">{action.role.name}</p>}
             </div>
         </div>
     }
     else {
+        function openElem(){
+            if(isProject){
+                elem.update = rootUser.update;
+                rootUser.project.set(elem);
+                updatePage(PageEnum.Project);
+            }
+            else {
+                elem.update = rootUser.update;
+                rootUser.user.set(elem);
+                updatePage(PageEnum.Profil);
+            }
+        }
         let name;
         if(elem instanceof User){
             name = elem.firstname + " " + elem.lastname
@@ -62,12 +74,12 @@ function SimpleProfile({content, elem, user, action, updatePage, isProject, bord
             name = elem.name
         }
         //flex view
-        return <div className={"d-flex pb-2" + ( border && "border-top separator" ) + "pt-2 ps-3 pe-2" }>
-            <div className="profil-tiny bg-light bg-light">
+        return <div className={"d-flex pb-2 " + ( border ? "border-top separator" : "" ) + " pt-2 ps-3 pe-2" }>
+            <div onClick={openElem} className="profil-tiny bg-light bg-light">
                 <ImgProfile elem={elem}></ImgProfile>
             </div>
-            <div className="ms-3">
-                <h5 className="click mb-1">{name}</h5>
+            <div className="ms-3 d-flex align-items-center">
+                <h5 onClick={openElem} className=" click mb-1">{name}</h5>
                 {content}
             </div>
         </div>

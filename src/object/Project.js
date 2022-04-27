@@ -34,6 +34,9 @@ export default class Project extends ObjectEats {
         return res;
     }
     
+    getDisplayName(){
+        return this.name;
+    }
 
     actionType(actionType){
         let res;

@@ -27,6 +27,10 @@ export default class User extends ObjectEats {
         super();
     }
 
+    getDisplayName(){
+        return this.firstname + " " + this.lastname;
+    }
+
     logout(){
         Data.setAccessToken(undefined);
         Data.setRefreshToken(undefined);
@@ -75,12 +79,15 @@ export default class User extends ObjectEats {
                 id_user: this.id_str
             },
             function(error){
+                console.log("error1")
                 console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }
             },
             function(response){
+                console.log("response1")
+                console.log(response)
                 if(success!=undefined){
                     success(response);
                 }
@@ -94,11 +101,14 @@ export default class User extends ObjectEats {
                 access_token: Data.accessToken()
             },
             function(error){
+                console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }
             },
             function(response){
+                console.log("response")
+                console.log(response)
                 if(success!=undefined){
                     success(response);
                 }
@@ -140,7 +150,6 @@ export default class User extends ObjectEats {
                 }
             },
             function(response){
-                console.log(obj)
                 if(success!=undefined){
                     success(response);
                 }

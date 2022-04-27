@@ -20,6 +20,7 @@ import ManageRole from './page/ManageRole';
 import NotifPage from './page/NotifPage';
 import Messenger from './page/Messenger';
 import Header from './component/Header';
+import NotifList from './list/NotifList';
 
 const NOTIF_FETCH = 15000
 
@@ -28,6 +29,7 @@ function App() {
     const [pageList, updatePageList] = useState([]);
     const [user, updateUser] = useState(new User());
     const [log, updateLog] = useState(false);
+    const [notif, updateNotif] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -42,7 +44,10 @@ function App() {
     useEffect(function(){
         // Si il y a changement de l'utilisateur on regarde si il y a des notifs
         if(log){
-            user.getNotif();
+            user.getMyNotif();
+        }
+        else {
+            updateNotif(false);
         }
     }, [log])
 
@@ -112,7 +117,7 @@ function App() {
         res = <Register back={back} user={user} updatePage={updatePage}></Register>;
     }
     else if(page.equals(PageEnum.Profil)){
-        res = <Profil back={back} user={user.user.get()} updatePage={updatePage}></Profil>;
+        res = <Profil back={back} rootUser={user} user={user.user.get()} updatePage={updatePage}></Profil>;
     }
     else if(page.equals(PageEnum.CreateProject)){
         res = <CreateProject back={back} user={user} updatePage={updatePage}></CreateProject>;
@@ -121,7 +126,7 @@ function App() {
         res = <Search back={back} user={user} updatePage={updatePage}></Search>;
     }
     else if(page.equals(PageEnum.Project)){
-        res = <Project back={back} project={user.project.get()} user={user} updatePage={updatePage}></Project>;
+        res = <Project back={back} rootUser={user} project={user.project.get()} user={user} updatePage={updatePage}></Project>;
     }
     else if(page.equals(PageEnum.Add)){
         res = <AddParticipant back={back} updatePage={updatePage} project={user.project.get()}>
@@ -148,10 +153,27 @@ function App() {
     function chercher(){
         updatePage(PageEnum.Search);
     }
-    let head = <Header user={user} updatePage={updatePage}></Header>;
+    let head = <Header user={user} updateNotif={updateNotif} notif={notif} updatePage={updatePage}></Header>;
+    let notifElem;
+    if(notif){
+        notifElem = 
+        <div>
+            <NotifList
+                you={true}
+                updatePage={updatePage} 
+                list={user.notifList}>
+
+            </NotifList>
+        </div>
+    }
     return (<div>
         {head}
-        {res}
+        <div className="w-100 d-flex justify-content-center flex-row">
+            <div className="w-100">
+                {res}
+            </div>
+            {notifElem}
+        </div>
     </div>)
 }
 

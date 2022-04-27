@@ -1,10 +1,13 @@
 import PageEnum from "../enum/PageEnum";
 import Utils from "../utils/Utils";
 import React from "react"
-import { Search } from "react-bootstrap-icons";
+import { Bell, BellFill, Search } from "react-bootstrap-icons";
+import { Badge, Button } from "react-bootstrap";
 
-function Header({user}){
-
+function Header({user, notif, updateNotif}){
+    function openNotif(){
+        updateNotif(!notif);
+    }
     let button;
     if (user.logged){
         function createProjet(){
@@ -18,6 +21,10 @@ function Header({user}){
         button = <div>
             <button className='btn btn-primary me-3' onClick={createProjet}>Créer un Projet</button>
             <button className='btn btn-primary me-3' onClick={joinProjet}>Rejoindre un Projet</button>
+            <Button onClick={openNotif} className="me-3">
+                <BellFill></BellFill>
+                <Badge pill className="ms-2" bg="light" text="primary">9</Badge>
+            </Button>
         </div>
     }
     else {
