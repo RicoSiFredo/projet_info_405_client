@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import Data from "../utils/Data";
 import Field from "./Field";
 import RolePerm from "./RolePerm";
+import { Button, Modal } from "react-bootstrap";
 
 function ListRolePerm({project}){
     const [val, updateVal] = useState("");
     const [create, updateCreate] = useState(false);
+    const [checked, setChecked] = useState(false);
 
     useEffect(function(){
         project.makeRequest(
@@ -46,19 +47,13 @@ function ListRolePerm({project}){
         updateVal(e.target.value);
     }
     function startAdd(){
-        updateCreate(!create);
+        updateCreate(true);
+    }
+    function handleClose() {
+        updateCreate(false);
     }
 
-    let add;
-    if(!create){
-        add = <Button onClick={startAdd}>Ajouter un role</Button>
-    } else {
-        add = <div>
-            <p>Ajouter un role :</p>
-            <Field val={val} changeValue={updateName} label="Nom" name="name"></Field>
-            <Button onClick={addRole}>Ajouter</Button><Button onClick={startAdd}>Annuler</Button>
-        </div>
-    }
+
     let listContent;
     if(project.roleList.size()==0){
         listContent = <div>
@@ -72,6 +67,7 @@ function ListRolePerm({project}){
                     if(object.root==undefined){
                         return <div key={object.id_str}>
                             <RolePerm project={project} role={object}></RolePerm>
+                            <br></br>
                         </div>
                     }
                 })
@@ -79,8 +75,30 @@ function ListRolePerm({project}){
         </div>
     }
     return <div>
-        {add}
+            <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
+                <h4>{"Rôles"}</h4>
+                <Button onClick={startAdd} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                    <img className="img-btn" src="plus.png"/>
+                </Button>
+            </div>
+       
         {listContent}
+        <div>
+            <Modal show={create} className="highest" onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Ajouter un role</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Field val={val} changeValue={updateName} label="Nom" name="name"></Field>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={addRole}>Ajouter</Button>
+                    <Button  variant="outline-primary" onClick={handleClose}>Annuler</Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+
+
     </div>
 }
 export default ListRolePerm;

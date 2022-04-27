@@ -1,5 +1,6 @@
 import Data from "../utils/Data";
 import React from "react"
+import { ToggleButton } from "react-bootstrap";
 
 function RolePerm({role, project}){
     return <div>
@@ -30,11 +31,17 @@ function RolePerm({role, project}){
                             console.log(response)
                             console.log(project)
                         }
+                        
                     )
                 }
                 return <div key={"role-"+role.id_str+"-perm-"+obj.id_str}>
                     <label>
-                        <input onChange={updatePerm} checked={role.havePermission(obj.enum())} type="checkbox"/>
+                        <input class="form-check-input" 
+                                type="checkbox" 
+                                id="flexCheckIndeterminate" 
+                                onChange={updatePerm} 
+                                checked={role.havePermission(obj.enum())}>    
+                        </input>
                         {obj.text()}
                     </label>
                 </div>
