@@ -75,7 +75,7 @@ function Messenger({back, user, updatePage}){
                                 <Conversation key={c.id_str} conversation={c}/>
                             </div>
                         ))}
-                   
+                    <button id="newConv">Créer une nouvelle conversation</button>
                 </div>
             </div>
     
