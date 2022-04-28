@@ -30,7 +30,10 @@ function Notif({rootUser, you, notif, updatePage}){
     let message;
     let user;
     let acceptText;
+    let acceptFunc;
     let refuseText;
+    let refuseFunc;
+    let cantText;
         
     user = notif.parent;
     let elem;
@@ -54,13 +57,33 @@ function Notif({rootUser, you, notif, updatePage}){
             text = "Vous avez été inviter à rejoindre "+elem.getDisplayName()+", envoyé par "+notif.by.getDisplayName()+".";
         }
         message = notif.current_description;
-        acceptText = "Accpeter"
-        refuseText = "Refuser"
+        if(notif.finale_type == IN_PROJECT){
+            cantText = "Vous avez accepté l'invitation."
+        }
+        else if(notif.finale_type == USER_REFUSE_TO_PROJECT){
+            cantText = "Vous avez refusé l'invitation."
+        }
+        else if(notif.elem.type == IN_PROJECT){
+            cantText = "Vous êtes déjà dans le projet."
+        }
+        else if (notif.current_date == notif.elem.date){
+            cantText = "Invitation expiré."
+        }
+        else {
+            acceptText = "Accepter";
+            acceptFunc = function(){
+                alert("accept");
+            };
+            refuseText = "Refuser";
+            refuseFunc = function(){
+                alert("refuse");
+            };
+        }
     }
     else {
         elem = notif.elem;
-        title = "test1:"+notif.current_type;
-        text = "test2";
+        title = "Pas définie";
+        text = "Pas définie";
     }
     let color = undefined;
     let i = 0;
@@ -79,32 +102,37 @@ function Notif({rootUser, you, notif, updatePage}){
         style = "border-top border-secondar position-relative pb-2 ms-2 me-2 overflow-hidden"
     }
     return <div className={style}>
-        {you&&<div className={"opacity-1 position-absolute top-0 bottom-0 start-0 end-0 "+color}>
+        <div className="z-top position-relative">
+            <div className="pt-2 pe-3 ps-3 pb-1">
+                <h5>{title}</h5>
+                <p className="mb-0">{text}</p>
+                {message!=undefined&&<p className="mt-1 mb-0">{message}</p>}
+            </div>
+            <SimpleProfile
+                rootUser={rootUser}
+                border={false}
+                elem={elem} 
+                updatePage={updatePage}
+                isProject={ elem instanceof Project}>
+
+            </SimpleProfile>
+            {(acceptText!=undefined||cantText!=undefined||acceptText!=undefined)&&
+                <div className="ms-3 mt-2 mb-2">
+                    {acceptText!=undefined&&
+                        <Button onClick={acceptFunc}>{acceptText}</Button>
+                    }
+                    {refuseText!=undefined&&
+                        <Button onClick={refuseFunc} className="ms-2" variant="outline-primary">{refuseText}</Button>
+                    }
+                    {cantText!=undefined&&
+                        <p>{cantText}</p>
+                    }
+                </div>
+            }
+        </div>
+        {you&&<div className={"opacity-1 position-absolute top-0 bottom-0 start-0 end-0 behind z-bottom "+color}>
 
         </div>}
-        <div className="pt-2 pe-3 ps-3 pb-1">
-            <h5>{title}</h5>
-            <p className="mb-0">{text}</p>
-            {message!=undefined&&<p className="mt-1 mb-0">{message}</p>}
-        </div>
-        <SimpleProfile
-            rootUser={rootUser}
-            border={false}
-            elem={elem} 
-            updatePage={updatePage}
-            isProject={ elem instanceof Project}>
-
-        </SimpleProfile>
-        {(acceptText!=undefined||acceptText!=undefined)&&
-            <div className="ms-3 mt-2 mb-2">
-                {acceptText!=undefined&&
-                    <Button>{acceptText}</Button>
-                }
-                {refuseText!=undefined&&
-                    <Button className="ms-2" variant="outline-primary">{refuseText}</Button>
-                }
-            </div>
-        }
     </div>
 }
 export default Notif;

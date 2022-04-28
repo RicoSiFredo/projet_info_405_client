@@ -159,6 +159,7 @@ function App() {
         notifElem = 
         <div>
             <NotifList
+                rootUser={user}
                 you={true}
                 updatePage={updatePage} 
                 list={user.notifList}>
