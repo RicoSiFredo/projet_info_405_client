@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import Field from "../component/Field";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import PermEnum from "../enum/PermEnum";
 import ProjectActionList from "../list/ProjectActionList";
 import Data from "../utils/Data";
-import AddParticipant from "./AddParticipant";
-import TecnoList from "../list/TecnoList";
-import AddTecno from "../component/AddTecno";
-import ProfilField from "../component/ProfilField";
 import React from "react"
 import ProfilView from "../component/ProfilView";
 import ElemView from "../component/ElemView";
@@ -31,6 +27,28 @@ function Project({project, user, updatePage}){
     }
     function manageRole(){
         updatePage(PageEnum.ManageRole);
+    }
+    let [show, updateShow] = useState(false);
+    function handleClose() {
+        updateShow(false);
+    }
+    function delProject() {
+        updateShow(true);
+    }
+    function requestDelete() {
+        project.makeRequest(
+            'project/del',
+            {
+                access_token: Data.accessToken(),
+                id_project: project.id_str
+            },
+            function(error){
+                console.log(error)
+            },
+            function(response){
+                
+            }
+        )
     }
 //<<<<<<< HEAD
         /*return <div>
@@ -120,8 +138,25 @@ function Project({project, user, updatePage}){
             {
                 project.havePermission(PermEnum.MANAGE_ROLE) && (
                     <div>
-                        <Button onClick={manageRole}>Gérer les role</Button>
-                    </div>
+                        <Button onClick={manageRole}>Gérer les roles</Button>
+
+                        <Button onClick={delProject}>Supprimer le projet</Button>
+
+                        <Modal show={show} className="highest" onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Voulez vous vraiment supprimer le projet ?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Button variant="primary" onClick={requestDelete}>
+                                    Valider
+                                </Button>
+                                <Button variant="primary" onClick={handleClose}>
+                                    Fermer
+                                </Button>
+                            </Modal.Body>
+                        </Modal>
+
+                    </div>                
                 )
             }
 
