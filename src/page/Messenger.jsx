@@ -1,7 +1,7 @@
 import '../App.css';
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import ProfilField from "../component/ProfilField";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
@@ -14,13 +14,51 @@ import ListEats from "../object/base/ListEats";
 import Conversation from "./Conversation";
 import Message from "./Message";
 import Utils from "../utils/Utils";
+import Eats from "../object/base/Eats";
 import React from "react"
 
 
 function Messenger({back, user, updatePage}){
+    const [show, updateShow] = useState(false);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage,setNewMessage] = useState("");
+    const [name, updateName] = useState("");
+    const [listFriends, updateList] = useState(new ListEats("", undefined));
+
+    useEffect(function(){
+        showFriends();
+    }, [name])
+
+    function addConv() {
+        updateShow(true);
+    }
+
+    listFriends.update = function(){
+        updateList(Eats.fakeUpdate(listFriends))
+    }
+
+    function chercherEvent(e){
+        updateName(e.target.value);
+    }
+
+    function showFriends(){
+        listFriends.reset();
+        listFriends.makeRequest(
+            'user/get/userFriends', 
+            {
+                idUser: user.id_str,
+            },
+            function(error){
+            },
+            function(response){
+            }
+        )
+    }
+
+    function handleClose() {
+        updateShow(false);
+    }
 
     
     useEffect(function(){
@@ -46,7 +84,6 @@ function Messenger({back, user, updatePage}){
         getMessages();
     },[currentChat]);
 
-
     
 
     const handleSubmit = (e) => {
@@ -64,7 +101,6 @@ function Messenger({back, user, updatePage}){
     };
 
     
-    
 
     return (
         <div className="Messenger">
@@ -76,7 +112,7 @@ function Messenger({back, user, updatePage}){
                                 <Conversation key={c.id_str} conversation={c}/>
                             </div>
                         ))}
-                    <button className="newConv">Créer une nouvelle conversation</button>
+                    <button className="newConv" onClick={addConv}>Créer une nouvelle conversation</button>
                 </div>
             </div>
     
@@ -109,6 +145,18 @@ function Messenger({back, user, updatePage}){
                     <h1></h1>
                 </div>
             </div>
+
+            <Modal show={show} className="highest" onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Démarrer une nouvelle discussion</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                    test
+            </Modal.Body>
+            <Modal.Footer>
+                    Bottom
+            </Modal.Footer>
+            </Modal>
         </div>
         
         
