@@ -44,12 +44,14 @@ function Project({project, user, updatePage}){
                 id_project: project.id_str
             },
             function(error){
-                console.log(error)
             },
             function(response){
-                
+                console.log("response");
+                updatePage(PageEnum.Profil);
             }
         )
+        handleClose();
+        
     }
 //<<<<<<< HEAD
         /*return <div>

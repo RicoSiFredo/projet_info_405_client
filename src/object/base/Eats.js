@@ -118,6 +118,9 @@ export default class Eats{
     }
     applyRequest(response){
         let data = response["result"];
+        if(data==undefined){
+            data = {};
+        }
         let props = Object.keys(data);
         for(let i=0; i<props.length; i++){
             if(Array.isArray(data[props[i]])){
