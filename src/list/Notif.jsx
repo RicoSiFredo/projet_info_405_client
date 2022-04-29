@@ -2,6 +2,7 @@ import React from "react"
 import { Button } from "react-bootstrap";
 import SimpleProfile from "../component/SimpleProfile";
 import Project from "../object/Project";
+import Data from "../utils/Data";
 
 const CREATE_PROJECT = 6;
 const IN_PROJECT = 0;
@@ -47,6 +48,17 @@ function Notif({rootUser, you, notif, updatePage}){
             text = "Vous avez créer un nouveau projet.";
         }
     }
+    else if(notif.current_type == IN_PROJECT){
+        elem = notif.elem.project;
+        title = "Nouveau projet"
+        if(!you){
+            text = user.getDisplayName()+" a rejoint le Edge8.";
+        }
+        else {
+            text = "Vous avez rejoint le Edge8.";
+        }
+        //text = "Vous avez été inviter à rejoindre "+elem.getDisplayName();
+    }
     else if(notif.current_type == PROJECT_ASK_TO_USER){
         elem = notif.elem.project;
         title = "Invitation"
@@ -57,26 +69,47 @@ function Notif({rootUser, you, notif, updatePage}){
             text = "Vous avez été inviter à rejoindre "+elem.getDisplayName()+", envoyé par "+notif.by.getDisplayName()+".";
         }
         message = notif.current_description;
-        if(notif.finale_type == IN_PROJECT){
+        if(notif.final_type == IN_PROJECT){
             cantText = "Vous avez accepté l'invitation."
         }
-        else if(notif.finale_type == USER_REFUSE_TO_PROJECT){
+        else if(notif.final_type == USER_REFUSE_TO_PROJECT){
             cantText = "Vous avez refusé l'invitation."
-        }
-        else if(notif.elem.type == IN_PROJECT){
-            cantText = "Vous êtes déjà dans le projet."
         }
         else if (notif.current_date == notif.elem.date){
             cantText = "Invitation expiré."
         }
+        else if(notif.elem.type == IN_PROJECT){
+            cantText = "Vous êtes déjà dans le projet."
+        }
         else {
             acceptText = "Accepter";
-            acceptFunc = function(){
-                alert("accept");
-            };
+            acceptFunc =  function(){
+                user.makeRequest(
+                    'user/add/project', 
+                    {
+                        access_token: Data.accessToken(),
+                        id_project: notif.elem.project.id_str,
+                        description: ""
+                    },
+                    function(error){ },
+                    function(response){ }
+                )
+            }
             refuseText = "Refuser";
             refuseFunc = function(){
-                alert("refuse");
+                user.makeRequest(
+                    'user/del/project', 
+                    {
+                        access_token: Data.accessToken(),
+                        id_project: notif.elem.project.id_str
+                    },
+                    function(error){
+                        console.log(error)
+                    },
+                    function(response){
+                        console.log(response)
+                    }
+                )
             };
         }
     }
