@@ -50,6 +50,7 @@ function Notif({rootUser, you, notif, updatePage}){
     }
     else if(notif.current_type == IN_PROJECT){
         elem = notif.elem.project;
+        console.log(notif.elem.project)
         title = "Nouveau projet"
         if(!you){
             text = user.getDisplayName()+" a rejoint le Edge8.";
@@ -129,7 +130,7 @@ function Notif({rootUser, you, notif, updatePage}){
     }
     let style;
     if(!you){
-        style = "card pb-2 pt-1 mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden";
+        style = "card pt-1 mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden";
     }
     else{
         style = "border-top border-secondar position-relative pb-2 ms-2 me-2 overflow-hidden"
@@ -137,20 +138,21 @@ function Notif({rootUser, you, notif, updatePage}){
     return <div className={style}>
         <div className="z-top position-relative">
             <div className="pt-2 pe-3 ps-3 pb-1">
-                <h5>{title}</h5>
                 <p className="mb-0">{text}</p>
                 {message!=undefined&&<p className="mt-1 mb-0">{message}</p>}
             </div>
-            <SimpleProfile
-                rootUser={rootUser}
-                border={false}
-                elem={elem} 
-                updatePage={updatePage}
-                isProject={ elem instanceof Project}>
+            <div className="mb-2">
+                <SimpleProfile
+                    rootUser={rootUser}
+                    border={false}
+                    elem={elem} 
+                    updatePage={updatePage}
+                    isProject={ elem instanceof Project}>
 
-            </SimpleProfile>
+                </SimpleProfile>
+            </div>
             {(acceptText!=undefined||cantText!=undefined||acceptText!=undefined)&&
-                <div className="ms-3 mt-2 mb-2">
+                <div className="ms-3 mt-2 mb-1">
                     {acceptText!=undefined&&
                         <Button onClick={acceptFunc}>{acceptText}</Button>
                     }
