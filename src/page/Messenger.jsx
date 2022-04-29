@@ -86,7 +86,7 @@ function Messenger({back, user, updatePage}){
                         currentChat ?
                     (<>
                     <div className="chatBoxTop">
-                    {messages.map((m) => (
+                    {messages.slice().reverse().map((m) => (
                             <Message key={m.id_str} message={m} own={m.auteur.id_str === user.id_str}/>
                         ))}
                     </div>

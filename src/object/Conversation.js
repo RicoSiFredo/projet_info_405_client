@@ -11,7 +11,7 @@ export default class Conversation extends ObjectEats {
     static TYPE = "Conversation";
 
     members = new ListEats("is_member", this);
-    message_list = new ListEats("is_msg", this);
+    message_list = new ListEats("is_msg", this, CompareEats.compareInt("date", CompareEats.DESC));
     
     
     
