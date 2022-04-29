@@ -75,13 +75,13 @@ function Messenger({back, user, updatePage}){
                                 <Conversation key={c.id_str} conversation={c}/>
                             </div>
                         ))}
-                    <button id="newConv">Créer une nouvelle conversation</button>
+                    <button className="newConv">Créer une nouvelle conversation</button>
                 </div>
             </div>
     
             <div className="chatBox">
                 <div className="chatBoxWrapper">
-                    <h1>box</h1>
+                    <h1>Boite de dialogue</h1>
                     {
                         currentChat ?
                     (<>
@@ -98,14 +98,14 @@ function Messenger({back, user, updatePage}){
                         <button className="chatSubmitButton" onClick={handleSubmit}>Envoyer</button>
                     </div></>
                     ) : (
-                    <span className="noConversationText">Open a conversation to start a chat.</span>
+                        <span className="noConversationText">Ouvrez une conversation pour commencer à discuter.</span>
                     )}
                 </div>
             </div>
     
             <div className="chatOnline">
                 <div className="chatOnlineWrapper">
-                    <h1>online</h1>
+                    <h1>Amis</h1>
                 </div>
             </div>
         </div>
