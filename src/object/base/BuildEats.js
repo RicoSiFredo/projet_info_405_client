@@ -7,7 +7,7 @@ import Role from "../Role";
 import Skill from "../Skill";
 import Tecno from "../Tecno";
 import User from "../User";
-import ObjectEats from "./ObjectEats";
+import Object405 from "./ObjectEats";
 import Notif from "../Notif";
 
 
@@ -46,7 +46,7 @@ export default class BuildEats {
             res = new Notif();
         }
         else {
-            res = new ObjectEats();
+            res = new Object405();
         }
         return res;
     }

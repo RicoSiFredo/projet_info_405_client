@@ -1,6 +1,6 @@
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 
-export default class Tecno extends ObjectEats {
+export default class Tecno extends Object405 {
 
     static TYPE = "Tecno";
 

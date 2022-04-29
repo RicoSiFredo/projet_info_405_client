@@ -1,7 +1,7 @@
 import PermEnum from "../enum/PermEnum";
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 
-export default class Permission extends ObjectEats {
+export default class Permission extends Object405 {
 
     static TYPE = "Permission";
 

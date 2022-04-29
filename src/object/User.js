@@ -2,9 +2,9 @@ import Data from "../utils/Data";
 import CompareEats from "./base/CompareEats";
 import ForeignEats from "./base/ForeignEats";
 import ListEats from "./base/ListEats";
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 
-export default class User extends ObjectEats {
+export default class User extends Object405 {
 
     static TYPE = "User";
 

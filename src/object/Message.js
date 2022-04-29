@@ -2,11 +2,11 @@ import Data from "../utils/Data";
 import CompareEats from "./base/CompareEats";
 import ForeignEats from "./base/ForeignEats";
 import ListEats from "./base/ListEats";
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 import SimpleEats from "./base/SimpleEats";
 
 
-export default class Message extends ObjectEats {
+export default class Message extends Object405 {
 
     static TYPE = "Message";
 

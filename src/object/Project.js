@@ -1,11 +1,11 @@
 import Data from "../utils/Data";
 import CompareEats from "./base/CompareEats";
 import ListEats from "./base/ListEats";
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 import ForeignEats from "./base/ForeignEats";
 import SimpleEats from "./base/SimpleEats";
 
-export default class Project extends ObjectEats {
+export default class Project extends Object405 {
 
     static TYPE = "Project";
 

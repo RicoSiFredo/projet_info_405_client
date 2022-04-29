@@ -1,8 +1,8 @@
 import Utils from "../../utils/Utils";
 import BuildEats from "./BuildEats";
-import ObjectEats from "./ObjectEats";
+import Object405 from "./ObjectEats";
 
-export default class SimpleEats extends ObjectEats {
+export default class SimpleEats extends Object405 {
     key = "";
     init = false;
     elem = undefined;

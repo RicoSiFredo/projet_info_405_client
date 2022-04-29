@@ -1,7 +1,7 @@
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 import SimpleEats from "./base/SimpleEats";
 
-export default class Notif extends ObjectEats {
+export default class Notif extends Object405 {
     
     static TYPE = "Notif";
 

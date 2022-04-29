@@ -1,8 +1,8 @@
 import CompareEats from "./base/CompareEats";
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 import SimpleEats from "./base/SimpleEats";
 
-export default class Action extends ObjectEats {
+export default class Action extends Object405 {
 
     static TYPE = "Action";
 

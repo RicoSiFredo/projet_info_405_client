@@ -46,7 +46,7 @@ function ManageRole({project}){
 
 
     return <div>
-                <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
+                <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
                     <div className="d-flex mt-1">
                         <h4>{"Membres"}</h4>
                         <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">

@@ -1,7 +1,7 @@
 import ListEats from "./base/ListEats";
-import ObjectEats from "./base/ObjectEats";
+import Object405 from "./base/ObjectEats";
 
-export default class Role extends ObjectEats {
+export default class Role extends Object405 {
 
     static TYPE = "Role";
 

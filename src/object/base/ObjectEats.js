@@ -3,7 +3,7 @@ import HTTP from "../../utils/HTTP";
 import Utils from "../../utils/Utils";
 import Eats from "./Eats";
 
-export default class ObjectEats extends Eats {
+export default class Object405 extends Eats {
 
     init = true;
 
