@@ -31,14 +31,14 @@ function App() {
     const [log, updateLog] = useState(false);
     const [notif, updateNotif] = useState(false);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const interval = setInterval(() => {
             if(user.logged) {
                 user.getNotif();
             }
         }, NOTIF_FETCH);
         return () => clearInterval(interval);
-    }, []);
+    }, []);*/
     
 
     useEffect(function(){

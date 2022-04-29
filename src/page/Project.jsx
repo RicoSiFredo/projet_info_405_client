@@ -10,6 +10,7 @@ import React from "react"
 import ProfilView from "../component/ProfilView";
 import ElemView from "../component/ElemView";
 import ProjectActionView from "../component/ProjectActionView";
+import ManageRole from "./ManageRole";
 
 function Project({project, user, updatePage}){
     const [edit, updateEdit] = useState(false);
@@ -165,6 +166,10 @@ function Project({project, user, updatePage}){
                     <ProjectActionList user={user} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
                 )
             }
+
+            
+
+            <ManageRole project={project}></ManageRole>
         </div>
     </div>
 
