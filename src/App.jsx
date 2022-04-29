@@ -30,6 +30,7 @@ function App() {
     const [user, updateUser] = useState(new User());
     const [log, updateLog] = useState(false);
     const [notif, updateNotif] = useState(false);
+    const [search, updateSearch] = useState("");
 
     /*useEffect(() => {
         const interval = setInterval(() => {
@@ -123,7 +124,7 @@ function App() {
         res = <CreateProject back={back} user={user} updatePage={updatePage}></CreateProject>;
     }
     else if(page.equals(PageEnum.Search)){
-        res = <Search back={back} user={user} updatePage={updatePage}></Search>;
+        res = <Search search={search} back={back} user={user} updatePage={updatePage}></Search>;
     }
     else if(page.equals(PageEnum.Project)){
         res = <Project back={back} rootUser={user} project={user.project.get()} user={user} updatePage={updatePage}></Project>;
@@ -153,7 +154,8 @@ function App() {
     function chercher(){
         updatePage(PageEnum.Search);
     }
-    let head = <Header user={user} updateNotif={updateNotif} notif={notif} updatePage={updatePage}></Header>;
+    
+    let head = <Header search={search} updateSearch={updateSearch} user={user} updateNotif={updateNotif} notif={notif} updatePage={updatePage}></Header>;
     let notifElem;
     if(notif){
         notifElem = 

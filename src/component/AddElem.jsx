@@ -17,7 +17,6 @@ modal.addErrorMessage(
 function AddElem({elem,keyword, handleClose}){
     const [val, updateVal] = useState("");
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
-
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
     
     let baseKeyword = "user"

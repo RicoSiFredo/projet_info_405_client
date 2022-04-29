@@ -3,8 +3,18 @@ import Utils from "../utils/Utils";
 import React from "react"
 import { Bell, BellFill, Search } from "react-bootstrap-icons";
 import { Badge, Button } from "react-bootstrap";
+import { useEffect,useState } from "react";
+import ErrorEats from "../object/base/ErrorEats";
+import CompareEats from "../object/base/CompareEats";
+import ListEats from "../object/base/ListEats";
+import Eats from "../object/base/Eats";
 
-function Header({user, notif, updateNotif}){
+
+function Header({user, search, updateSearch, notif, updateNotif}){
+    const [val, updateVal] = useState("");
+    const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+    const [error, updateError] = useState(ErrorEats.NO_ERROR);
+
     function openNotif(){
         updateNotif(!notif);
     }
@@ -50,6 +60,26 @@ function Header({user, notif, updateNotif}){
     function back(){
         user.back();
     }
+
+  
+
+    function chercherEvent(e){
+        chercher();
+        updateSearch(e.target.value);
+    }
+    list.update = function(){
+        updateList(Eats.fakeUpdate(list));
+    }
+
+    function chercher(){
+        if(search==""){
+            user.updatePage(PageEnum.Home);
+        }
+        else {
+            user.updatePage(PageEnum.Search);
+        }
+    }
+
     return (
         <nav className="navbar navbar-dark bg-dark justify-content-between">
             <div className="navbar-brand ps-2 click" onClick={home}>
@@ -60,9 +90,9 @@ function Header({user, notif, updateNotif}){
             <div>
                 <div className="input-group">
                     <div>
-                        <input type="search" id="form1" className="form-control" placeholder="Rechercher un projet" />
+                        <input onChange={chercherEvent} type="search" id="form1" className="form-control" placeholder="Rechercher" value={search}/>
                     </div>
-                    <button type="button" className="d-flex align-items-center justify-content-center btn btn-primary">
+                    <button  type="button" className="d-flex align-items-center justify-content-center btn btn-primary">
                         <Search></Search>
                     </button>
                 </div>

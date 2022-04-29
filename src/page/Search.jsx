@@ -11,38 +11,35 @@ import Response from "../utils/Response";
 import Project from "../object/Project";
 import React from "react"
 
-function Search({back, user, updatePage}){
+function Search({search, back, user, updatePage}){
     const [name, updateName] = useState("");
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
     
     useEffect(function(){
         chercher();
-    }, [name])
+    }, [search])
 
     list.update = function(){
         updateList(Eats.fakeUpdate(list))
     }
-    function chercherEvent(e){
-        updateName(e.target.value);
-    }
+    console.log(search)
     function chercher(){
         list.reset();
         list.makeRequest(
-            '/search/element', 
+            'search/element', 
             {
-                name: name,
+                name: search,
             },
             function(error){
             },
             function(response){
+                console.log(response)
             }
         )
     }
-    /*inutile ? <Button variant="primary" onClick={back}>Home</Button>*/
+
     return <div>
-        
-        <Field name={"name"} label="Nom" val={name} changeValue={chercherEvent}></Field>
-        <Button variant="primary" onClick={chercher}>Rechercher</Button>
+       
         {
             list.map(function(object, index) {
                 function openProfil(){
