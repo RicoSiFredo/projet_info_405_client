@@ -25,11 +25,12 @@ function Messenger({back, user, updatePage}){
     
     useEffect(function(){
         user.getAllConv();
+        user.getUserFriends();
     }, []);
 
     
     const conversations = user.convList.list;
-    
+    console.log(user);
 
     useEffect(() => {
         const getMessages = async () => {
@@ -105,7 +106,7 @@ function Messenger({back, user, updatePage}){
     
             <div className="chatOnline">
                 <div className="chatOnlineWrapper">
-                    <h1>Amis</h1>
+                    <h1></h1>
                 </div>
             </div>
         </div>

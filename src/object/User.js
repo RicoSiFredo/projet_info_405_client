@@ -21,6 +21,7 @@ export default class User extends ObjectEats {
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
     convList = new ListEats("is_member", this);
     notifList = new ListEats(["target", "view"], this);
+    friendsList = new ListEats("friends", this);
     logged = false;
 
     constructor(){ 
@@ -190,6 +191,27 @@ export default class User extends ObjectEats {
                 }
             },
             function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+    getUserFriends(failed, success){
+        super.makeRequest(
+            "user/get/userFriends",
+            {
+                access_token: Data.accessToken(),
+                idUser: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                console.log("response")
+                console.log(response)
                 if(success!=undefined){
                     success(response);
                 }
