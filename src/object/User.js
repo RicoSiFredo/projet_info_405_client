@@ -218,5 +218,25 @@ export default class User extends Object405 {
             }
         )
     }
+    createConversation(idFriend,failed, success){
+        super.makeRequest(
+            "user/create/conversation",
+            {
+                access_token: Data.accessToken(),
+                senderId: this.id_str,
+                receiverId: idFriend
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    } 
 }
 

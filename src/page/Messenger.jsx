@@ -38,9 +38,6 @@ function Messenger({back, user, updatePage}){
         updateList(Eats.fakeUpdate(listFriends))
     }
 
-    function chercherEvent(e){
-        updateName(e.target.value);
-    }
 
     function showFriends(){
         listFriends.reset();
@@ -68,7 +65,7 @@ function Messenger({back, user, updatePage}){
 
     
     const conversations = user.convList.list;
-    console.log(user);
+    console.log(conversations);
 
     useEffect(() => {
         const getMessages = async () => {
@@ -100,7 +97,7 @@ function Messenger({back, user, updatePage}){
         }
     };
 
-    
+
 
     return (
         <div className="Messenger">
@@ -151,11 +148,30 @@ function Messenger({back, user, updatePage}){
                 <Modal.Title>Démarrer une nouvelle discussion</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                    test
+                <h1>Amis</h1>
+                {
+                listFriends.map((obj, index) => {
+                    const createConv = (e) => {
+                        e.preventDefault();
+                        
+                        try{
+                                user.createConversation(obj.id_str);      
+                
+                        }catch(err){
+                            console.log(err);
+                        }
+                    };
+                        return (
+                            <div>
+                                {obj.firstname}
+                                <button className="creeConv" onClick={createConv}>Créer une nouvelle conversation</button>
+                            </div>
+    
+                        )
+                     
+                })
+            }
             </Modal.Body>
-            <Modal.Footer>
-                    Bottom
-            </Modal.Footer>
             </Modal>
         </div>
         

@@ -19,7 +19,7 @@ import React from "react"
 function Message({message,own,updatePage}){
 
 
-    let image = message.auteur.banner;
+    let image = message.auteur.profile;
     let profilPic = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + image;
     
     let dateMessage = new Date(message.date * 1000).toLocaleString();

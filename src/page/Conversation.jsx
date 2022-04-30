@@ -18,7 +18,7 @@ function Conversation({conversation,updatePage}){
 
            
             if (friend != undefined) {
-                let image = friend.banner;
+                let image = friend.profile;
                 let ProfilPic = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + image;
 
                 if (image !== undefined){
