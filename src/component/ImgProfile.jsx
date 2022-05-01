@@ -8,10 +8,10 @@ function ImgProfile({elem}){
         profil = <img src={Constant.IMAGE_URL+elem.profile} className="center-crop" alt=""/>
     }
     else if(elem instanceof User){
-        profil = <img src="profile_empty.png" className="center-crop w-100 h-100" alt=""/>
+        profil = <img src={Constant.BASE_IMAGE + "profile_empty.png"} className="center-crop w-100 h-100" alt=""/>
     }
     else {
-        profil = <img src="project_empty.png" className="center-crop w-100 h-100" alt=""/>
+        profil = <img src={Constant.BASE_IMAGE + "project_empty.png"} className="center-crop w-100 h-100" alt=""/>
     }
     return profil;
 }

@@ -14,15 +14,25 @@ import SkillView from "../component/ElemView";
 import ElemView from "../component/ElemView";
 import UserProjectView from "../component/UserProjectView";
 import NotifList from "../list/NotifList";
+import { useParams } from "react-router-dom";
+import User from "../object/User";
+import { useState } from "react";
+import Eats from "../object/base/Eats";
 
-
-function Profil({back, rootUser, user, updatePage}){
+function Profil({rootUser}){
+    const {id} = useParams();
+    const [user, updateUser] = useState(new User());
+    user.id_str = id;
+    function update(){
+        updateUser(Eats.fakeUpdate(user));
+        // fait croire à un changement
+    }
+    user.update = update;
     useEffect(function(){
         user.getAllSkill();
         user.getAllProject();
-        user.getNotif();
+        user.getNotif()
     }, []);
-
     let canEdit = Data.isMe(user);
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
@@ -41,15 +51,14 @@ function Profil({back, rootUser, user, updatePage}){
         <div className="w-45 center-div">
             <NotifList
                 rootUser={rootUser}
+                user={user}
                 you={false}
-                updatePage={updatePage} 
                 list={user.notifList}>
 
             </NotifList>
         </div>
         <div className="w-25 right-div">
             <UserProjectView 
-                updatePage={updatePage} 
                 user={user}>
 
             </UserProjectView>

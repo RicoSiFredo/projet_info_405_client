@@ -8,29 +8,26 @@ import ErrorEats from "../object/base/ErrorEats";
 import CompareEats from "../object/base/CompareEats";
 import ListEats from "../object/base/ListEats";
 import Eats from "../object/base/Eats";
+import Constant from "../utils/Constant";
+import { useLocation } from 'react-router-dom'
 
-
-function Header({user, search, updateSearch, notif, updateNotif}){
-    const [val, updateVal] = useState("");
+function Header({user, navigate, search, updateSearch, notif, updateNotif}){
+    const location = useLocation();
+    const [pathname, updatePathname] = useState("/");
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
-    const [error, updateError] = useState(ErrorEats.NO_ERROR);
 
+    useEffect(function(){
+        if(!location.pathname.includes("/search/")){
+            updatePathname(location.pathname);
+        }
+    }, [location.pathname, ])
+    
     function openNotif(){
         updateNotif(!notif);
     }
     let button;
     if (user.logged){
-        function createProjet(){
-            Utils.changeUrl("Créer un projet", "/create_project");
-            user.updatePage(PageEnum.CreateProject);
-        }
-        function joinProjet(){
-            //Utils.changeUrl(titleInscription, "/join_project");
-            //user.updatePage(PageEnum.);
-        }
         button = <div>
-            <button className='btn btn-primary me-3' onClick={createProjet}>Créer un Projet</button>
-            <button className='btn btn-primary me-3' onClick={joinProjet}>Rejoindre un Projet</button>
             <Button onClick={openNotif} className="me-3">
                 <BellFill></BellFill>
                 <Badge pill className="ms-2" bg="light" text="primary">9</Badge>
@@ -41,12 +38,10 @@ function Header({user, search, updateSearch, notif, updateNotif}){
         let titleInscription = "Inscription";
         let titleConnexion = "Connexion";
         function connexion(){
-            Utils.changeUrl(titleConnexion, "/login");
-            user.updatePage(PageEnum.Login);
+            navigate("/login");
         }
         function inscription(){
-            Utils.changeUrl(titleInscription, "/register");
-            user.updatePage(PageEnum.Register);
+            navigate("/register");
         }
         button = <div>
             <button className='btn btn-primary me-3' onClick={inscription}>{titleInscription}</button>
@@ -54,37 +49,35 @@ function Header({user, search, updateSearch, notif, updateNotif}){
         </div>
     }
     function home(){
-        Utils.changeUrl("Accueil", "/");
-        user.updatePage(PageEnum.Home);
+        navigate('/');
     }
     function back(){
-        user.back();
+        navigate(-1)
     }
 
   
 
     function chercherEvent(e){
-        chercher();
         updateSearch(e.target.value);
+        chercher(e.target.value);
     }
     list.update = function(){
         updateList(Eats.fakeUpdate(list));
     }
 
-    function chercher(){
-        if(search==""){
-            user.updatePage(PageEnum.Home);
+    function chercher(search_base=search){
+        if(search_base==""){
+            navigate(pathname)
         }
         else {
-            user.updatePage(PageEnum.Search);
+            navigate("/search/"+search_base);
         }
     }
 
     return (
-        <nav className="navbar navbar-dark bg-dark justify-content-between">
+        <nav className="navbar navbar-dark bg-dark justify-content-between">            <button className='btn btn-primary me-3' onClick={back}>Retour</button>
             <div className="navbar-brand ps-2 click" onClick={home}>
-                <button className='btn btn-primary me-3' onClick={back}>Retour</button>
-                <img src="logo_usmb.png" width="30" height="30" className="align-top" alt=""/>
+                <img src={Constant.BASE_IMAGE + "logo_usmb.png"} width="30" height="30" className="align-top" alt=""/>
                 <h4 className="p-3 d-inline">Projet 405</h4>
             </div>
             <div>

@@ -8,7 +8,7 @@ import React from "react"
 import Response from "../utils/Response";
 import Form405 from "../component/Form405";
 
-function Register({back, user, updatePage}){
+function Register({back, user, navigate}){
     const [email, updateEmail] = useState("");
     const [firstname, updateFirstname] = useState("");
     const [lastname, updateLastname] = useState("");
@@ -34,7 +34,7 @@ function Register({back, user, updatePage}){
                 if(Response.isSuccessResponse(response)) {
                     // la requete est un succès
                     user.login(response);
-                    back();
+                    navigate("/")
                 }
                 else {
                     updateError(new ErrorEats(

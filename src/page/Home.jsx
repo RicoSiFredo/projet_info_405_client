@@ -1,31 +1,37 @@
 import { Button } from "react-bootstrap";
 import PageEnum from "../enum/PageEnum";
 import React from "react"
+import { Link } from "react-router-dom";
 
-function Home({user, updatePage}){
+function Home({user, navigate, updatePage}){
     let button;
     if(!user.logged){
-        
+        function login(){
+            navigate("/login");
+        }
+        function register(){
+            navigate("/register");
+        }
+        button = <div >
+            <Button className="m-1" variant="primary" onClick={login}>Connexion</Button>
+            <Button className="m-1" variant="primary" onClick={register}>Déconnexion</Button>
+        </div>
     }
     else {
         function logout(){
+            navigate("/");
             user.logout();
         }
-        function profil(){
-            user.user.set(user);
-            updatePage(PageEnum.Profil);
-        }
-        function notif(){
-            updatePage(PageEnum.Notif);
-        }
-        function messages(){
-            updatePage(PageEnum.Messenger);
-        }
         button = <div >
-            <Button className="m-1" variant="primary" onClick={logout}>Déconnexion</Button>
-            <Button className="m-1" variant="primary" onClick={profil}>Profil</Button>
-            <Button className="m-1" variant="primary" onClick={notif}>Notification</Button>
-            <Button className="m-1" variant="primary" onClick={messages}>Messages</Button>
+            <Link to={"/"}>
+                <Button className="m-1" variant="primary" onClick={logout}>Déconnexion</Button>
+            </Link>
+            <Link to={"/profil/"+user.id_str}>
+                <Button className="m-1" variant="primary">Profil</Button>
+            </Link>
+            <Link to={"/message/-1"}>
+                <Button className="m-1" variant="primary">Messages</Button>
+            </Link>
         </div>
     }
     return <div className="card m-2 p-2 d-flex align-items-center">

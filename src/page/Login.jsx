@@ -7,7 +7,7 @@ import HTTP from "../utils/HTTP";
 import Response from "../utils/Response";
 import Form405 from "../component/Form405";
 
-function Login({user, back, updatePage}){
+function Login({user, back, navigate}){
     const [email, updateEmail] = useState("");
     const [password, updatePassword] = useState(""); 
     // variable qui correspond à l'erreur
@@ -29,7 +29,7 @@ function Login({user, back, updatePage}){
                 if(Response.isSuccessResponse(response)) {
                     // la requete est un succès
                     user.login(response);
-                    back();
+                    navigate("/")
                 }
                 else {
                     console.log(response)

@@ -5,7 +5,7 @@ import React from "react"
 
 
 
-function Conversation({conversation,updatePage}){
+function ConversationView({conversation,updatePage}){
     const currentUser = conversation.parent;
     conversation.update = currentUser.update;
 
@@ -64,4 +64,4 @@ function Conversation({conversation,updatePage}){
 
 
 }
-export default Conversation;
+export default ConversationView;

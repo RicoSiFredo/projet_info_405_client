@@ -5,7 +5,7 @@ import Notif from "./Notif";
 const TYPE = {
     NOTIF: 0
 };
-function NotifList({rootUser, you, list, updatePage}){
+function NotifList({user, rootUser, you, list}){
     function count(){
         let res;
         if(list!=undefined){
@@ -30,10 +30,10 @@ function NotifList({rootUser, you, list, updatePage}){
         let res;
         if(typeLay==TYPE.NOTIF){
             res = <Notif 
+                user={user}
                 rootUser={rootUser}
                 you={you}
-                notif={list.get(index)}
-                updatePage={updatePage}>
+                notif={list.get(index)}>
             </Notif>
         }
         return res;

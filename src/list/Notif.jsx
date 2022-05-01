@@ -25,22 +25,26 @@ const COLOR_ARRAY = [
     }
 ]
 
-function Notif({rootUser, you, notif, updatePage}){
-    let title;
+function Notif({rootUser, user, you, notif}){
     let text;
     let message;
-    let user;
     let acceptText;
     let acceptFunc;
     let refuseText;
     let refuseFunc;
     let cantText;
-        
-    user = notif.parent;
+    
+    let refetch = () => {
+        if(you){
+            user.getMyNotif()
+        }
+        else {
+            user.getNotif()
+        }
+    };
     let elem;
     if(notif.current_type == CREATE_PROJECT){
         elem = notif.elem;
-        title = "Nouveau projet"
         if(!you){
             text = user.getDisplayName() + " a créé un nouveau projet.";
         }
@@ -50,8 +54,6 @@ function Notif({rootUser, you, notif, updatePage}){
     }
     else if(notif.current_type == IN_PROJECT){
         elem = notif.elem.project;
-        console.log(notif.elem.project)
-        title = "Nouveau projet"
         if(!you){
             text = user.getDisplayName()+" a rejoint le Edge8.";
         }
@@ -62,7 +64,6 @@ function Notif({rootUser, you, notif, updatePage}){
     }
     else if(notif.current_type == PROJECT_ASK_TO_USER){
         elem = notif.elem.project;
-        title = "Invitation"
         if(!you){
             text = user.getDisplayName() + " a créé un nouveau projet.";
         }
@@ -92,8 +93,8 @@ function Notif({rootUser, you, notif, updatePage}){
                         id_project: notif.elem.project.id_str,
                         description: ""
                     },
-                    function(error){ },
-                    function(response){ }
+                    refetch,
+                    refetch
                 )
             }
             refuseText = "Refuser";
@@ -104,19 +105,14 @@ function Notif({rootUser, you, notif, updatePage}){
                         access_token: Data.accessToken(),
                         id_project: notif.elem.project.id_str
                     },
-                    function(error){
-                        console.log(error)
-                    },
-                    function(response){
-                        console.log(response)
-                    }
+                    refetch,
+                    refetch
                 )
             };
         }
     }
     else {
         elem = notif.elem;
-        title = "Pas définie";
         text = "Pas définie";
     }
     let color = undefined;
@@ -146,7 +142,6 @@ function Notif({rootUser, you, notif, updatePage}){
                     rootUser={rootUser}
                     border={false}
                     elem={elem} 
-                    updatePage={updatePage}
                     isProject={ elem instanceof Project}>
 
                 </SimpleProfile>

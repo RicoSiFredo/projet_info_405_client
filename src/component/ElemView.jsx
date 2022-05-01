@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Data from "../utils/Data";
 import { Button, Modal } from "react-bootstrap";
 import ElemList from "../list/ElemList";
+import Constant from "../utils/Constant";
 
 function ElemView({parent, list, keyword, canEdit, title, infoNothing, infoNothingEdit}){
     let [show, updateShow] = useState(false);
@@ -32,7 +33,7 @@ function ElemView({parent, list, keyword, canEdit, title, infoNothing, infoNothi
             <div className="d-flex mt-1">
                 <h4>{title}</h4>
                 <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                    <img className="img-btn" src="plus.png"/>
+                    <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
             </div>
             {content}

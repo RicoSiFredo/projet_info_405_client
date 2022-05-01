@@ -5,7 +5,7 @@ import Data from "../utils/Data";
 import React from "react"
 import SimpleProfile from "../component/SimpleProfile";
 
-function UserProjectElem({action, user, updatePage}){
+function UserProjectElem({action, user, navigate}){
     let bonus;
     if(ActionEnum.IN_PROJECT.is(action.type)){
 
@@ -54,7 +54,7 @@ function UserProjectElem({action, user, updatePage}){
     return <SimpleProfile 
         user={user} 
         isProject={true}
-        updatePage={updatePage} 
+        navigate={navigate} 
         action={action}>
 
     </SimpleProfile>

@@ -20,6 +20,15 @@ function ProfilField({user, isProject, label, name, canEdit, value, className=""
             updateEdit(true);
         }
     }, [])
+    useEffect(() => {
+        updateVal(value);
+        if(canEdit&&(value==""||value==undefined)){
+            updateEdit(true);
+        }
+        else {
+            updateEdit(false);
+        }
+    }, [value])
 
     if((canEdit&&val=="")||edit){
         // Si l'utilisateur est en train de changé ces données

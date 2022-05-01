@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import ProjectActionList from "../list/ProjectActionList";
 import ErrorEats from "../object/base/ErrorEats";
+import Constant from "../utils/Constant";
 import AddMembers from "./AddMembers";
 function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     const [show, updateShow] = useState(false);
@@ -24,7 +25,7 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                 <h4>{"Membres"}</h4>
                 <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                    <img className="img-btn" src="plus.png"/>
+                    <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
             </div>
             <ProjectActionList 

@@ -2,26 +2,26 @@ import '../App.css';
 import { useEffect } from "react";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import ProfilField from "../component/ProfilField";
-import { ActionEnum } from "../enum/ActionEnum";
-import PageEnum from "../enum/PageEnum";
-import SkillList from "../list/ElemList";
-import UserProjectList from "../list/UserProjectList";
-import Data from "../utils/Data";
-import HTTP from "../utils/HTTP";
-import Constant from "../utils/Constant";
 import ListEats from "../object/base/ListEats";
-import Conversation from "./Conversation";
+import ConversationView from "./ConversationView";
 import Message from "./Message";
-import Utils from "../utils/Utils";
 import Eats from "../object/base/Eats";
+import Conversation from "../object/Conversation";
 import React from "react"
+import { useParams, Link } from "react-router-dom";
 
 
-function Messenger({back, user, updatePage}){
+function Messenger({user}){
+    const {id} = useParams();
     const [show, updateShow] = useState(false);
-    const [currentChat, setCurrentChat] = useState(null);
-    const [messages, setMessages] = useState([]);
+    const [currentChat, setCurrentChat] = useState(new Conversation());
+    currentChat.id_str = id
+    function update(){
+        setCurrentChat(Eats.fakeUpdate(currentChat));
+        // fait croire à un changement
+    }
+    currentChat.update = update;
+
     const [newMessage,setNewMessage] = useState("");
     const [name, updateName] = useState("");
     const [listFriends, updateList] = useState(new ListEats("", undefined));
@@ -57,31 +57,19 @@ function Messenger({back, user, updatePage}){
         updateShow(false);
     }
 
-    
+    useEffect(function(){
+        if(currentChat!=undefined){
+            currentChat.message_list.reset()
+            currentChat.getAllMessages();
+        }
+    }, [currentChat, ])
     useEffect(function(){
         user.getAllConv();
         user.getUserFriends();
-    }, []);
+    }, [user.logged, ]);
 
     
     const conversations = user.convList.list;
-    console.log(conversations);
-
-    useEffect(() => {
-        const getMessages = async () => {
-            try{
-                if (currentChat != null){
-                    const res = currentChat.message_list.list;
-                    setMessages(res);
-                }
-            }catch(err){
-                console.log(err);
-            }
-        };
-        getMessages();
-    },[currentChat]);
-
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -105,9 +93,9 @@ function Messenger({back, user, updatePage}){
                 <div className="chatMenuWrapper">
                     <input placeholder="Rechercher des amis" className="chatMenuInput" />
                         {conversations.map((c) => (
-                            <div onClick={() => setCurrentChat(c)}>
-                                <Conversation key={c.id_str} conversation={c}/>
-                            </div>
+                            <Link to={"/message/"+c.id_str}>
+                                <ConversationView key={c.id_str} conversation={c}/>
+                            </Link>
                         ))}
                     <button className="newConv" onClick={addConv}>Créer une nouvelle conversation</button>
                 </div>
@@ -120,7 +108,7 @@ function Messenger({back, user, updatePage}){
                         currentChat ?
                     (<>
                     <div className="chatBoxTop">
-                    {messages.slice().reverse().map((m) => (
+                    {currentChat.message_list.list.slice().reverse().map((m) => (
                             <Message key={m.id_str} message={m} own={m.auteur.id_str === user.id_str}/>
                         ))}
                     </div>

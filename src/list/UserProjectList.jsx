@@ -9,7 +9,7 @@ import React from "react"
 const TYPE = {
     PROJECT: 0
 };
-function UserProjectList({typeAction, user, updatePage, actionList}){
+function UserProjectList({typeAction, user, navigate, actionList}){
     function getList(){
         let list = [];
         for(let i = 0; i < actionList.size(); i++){
@@ -36,7 +36,7 @@ function UserProjectList({typeAction, user, updatePage, actionList}){
         let res;
         
         if(typeLay==TYPE.PROJECT){
-            res = <UserProjectElem user={user} updatePage={updatePage} action={getList()[index]}>
+            res = <UserProjectElem user={user} navigate={navigate} action={getList()[index]}>
 
             </UserProjectElem>
         }

@@ -11,8 +11,20 @@ import ProfilView from "../component/ProfilView";
 import ElemView from "../component/ElemView";
 import ProjectActionView from "../component/ProjectActionView";
 import ManageRole from "./ManageRole";
+import { useParams } from "react-router-dom";
+import Project from "../object/Project";
+import Eats from "../object/base/Eats";
 
-function Project({project, user, updatePage}){
+function ProjectFrame({rootUser, updatePage}){
+    const {id} = useParams();
+    const [project, updateProject] = useState(new Project());
+    project.id_str = id;
+    function update(){
+        updateProject(Eats.fakeUpdate(project));
+        // fait croire à un changement
+    }
+    project.update = update;
+
     const [edit, updateEdit] = useState(false);
     const [comment, updateComment] = useState("");
 //>>>>>>> d7766fd4c0f8e4b40cefda4ad3d31bbd1600795d
@@ -22,14 +34,11 @@ function Project({project, user, updatePage}){
         project.getAllTecno();
         project.getAllPermission();
     }, []);
-    let canEdit = Data.isMe(user);
-    function addParticipant(){
-        updatePage(PageEnum.Add);
-    }
-    function manageRole(){
-        updatePage(PageEnum.ManageRole);
-    }
+    let canEdit = false;
     let [show, updateShow] = useState(false);
+    function manageRole() {
+
+    }
     function handleClose() {
         updateShow(false);
     }
@@ -63,10 +72,6 @@ function Project({project, user, updatePage}){
         
         </div>*/
 //=======
-    let addParticipantBlock;
-    if(project.havePermission(PermEnum.MANAGE_MEMBERS)){
-        addParticipantBlock = <Button onClick={addParticipant}>Ajouter des participants</Button>
-    }
     let joinBlock;
     if(!project.isIn()){
         function join(){
@@ -130,7 +135,7 @@ function Project({project, user, updatePage}){
             <ProjectActionView 
                 typeAction={[ActionEnum.IN_PROJECT]} 
                 updatePage={updatePage} 
-                user={user} 
+                user={rootUser} 
                 project={project} 
                 actionList={project.actionList}>
 
@@ -141,8 +146,6 @@ function Project({project, user, updatePage}){
             {
                 project.havePermission(PermEnum.MANAGE_ROLE) && (
                     <div>
-                        <Button onClick={manageRole}>Gérer les roles</Button>
-
                         <Button onClick={delProject}>Supprimer le projet</Button>
 
                         <Modal show={show} className="highest" onHide={handleClose}>
@@ -165,7 +168,7 @@ function Project({project, user, updatePage}){
 
             {
                 project.havePermission(PermEnum.MANAGE_MEMBERS) && (
-                    <ProjectActionList user={user} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
+                    <ProjectActionList user={rootUser} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
                 )
             }
 
@@ -176,4 +179,4 @@ function Project({project, user, updatePage}){
     </div>
 
 }
-export default Project;
+export default ProjectFrame;

@@ -7,7 +7,7 @@ import Data from "../utils/Data";
 import ErrorEats from "../object/base/ErrorEats";
 import Response from "../utils/Response";
 
-function UserProjectView({user, updatePage}){
+function UserProjectView({user, navigate}){
     const [show, updateShow] = useState(false);
     const [val, updateVal] = useState("");
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
@@ -58,7 +58,7 @@ function UserProjectView({user, updatePage}){
             <UserProjectList 
                 typeAction={[ActionEnum.IN_PROJECT]} 
                 user={user} 
-                updatePage={updatePage} 
+                navigate={navigate} 
                 actionList={user.actionList}>
 
             </UserProjectList>

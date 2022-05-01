@@ -27,6 +27,8 @@
   height: 200px;
 }
 .click{
+  text-decoration: none;
+  
   cursor: pointer;
 }
 .profil-tiny{

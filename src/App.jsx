@@ -12,7 +12,7 @@ import Constant from './utils/Constant';
 import Profil from './page/Profil';
 import CreateProject from './page/CreateProject';
 import Search from './page/Search';
-import Project from './page/Project';
+import ProjectFrame from './page/Project';
 import Eats from './object/base/Eats';
 import { Button } from 'react-bootstrap';
 import AddParticipant from './page/AddParticipant';
@@ -21,6 +21,7 @@ import NotifPage from './page/NotifPage';
 import Messenger from './page/Messenger';
 import Header from './component/Header';
 import NotifList from './list/NotifList';
+import { Link, Route, Router, Routes, useNavigate } from 'react-router-dom';
 
 const NOTIF_FETCH = 15000
 
@@ -32,15 +33,8 @@ function App() {
     const [notif, updateNotif] = useState(false);
     const [search, updateSearch] = useState("");
 
-    /*useEffect(() => {
-        const interval = setInterval(() => {
-            if(user.logged) {
-                user.getNotif();
-            }
-        }, NOTIF_FETCH);
-        return () => clearInterval(interval);
-    }, []);*/
-    
+    const [ locationKeys, setLocationKeys ] = useState([])
+    const navigate = useNavigate()
 
     useEffect(function(){
         // Si il y a changement de l'utilisateur on regarde si il y a des notifs
@@ -127,7 +121,7 @@ function App() {
         res = <Search search={search} back={back} user={user} updatePage={updatePage}></Search>;
     }
     else if(page.equals(PageEnum.Project)){
-        res = <Project back={back} rootUser={user} project={user.project.get()} user={user} updatePage={updatePage}></Project>;
+        res = <ProjectFrame back={back} rootUser={user} project={user.project.get()} user={user} updatePage={updatePage}></ProjectFrame>;
     }
     else if(page.equals(PageEnum.Add)){
         res = <AddParticipant back={back} updatePage={updatePage} project={user.project.get()}>
@@ -154,8 +148,7 @@ function App() {
     function chercher(){
         updatePage(PageEnum.Search);
     }
-    
-    let head = <Header search={search} updateSearch={updateSearch} user={user} updateNotif={updateNotif} notif={notif} updatePage={updatePage}></Header>;
+    let head = <Header search={search} updateSearch={updateSearch} user={user} updateNotif={updateNotif} notif={notif} navigate={navigate}></Header>;
     let notifElem;
     if(notif){
         notifElem = 
@@ -163,21 +156,42 @@ function App() {
             <NotifList
                 rootUser={user}
                 you={true}
-                updatePage={updatePage} 
+                navigate={navigate} 
                 list={user.notifList}>
 
             </NotifList>
         </div>
     }
-    return (<div>
-        {head}
-        <div className="w-100 d-flex justify-content-center flex-row">
-            <div className="w-100">
-                {res}
-            </div>
-            {notifElem}
-        </div>
-    </div>)
+    return <div>
+        {
+            head
+        }
+
+        {/* A <Switch> looks through its children <Route>s and
+        renders the first one that matches the current URL. */}
+        <Routes>
+            <Route exact path="/login" element={<Login navigate={navigate} user={user}></Login>}></Route>
+            <Route exact path="/register" element={<Register navigate={navigate} user={user}></Register>}></Route>
+            <Route path="/message/:id" element={<Messenger user={user}></Messenger>}></Route>
+            <Route exact path="/profil/:id" element={<Profil navigate={navigate} rootUser={user}></Profil>}></Route>
+            <Route exact path="/project/:id" element={<ProjectFrame navigate={navigate} rootUser={user}></ProjectFrame>}></Route>
+            <Route exact path="/search/:search" element={<Search navigate={navigate} rootUser={user}></Search>}></Route>
+            <Route exact path="/" element={<Home navigate={navigate} user={user} updatePage={updatePage}></Home>}></Route>
+        </Routes>
+    </div>
 }
 
+
+function Home2() {
+    return <h2>Home</h2>;
+  }
+  
+  function About() {
+    return <h2>About</h2>;
+  }
+
+  
+  function Users2() {
+    return <h2>Users</h2>;
+  }
 export default App;

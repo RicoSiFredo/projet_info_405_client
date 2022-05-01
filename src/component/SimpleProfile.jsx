@@ -3,20 +3,16 @@ import React from "react";
 import ImgProfile from "./ImgProfile";
 import PageEnum from "../enum/PageEnum";
 import User from "../object/User";
+import { Link } from "react-router-dom";
 
-function SimpleProfile({content, elem, user, action, updatePage, isProject, rootUser, border=true}){
+function SimpleProfile({content, elem, user, action, isProject, rootUser, border=true}){
     if(action!=undefined){
-        function openElem(){
-            if(isProject){
-                action.project.update = user.update;
-                user.project.set(action.project);
-                updatePage(PageEnum.Project);
-            }
-            else {
-                action.user.update = user.update;
-                user.user.set(action.user);
-                updatePage(PageEnum.Profil);
-            }
+        let url;
+        if(isProject){
+            url = "/project/" + action.project.id_str;
+        }
+        else {
+            url = "/profil/" + action.user.id_str;
         }
         let name;
         if(isProject){
@@ -32,39 +28,27 @@ function SimpleProfile({content, elem, user, action, updatePage, isProject, root
         else {
             profile = <ImgProfile elem={action.user}></ImgProfile>
         }
-        let url = "";
-        if(isProject){
-            url = "/project/" + action.project.id_str
-        }
-        else {
-            url = "/user/" + action.user.id_str
-        }
         return <div className={"d-flex pb-2 " + ( border ? "border-top separator" : "" ) + " pt-2 ps-3 pe-2" }>
-            <a href="#" class="text-decoration-none link-dark">
-                <div onClick={openElem} className="profil-tiny bg-light bg-light">
+            <Link className="text-decoration-none text-dark" to={url}>
+                <div className="profil-tiny bg-light bg-light">
                     {profile}
                 </div>
-            </a>
+            </Link>
             <div className="ms-3 flex align-items-center">
-                <a href="#" class="text-decoration-none link-dark">
-                    <h5 onClick={openElem} className="click mb-1">{name}</h5>
-                </a>
+                <Link className="text-decoration-none text-dark" to={url}>
+                    <h5 className="click mb-1">{name}</h5>
+                </Link>
                 {action.role.name!=""&&<p className="mb-0">{action.role.name}</p>}
             </div>
         </div>
     }
     else {
-        function openElem(){
-            if(isProject){
-                elem.update = rootUser.update;
-                rootUser.project.set(elem);
-                updatePage(PageEnum.Project);
-            }
-            else {
-                elem.update = rootUser.update;
-                rootUser.user.set(elem);
-                updatePage(PageEnum.Profil);
-            }
+        let url;
+        if(isProject){
+            url = "/project/" + elem.id_str;
+        }
+        else {
+            url = "/profil/" + elem.id_str;
         }
         let name;
         if(elem instanceof User){
@@ -75,11 +59,15 @@ function SimpleProfile({content, elem, user, action, updatePage, isProject, root
         }
         //flex view
         return <div className={"d-flex pb-2 " + ( border ? "border-top separator" : "" ) + " pt-2 ps-3 pe-2" }>
-            <div onClick={openElem} className="profil-tiny bg-light bg-light">
-                <ImgProfile elem={elem}></ImgProfile>
-            </div>
+            <Link className="text-decoration-none text-dark" to={url}>
+                <div className="profil-tiny bg-light bg-light">
+                    <ImgProfile elem={elem}></ImgProfile>
+                </div>
+            </Link>
             <div className="ms-3 d-flex align-items-center">
-                <h5 onClick={openElem} className=" click mb-1">{name}</h5>
+                <Link className="text-decoration-none text-dark" to={url}>
+                    <h5 className=" click mb-1">{name}</h5>
+                </Link>
                 {content}
             </div>
         </div>

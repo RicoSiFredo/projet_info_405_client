@@ -18,6 +18,7 @@ const FAILED_ERROR = 2;
 function ProfilView({elem, isProject=false}){
     let canEdit = true; 
     
+    console.log(elem.firstname)
     const [error, setError] = useState(NONE_ERROR);
 
     function openFilePicker(elemId) {
@@ -56,7 +57,6 @@ function ProfilView({elem, isProject=false}){
             }
             if(goodExt){
                 const formData = new FormData();
-                console.log(Constant.SERVER_URL + key + "/set/"+type)
                 formData.append('file', file);
                 formData.append('id', elem.id_str);
                 formData.append('access_token', Data.accessToken());
