@@ -14,7 +14,7 @@ function Home({user, navigate, updatePage}){
         }
         button = <div >
             <Button className="m-1" variant="primary" onClick={login}>Connexion</Button>
-            <Button className="m-1" variant="primary" onClick={register}>Déconnexion</Button>
+            <Button className="m-1" variant="primary" onClick={register}>Inscription</Button>
         </div>
     }
     else {
