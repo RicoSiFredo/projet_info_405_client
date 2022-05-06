@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import React from "react"
+import Constant from "../utils/Constant";
 
 
 
@@ -11,50 +12,49 @@ function ConversationView({conversation,updatePage}){
 
     useEffect(function(){
         conversation.getAllMembers();
-        conversation.getAllMessages();
     }, []);
 
-            const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
-
-           
-            if (friend != undefined) {
-                let image = friend.profile;
-                let ProfilPic = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + image;
-
-                if (image !== undefined){
-                    return(
-                        <div className="conversation">
-                            <img
-                            className="conversationImg"
-                            src={ProfilPic}
-                            alt=""
-                            />
-                            <span className="conversationName">{friend.firstname}</span>
-                        </div>
-    
-                    )
-                }else{
-                    return(
-                        <div className="conversation">
-                            <img
-                            className="conversationImg"
-                            src="profile_empty.png"
-                            alt=""
-                            />
-                            <span className="conversationName">{friend.firstname}</span>
-                        </div>
-    
-                    )
-                }
-                
-
-            }else{
+        const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
 
         
-            return(
-            <p>Chargement</p>
-            )
-    }
+        if (friend != undefined) {
+            let image = friend.profile;
+            let ProfilPic = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + image;
+
+            if (image !== undefined){
+                return(
+                    <div className="conversation">
+                        <img
+                        className="conversationImg"
+                        src={ProfilPic}
+                        alt=""
+                        />
+                        <span className="conversationName">{friend.firstname}</span>
+                    </div>
+
+                )
+            }else{
+                return(
+                    <div className="conversation">
+                        <img
+                        className="conversationImg"
+                        src={Constant.BASE_IMAGE+"profile_empty.png"}
+                        alt=""
+                        />
+                        <span className="conversationName">{friend.firstname}</span>
+                    </div>
+
+                )
+            }
+            
+
+        }else{
+
+    
+        return(
+        <p>Chargement</p>
+        )
+}
         
     
 

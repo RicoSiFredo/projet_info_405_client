@@ -101,7 +101,7 @@ function App() {
 
     user.back = back;
 
-    let res;
+    /*let res;
     if(page.equals(PageEnum.Home)){
         res = <Home user={user} updatePage={updatePage}></Home>;
     }
@@ -140,14 +140,7 @@ function App() {
     }
     else if(page.equals(PageEnum.Messenger)){
         res = <Messenger back={back} user={user} updatePage={updatePage}></Messenger>;
-    }
-    let backButton;
-    if(pageList.length>1){
-        backButton = <Button onClick={back} variant='primary'>Retour</Button>
-    }
-    function chercher(){
-        updatePage(PageEnum.Search);
-    }
+    }*/
     let head = <Header search={search} updateSearch={updateSearch} user={user} updateNotif={updateNotif} notif={notif} navigate={navigate}></Header>;
     let notifElem;
     if(notif){

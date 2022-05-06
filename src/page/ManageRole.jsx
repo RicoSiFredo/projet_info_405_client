@@ -4,6 +4,7 @@ import { Button, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Data from "../utils/Data";
 import Field from "../component/Field";
+import Constant from "../utils/Constant";
 
 function ManageRole({project}){
     const [create, updateCreate] = useState(false);
@@ -48,9 +49,9 @@ function ManageRole({project}){
     return <div>
                 <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
                     <div className="d-flex mt-1">
-                        <h4>{"Membres"}</h4>
+                        <h4>{"Role"}</h4>
                         <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                            <img className="img-btn" src="plus.png"/>
+                            <img className="img-btn" src={Constant.BASE_IMAGE + "plus.png"}/>
                         </Button>
                     </div>
 
