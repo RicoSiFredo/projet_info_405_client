@@ -14,12 +14,13 @@ function ConversationView({conversation,updatePage}){
         conversation.getAllMembers();
     }, []);
 
-        const friend = (conversation.members.list.find((m) => m !== currentUser.id_str));
-
+        const friend = (conversation.members.list.find((m) => m.id_str !== currentUser.id_str));
+        
         
         if (friend != undefined) {
             let image = friend.profile;
             let ProfilPic = "http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/" + image;
+            
 
             if (image !== undefined){
                 return(
