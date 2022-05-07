@@ -22,6 +22,6 @@ export default class Data {
         return id == localStorage.getItem("id_user", id);
     }
     static isMe(user){
-        return user.logged;
+        return Data.isUserId(user.id_str);
     }
 }
