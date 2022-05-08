@@ -18,9 +18,11 @@ export default class Project extends Object405 {
     date = undefined;
 
     permissionList = new ListEats("", undefined, CompareEats.compareInt("type", CompareEats.ASC), "", true)
+    haveActuList = new ListEats("have_actu", this, CompareEats.compareInt("date", CompareEats.DESC), "", true)
 
     roleList = new ListEats("own_role", undefined, CompareEats.compareInt("date", CompareEats.DESC))
     tecnoList = new ListEats("use", this);
+    actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
     actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
 
     havePermission(perm){
@@ -60,6 +62,24 @@ export default class Project extends Object405 {
             {
                 access_token: Data.accessToken(),
                 id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+    getHaveActuList(failed, success){
+        this.permissionList.makeRequest(
+            "project/get/actu",
+            {
+                access_token: Data.accessToken()
             },
             function(error){
                 if(failed!=undefined){

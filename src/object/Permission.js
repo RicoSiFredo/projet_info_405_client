@@ -26,6 +26,12 @@ export default class Permission extends Object405 {
         else if(en.equals(PermEnum.MANAGE_ROLE)){
             res = "Gérer les rôles"
         }
+        else if(en.equals(PermEnum.MANAGE_ACTU)){
+            res = "Publier des posts"
+        }
+        else if(en.equals(PermEnum.MANAGE_OFFRE)){
+            res = "Publier des offres d'emploie"
+        }
         return res;
     }
 }

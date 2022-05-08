@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import NotifList from "../list/NotifList";
 import Constant from "../utils/Constant";
-import ActuForm from "./ActuForm";
+import Data from "../utils/Data";
+import Field from "./Field";
+import SelectRole from "./SelectRole";
 
 function ActualiteView({user, you, rootUser}){
+    useEffect(function(){
+        user.getHaveActuList();
+    }, [])
     let [show, updateShow] = useState(false);
     let [listAction, updateListAction] = useState([{
         type: 0,
@@ -18,7 +23,7 @@ function ActualiteView({user, you, rootUser}){
         color: "danger",
         select: false
     }]); 
-    let ccAction;
+    let ccAction; 
     for(let i = 0; i < listAction.length; i++){
         if(listAction[i].select){
             ccAction = listAction[i];
@@ -26,12 +31,12 @@ function ActualiteView({user, you, rootUser}){
     }
     function handleClose() {
         updateShow(false);
+        updateComment("");
+        updatePrix("");
+        updateRole("");
     }
     function addElem(){
         updateShow(true);
-    }
-    function sendElem(){
-
     }
     function selectAction(action){
         for(let i = 0; i < listAction.length; i++){
@@ -44,6 +49,63 @@ function ActualiteView({user, you, rootUser}){
         }
         updateListAction([...listAction]);
     }
+
+    const [comment, updateComment] = useState("");
+    const [prix, updatePrix] = useState("");
+    const [role, updateRole] = useState("");
+    const [duree, updateDuree] = useState("");
+    let res;
+
+    function changeComment(e){
+        updateComment(e.target.value);
+    }
+    function changePrix(e){
+        updatePrix(e.target.value);
+    }
+    function changeDuree(e){
+        updateDuree(e.target.value);
+    }
+    let action = ccAction;
+    if(action.type==0){
+        res = <div className="mt-3 mb-0">
+            <h5>Nouveau post</h5>
+            <Field className={"mt-2"} val={comment} changeValue={changeComment} label="Contenu" name="name"></Field>
+        </div>
+    }
+    else if(action.type==1){
+        res = <div className="mt-3 mb-0">
+            <h5>Nouvelle offre</h5>
+            <SelectRole
+                updateRole={updateRole}
+                project={user}>
+
+            </SelectRole>
+            <Field className={"mt-2"} val={comment} changeValue={changeComment} label="Description" name="name"></Field>
+            <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Prix par mois €" name="name"></Field>
+            <Field className={"mt-3"} val={duree} changeValue={changeDuree} label="Durée" name="name"></Field>
+        </div>
+    }
+
+    function sendElem(){
+        user.makeRequest(
+            '/project/create/actu', 
+            {
+                access_token: Data.accessToken(),
+                id: user.id_str,
+                role: role,
+                comment: comment,
+                price: prix,
+                duree: duree
+            },
+            function(error){
+
+            },
+            function(response){
+                
+            }
+        )
+    }
+
     return (
         <div>
             <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
@@ -53,13 +115,11 @@ function ActualiteView({user, you, rootUser}){
                         <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                     </Button>
                 </div>
-                <NotifList
-                    rootUser={rootUser}
-                    user={user}
-                    you={false}
-                    list={user.notifList}>
-
-                </NotifList>
+                {
+                    user.haveActuList.map((actu, index) =>
+                        <p>H,ghj</p>
+                    )
+                }
             </div>
             <Modal show={show} className="highest" onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -72,11 +132,7 @@ function ActualiteView({user, you, rootUser}){
                         )}
                     </div>
                     <div>
-                       <ActuForm
-                            project={user} 
-                            action={ccAction}>
-
-                        </ActuForm>
+                        {res}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
