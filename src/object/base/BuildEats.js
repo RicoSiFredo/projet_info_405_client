@@ -9,6 +9,7 @@ import Tecno from "../Tecno";
 import User from "../User";
 import Object405 from "./ObjectEats";
 import Notif from "../Notif";
+import Actu from "../Actu";
 
 
 export default class BuildEats {
@@ -44,6 +45,9 @@ export default class BuildEats {
         }
         else if(json==Notif.TYPE||json["_type"]==Notif.TYPE){
             res = new Notif();
+        }
+        else if(json==Actu.TYPE||json["_type"]==Actu.TYPE){
+            res = new Actu();
         }
         else {
             res = new Object405();

@@ -81,7 +81,7 @@ function ActualiteView({user, you, rootUser}){
 
             </SelectRole>
             <Field className={"mt-2"} val={comment} changeValue={changeComment} label="Description" name="name"></Field>
-            <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Prix par mois €" name="name"></Field>
+            <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Prix €" name="name"></Field>
             <Field className={"mt-3"} val={duree} changeValue={changeDuree} label="Durée" name="name"></Field>
         </div>
     }
