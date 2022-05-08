@@ -38,12 +38,12 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     }
     if (ActionEnum.IN_PROJECT.got(typeAction)&& !action.root&&project.isIn()){
         if (action.equals(project.action)){
-            button = <div>
+            button = <div className="ms-3 align-self-center flex ">
                 <Button onClick={exclure}>Quitter</Button>
             </div>
         }
         else if(project.havePermission(PermEnum.MANAGE_MEMBERS)){
-            button = <div>
+            button = <div className="ms-3 align-self-center flex ">
                 <Button onClick={exclure}>Exclure</Button>
             </div>
         }

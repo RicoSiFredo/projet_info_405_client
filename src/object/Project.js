@@ -134,5 +134,23 @@ export default class Project extends Object405 {
             }
         )
     }
-
+    getAllRole(failed, success){
+        super.makeRequest(
+            "project/get/role",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
 }

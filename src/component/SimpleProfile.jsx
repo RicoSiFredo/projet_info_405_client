@@ -49,9 +49,7 @@ function SimpleProfile({content, elem, user, action, isProject, rootUser, border
                 {action.role.name!=""&&<p className="mb-0">{action.role.name}</p>}
             </div>
             </div>
-            <div className="ms-3 align-self-center flex ">
-                {button}
-            </div>
+            {contentBonus}
         </div>
     }
     else {

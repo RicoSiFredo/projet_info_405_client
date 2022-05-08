@@ -14,6 +14,8 @@ import ManageRole from "./ManageRole";
 import { useParams } from "react-router-dom";
 import Project from "../object/Project";
 import Eats from "../object/base/Eats";
+import NotifList from "../list/NotifList";
+import ActualiteView from "../component/ActualiteView";
 
 function ProjectFrame({rootUser, updatePage}){
     const {id} = useParams();
@@ -27,7 +29,6 @@ function ProjectFrame({rootUser, updatePage}){
 
     const [edit, updateEdit] = useState(false);
     const [comment, updateComment] = useState("");
-//>>>>>>> d7766fd4c0f8e4b40cefda4ad3d31bbd1600795d
     useEffect(function(){
         project.getBase();
         project.getAllAction();
@@ -36,9 +37,7 @@ function ProjectFrame({rootUser, updatePage}){
     }, []);
     let canEdit = false;
     let [show, updateShow] = useState(false);
-    function manageRole() {
 
-    }
     function handleClose() {
         updateShow(false);
     }
@@ -55,23 +54,11 @@ function ProjectFrame({rootUser, updatePage}){
             function(error){
             },
             function(response){
-                console.log("response");
                 updatePage(PageEnum.Profil);
             }
         )
         handleClose();
-        
     }
-//<<<<<<< HEAD
-        /*return <div>
-            <p>Nom : {project.name}</p>
-            <p>Description : {project.description}</p>
-            <Button onClick={addParticipant}>Ajouter des participants</Button>
-            <ProjectActionList typeAction={0} actionList={project.actionList}></ProjectActionList>
-            
-        
-        </div>*/
-//=======
     let joinBlock;
     if(!project.isIn()){
         function join(){
@@ -130,6 +117,12 @@ function ProjectFrame({rootUser, updatePage}){
             </ElemView>
         </div>
         <div className="w-45 center-div">
+            <ActualiteView
+                rootUser={rootUser}
+                user={project}
+                you={false}>
+
+            </ActualiteView>
         </div>
         <div className="w-25 right-div">
             <ProjectActionView 

@@ -3,37 +3,68 @@ import React from "react"
 import Notif from "./Notif";
 
 const TYPE = {
-    NOTIF: 0
+    NOTIF: 0,
+    ADD: 1
 };
 function NotifList({user, rootUser, you, list}){
+    let canAdd = true;
     function count(){
         let res;
         if(list!=undefined){
-            res = list.size();
+            if(canAdd){
+                res = list.size() + 1;
+            }
+            else {
+                res = list.size();
+            }
         }
         else {
-            res = 0;
+            if(canAdd){
+                res = 1;
+            }
+            else {
+                res = 0;
+            }
         }
         return res;
         // donne le nombre d'élément
     }
     function type(index){
-        return TYPE.NOTIF;
-        // donne le type d'affichage pour l'index*
+        // donne le type d'affichage pour l'index
         // il y a que skill ici mais on peut imaginer le dernier
         // serait un load pour avoir les suivants
+        let res;
+        if(canAdd&&index == 0){
+            res = TYPE.ADD;
+        }
+        else {
+            res = TYPE.NOTIF;
+        }
+        return res;
+    }
+    function getMoin(){
+        let res = 0;
+        if(canAdd){
+            res = 1;
+        }
+        return res;
     }
     function compute(index){
         let typeLay = type(index);
         // on recupère le type de l'élément
 
         let res;
-        if(typeLay==TYPE.NOTIF){
+        if(typeLay==TYPE.ADD){
+            return <div>
+                <p>Prout</p>
+            </div>
+        }
+        else if(typeLay==TYPE.NOTIF){
             res = <Notif 
                 user={user}
                 rootUser={rootUser}
                 you={you}
-                notif={list.get(index)}>
+                notif={list.get(index-getMoin())}>
             </Notif>
         }
         return res;
