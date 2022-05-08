@@ -5,7 +5,7 @@ import PageEnum from "../enum/PageEnum";
 import User from "../object/User";
 import { Link } from "react-router-dom";
 
-function SimpleProfile({content, elem, user, action, isProject, rootUser, border=true}){
+function SimpleProfile({content, elem, user, action, isProject, rootUser, border=true, contentBonus}){
     if(action!=undefined){
         let url;
         if(isProject){
@@ -28,7 +28,15 @@ function SimpleProfile({content, elem, user, action, isProject, rootUser, border
         else {
             profile = <ImgProfile elem={action.user}></ImgProfile>
         }
-        return <div className={"d-flex pb-2 " + ( border ? "border-top separator" : "" ) + " pt-2 ps-3 pe-2" }>
+        let button;
+        if (contentBonus!=undefined){
+            button = contentBonus
+        }
+        else{
+            button = <div></div>
+        }
+        return <div className={"d-flex justify-content-between pb-2 " + ( border ? "border-top separator" : "" ) + " pt-2 ps-3 pe-2" }>
+            <div className={"d-flex pb-2"}>
             <Link className="text-decoration-none text-dark" to={url}>
                 <div className="profil-tiny bg-light bg-light">
                     {profile}
@@ -39,6 +47,10 @@ function SimpleProfile({content, elem, user, action, isProject, rootUser, border
                     <h5 className="click mb-1">{name}</h5>
                 </Link>
                 {action.role.name!=""&&<p className="mb-0">{action.role.name}</p>}
+            </div>
+            </div>
+            <div className="ms-3 align-self-center flex ">
+                {button}
             </div>
         </div>
     }

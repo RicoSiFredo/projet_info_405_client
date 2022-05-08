@@ -36,8 +36,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     if (ActionEnum.IN_PROJECT.got(typeAction)){
         text = <p>Role : {action.role.name}</p>
     }
-    if(ActionEnum.IN_PROJECT.got(typeAction)&&
-    !action.root&&project.isIn()){
+    if (ActionEnum.IN_PROJECT.got(typeAction)&& !action.root&&project.isIn()){
         if (action.equals(project.action)){
             button = <div>
                 <Button onClick={exclure}>Quitter</Button>
@@ -89,7 +88,8 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         user={user} 
         action={action} 
         updatePage={updatePage} 
-        isProject={false}>
+        isProject={false}
+        contentBonus={button}>
 
     </SimpleProfile>
 }
