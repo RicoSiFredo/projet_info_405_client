@@ -97,7 +97,7 @@ function Messenger({user}){
                                 <ConversationView key={c.id_str} conversation={c}/>
                             </Link>
                         ))}
-                    <button className="newConv" onClick={addConv}>Créer une nouvelle conversation</button>
+                    <button className="btn btn-primary" onClick={addConv}>Nouvelle conversation</button>
                 </div>
             </div>
     
@@ -117,7 +117,7 @@ function Messenger({user}){
                         onChange={(e) => setNewMessage(e.target.value)}
                         value={newMessage}
                         ></textarea>
-                        <button className="chatSubmitButton" onClick={handleSubmit}>Envoyer</button>
+                        <button className="btn btn-primary" onClick={handleSubmit}>Envoyer</button>
                     </div></>
                     ) : (
                         <span className="noConversationText">Ouvrez une conversation pour commencer à discuter.</span>
@@ -152,7 +152,7 @@ function Messenger({user}){
                         return (
                             <div>
                                 {obj.firstname}
-                                <button className="creeConv" onClick={createConv}>Créer une nouvelle conversation</button>
+                                <button type="button" className="btn btn-primary" onClick={createConv}>Créer une nouvelle conversation</button>
                             </div>
     
                         )
