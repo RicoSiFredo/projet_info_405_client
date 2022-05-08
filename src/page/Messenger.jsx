@@ -38,6 +38,7 @@ function Messenger({user}){
         updateList(Eats.fakeUpdate(listFriends))
     }
 
+    
 
     function showFriends(){
         listFriends.reset();
@@ -84,7 +85,6 @@ function Messenger({user}){
             console.log(err);
         }
     };
-
 
 
     return (
@@ -143,19 +143,23 @@ function Messenger({user}){
                         e.preventDefault();
                         
                         try{
-                                user.createConversation(obj.id_str);      
+                                user.createConversation(obj.id_str);
+                                    
                 
                         }catch(err){
                             console.log(err);
                         }
                     };
-                        return (
-                            <div>
-                                {obj.firstname}
-                                <button type="button" className="btn btn-primary" onClick={createConv}>Créer une nouvelle conversation</button>
-                            </div>
-    
-                        )
+                        if (obj.id_str !== user.id_str){
+                            return (
+                                <div>
+                                    {obj.firstname}
+                                    <button type="button" className="btn btn-primary" onClick={createConv}>Créer une nouvelle conversation</button>
+                                </div>
+        
+                            )
+                        }
+                        
                      
                 })
             }
