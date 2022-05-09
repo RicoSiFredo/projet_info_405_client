@@ -4,6 +4,7 @@ import ImgProfile from "./ImgProfile";
 import PageEnum from "../enum/PageEnum";
 import User from "../object/User";
 import { Link } from "react-router-dom";
+import { ThreeDots } from "react-bootstrap-icons";
 
 function SimpleProfile({content, elem, user, action, isProject, rootUser, border=true, contentBonus}){
     if(action!=undefined){
@@ -50,6 +51,7 @@ function SimpleProfile({content, elem, user, action, isProject, rootUser, border
             </div>
             </div>
             {contentBonus}
+
         </div>
     }
     else {

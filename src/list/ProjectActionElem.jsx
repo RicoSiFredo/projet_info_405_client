@@ -1,13 +1,24 @@
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
-import PermEnum from "../enum/PermEnum";
 import Data from "../utils/Data";
 import React from "react"
 import SimpleProfile from "../component/SimpleProfile";
+import { ThreeDots } from "react-bootstrap-icons";
+import { useState } from "react";
+import PermEnum from "../enum/PermEnum";
+
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
     
+    let [show, updateShow] = useState(false);
+    function handleClose() {
+        updateShow(false);
+    }
+    function openParam() {
+        updateShow(true);
+    }
+
     function exclure(){
         project.makeRequest(
             'project/del/user',
@@ -31,12 +42,14 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         updatePage(PageEnum.Profil);
     }
     
-    let button;
+
     let text;
     if (ActionEnum.IN_PROJECT.got(typeAction)){
         text = <p>Role : {action.role.name}</p>
+        
     }
-    if (ActionEnum.IN_PROJECT.got(typeAction)&& !action.root&&project.isIn()){
+    let button;
+    if (ActionEnum.IN_PROJECT.got(typeAction) && !action.root){
         if (action.equals(project.action)){
             button = <div className="ms-3 align-self-center flex ">
                 <Button onClick={exclure}>Quitter</Button>
@@ -78,18 +91,45 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                 }
             )
         }
-        button = <div>
+        bonus = <div>
             <p>{action.description}</p>
             <Button onClick={accepter}>Accepter</Button>
             <Button onClick={refuser}>Refuser</Button>
         </div>
     }
+    let bonus;
+    bonus =
+        <div className="ms-3 align-self-center flex ">
+			<Button onClick={openParam} className="p-absolute bottom-right ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+				<ThreeDots></ThreeDots>
+			</Button>
+
+            <Modal show={show} className="highest" onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Selectionnez l'action</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Button variant="primary" onClick={exclure}>
+                        {button}
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Noter
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Envoyer un message
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Annuler
+                    </Button>
+                </Modal.Body>
+            </Modal>
+        </div>
     return <SimpleProfile
         user={user} 
         action={action} 
         updatePage={updatePage} 
         isProject={false}
-        contentBonus={button}>
+        contentBonus={bonus}>
 
     </SimpleProfile>
 }
