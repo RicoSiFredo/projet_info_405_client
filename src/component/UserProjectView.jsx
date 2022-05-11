@@ -1,7 +1,7 @@
 import { useState } from "react";
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { Plus } from "react-bootstrap-icons";
+import { PlusLg } from "react-bootstrap-icons";
 import UserProjectList from "../list/UserProjectList";
 import { ActionEnum } from "../enum/ActionEnum";
 import Data from "../utils/Data";
@@ -52,7 +52,7 @@ function UserProjectView({user, navigate}){
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                 <h4>{"Projets"}</h4>
                 <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                    <Plus></Plus>
+                    <PlusLg></PlusLg>
                 </Button>
             </div>
             <UserProjectList 
