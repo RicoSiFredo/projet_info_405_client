@@ -4,13 +4,11 @@ import { Button, Modal } from "react-bootstrap";
 import NotifList from "../list/NotifList";
 import Constant from "../utils/Constant";
 import Data from "../utils/Data";
+import ActuElem from "./ActuElem";
 import Field from "./Field";
 import SelectRole from "./SelectRole";
 
 function ActualiteView({user, you, rootUser}){
-    useEffect(function(){
-        user.getHaveActuList();
-    }, [])
     let [show, updateShow] = useState(false);
     let [listAction, updateListAction] = useState([{
         type: 0,
@@ -105,7 +103,6 @@ function ActualiteView({user, you, rootUser}){
             }
         )
     }
-
     return (
         <div>
             <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
@@ -117,7 +114,10 @@ function ActualiteView({user, you, rootUser}){
                 </div>
                 {
                     user.haveActuList.map((actu, index) =>
-                        <p>H,ghj</p>
+                        <ActuElem
+                            actu={actu}>
+
+                        </ActuElem>
                     )
                 }
             </div>

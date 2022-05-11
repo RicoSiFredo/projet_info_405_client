@@ -17,6 +17,7 @@ export default class User extends Object405 {
     profile = undefined;
     banner = undefined;
 
+    haveActuList = new ListEats("have_actu", this);
     skillList = new ListEats("got_skill", this);
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
     convList = new ListEats("is_member", this);
@@ -71,7 +72,25 @@ export default class User extends Object405 {
         // les données on changé si un fonction de mise a jour est definie on l'execute
         return true
     }
-
+    getAllAction(failed, success){
+        super.makeRequest(
+            "user/get/action",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
     getNotif(failed, success){
         super.makeRequest(
             "user/get/notif",
@@ -144,7 +163,6 @@ export default class User extends Object405 {
                 }
             },
             function(response){
-                console.log(obj)
                 if(success!=undefined){
                     success(response);
                 }

@@ -8,6 +8,7 @@ export default class Actu extends Object405 {
     comment = undefined;
     date = undefined;
     price = undefined;
+    duree = undefined;
 
     constructor(){
         super();

@@ -31,7 +31,8 @@ function Profil({rootUser}){
     useEffect(function(){
         user.getAllSkill();
         user.getAllProject();
-        user.getNotif()
+        user.getNotif();
+        user.getAllAction();
     }, []);
     let canEdit = Data.isMe(user);
     return <div className="d-flex justify-content-center flex-row">

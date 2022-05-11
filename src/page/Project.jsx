@@ -34,6 +34,7 @@ function ProjectFrame({rootUser, updatePage}){
         project.getAllAction();
         project.getAllTecno();
         project.getAllPermission();
+        project.getHaveActuList();
     }, []);
     let canEdit = false;
     let [show, updateShow] = useState(false);
@@ -85,7 +86,6 @@ function ProjectFrame({rootUser, updatePage}){
                     description: comment
                 },
                 function(error){
-                    console.log(error)
                 },
                 function(response){
                     updateEdit(false)
