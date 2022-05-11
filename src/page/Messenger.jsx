@@ -105,7 +105,7 @@ function Messenger({user}){
                 <div className="chatBoxWrapper">
                     <h1>Boite de dialogue</h1>
                     {
-                        currentChat ?
+                        (currentChat.id_str != -1) ?
                     (<>
                     <div className="chatBoxTop">
                     {currentChat.message_list.list.slice().reverse().map((m) => (

@@ -99,19 +99,20 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     }
     let bonus;
     bonus =
-        <div className="ms-3 align-self-center flex ">
-			<Button onClick={openParam} className="p-absolute bottom-right ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+        <div className="align-self-center flex ">
+			<Button onClick={openParam} variant="primary">
 				<ThreeDots></ThreeDots>
 			</Button>
 
-            <Modal show={show} className="highest" onHide={handleClose}>
+            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered dialogClassName="modal-90w">
                 <Modal.Header closeButton>
-                    <Modal.Title>Selectionnez l'action</Modal.Title>
+                    <Modal.Title>Paramètres du membre</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Button variant="primary" onClick={exclure}>
-                        {button}
-                    </Button>
+                     Selectionnez l'action
+                </Modal.Body>
+                <Modal.Footer>
+                    {button}
                     <Button variant="primary" onClick={handleClose}>
                         Noter
                     </Button>
@@ -119,9 +120,9 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                         Envoyer un message
                     </Button>
                     <Button variant="primary" onClick={handleClose}>
-                        Annuler
+                            Retour
                     </Button>
-                </Modal.Body>
+                </Modal.Footer>
             </Modal>
         </div>
     return <SimpleProfile
