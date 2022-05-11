@@ -37,12 +37,19 @@ function ProjectFrame({rootUser, updatePage}){
     }, []);
     let canEdit = false;
     let [show, updateShow] = useState(false);
+    let [end, updateEnd] = useState(false);
 
     function handleClose() {
         updateShow(false);
     }
     function delProject() {
         updateShow(true);
+    }
+    function endClose() {
+        updateEnd(false);
+    }
+    function endProject() {
+        updateEnd(true);
     }
     function requestDelete() {
         project.makeRequest(
@@ -59,6 +66,11 @@ function ProjectFrame({rootUser, updatePage}){
         )
         handleClose();
     }
+    function requestFinish() {
+        project.finished = true;
+        endClose();
+    }
+
     let joinBlock;
     if(!project.isIn()){
         function join(){
@@ -101,7 +113,7 @@ function ProjectFrame({rootUser, updatePage}){
             }
         }
     }
-    
+    console.log(project);
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView elem={project} isProject={true}></ProfilView>
@@ -141,6 +153,8 @@ function ProjectFrame({rootUser, updatePage}){
                     <div>
                         <Button onClick={delProject}>Supprimer le projet</Button>
 
+                        <Button onClick={endProject}>Terminer le projet</Button>
+
                         <Modal show={show} className="highest" onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Voulez vous vraiment supprimer le projet ?</Modal.Title>
@@ -155,7 +169,21 @@ function ProjectFrame({rootUser, updatePage}){
                             </Modal.Body>
                         </Modal>
 
-                    </div>                
+                        <Modal show={end} className="highest" onHide={endClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Voulez vous vraiment terminer le projet ?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Button variant="primary" onClick={requestFinish}>
+                                    Valider
+                                </Button>
+                                <Button variant="primary" onClick={endClose}>
+                                    Fermer
+                                </Button>
+                            </Modal.Body>
+                        </Modal>
+
+                    </div>  
                 )
             }
 
