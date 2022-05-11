@@ -80,15 +80,11 @@ export default class User extends Object405 {
                 id_user: this.id_str
             },
             function(error){
-                console.log("error1")
-                console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }
             },
             function(response){
-                console.log("response1")
-                console.log(response)
                 if(success!=undefined){
                     success(response);
                 }
@@ -102,14 +98,11 @@ export default class User extends Object405 {
                 access_token: Data.accessToken()
             },
             function(error){
-                console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }
             },
             function(response){
-                console.log("response")
-                console.log(response)
                 if(success!=undefined){
                     success(response);
                 }
@@ -151,6 +144,7 @@ export default class User extends Object405 {
                 }
             },
             function(response){
+                console.log(obj)
                 if(success!=undefined){
                     success(response);
                 }
@@ -210,8 +204,6 @@ export default class User extends Object405 {
                 }
             },
             function(response){
-                console.log("response")
-                console.log(response)
                 if(success!=undefined){
                     success(response);
                 }

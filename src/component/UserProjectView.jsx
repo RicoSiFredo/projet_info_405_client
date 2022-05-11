@@ -32,7 +32,6 @@ function UserProjectView({user, navigate}){
             },
             function(response){
                 if(Response.isSuccessResponse(response)){
-                    console.log(response);
                     updateError(ErrorEats.SUCCESS);
                     updateShow(false);
                 }

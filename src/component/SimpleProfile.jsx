@@ -7,6 +7,10 @@ import { Link } from "react-router-dom";
 import { ThreeDots } from "react-bootstrap-icons";
 
 function SimpleProfile({content, elem, user, action, isProject, rootUser, border=true, contentBonus}){
+   /* if(elem!=undefined){
+        console.log("action:"+elem.name)
+        console.log(action)
+    }*/
     if(action!=undefined){
         let url;
         if(isProject){

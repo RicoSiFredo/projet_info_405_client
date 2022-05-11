@@ -17,8 +17,6 @@ const FAILED_ERROR = 2;
 
 function ProfilView({elem, isProject=false}){
     let canEdit = true; 
-    
-    console.log(elem.firstname)
     const [error, setError] = useState(NONE_ERROR);
 
     function openFilePicker(elemId) {
@@ -43,7 +41,6 @@ function ProfilView({elem, isProject=false}){
         key = "user";
     }
     function sendFile(type, file){
-        console.log(file.size)
         if (file.size > 8192000){
             setError(SIZE_ERROR);
         }
@@ -64,10 +61,8 @@ function ProfilView({elem, isProject=false}){
                     Constant.SERVER_URL + key + "/set/" + type,
                     formData,
                     function(err){
-                        console.log(err)
                     },
                     function(result){
-                        console.log(result)
                         if(result["status"] == "success"){
                             elem.applyRequest(result);
                         }

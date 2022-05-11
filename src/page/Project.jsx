@@ -113,7 +113,6 @@ function ProjectFrame({rootUser, updatePage}){
             }
         }
     }
-    console.log(project);
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView elem={project} isProject={true}></ProfilView>
