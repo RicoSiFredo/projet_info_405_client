@@ -8,6 +8,7 @@ import Data from "../utils/Data";
 import Response from "../utils/Response";
 import Project from "../object/Project";
 import ErrorModal from "../object/base/ErrorModal";
+import Constant from "../utils/Constant";
 
 let modal = new ErrorModal();
 modal.addErrorMessage(
@@ -109,7 +110,7 @@ function AddElem({elem,keyword, handleClose}){
                     return <div key={index} className="d-flex mt-3">
                         <p className="mb-0">{object.name}</p> 
                         <Button onClick={()=>addRelation(object.name)} className="ms-2 mb-1 pt-1 ps-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                            <img className="img-btn" src="plus.png"/>
+                            <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                         </Button>
                     </div>
                 })

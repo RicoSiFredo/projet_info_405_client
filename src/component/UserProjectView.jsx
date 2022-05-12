@@ -7,6 +7,7 @@ import { ActionEnum } from "../enum/ActionEnum";
 import Data from "../utils/Data";
 import ErrorEats from "../object/base/ErrorEats";
 import Response from "../utils/Response";
+import Constant from "../utils/Constant";
 
 function UserProjectView({user, navigate}){
     const [show, updateShow] = useState(false);
@@ -52,7 +53,7 @@ function UserProjectView({user, navigate}){
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                 <h4>{"Projets"}</h4>
                 <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                    <PlusLg></PlusLg>
+                    <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
             </div>
             <UserProjectList 
