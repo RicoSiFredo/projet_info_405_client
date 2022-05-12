@@ -8,9 +8,10 @@ import { ThreeDots } from "react-bootstrap-icons";
 import { useState } from "react";
 import PermEnum from "../enum/PermEnum";
 import { Link } from "react-router-dom";
+import ListEats from "../object/base/ListEats";
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
-    
+    const [listConv, updateConv] = useState(new ListEats("", undefined));
     let [show, updateShow] = useState(false);
     function handleClose() {
         updateShow(false);
@@ -35,6 +36,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
             }
         )
     }
+
 
     function openProfil(){
         action.user.update = project.update;
@@ -97,14 +99,34 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         </div>
     }
     let bonus;
+    let test = "/message/";
     console.log(action.user);
     if (action.user.id_str != user.id_str){
+
+        function showConv(){
+            listConv.reset();
+            listConv.makeRequest(
+                'user/get/conversationWithFriend', 
+                {
+                    id: user.id_str,
+                    id_friend: action.user.id_str 
+                },
+                function(error){
+                },
+                function(response){
+                    test = test + listConv.list[0].convList.list[0].id_str;
+                    console.log(test);
+                    
+                }
+            )
+        }
+        
         bonus =
         <div className="align-self-center flex ">
 			<Button onClick={openParam} variant="primary">
 				<ThreeDots></ThreeDots>
 			</Button>
-            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered dialogClassName="modal-90w">
+            <Modal show={show} className="highest" onHide={show} size="lg" centered dialogClassName="modal-90w">
                 <Modal.Header closeButton>
                     <Modal.Title>Paramètres du membre</Modal.Title>
                 </Modal.Header>
@@ -116,8 +138,8 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     <Button variant="primary" onClick={handleClose}>
                         Noter
                     </Button>
-                    <Link to={"/message/-1"}>
-                        <Button className="m-1" variant="primary">Envoyer un message</Button>
+                    <Link to={test}>
+                        <Button className="m-1" variant="primary" >Envoyer un message</Button>
                     </Link>
                     <Button variant="primary" onClick={handleClose}>
                         Retour
