@@ -97,12 +97,13 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         </div>
     }
     let bonus;
-    bonus =
+    console.log(action.user);
+    if (action.user.id_str != user.id_str){
+        bonus =
         <div className="align-self-center flex ">
 			<Button onClick={openParam} variant="primary">
 				<ThreeDots></ThreeDots>
 			</Button>
-
             <Modal show={show} className="highest" onHide={handleClose} size="lg" centered dialogClassName="modal-90w">
                 <Modal.Header closeButton>
                     <Modal.Title>Paramètres du membre</Modal.Title>
@@ -124,6 +125,29 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                 </Modal.Footer>
             </Modal>
         </div>
+    }else{
+        bonus =
+        <div className="align-self-center flex ">
+			<Button onClick={openParam} variant="primary">
+				<ThreeDots></ThreeDots>
+			</Button>
+            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered dialogClassName="modal-90w">
+                <Modal.Header closeButton>
+                    <Modal.Title>Paramètres du membre</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                     Selectionnez l'action
+                </Modal.Body>
+                <Modal.Footer>
+                    {button}
+                    <Button variant="primary" onClick={handleClose}>
+                        Retour
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
+    }
+    
     return <SimpleProfile
         user={user} 
         action={action} 
