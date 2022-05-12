@@ -7,7 +7,7 @@ import SimpleProfile from "../component/SimpleProfile";
 import { ThreeDots } from "react-bootstrap-icons";
 import { useState } from "react";
 import PermEnum from "../enum/PermEnum";
-
+import { Link } from "react-router-dom";
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
     
@@ -42,7 +42,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         updatePage(PageEnum.Profil);
     }
     
-
     let text;
     if (ActionEnum.IN_PROJECT.got(typeAction)){
         text = <p>Role : {action.role.name}</p>
@@ -116,11 +115,11 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     <Button variant="primary" onClick={handleClose}>
                         Noter
                     </Button>
+                    <Link to={"/message/-1"}>
+                        <Button className="m-1" variant="primary">Envoyer un message</Button>
+                    </Link>
                     <Button variant="primary" onClick={handleClose}>
-                        Envoyer un message
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                            Retour
+                        Retour
                     </Button>
                 </Modal.Footer>
             </Modal>
