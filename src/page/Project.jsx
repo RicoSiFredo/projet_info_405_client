@@ -16,6 +16,7 @@ import Project from "../object/Project";
 import Eats from "../object/base/Eats";
 import NotifList from "../list/NotifList";
 import ActualiteView from "../component/ActualiteView";
+import { GearFill } from "react-bootstrap-icons";
 
 function ProjectFrame({rootUser, updatePage}){
     const {id} = useParams();
@@ -39,6 +40,7 @@ function ProjectFrame({rootUser, updatePage}){
     let canEdit = false;
     let [show, updateShow] = useState(false);
     let [end, updateEnd] = useState(false);
+    let [param, updateParam] = useState(false);
 
     function handleClose() {
         updateShow(false);
@@ -51,6 +53,12 @@ function ProjectFrame({rootUser, updatePage}){
     }
     function endProject() {
         updateEnd(true);
+    }
+    function showProjectParam(){
+        updateParam(true);
+    }
+    function unshowProjectParam(){
+        updateParam(false);
     }
     function requestDelete() {
         project.makeRequest(
@@ -116,44 +124,7 @@ function ProjectFrame({rootUser, updatePage}){
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView elem={project} isProject={true}></ProfilView>
-            {
-                project.havePermission(PermEnum.MANAGE_ROLE) && (
-                    <div className="ms-2">
-                        <Button className="me-1" onClick={delProject}>Supprimer le projet</Button>
-
-                        <Button className="me-1" onClick={endProject}>Terminer le projet</Button>
-
-                        <Modal show={show} className="highest" onHide={handleClose} size="lg" >
-                            <Modal.Header closeButton>
-                                <Modal.Title>Voulez-vous vraiment supprimer le projet ?</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Button className="m-1" variant="primary" onClick={requestDelete}>
-                                    Valider
-                                </Button>
-                                <Button className="m-1" variant="primary" onClick={handleClose}>
-                                    Annuler
-                                </Button>
-                            </Modal.Body>
-                        </Modal>
-
-                        <Modal show={end} className="highest" onHide={endClose} size="lg">
-                            <Modal.Header closeButton>
-                                <Modal.Title>Voulez-vous vraiment terminer le projet ?</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Button className="m-1" variant="primary" onClick={requestFinish}>
-                                    Valider
-                                </Button>
-                                <Button className="m-1" variant="primary" onClick={endClose}>
-                                    Annuler
-                                </Button>
-                            </Modal.Body>
-                        </Modal>
-
-                    </div>  
-                )
-            }
+           
             <ElemView 
                 canEdit={canEdit} 
                 parent={project}
@@ -174,6 +145,64 @@ function ProjectFrame({rootUser, updatePage}){
             </ActualiteView>
         </div>
         <div className="w-25 right-div">
+            <div className="card pb-2 pt-2 ps-3 pe-2 mt-2 me-2 bg-light bg-gradient overflow-hidden d-flex justify-content-start" >
+                <div className="d-flex">
+                    <h4>Paramètres du projet</h4>
+                    <Button className="ms-2 mb-1 p-2 d-flex align-items-center justify-content-center" variant="primary" onClick={showProjectParam}>
+                        <GearFill></GearFill>
+                    </Button>
+                    <Modal show={param} className="highest" onHide={unshowProjectParam} size="lg" >
+                            <Modal.Header closeButton>
+                                <Modal.Title>Paramètres du projet</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                            {
+                                project.havePermission(PermEnum.MANAGE_ROLE) && (
+                                    <div className="ms-2">
+                                        <Button className="me-1" onClick={delProject}>Supprimer le projet</Button>
+
+                                        <Button className="me-1" onClick={endProject}>Terminer le projet</Button>
+
+                                        <Modal show={show} className="highest" onHide={handleClose} size="lg" centered>
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>Voulez-vous vraiment supprimer le projet ?</Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>
+                                                <Button className="m-1" variant="primary" onClick={requestDelete}>
+                                                    Valider
+                                                </Button>
+                                                <Button className="m-1" variant="primary" onClick={handleClose}>
+                                                    Annuler
+                                                </Button>
+                                            </Modal.Body>
+                                        </Modal>
+
+                                        <Modal show={end} className="highest" onHide={endClose} size="lg" centered>
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>Voulez-vous vraiment terminer le projet ?</Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>
+                                                <Button className="m-1" variant="primary" onClick={requestFinish}>
+                                                    Valider
+                                                </Button>
+                                                <Button className="m-1" variant="primary" onClick={endClose}>
+                                                    Annuler
+                                                </Button>
+                                            </Modal.Body>
+                                        </Modal>
+
+                                    </div>  
+                                )
+                            }
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button className="m-1" variant="primary" onClick={unshowProjectParam}>
+                                Annuler
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                </div>
+            </div>
             <ProjectActionView 
                 typeAction={[ActionEnum.IN_PROJECT]} 
                 updatePage={updatePage} 
