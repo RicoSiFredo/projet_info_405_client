@@ -126,7 +126,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
 			<Button onClick={openParam} variant="primary">
 				<ThreeDots></ThreeDots>
 			</Button>
-            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered dialogClassName="modal-90w">
+            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Paramètres du membre</Modal.Title>
                 </Modal.Header>
@@ -160,7 +160,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
 			<Button onClick={openParam} variant="primary">
 				<ThreeDots></ThreeDots>
 			</Button>
-            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered dialogClassName="modal-90w">
+            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Paramètres du membre</Modal.Title>
                 </Modal.Header>

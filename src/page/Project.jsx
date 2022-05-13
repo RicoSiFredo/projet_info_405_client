@@ -94,7 +94,7 @@ function ProjectFrame({rootUser, updatePage}){
             )
         }
         if(project.actionType(ActionEnum.USER_ASK_TO_PROJECT)){
-            joinBlock = <p>Vous avez demandé à rejoindre ce groupe</p>
+            joinBlock = <p>Vous avez demandé à rejoindre ce projet</p>
         }
         else {
             if(!edit){
@@ -116,6 +116,44 @@ function ProjectFrame({rootUser, updatePage}){
     return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView elem={project} isProject={true}></ProfilView>
+            {
+                project.havePermission(PermEnum.MANAGE_ROLE) && (
+                    <div className="ms-2">
+                        <Button className="me-1" onClick={delProject}>Supprimer le projet</Button>
+
+                        <Button className="me-1" onClick={endProject}>Terminer le projet</Button>
+
+                        <Modal show={show} className="highest" onHide={handleClose} size="lg" >
+                            <Modal.Header closeButton>
+                                <Modal.Title>Voulez-vous vraiment supprimer le projet ?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Button className="m-1" variant="primary" onClick={requestDelete}>
+                                    Valider
+                                </Button>
+                                <Button className="m-1" variant="primary" onClick={handleClose}>
+                                    Annuler
+                                </Button>
+                            </Modal.Body>
+                        </Modal>
+
+                        <Modal show={end} className="highest" onHide={endClose} size="lg">
+                            <Modal.Header closeButton>
+                                <Modal.Title>Voulez-vous vraiment terminer le projet ?</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Button className="m-1" variant="primary" onClick={requestFinish}>
+                                    Valider
+                                </Button>
+                                <Button className="m-1" variant="primary" onClick={endClose}>
+                                    Annuler
+                                </Button>
+                            </Modal.Body>
+                        </Modal>
+
+                    </div>  
+                )
+            }
             <ElemView 
                 canEdit={canEdit} 
                 parent={project}
@@ -147,44 +185,7 @@ function ProjectFrame({rootUser, updatePage}){
             {
                 joinBlock
             }
-            {
-                project.havePermission(PermEnum.MANAGE_ROLE) && (
-                    <div>
-                        <Button className="me-1" onClick={delProject}>Supprimer le projet</Button>
 
-                        <Button className="me-1" onClick={endProject}>Terminer le projet</Button>
-
-                        <Modal show={show} className="highest" onHide={handleClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Voulez vous vraiment supprimer le projet ?</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Button variant="primary" onClick={requestDelete}>
-                                    Valider
-                                </Button>
-                                <Button variant="primary" onClick={handleClose}>
-                                    Fermer
-                                </Button>
-                            </Modal.Body>
-                        </Modal>
-
-                        <Modal show={end} className="highest" onHide={endClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Voulez vous vraiment terminer le projet ?</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <Button variant="primary" onClick={requestFinish}>
-                                    Valider
-                                </Button>
-                                <Button variant="primary" onClick={endClose}>
-                                    Fermer
-                                </Button>
-                            </Modal.Body>
-                        </Modal>
-
-                    </div>  
-                )
-            }
 
             {
                 project.havePermission(PermEnum.MANAGE_MEMBERS) && (
