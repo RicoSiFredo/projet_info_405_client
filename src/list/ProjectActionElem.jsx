@@ -53,12 +53,12 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     if (ActionEnum.IN_PROJECT.got(typeAction) && !action.root){
         if (action.equals(project.action)){
             button = <div className="ms-3 align-self-center flex ">
-                <Button onClick={exclure}>Quitter</Button>
+                <Button className="me-1" onClick={exclure}>Quitter</Button>
             </div>
         }
         else if(project.havePermission(PermEnum.MANAGE_MEMBERS)){
             button = <div className="ms-3 align-self-center flex ">
-                <Button onClick={exclure}>Exclure</Button>
+                <Button className="me-1" onClick={exclure}>Exclure</Button>
             </div>
         }
     }
@@ -131,16 +131,20 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     <Modal.Title>Paramètres du membre</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                     Selectionnez l'action
+                    Selectionnez l'action
+                    <div className="d-flex justify-content-center mt-2">
+                        {button}
+
+                        <Button className="m-1" variant="primary" onClick={handleClose}>
+                            Noter
+                        </Button>
+                    
+                        <Link to={test}>
+                            <Button className="m-1" variant="primary" >Envoyer un message</Button>
+                        </Link>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    {button}
-                    <Button variant="primary" onClick={handleClose}>
-                        Noter
-                    </Button>
-                    <Link to={test}>
-                        <Button className="m-1" variant="primary" >Envoyer un message</Button>
-                    </Link>
                     <Button variant="primary" onClick={handleClose}>
                         Retour
                     </Button>
