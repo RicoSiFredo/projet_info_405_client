@@ -6,6 +6,7 @@ import Constant from "../utils/Constant";
 import Data from "../utils/Data";
 import ActuElem from "./ActuElem";
 import Field from "./Field";
+import SelectCompetence from "./SelectCompetence";
 import SelectRole from "./SelectRole";
 
 function ActualiteView({user, you, rootUser}){
@@ -52,6 +53,7 @@ function ActualiteView({user, you, rootUser}){
     const [prix, updatePrix] = useState("");
     const [role, updateRole] = useState("");
     const [duree, updateDuree] = useState("");
+    const [compList, updateCompList] = useState([]);
     let res;
 
     function changeComment(e){
@@ -73,18 +75,28 @@ function ActualiteView({user, you, rootUser}){
     else if(action.type==1){
         res = <div className="mt-3 mb-0">
             <h5>Nouvelle offre</h5>
+            <SelectCompetence
+                compList={compList}
+                updateCompList={updateCompList}
+                project={user}>
+
+            </SelectCompetence>
             <SelectRole
                 updateRole={updateRole}
                 project={user}>
 
             </SelectRole>
             <Field className={"mt-2"} val={comment} changeValue={changeComment} label="Description" name="name"></Field>
-            <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Prix €" name="name"></Field>
-            <Field className={"mt-3"} val={duree} changeValue={changeDuree} label="Durée" name="name"></Field>
+            <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Prix en €" name="name"></Field>
+            <Field className={"mt-3"} val={duree} changeValue={changeDuree} label="Durée en jours" name="name"></Field>
         </div>
     }
 
     function sendElem(){
+        let idList = []
+        for(let i = 0; i < compList.length; i++){
+            idList.push(compList[i].id_str);
+        }
         user.makeRequest(
             '/project/create/actu', 
             {
@@ -93,13 +105,14 @@ function ActualiteView({user, you, rootUser}){
                 role: role,
                 comment: comment,
                 price: prix,
-                duree: duree
+                duree: duree,
+                comp_list: idList
             },
             function(error){
-
+                console.log(error)
             },
             function(response){
-                
+                console.log(response)
             }
         )
     }
@@ -137,7 +150,7 @@ function ActualiteView({user, you, rootUser}){
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={sendElem}>
-                        Valider
+                        Envoyer
                     </Button>
                     <Button variant="outline-primary" onClick={handleClose}>
                         Fermer

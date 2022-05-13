@@ -56,6 +56,9 @@
   cursor: pointer;
   border-radius: 50%;
 }
+.round-50p{
+  border-radius: 500px;
+}
 .img-btn-tiny{
   width: 13px;
   height: 13px;
