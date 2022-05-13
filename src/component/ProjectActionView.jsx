@@ -42,9 +42,7 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
                 <Modal.Title>Inviter des membres</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <AddMembers project={project}>
-
-                </AddMembers>
+                <AddMembers project={project}></AddMembers>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" onClick={handleClose}>

@@ -42,11 +42,11 @@ function ProjectUserCheckElem({inviteElem, project, list, elem}){
     let content;
     if(action==undefined||action.type==3||action.type==4||action.type==5){
         content = <div className="mt-2 mb-1">
-            <Button onClick={inviter}>Inviter</Button>
+            <Button className="ms-2" onClick={inviter}>Inviter</Button>
         </div>
     }
     else if(action.type==0){
-        content = <p className="mb-0">Déjà dans le projet</p>
+        content = <p className="ms-2 mb-0">Déjà dans le projet</p>
     }
     else if(action.type==1){
         function refuserInviterSend(){
@@ -74,7 +74,7 @@ function ProjectUserCheckElem({inviteElem, project, list, elem}){
         </div>
     }
     else if(action.type==2){
-        content = <p className="mb-0">A été invité a rejoindre le projet</p>
+        content = <p className="ms-2 mb-0">A été invité a rejoindre le projet</p>
     }
     return <div>
         <SimpleProfile
