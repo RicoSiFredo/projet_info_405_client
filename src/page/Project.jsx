@@ -150,9 +150,9 @@ function ProjectFrame({rootUser, updatePage}){
             {
                 project.havePermission(PermEnum.MANAGE_ROLE) && (
                     <div>
-                        <Button onClick={delProject}>Supprimer le projet</Button>
+                        <Button className="me-1" onClick={delProject}>Supprimer le projet</Button>
 
-                        <Button onClick={endProject}>Terminer le projet</Button>
+                        <Button className="me-1" onClick={endProject}>Terminer le projet</Button>
 
                         <Modal show={show} className="highest" onHide={handleClose}>
                             <Modal.Header closeButton>

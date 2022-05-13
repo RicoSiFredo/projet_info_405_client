@@ -49,17 +49,15 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         text = <p>Role : {action.role.name}</p>
         
     }
+    let bonus;
     let button;
     if (ActionEnum.IN_PROJECT.got(typeAction) && !action.root){
         if (action.equals(project.action)){
-            button = <div className="ms-3 align-self-center flex ">
-                <Button className="me-1" onClick={exclure}>Quitter</Button>
-            </div>
+            button = <Button className="m-1" onClick={exclure}>Quitter le projet</Button>
+
         }
         else if(project.havePermission(PermEnum.MANAGE_MEMBERS)){
-            button = <div className="ms-3 align-self-center flex ">
-                <Button className="me-1" onClick={exclure}>Exclure</Button>
-            </div>
+            button = <Button className="m-1" onClick={exclure}>Exclure</Button>
         }
     }
     else if(ActionEnum.USER_ASK_TO_PROJECT.got(typeAction)){
@@ -93,12 +91,14 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
             )
         }
         bonus = <div>
-            <p>{action.description}</p>
-            <Button onClick={accepter}>Accepter</Button>
-            <Button onClick={refuser}>Refuser</Button>
+        <p>{action.description}</p>
+        <Button onClick={accepter}>Accepter</Button>
+        <Button onClick={refuser}>Refuser</Button>
         </div>
+
     }
-    let bonus;
+    
+    
     let test = "/message/";
     console.log(action.user);
     if (action.user.id_str != user.id_str){
@@ -134,7 +134,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     Selectionnez l'action
                     <div className="d-flex justify-content-center mt-2">
                         {button}
-
                         <Button className="m-1" variant="primary" onClick={handleClose}>
                             Noter
                         </Button>
@@ -142,6 +141,10 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                         <Link to={test}>
                             <Button className="m-1" variant="primary" >Envoyer un message</Button>
                         </Link>
+
+                        <Button className="m-1" variant="primary" onClick={handleClose}>
+                            Gerer le role
+                        </Button>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
@@ -163,9 +166,12 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                 </Modal.Header>
                 <Modal.Body>
                      Selectionnez l'action
+                     <div className="d-flex justify-content-center mt-2">
+                     {button}
+                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    {button}
+                    
                     <Button variant="primary" onClick={handleClose}>
                         Retour
                     </Button>
