@@ -139,7 +139,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                         </Button>
                     
                         <Link to={test}>
-                            <Button className="m-1" variant="primary" >Envoyer un message</Button>
+                            <Button className="m-1" variant="primary" onClick={showConv}>Envoyer un message</Button>
                         </Link>
 
                         <Button className="m-1" variant="primary" onClick={handleClose}>
