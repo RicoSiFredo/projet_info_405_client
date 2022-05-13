@@ -34,9 +34,14 @@ function Home({user, navigate, updatePage}){
             </Link>
         </div>
     }
-    return <div className="card m-2 p-2 d-flex align-items-center">
-        <h2 >Page d'accueil</h2>
-        {button}
-    </div>
+    return <div>
+                <div className="card m-2 p-2 d-flex align-items-center">
+                    <h2 >Page d'accueil</h2>
+                    {button}
+                </div>
+                <div className="card m-2 p-2 d-flex align-items-center">
+                    <h2>On mets quoi là ?</h2>
+                </div>
+            </div>
 }
 export default Home;
