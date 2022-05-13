@@ -42,7 +42,6 @@ function AddTecno({project,canEdit}){
 
     if(edit){
         function edit(){
-
             project.makeRequest(
                 "project/add/tecno", 
                 {

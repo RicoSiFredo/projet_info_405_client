@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import LinearCompList from "../list/LinearCompList";
 
 function ActuElem({actu}){
+    const [message, updateMessage] = useState("");
+    const [prix, updatePrix] = useState(actu.prix);
+    //const [prix, updatePrix] = useState(actu.prix);
+    //const [message, updateMessage] = useState("");
+    function postuler(){
+        actu.postuler(message, prix)
+    }
     return <div className={"pb-2 border-top separator pt-3 ps-3 pe-2" }>
         <div>
             <h4>Offre d'emploi</h4>
@@ -26,7 +33,7 @@ function ActuElem({actu}){
             </p>
         </div>
         <div>
-            <Button className="mt-0 mb-2" variant="primary">Postuler</Button>
+            <Button onClick={postuler} className="mt-0 mb-2" variant="primary">Postuler</Button>
         </div>
     </div>
 }
