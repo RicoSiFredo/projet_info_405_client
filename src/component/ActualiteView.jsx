@@ -128,6 +128,7 @@ function ActualiteView({user, you, rootUser}){
                 {
                     user.haveActuList.map((actu, index) =>
                         <ActuElem
+                            action={user.action}
                             actu={actu}>
 
                         </ActuElem>

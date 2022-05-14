@@ -10,6 +10,7 @@ import User from "../User";
 import Object405 from "./ObjectEats";
 import Notif from "../Notif";
 import Actu from "../Actu";
+import Request from "../Request";
 
 
 export default class BuildEats {
@@ -48,6 +49,9 @@ export default class BuildEats {
         }
         else if(json==Actu.TYPE||json["_type"]==Actu.TYPE){
             res = new Actu();
+        }
+        else if(json==Request.TYPE||json["_type"]==Request.TYPE){
+            res = new Request();
         }
         else {
             res = new Object405();

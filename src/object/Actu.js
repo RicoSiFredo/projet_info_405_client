@@ -16,12 +16,13 @@ export default class Actu extends Object405 {
 
     compList = new ListEats("for_comp", this, CompareEats.compareInt("date", CompareEats.DESC))
     role = new SimpleEats("for_role", this)
+    requestList = new ListEats("actu_req", this, CompareEats.compareInt("date", CompareEats.DESC))
 
     constructor(){
         super();
     }
 
-    postuler(message, prix, success, failed){
+    postuler(message, prix, failed, success){
         super.makeRequest(
             "actu/postuler",
             {

@@ -22,6 +22,7 @@ import Messenger from './page/Messenger';
 import Header from './component/Header';
 import NotifList from './list/NotifList';
 import { Link, Route, Router, Routes, useNavigate } from 'react-router-dom';
+import Offre from './page/Offre';
 
 const NOTIF_FETCH = 15000
 
@@ -169,6 +170,7 @@ function App() {
             <Route exact path="/profil/:id" element={<Profil navigate={navigate} rootUser={user}></Profil>}></Route>
             <Route exact path="/project/:id" element={<ProjectFrame navigate={navigate} rootUser={user}></ProjectFrame>}></Route>
             <Route exact path="/search/:search" element={<Search navigate={navigate} rootUser={user}></Search>}></Route>
+            <Route exact path="/offre/:id" element={<Offre navigate={navigate} rootUser={user}></Offre>}></Route>
             <Route exact path="/" element={<Home navigate={navigate} user={user} updatePage={updatePage}></Home>}></Route>
         </Routes>
     </div>

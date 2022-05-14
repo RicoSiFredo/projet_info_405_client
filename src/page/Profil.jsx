@@ -168,7 +168,7 @@ function Profil({rootUser}){
                 <button className="btn btn-primary" onClick={handleClose}>Fermer</button>
             </Modal.Footer>
             
-            </Modal>
+        </Modal>
     </div>
     }
     
