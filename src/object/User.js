@@ -23,6 +23,7 @@ export default class User extends Object405 {
     convList = new ListEats("is_member", this);
     notifList = new ListEats(["target", "view"], this);
     friendsList = new ListEats("friends", this);
+    commentList = new ListEats("is_comment", this);
     logged = false;
 
     constructor(){ 

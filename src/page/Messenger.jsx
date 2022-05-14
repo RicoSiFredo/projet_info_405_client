@@ -69,7 +69,6 @@ function Messenger({user}){
         user.getUserFriends();
     }, [user.logged, ]);
 
-    
     const conversations = user.convList.list;
 
     const handleSubmit = (e) => {

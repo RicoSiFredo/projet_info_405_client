@@ -75,9 +75,10 @@ function Profil({rootUser}){
         user.getAllProject();
         user.getNotif();
         user.getAllAction();
+        user.getAllComment();
     }, []);
     let canEdit = Data.isMe(user);
-
+    console.log(user);
     if (Data.isMe(user)){
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
@@ -127,6 +128,7 @@ function Profil({rootUser}){
             </ElemView>
             
             <button className="btn btn-primary" onClick={addNote}>Ajouter un avis</button>
+
         </div>
         
         <div className="w-45 center-div">
