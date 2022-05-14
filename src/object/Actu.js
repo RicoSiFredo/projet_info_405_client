@@ -21,7 +21,7 @@ export default class Actu extends Object405 {
         super();
     }
 
-    postuler(message, prix){
+    postuler(message, prix, success, failed){
         super.makeRequest(
             "actu/postuler",
             {
@@ -32,14 +32,14 @@ export default class Actu extends Object405 {
                 id_project: this.parent.id_str
             },
             function(error){
-                /*if(failed!=undefined){
+                if(failed!=undefined){
                     failed(error);
-                }*/
+                }
             },
             function(response){
-                /*if(success!=undefined){
+                if(success!=undefined){
                     success(response);
-                }*/
+                }
             }
         )
     }
