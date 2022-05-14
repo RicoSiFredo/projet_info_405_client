@@ -209,6 +209,48 @@ export default class User extends Object405 {
             }
         )
     }
+    createComment(receiverId,commentaire,note,failed, success){
+        super.makeRequest(
+            "user/create/commentaire",
+            {
+                access_token: Data.accessToken(), 
+                receiverId: receiverId,
+                commentaire: commentaire,
+                note: note
+                
+
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+    getAllComment(failed, success){
+        super.makeRequest(
+            "user/get/commentaires",
+            {
+                access_token: Data.accessToken(),
+                sender_id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
     getUserFriends(failed, success){
         super.makeRequest(
             "user/get/userFriends",

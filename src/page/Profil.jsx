@@ -26,6 +26,8 @@ function Profil({rootUser}){
     const [show, updateShow] = useState(false);
     const [rating, setRating] = useState(0)
     const [newComment,setNewComment] = useState("");
+    
+
     user.id_str = id;
     function update(){
         updateUser(Eats.fakeUpdate(user));
@@ -42,7 +44,6 @@ function Profil({rootUser}){
       
         // Catch Rating value
         const handleRating = (rate) => {
-          console.log(rate)
           setRating(rate)
           // other logic
         }
@@ -61,7 +62,7 @@ function Profil({rootUser}){
         try{
             if (newComment != ("")){
                 setNewComment("");
-                console.log(newComment);    
+                rootUser.createComment(user.id_str,newComment,rating);    
             }
 
         }catch(err){
