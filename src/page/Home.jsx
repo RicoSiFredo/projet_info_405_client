@@ -41,6 +41,7 @@ function Home({user, navigate, updatePage}){
                 </div>
                 <div className="card m-2 p-2 d-flex align-items-center">
                     <h2>On mets quoi là ?</h2>
+                    <h1>💩 CACA 💩</h1>
                 </div>
             </div>
 }
