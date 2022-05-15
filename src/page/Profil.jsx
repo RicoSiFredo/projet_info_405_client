@@ -1,15 +1,7 @@
 import { useEffect } from "react";
-import ProfilField from "../component/ProfilField";
-import { ActionEnum } from "../enum/ActionEnum";
-import PageEnum from "../enum/PageEnum";
-import SkillList from "../list/ElemList";
-import UserProjectList from "../list/UserProjectList";
 import Data from "../utils/Data";
-import Login from "./Login";
 import React from "react"
 import ProfilView from "../component/ProfilView";
-import Elem from "../list/Elem";
-import SkillView from "../component/ElemView";
 import ElemView from "../component/ElemView";
 import UserProjectView from "../component/UserProjectView";
 import NotifList from "../list/NotifList";
@@ -17,15 +9,16 @@ import { useParams } from "react-router-dom";
 import User from "../object/User";
 import { useState } from "react";
 import Eats from "../object/base/Eats";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { Rating } from 'react-simple-star-rating'
+import HistoryView from "../component/HistoryView";
 
 function Profil({rootUser}){
     const {id} = useParams();
     const [user, updateUser] = useState(new User());
     const [show, updateShow] = useState(false);
     const [rating, setRating] = useState(0)
-    const [newComment,setNewComment] = useState("");
+    const [newComment, setNewComment] = useState("");
     
 
     user.id_str = id;
@@ -49,11 +42,11 @@ function Profil({rootUser}){
         }
       
         return (
-          <Rating
-            transition
-            onClick={handleRating}
-            ratingValue={rating} /* Available Props */
-          />
+            <Rating
+                transition
+                onClick={handleRating}
+                ratingValue={rating} /* Available Props */
+            />
         )
     }
     const handleSubmit = (e) => {
@@ -95,33 +88,26 @@ function Profil({rootUser}){
             <div>Commentaires : 
                 {
                     user.commentList.list.map((obj, index) => {
-
-                                return (
-                                    <div className="Commentaires">
-                                        Note : <Rating
-                                            readonly={true}
-                                            allowHover={false}
-                                            ratingValue={obj.note} /* Available Props */
-                                        /> <br />
-                                        Commentaire : {obj.text} <br />
-                                        écrit par : {obj.auteur.firstname} 
-                                    </div>            
-                                )
-                            
-                        
+                        return (
+                            <div className="Commentaires">
+                                Note : <Rating
+                                    readonly={true}
+                                    allowHover={false}
+                                    ratingValue={obj.note} /* Available Props */
+                                /> <br />
+                                Commentaire : {obj.text} <br />
+                                écrit par : {obj.auteur.firstname} 
+                            </div>            
+                        )
                     })
                 }
             </div>
         </div>
-        
         <div className="w-45 center-div">
-            <NotifList
-                rootUser={rootUser}
-                user={user}
-                you={false}
-                list={user.notifList}>
+            <HistoryView 
+                user={user}>
 
-            </NotifList>
+            </HistoryView>
         </div>
         <div className="w-25 right-div">
             <UserProjectView 

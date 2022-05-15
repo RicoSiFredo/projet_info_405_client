@@ -1,5 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-datetime/css/react-datetime.css";
 import React, { useEffect, useState } from 'react';
 import User from './object/User';
 import PageEnum from './enum/PageEnum';
