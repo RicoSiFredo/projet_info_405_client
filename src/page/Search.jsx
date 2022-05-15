@@ -55,18 +55,22 @@ function Search({navigate, rootUser}){
 
     return <div>
 
-            <Form.Select className="mb-3" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
+            <div classname = "flex">
+
+            <Form.Select className="mb-3 w-25" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
                 <option>Type</option>
                 <option value="project">Projet</option>
                 <option value="user">Utilisateur</option>
             </Form.Select>
 
-            <Form.Group className="mb-3" controlId="min">
+            <Form.Group className="mb-3 w-25" controlId="min">
                 <Form.Control value={min} onInput={eventMin} type="text" placeholder="Note minimum" />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="max">
+            <Form.Group className="mb-3 w-25" controlId="max">
                 <Form.Control value={max} onInput={eventMax} type="text" placeholder="Note maximum" />
             </Form.Group>
+            </div>
+
 
         {
             list.map(function(object, index) {
