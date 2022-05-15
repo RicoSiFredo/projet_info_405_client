@@ -21,6 +21,9 @@ function Search({navigate, rootUser}){
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
 
     const [type, updateType] = useState("");
+    const [min, updateMin] = useState("");
+    const [max, updateMax] = useState("");
+
     console.log(type);
     useEffect(function(){
         chercher();
@@ -43,6 +46,13 @@ function Search({navigate, rootUser}){
         )
     }
 
+    function eventMin(e){
+        updateMin(e.target.value);
+    }
+    function eventMax(e){
+        updateMax(e.target.value);
+    }
+
     return <div>
 
             <Form.Select className="mb-3" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
@@ -50,7 +60,14 @@ function Search({navigate, rootUser}){
                 <option value="project">Projet</option>
                 <option value="user">Utilisateur</option>
             </Form.Select>
-       
+
+            <Form.Group className="mb-3" controlId="min">
+                <Form.Control value={min} onInput={eventMin} type="text" placeholder="Note minimum" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="max">
+                <Form.Control value={max} onInput={eventMax} type="text" placeholder="Note maximum" />
+            </Form.Group>
+
         {
             list.map(function(object, index) {
                 function openProfil(){
