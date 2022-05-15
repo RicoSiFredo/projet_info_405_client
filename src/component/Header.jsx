@@ -61,8 +61,8 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
         chercher(true, "")
     }
     const onBlur = function(){
-        setFocused(false)
-        chercher(false, "")
+        //setFocused(false)
+        //chercher(false, "")
     }
   
     function chercherEvent(e){
