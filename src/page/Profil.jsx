@@ -92,6 +92,26 @@ function Profil({rootUser}){
                 infoNothingEdit="Commencer à ajouter des compétences">
                     
             </ElemView>
+            <div>Commentaires : 
+                {
+                    user.commentList.list.map((obj, index) => {
+
+                                return (
+                                    <div className="Commentaires">
+                                        Note : <Rating
+                                            readonly={true}
+                                            allowHover={false}
+                                            ratingValue={obj.note} /* Available Props */
+                                        /> <br />
+                                        Commentaire : {obj.text} <br />
+                                        écrit par : {obj.auteur.firstname} 
+                                    </div>            
+                                )
+                            
+                        
+                    })
+                }
+            </div>
         </div>
         
         <div className="w-45 center-div">
