@@ -46,12 +46,14 @@ function ProjectFrame({rootUser, updatePage}){
         updateShow(false);
     }
     function delProject() {
+        endClose();
         updateShow(true);
     }
     function endClose() {
         updateEnd(false);
     }
     function endProject() {
+        handleClose();
         updateEnd(true);
     }
     function showProjectParam(){
@@ -169,7 +171,7 @@ function ProjectFrame({rootUser, updatePage}){
                                             <Button className="m-1" variant="primary" onClick={requestDelete}>
                                                     Valider
                                                 </Button>
-                                                <Button className="m-1" variant="primary" onClick={handleClose}>
+                                                <Button className="m-1" variant="outline-primary" onClick={handleClose}>
                                                     Annuler
                                                 </Button>
                                         </Alert>       
@@ -179,7 +181,7 @@ function ProjectFrame({rootUser, updatePage}){
                                             <Button className="m-1" variant="primary" onClick={requestFinish}>
                                                     Valider
                                                 </Button>
-                                                <Button className="m-1" variant="primary" onClick={endClose}>
+                                                <Button className="m-1" variant="outline-primary" onClick={endClose}>
                                                     Annuler
                                                 </Button>
                                         </Alert>
