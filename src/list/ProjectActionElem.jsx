@@ -1,4 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Alert } from "react-bootstrap";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import Data from "../utils/Data";
@@ -15,6 +15,8 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [listConv, updateConv] = useState(new ListEats("", undefined));
     let [show, updateShow] = useState(false);
     let [showRole, updateShowRole] = useState(false);
+    let [verif, updateShowVerif] = useState(false);
+
     function handleClose() {
         updateShow(false);
     }
@@ -29,6 +31,13 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         updateShowRole(false);
         openParam();
     }
+    function closeVerif() {
+        updateShowVerif(false);
+    }
+    function openVerif() {
+        updateShowVerif(true);
+    }
+
     function exclure(){
         project.makeRequest(
             'project/del/user',
@@ -62,11 +71,11 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     let button;
     if (ActionEnum.IN_PROJECT.got(typeAction) && !action.root){
         if (action.equals(project.action)){
-            button = <Button className="m-1" onClick={exclure}>Quitter le projet</Button>
+            button = <Button className="m-1" onClick={openVerif}>Quitter le projet</Button>
 
         }
         else if(project.havePermission(PermEnum.MANAGE_MEMBERS)){
-            button = <Button className="m-1" onClick={exclure}>Exclure</Button>
+            button = <Button className="m-1" onClick={openVerif}>Exclure</Button>
         }
     }
     else if(ActionEnum.USER_ASK_TO_PROJECT.got(typeAction)){
@@ -155,6 +164,15 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                             Gerer le role
                         </Button>
                     </div>
+                    <Alert variant="danger" show={verif} className="mt-3">
+                        <Alert.Heading>Etes-vous sûr de vous ?</Alert.Heading>
+                        <Button className="m-1" variant="primary" onClick={exclure}>
+                                Valider
+                            </Button>
+                            <Button className="m-1" variant="outline-primary" onClick={closeVerif}>
+                                Annuler
+                            </Button>
+                    </Alert>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>
@@ -169,11 +187,14 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     </Modal.Header>
                     <Modal.Body>
 
-                        <p>Quel rôle souhaitez-vous attribuer à ce membre ? </p>
 
-                        <ListRole project={project}></ListRole>
+                        <ListRole 
+                            project={project}
+                            action={action}
+                        >
+
+                        </ListRole>
                         
-
 
                     </Modal.Body>
                     <Modal.Footer>
@@ -200,6 +221,15 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                      <div className="d-flex justify-content-center mt-2">
                      {button}
                      </div>
+                     <Alert variant="danger" show={verif} className="mt-3">
+                        <Alert.Heading>Êtes-vous sûr de vous ?</Alert.Heading>
+                        <Button className="m-1" variant="primary" onClick={exclure}>
+                                Valider
+                            </Button>
+                            <Button className="m-1" variant="outline-primary" onClick={closeVerif}>
+                                Annuler
+                            </Button>
+                    </Alert>
                 </Modal.Body>
                 <Modal.Footer>
                     
