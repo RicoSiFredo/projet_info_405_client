@@ -134,6 +134,8 @@ function Profil({rootUser}){
                                 return (
                                     <div className="Commentaires">
                                         Note : <Rating
+                                            readonly={true}
+                                            allowHover={false}
                                             ratingValue={obj.note} /* Available Props */
                                         /> <br />
                                         Commentaire : {obj.text} <br />
