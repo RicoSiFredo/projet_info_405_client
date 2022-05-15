@@ -78,7 +78,7 @@ function Profil({rootUser}){
         user.getAllComment();
     }, []);
     let canEdit = Data.isMe(user);
-    console.log(user);
+    console.log(user.commentList.list);
     if (Data.isMe(user)){
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
@@ -128,6 +128,24 @@ function Profil({rootUser}){
             </ElemView>
             
             <button className="btn btn-primary" onClick={addNote}>Ajouter un avis</button>
+            <div>Commentaires : 
+                {
+                    user.commentList.list.map((obj, index) => {
+
+                                return (
+                                    <div className="Commentaires">
+                                        Note : {obj.note} <br />
+                                        Commentaire : {obj.text} <br />
+                                        écrit par : {obj.auteur.firstname} 
+                                    </div>
+            
+                                )
+                            
+                        
+                    })
+                }
+            </div>
+            
 
         </div>
         

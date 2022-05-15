@@ -11,6 +11,7 @@ import Object405 from "./ObjectEats";
 import Notif from "../Notif";
 import Actu from "../Actu";
 import Request from "../Request";
+import Commentaire from "../Commentaire";
 
 
 export default class BuildEats {
@@ -52,6 +53,9 @@ export default class BuildEats {
         }
         else if(json==Request.TYPE||json["_type"]==Request.TYPE){
             res = new Request();
+        }
+        else if(json==Commentaire.TYPE||json["_type"]==Commentaire.TYPE){
+            res = new Commentaire();
         }
         else {
             res = new Object405();
