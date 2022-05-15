@@ -17,7 +17,7 @@ export default class Request extends Object405 {
     getScoreComp(){
         let listNeed = this.parent.compList;
         let listHave = this.user.skillList;
-        let count = 0;;
+        let count = 0;
         for(let i = 0; i < listNeed.size(); i++){
             let need = listNeed.get(i);
             for(let j = 0; j < listHave.size(); j++){

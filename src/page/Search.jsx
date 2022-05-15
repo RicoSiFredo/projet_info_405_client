@@ -14,7 +14,10 @@ import React from "react"
 import { useParams } from "react-router-dom";
 
 function Search({navigate, rootUser}){
-    const {search} = useParams();
+    let {search} = useParams();
+    if(search==undefined){
+        search = ""
+    }
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
 
     const [type, updateType] = useState("");

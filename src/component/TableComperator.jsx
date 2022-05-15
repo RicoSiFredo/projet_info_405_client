@@ -40,13 +40,6 @@ function TableComperator({offre}){
                         </TableComperatorCol>
                     )
                 }
-                <th scope="col">#</th>
-                <TableComperatorCol
-                    name="Score">
-
-                </TableComperatorCol>
-                <th scope="col">Nom</th>
-                <th scope="col">Compétences</th>
             </tr>
         </thead>
         <tbody>

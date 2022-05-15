@@ -54,19 +54,27 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     function back(){
         navigate(-1)
     }
-
+    
+    const [focused, setFocused] = useState(false)
+    const onFocus = function(){
+        setFocused(true)
+        chercher(true, "")
+    }
+    const onBlur = function(){
+        setFocused(false)
+        chercher(false, "")
+    }
   
-
     function chercherEvent(e){
         updateSearch(e.target.value);
-        chercher(e.target.value);
+        chercher(focused, e.target.value);
     }
     list.update = function(){
         updateList(Eats.fakeUpdate(list));
     }
 
-    function chercher(search_base=search){
-        if(search_base==""){
+    function chercher(focused, search_base=search){
+        if(!focused){
             navigate(pathname)
         }
         else {
@@ -83,7 +91,7 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
             <div>
                 <div className="input-group">
                     <div>
-                        <input onChange={chercherEvent} type="search" id="form1" className="form-control" placeholder="Rechercher" value={search}/>
+                        <input onChange={chercherEvent} type="search" id="form1" className="form-control" placeholder="Rechercher" value={search} onFocus={onFocus} onBlur={onBlur} />
                     </div>
                     <button  type="button" className="d-flex align-items-center justify-content-center btn btn-primary">
                         <Search></Search>

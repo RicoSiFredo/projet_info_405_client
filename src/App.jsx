@@ -169,7 +169,8 @@ function App() {
             <Route path="/message/:id" element={<Messenger user={user}></Messenger>}></Route>
             <Route exact path="/profil/:id" element={<Profil navigate={navigate} rootUser={user}></Profil>}></Route>
             <Route exact path="/project/:id" element={<ProjectFrame navigate={navigate} rootUser={user}></ProjectFrame>}></Route>
-            <Route exact path="/search/:search" element={<Search navigate={navigate} rootUser={user}></Search>}></Route>
+            <Route path="/search/:search" element={<Search navigate={navigate} rootUser={user}></Search>}></Route>
+            <Route path="/search" element={<Search navigate={navigate} rootUser={user}></Search>}></Route>
             <Route exact path="/offre/:id" element={<Offre navigate={navigate} rootUser={user}></Offre>}></Route>
             <Route exact path="/" element={<Home navigate={navigate} user={user} updatePage={updatePage}></Home>}></Route>
         </Routes>
