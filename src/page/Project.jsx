@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Alert } from "react-bootstrap";
 import Field from "../component/Field";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
@@ -56,6 +56,8 @@ function ProjectFrame({rootUser, updatePage}){
     }
     function showProjectParam(){
         updateParam(true);
+        endClose();
+        handleClose();
     }
     function unshowProjectParam(){
         updateParam(false);
@@ -160,37 +162,27 @@ function ProjectFrame({rootUser, updatePage}){
                                 project.havePermission(PermEnum.MANAGE_ROLE) && (
                                     <div>
                                         <Button className="me-2" onClick={delProject}>Supprimer le projet</Button>
-
                                         <Button className="me-1" onClick={endProject}>Terminer le projet</Button>
 
-                                        <Modal show={show} className="highest" onHide={handleClose} size="lg" centered>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Voulez-vous vraiment supprimer le projet ?</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <Button className="m-1" variant="primary" onClick={requestDelete}>
+                                        <Alert variant="danger" show={show} className="mt-3">
+                                            <Alert.Heading>Voulez-vous vraiment supprimer le projet ?</Alert.Heading>
+                                            <Button className="m-1" variant="primary" onClick={requestDelete}>
                                                     Valider
                                                 </Button>
                                                 <Button className="m-1" variant="primary" onClick={handleClose}>
                                                     Annuler
                                                 </Button>
-                                            </Modal.Body>
-                                        </Modal>
+                                        </Alert>       
 
-                                        <Modal show={end} className="highest" onHide={endClose} size="lg" centered>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Voulez-vous vraiment terminer le projet ?</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <Button className="m-1" variant="primary" onClick={requestFinish}>
+                                        <Alert variant="danger" show={end} className="mt-3">
+                                            <Alert.Heading>Voulez-vous vraiment terminer le projet ?</Alert.Heading>
+                                            <Button className="m-1" variant="primary" onClick={requestFinish}>
                                                     Valider
                                                 </Button>
                                                 <Button className="m-1" variant="primary" onClick={endClose}>
                                                     Annuler
                                                 </Button>
-                                            </Modal.Body>
-                                        </Modal>
-
+                                        </Alert>
                                     </div>  
                                 )
                             }

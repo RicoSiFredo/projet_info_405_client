@@ -1,4 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, ModalBody } from "react-bootstrap";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import Data from "../utils/Data";
@@ -13,13 +13,21 @@ import ListEats from "../object/base/ListEats";
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [listConv, updateConv] = useState(new ListEats("", undefined));
     let [show, updateShow] = useState(false);
+    let [showRole, updateShowRole] = useState(false);
     function handleClose() {
         updateShow(false);
     }
     function openParam() {
         updateShow(true);
     }
-
+    function openRole() {
+        updateShowRole(true);
+        handleClose();
+    }
+    function closeRole(){
+        updateShowRole(false);
+        openParam();
+    }
     function exclure(){
         project.makeRequest(
             'project/del/user',
@@ -142,7 +150,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                             <Button className="m-1" variant="primary" onClick={showConv}>Envoyer un message</Button>
                         </Link>
 
-                        <Button className="m-1" variant="primary" onClick={handleClose}>
+                        <Button className="m-1" variant="primary" onClick={openRole}>
                             Gerer le role
                         </Button>
                     </div>
@@ -153,7 +161,25 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     </Button>
                 </Modal.Footer>
             </Modal>
+            <div>
+                <Modal show={showRole} className="highest" onHide={closeRole} size="lg" centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Role du membre</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                        <p>Input radio</p>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={closeRole}>
+                            Retour
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
         </div>
+        
     }else{
         bonus =
         <div className="align-self-center flex ">
