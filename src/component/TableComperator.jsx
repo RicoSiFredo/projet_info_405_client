@@ -1,11 +1,50 @@
+import TableComperatorCol from "./TableComperatorCol";
 import TableComperatorRow from "./TableComperatorRow";
 
+const SORT_TYPE = {
+    ASC: 1,
+    DESC: -1,
+    UNDEFINED: 0,
+    CANT: 2
+}
+
+const COL_LIST = [
+    {
+        name: "#",
+        sort: SORT_TYPE.CANT
+    },
+    {
+        name: "Score",
+        sort: SORT_TYPE.ASC
+    },
+    {
+        name: "Nom",
+        sort: SORT_TYPE.CANT
+    },
+    {
+        name: "Compétences",
+        sort: SORT_TYPE.UNDEFINED
+    }
+]
+
 function TableComperator({offre}){
+    
     return <table class="table table-striped">
         <thead>
             <tr>
+                {
+                    COL_LIST.map((col, index) =>
+                        <TableComperatorCol
+                            col={col}>
+
+                        </TableComperatorCol>
+                    )
+                }
                 <th scope="col">#</th>
-                <th scope="col">Score</th>
+                <TableComperatorCol
+                    name="Score">
+
+                </TableComperatorCol>
                 <th scope="col">Nom</th>
                 <th scope="col">Compétences</th>
             </tr>
@@ -15,7 +54,7 @@ function TableComperator({offre}){
                 offre.requestList.map((request, index) =>
                     <TableComperatorRow 
                         offre={offre} 
-                        index={index} 
+                        index={index+1} 
                         request={request}/>
                 )
             }
