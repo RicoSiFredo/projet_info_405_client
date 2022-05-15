@@ -78,7 +78,6 @@ function Profil({rootUser}){
         user.getAllComment();
     }, []);
     let canEdit = Data.isMe(user);
-    console.log(user.commentList.list);
     if (Data.isMe(user)){
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
@@ -134,11 +133,12 @@ function Profil({rootUser}){
 
                                 return (
                                     <div className="Commentaires">
-                                        Note : {obj.note} <br />
+                                        Note : <Rating
+                                            ratingValue={obj.note} /* Available Props */
+                                        /> <br />
                                         Commentaire : {obj.text} <br />
                                         écrit par : {obj.auteur.firstname} 
-                                    </div>
-            
+                                    </div>            
                                 )
                             
                         

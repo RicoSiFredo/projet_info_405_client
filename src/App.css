@@ -299,3 +299,8 @@
   background-color: teal;
   color: white;
 }
+
+.Commentaires{
+  border: solid 1px black;
+  padding: 25px;
+}
