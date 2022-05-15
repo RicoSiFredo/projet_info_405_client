@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { ActionEnum } from "../enum/ActionEnum";
 import PageEnum from "../enum/PageEnum";
 import Data from "../utils/Data";
@@ -9,6 +9,7 @@ import { useState } from "react";
 import PermEnum from "../enum/PermEnum";
 import { Link } from "react-router-dom";
 import ListEats from "../object/base/ListEats";
+import ListRole from "../component/ListeRole";
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [listConv, updateConv] = useState(new ListEats("", undefined));
@@ -168,7 +169,11 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     </Modal.Header>
                     <Modal.Body>
 
-                        <p>Input radio</p>
+                        <p>Quel rôle souhaitez-vous attribuer à ce membre ? </p>
+
+                        <ListRole project={project}></ListRole>
+                        
+
 
                     </Modal.Body>
                     <Modal.Footer>
