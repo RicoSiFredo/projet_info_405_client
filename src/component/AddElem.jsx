@@ -36,7 +36,7 @@ function AddElem({elem,keyword, handleClose}){
         updateError(ErrorEats.NO_ERROR);
         list.reset();
         list.makeRequest(
-            'search/competence',
+            'search/skill',
             {
                 name: val,
                 elem: elem.id_str
