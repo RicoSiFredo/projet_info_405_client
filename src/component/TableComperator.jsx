@@ -1,40 +1,92 @@
+import { useState } from "react";
+import SortEnum from "../enum/SortEnum";
 import TableComperatorCol from "./TableComperatorCol";
 import TableComperatorRow from "./TableComperatorRow";
 
-const SORT_TYPE = {
-    ASC: 1,
-    DESC: -1,
-    UNDEFINED: 0,
-    CANT: 2
+function score(a, b){
+    let res;
+    if(a.getScore()>b.getScore()){
+        res = -1;
+    }
+    else if(a.getScore()<b.getScore()){
+        res = 1;
+    }
+    else {
+        res = 0;
+    }
+    return res;
+}
+function scoreComp(a, b){
+    let res;
+    if(a.getScoreComp()>b.getScoreComp()){
+        res = -1;
+    }
+    else if(a.getScoreComp()<b.getScoreComp()){
+        res = 1;
+    }
+    else {
+        res = 0;
+    }
+    return res;
 }
 
-const COL_LIST = [
-    {
-        name: "#",
-        sort: SORT_TYPE.CANT
-    },
-    {
-        name: "Score",
-        sort: SORT_TYPE.ASC
-    },
-    {
-        name: "Nom",
-        sort: SORT_TYPE.CANT
-    },
-    {
-        name: "Compétences",
-        sort: SORT_TYPE.UNDEFINED
-    }
-]
-
 function TableComperator({offre}){
-    
+    const [colList, updateColList] = useState([
+        {
+            name: "#",
+            sort: SortEnum.CANT
+        },
+        {
+            name: "Score",
+            sort: SortEnum.ASC,
+            fun_asc: function(a, b){
+                return score(a, b) * 1;
+            },
+            fun_desc: function(a, b){
+                return score(a, b) * -1;
+            }
+        },
+        {
+            name: "Nom",
+            sort: SortEnum.CANT
+        },
+        {
+            name: "Compétences",
+            sort: SortEnum.UNDEFINED,
+            fun_asc: function(a, b){
+                return scoreComp(a, b) * 1;
+            },
+            fun_desc: function(a, b){
+                return scoreComp(a, b) * -1;
+            }
+        }
+    ]);
+    let selectCol;
+    for(let i = 0; i < colList.length; i++){
+        if(colList[i].sort!=SortEnum.CANT&&
+        colList[i].sort!=SortEnum.UNDEFINED){
+            selectCol = colList[i];
+        }
+    }
+    let list = []
+    for (let i = 0; i < offre.requestList.size(); i++){
+        let request = offre.requestList.get(i);
+        list.push(request)
+    }
+    if(selectCol.sort==SortEnum.ASC){
+        list.sort(selectCol.fun_asc);
+    }
+    else {
+        list.sort(selectCol.fun_desc);
+    }
     return <table class="table table-striped">
         <thead>
             <tr>
                 {
-                    COL_LIST.map((col, index) =>
+                    colList.map((col, index) =>
                         <TableComperatorCol
+                            updateColList={updateColList}
+                            colList={colList}
                             col={col}>
 
                         </TableComperatorCol>
@@ -44,7 +96,7 @@ function TableComperator({offre}){
         </thead>
         <tbody>
             {
-                offre.requestList.map((request, index) =>
+                list.map((request, index) =>
                     <TableComperatorRow 
                         offre={offre} 
                         index={index+1} 
