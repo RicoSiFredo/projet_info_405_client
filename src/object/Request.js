@@ -9,4 +9,8 @@ export default class Request extends Object405 {
     prix = undefined;
 
     user = new SimpleEats("req_user", this);
+
+    getScore(){
+        return 0;
+    }
 }

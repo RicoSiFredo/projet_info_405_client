@@ -22,6 +22,46 @@ export default class Actu extends Object405 {
         super();
     }
 
+    getRequestAll(failed, success){
+        super.makeRequest(
+            "actu/get/request",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        );
+    }
+
+    getBase(failed, success){
+        super.makeRequest(
+            "actu/get",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        );
+    }
+
     postuler(message, prix, failed, success){
         super.makeRequest(
             "actu/postuler",
