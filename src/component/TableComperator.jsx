@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SortEnum from "../enum/SortEnum";
+import TableComperatorCoef from "./TableComperatorCoef";
 import TableComperatorCol from "./TableComperatorCol";
 import TableComperatorRow from "./TableComperatorRow";
 
@@ -58,9 +59,11 @@ function TableComperator({offre}){
             },
             fun_desc: function(a, b){
                 return scoreComp(a, b) * -1;
-            }
+            },
+            coef: 1
         }
     ]);
+
     let selectCol;
     for(let i = 0; i < colList.length; i++){
         if(colList[i].sort!=SortEnum.CANT&&
@@ -71,6 +74,7 @@ function TableComperator({offre}){
     let list = []
     for (let i = 0; i < offre.requestList.size(); i++){
         let request = offre.requestList.get(i);
+        request.colList = colList;
         list.push(request)
     }
     if(selectCol.sort==SortEnum.ASC){
@@ -79,31 +83,48 @@ function TableComperator({offre}){
     else {
         list.sort(selectCol.fun_desc);
     }
-    return <table class="table table-striped">
-        <thead>
-            <tr>
-                {
-                    colList.map((col, index) =>
-                        <TableComperatorCol
-                            updateColList={updateColList}
-                            colList={colList}
-                            col={col}>
-
-                        </TableComperatorCol>
-                    )
-                }
-            </tr>
-        </thead>
-        <tbody>
+    return <div className="d-flex">
+        <div className="w-25">
             {
-                list.map((request, index) =>
-                    <TableComperatorRow 
-                        offre={offre} 
-                        index={index+1} 
-                        request={request}/>
+                colList.map((col, index) =>
+                    ( col.sort!=SortEnum.CANT &&
+                    col.name!="Score" ) && <TableComperatorCoef
+                        updateColList={updateColList}
+                        colList={colList}
+                        col={col}>
+
+                    </TableComperatorCoef>
                 )
             }
-        </tbody>
-    </table>
+        </div>
+        <div className="w-75">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        {
+                            colList.map((col, index) =>
+                                <TableComperatorCol
+                                    updateColList={updateColList}
+                                    colList={colList}
+                                    col={col}>
+
+                                </TableComperatorCol>
+                            )
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        list.map((request, index) =>
+                            <TableComperatorRow 
+                                offre={offre} 
+                                index={index+1} 
+                                request={request}/>
+                        )
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 }
 export default TableComperator;
