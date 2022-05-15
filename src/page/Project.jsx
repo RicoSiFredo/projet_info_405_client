@@ -161,7 +161,7 @@ function ProjectFrame({rootUser, updatePage}){
                             </Modal.Header>
                             <Modal.Body>
                             {
-                                project.havePermission(PermEnum.MANAGE_ROLE) && (
+                                project.havePermission(PermEnum.MANAGE_ROLE) ? (
                                     <div>
                                         <Button className="me-2" onClick={delProject}>Supprimer le projet</Button>
                                         <Button className="me-1" onClick={endProject}>Terminer le projet</Button>
@@ -186,7 +186,8 @@ function ProjectFrame({rootUser, updatePage}){
                                                 </Button>
                                         </Alert>
                                     </div>  
-                                )
+                                ) : <p>Vous n'avez pas les permissions necessaires pour modifier ce projet</p>
+                                
                             }
                             </Modal.Body>
                             <Modal.Footer>
@@ -212,7 +213,14 @@ function ProjectFrame({rootUser, updatePage}){
 
             {
                 project.havePermission(PermEnum.MANAGE_MEMBERS) && (
-                    <ProjectActionList user={rootUser} typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} project={project} updatePage={updatePage} actionList={project.actionList}></ProjectActionList>
+                    <ProjectActionList 
+                        user={rootUser} 
+                        typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} 
+                        project={project} 
+                        updatePage={updatePage} 
+                        actionList={project.actionList}>
+
+                    </ProjectActionList>
                 )
             }
 
