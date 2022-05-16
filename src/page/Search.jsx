@@ -53,23 +53,27 @@ function Search({navigate, rootUser}){
         updateMax(e.target.value);
     }
 
-    return <div>
+    return <div className = "d-flex m-2 p-4">
 
-            <div classname = "flex">
+            <div>
+                <p>Filtre de recherche</p>
 
-            <Form.Select className="mb-3 w-25" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
-                <option value="">Type</option>
-                <option value="project">Projet</option>
-                <option value="user">Utilisateur</option>
-            </Form.Select>
+                <Form.Select className="w-50 p-2" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
+                    <option value="">Type</option>
+                    <option value="project">Projet</option>
+                    <option value="user">Utilisateur</option>
+                </Form.Select>
 
-            <Form.Group className="mb-3 w-25" controlId="min">
-                <Form.Control value={min} onInput={eventMin} type="text" placeholder="Note minimum" />
-            </Form.Group>
-            <Form.Group className="mb-3 w-25" controlId="max">
-                <Form.Control value={max} onInput={eventMax} type="text" placeholder="Note maximum" />
-            </Form.Group>
+                <Form.Group className="w-50 p-2" controlId="min">
+                    <Form.Control value={min} onInput={eventMin} type="text" placeholder="Note minimum" />
+                </Form.Group>
+                <Form.Group className="w-50 p-2" controlId="max">
+                    <Form.Control value={max} onInput={eventMax} type="text" placeholder="Note maximum" />
+                </Form.Group>
+                
             </div>
+            <div>
+                
 
 
         {
@@ -82,8 +86,8 @@ function Search({navigate, rootUser}){
                     }
                 }
                 
-                    let div = <div key={index}>
-                        <p>{object.name == undefined ? object.firstname : object.name}</p> 
+                    let div = <div key={index} className = "d-flex p-1" >
+                        <p className="m-2">{object.name == undefined ? object.firstname : object.name}</p> 
                         <Button onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
                     if (type == "") return div;
@@ -92,6 +96,7 @@ function Search({navigate, rootUser}){
 
             })
         }
+        </div>
     </div>
 }
 export default Search;
