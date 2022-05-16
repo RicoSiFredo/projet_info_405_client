@@ -88,13 +88,13 @@ function Search({navigate, rootUser}){
                     }
                 }
                 
-                    let div = <div key={index} className = "d-flex p-1 mw-100 justify-content-between" >
-                          <div className="banner border-bottom border-4 border-primary">
-                        {object.profile != undefined ? <img src={Constant.IMAGE_URL+object.banner} className="center-crop w-100 h-100" alt=""/> :  <ImgProfile className="center-crop w-100 h-100" elem={object}></ImgProfile>}
+                    let div = <div key={index} className = "d-flex m-2 p-1 justify-content-between" >
+                            <div className="banner border-bottom border-4 border-primary">
+                                {object.profile != undefined ? <img src={Constant.IMAGE_URL+object.profile} className="center-crop w-100 h-100" alt=""/> :  <ImgProfile className="center-crop w-100 h-100" elem={object}></ImgProfile>}
                         </div>
                         <div>
                             <p className="m-4">{object.name == undefined ? object.firstname : object.name}</p>
-                            <p className = "m-4">{object.description}</p> 
+                            <p className = "mt-4 m-2">{object.description}</p> 
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
