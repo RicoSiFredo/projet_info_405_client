@@ -64,13 +64,13 @@ function Search({navigate, rootUser}){
                     <option value="user">Utilisateur</option>
                 </Form.Select>
 
-                <Form.Group className="w-50 p-2" controlId="min">
+                <Form.Group className="w-50 p-1" controlId="min">
                     <Form.Control value={min} onInput={eventMin} type="text" placeholder="Note minimum" />
                 </Form.Group>
-                <Form.Group className="w-50 p-2" controlId="max">
+                <Form.Group className="w-50 p-1" controlId="max">
                     <Form.Control value={max} onInput={eventMax} type="text" placeholder="Note maximum" />
                 </Form.Group>
-                
+
             </div>
             <div>
                 
@@ -86,9 +86,9 @@ function Search({navigate, rootUser}){
                     }
                 }
                 
-                    let div = <div key={index} className = "d-flex p-1" >
+                    let div = <div key={index} className = "d-flex p-1 mw-100 justify-content-between" >
                         <p className="m-2">{object.name == undefined ? object.firstname : object.name}</p> 
-                        <Button onClick={openProfil} variant="primary">Voir</Button>
+                        <Button className = "right-align" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
                     if (type == "") return div;
                     if (type == "project" && object instanceof Project) return div;
