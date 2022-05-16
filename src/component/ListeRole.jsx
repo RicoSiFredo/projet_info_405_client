@@ -8,7 +8,6 @@ function ListRole({project,action}){
     const [checked, setChecked] = useState(false);
     const [type, updateType] = useState("");
 
-    
     useEffect(function(){
         project.makeRequest(
             "project/get/role",
@@ -29,10 +28,10 @@ function ListRole({project,action}){
         project.makeRequest(
             'action/user/set/role',
             {
-                id_role: newRole,
+                access_token: Data.accessToken(),
                 id_project: project.id_str,
                 id_user: action.user.id_str,
-                access_token: Data.accessToken()
+                id_role: newRole
             },
             function(err){
                 console.log(err)
@@ -56,7 +55,7 @@ function ListRole({project,action}){
             Quel rôle souhaitez-vous lui attribuer au sein du projet ? </p>
 
             <Form.Select aria-label="Default select example"  value={type} onChange={(e) => updateType(e.target.value)}>
-                <option>{action.role.name}</option>
+                <option value=""> {action.role.name}</option>
 
                 {project.roleList.map(function(role){
                     let res;
