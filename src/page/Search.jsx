@@ -58,7 +58,7 @@ function Search({navigate, rootUser}){
             <div classname = "flex">
 
             <Form.Select className="mb-3 w-25" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
-                <option>Type</option>
+                <option value="">Type</option>
                 <option value="project">Projet</option>
                 <option value="user">Utilisateur</option>
             </Form.Select>
