@@ -9,10 +9,11 @@ export default class Actu extends Object405 {
     static TYPE = "Actu";
 
     type = undefined;
-    comment = undefined;
-    date = undefined;
+    description = undefined;
     price = undefined;
-    duree = undefined;
+    heure = undefined;
+    start = undefined;
+    end = undefined;
 
     compList = new ListEats("for_comp", this, CompareEats.compareInt("date", CompareEats.DESC))
     role = new SimpleEats("for_role", this)

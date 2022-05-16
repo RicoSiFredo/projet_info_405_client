@@ -52,10 +52,10 @@ function ActualiteView({user, you, rootUser}){
     const [comment, updateComment] = useState("");
     const [prix, updatePrix] = useState("");
     const [role, updateRole] = useState("");
-    const [duree, updateDuree] = useState("");
+    const [heure, updateHeure] = useState("");
+    const [end, updateEnd] = useState("");
+    const [start, updateStart] = useState("");
     const [compList, updateCompList] = useState([]);
-    let [start, updateStart] = useState("");
-    let [end, updateEnd] = useState("");
 
     let res;
 
@@ -65,8 +65,8 @@ function ActualiteView({user, you, rootUser}){
     function changePrix(e){
         updatePrix(e.target.value);
     }
-    function changeDuree(e){
-        updateDuree(e.target.value);
+    function changeHeure(e){
+        updateHeure(e.target.value);
     }
     function changeStart(e){
         updateStart(e.target.value);
@@ -96,7 +96,7 @@ function ActualiteView({user, you, rootUser}){
 
             </SelectRole>
             <Field className={"mt-2"} val={comment} changeValue={changeComment} label="Description ( optionnel )" name="name"></Field>
-            <Field className={"mt-3"} val={comment} changeValue={changeComment} label="Heure par semaine ( optionnel )" name="name"></Field>
+            <Field className={"mt-3"} val={heure} changeValue={changeHeure} label="Heure par semaine ( optionnel )" name="name"></Field>
             <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Salaire mois ( optionnel )" name="name"></Field>
             <Row className={"mt-3"}>
                 <Col>
@@ -119,10 +119,12 @@ function ActualiteView({user, you, rootUser}){
             {
                 access_token: Data.accessToken(),
                 id: user.id_str,
-                role: role,
-                comment: comment,
+                description: comment,
                 price: prix,
-                duree: duree,
+                heure: heure,
+                start: new Date(start).getTime(),
+                end: new Date(end).getTime(),
+                id_role: role,
                 comp_list: idList
             },
             function(error){

@@ -113,13 +113,15 @@ function HistoryView({user}){
                 <Modal.Body>
                     <div>
                         <h5>Votre activité</h5>
-                        <SelectCompetence
-                            compList={compList}
-                            updateCompList={updateCompList}
-                            project={user}>
-
-                        </SelectCompetence>
                         <Field className={"mt-3"} val={role} changeValue={changeRole} label="Rôle" name="role"></Field>
+                        <div className={"mt-3"}>
+                            <SelectCompetence
+                                compList={compList}
+                                updateCompList={updateCompList}
+                                project={user}>
+
+                            </SelectCompetence>
+                        </div>
                         <Field className={"mt-3"} val={description} changeValue={changeDescription} label="Description ( optionnel )" name="description"></Field>
                         <Field className={"mt-3"} val={heure} changeValue={changeHeure} label="Heure par semaine ( optionnel )" name="heure"></Field>
                         <Field className={"mt-3"} val={price} changeValue={changePrice} label="Salaire mois ( optionnel )" name="price"></Field>

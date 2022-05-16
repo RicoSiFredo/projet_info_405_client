@@ -21,7 +21,7 @@ function LinearCompList({refList, compList}){
                 return 1;
             }
             else {
-                return 0;   
+                return 0;
             }
         }
     }
@@ -36,11 +36,17 @@ function LinearCompList({refList, compList}){
         return res;
     }
     let list = []
-    if(!(refList==[]||refList==undefined)){
+    console.log(compList)
+    if(Array.isArray(compList)){
+        list = compList;
+    }
+    else if(compList!=undefined){
         for (let i = 0; i < compList.size(); i++){
             let comp = compList.get(i);
             list.push(comp)
         }
+    }
+    if(!(refList==[]||refList==undefined)){
         list.sort(function(a,b){
             if(getScore(a)>getScore(b)){
                 return -1

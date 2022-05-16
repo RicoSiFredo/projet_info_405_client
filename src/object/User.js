@@ -235,6 +235,7 @@ export default class User extends Object405 {
         )
     }
     getAllHistory(failed, success){
+        let obj = this;
         super.makeRequest(
             "user/get/history",
             {
@@ -247,6 +248,7 @@ export default class User extends Object405 {
                 }
             },
             function(response){
+                console.log(obj);
                 if(success!=undefined){
                     success(response);
                 }
