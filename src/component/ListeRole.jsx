@@ -69,7 +69,7 @@ function ListRole({project,action}){
                 })}
 
             </Form.Select>
-            <p>{type}</p>
+            
             </div>
 
             setRole(type);
