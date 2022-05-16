@@ -3,7 +3,7 @@ function LinearCompList({refList, compList}){
     function inRef(comp){
         let found = false;
         let i = 0;
-        while(refList!=undefined&&!found && i < refList.size()){
+        while(refList!=[]&&refList!=undefined&&!found && i < refList.size()){
             if (refList.get(i).id_str == comp.id_str){
                 found = true;
                 
@@ -13,7 +13,7 @@ function LinearCompList({refList, compList}){
         return found;
     }
     function getScore(comp){
-        if(refList==undefined){
+        if(refList==[]||refList==undefined){
             return 0;
         }
         else {
@@ -36,21 +36,23 @@ function LinearCompList({refList, compList}){
         return res;
     }
     let list = []
-    for (let i = 0; i < compList.size(); i++){
-        let comp = compList.get(i);
-        list.push(comp)
+    if(!(refList==[]||refList==undefined)){
+        for (let i = 0; i < compList.size(); i++){
+            let comp = compList.get(i);
+            list.push(comp)
+        }
+        list.sort(function(a,b){
+            if(getScore(a)>getScore(b)){
+                return -1
+            }
+            else if(getScore(a)<getScore(b)){
+                return 1
+            }
+            else {
+                return 0
+            }
+        });
     }
-    list.sort(function(a,b){
-        if(getScore(a)>getScore(b)){
-            return -1
-        }
-        else if(getScore(a)<getScore(b)){
-            return 1
-        }
-        else {
-            return 0
-        }
-    });
     return <div className="d-flex flex-wrap">
         {list.map((comp, index) => 
             <div 

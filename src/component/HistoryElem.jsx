@@ -18,14 +18,14 @@ function HistoryElem({history}){
         <div class="d-flex justify-content-between pb-2 border-top separator pt-2 ps-3 pe-2">
             <div class="d-flex flex-column">
                 <h5>{history.role}</h5>
-                <p className="mb-2 d-flex justify-content-between">
-                    <div className="me-1" onClick={openDesc}>
+                <div className="mb-2">
+                    <span className="me-1" onClick={openDesc}>
                         {visi?
-                        <CaretDownFill></CaretDownFill>:
-                        <CaretRightFill></CaretRightFill>}
+                        <CaretDownFill className="me-1"></CaretDownFill>:
+                        <CaretRightFill className="me-1"></CaretRightFill>}
                         {history.name}
-                    </div> - {toDate(history.start) + " / " + toDate(history.end)} - {history.heure+"h"} - {history.price+"€"}
-                </p>
+                    </span> - {toDate(history.start) + " / " + toDate(history.end)} - {history.heure+"h"} - {history.price+"€"}
+                </div>
                 <p className={visi?"d-block":"d-none"}>{history.descriptionProject}</p>
                 <p>{history.description}</p>
             </div>

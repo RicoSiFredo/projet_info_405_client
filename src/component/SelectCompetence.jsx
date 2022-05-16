@@ -49,9 +49,9 @@ function SelectCompetence({project, compList, updateCompList, updateRole}){
     function changeSearch(e){
         updateSearch(e.target.value);
     }
-    useEffect(function(){
+    /*useEffect(function(){
         project.getAllRole();
-    }, []);
+    }, []);*/
     function isSelect(comp){
         let select = false;
         let i = 0;

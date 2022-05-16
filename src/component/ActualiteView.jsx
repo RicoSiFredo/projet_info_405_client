@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import NotifList from "../list/NotifList";
 import Constant from "../utils/Constant";
 import Data from "../utils/Data";
@@ -54,6 +54,9 @@ function ActualiteView({user, you, rootUser}){
     const [role, updateRole] = useState("");
     const [duree, updateDuree] = useState("");
     const [compList, updateCompList] = useState([]);
+    let [start, updateStart] = useState("");
+    let [end, updateEnd] = useState("");
+
     let res;
 
     function changeComment(e){
@@ -64,6 +67,12 @@ function ActualiteView({user, you, rootUser}){
     }
     function changeDuree(e){
         updateDuree(e.target.value);
+    }
+    function changeStart(e){
+        updateStart(e.target.value);
+    }
+    function changeEnd(e){
+        updateEnd(e.target.value);
     }
     let action = ccAction;
     if(action.type==0){
@@ -86,9 +95,17 @@ function ActualiteView({user, you, rootUser}){
                 project={user}>
 
             </SelectRole>
-            <Field className={"mt-2"} val={comment} changeValue={changeComment} label="Description" name="name"></Field>
-            <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Prix en €" name="name"></Field>
-            <Field className={"mt-3"} val={duree} changeValue={changeDuree} label="Durée en jours" name="name"></Field>
+            <Field className={"mt-2"} val={comment} changeValue={changeComment} label="Description ( optionnel )" name="name"></Field>
+            <Field className={"mt-3"} val={comment} changeValue={changeComment} label="Heure par semaine ( optionnel )" name="name"></Field>
+            <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Salaire mois ( optionnel )" name="name"></Field>
+            <Row className={"mt-3"}>
+                <Col>
+                    <Form.Control type="date" value={start} onChange={changeStart} name="start" placeholder="Debut" />
+                </Col>
+                <Col>
+                    <Form.Control type="date" value={end} onChange={changeEnd} name="end" placeholder="Fin" />
+                </Col>
+            </Row>
         </div>
     }
 

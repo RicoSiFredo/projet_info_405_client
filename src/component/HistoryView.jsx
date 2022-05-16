@@ -4,6 +4,7 @@ import Constant from "../utils/Constant";
 import Data from "../utils/Data";
 import Field from "./Field";
 import HistoryElem from "./HistoryElem";
+import SelectCompetence from "./SelectCompetence";
 
 function HistoryView({user}){
     let [show, updateShow] = useState(false);
@@ -17,6 +18,7 @@ function HistoryView({user}){
     let [heure, updateHeure] = useState("");
     let [start, updateStart] = useState("");
     let [end, updateEnd] = useState("");
+    const [compList, updateCompList] = useState([]);
 
     function changeName(e){
         updateName(e.target.value);
@@ -43,6 +45,10 @@ function HistoryView({user}){
         updateRole(e.target.value);
     }
     function sendHistory(failed, success){
+        let idList = []
+        for(let i = 0; i < compList.length; i++){
+            idList.push(compList[i].id_str);
+        }
         user.makeRequest(
             "user/create/history",
             {
@@ -54,7 +60,8 @@ function HistoryView({user}){
                 price: price,
                 heure: heure,
                 start: new Date(start).getTime(),
-                end: new Date(end).getTime()
+                end: new Date(end).getTime(),
+                comp_list: idList
             },
             function(error){
                 if(failed!=undefined){
@@ -106,6 +113,12 @@ function HistoryView({user}){
                 <Modal.Body>
                     <div>
                         <h5>Votre activité</h5>
+                        <SelectCompetence
+                            compList={compList}
+                            updateCompList={updateCompList}
+                            project={user}>
+
+                        </SelectCompetence>
                         <Field className={"mt-3"} val={role} changeValue={changeRole} label="Rôle" name="role"></Field>
                         <Field className={"mt-3"} val={description} changeValue={changeDescription} label="Description ( optionnel )" name="description"></Field>
                         <Field className={"mt-3"} val={heure} changeValue={changeHeure} label="Heure par semaine ( optionnel )" name="heure"></Field>
