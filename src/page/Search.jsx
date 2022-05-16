@@ -12,6 +12,8 @@ import Project from "../object/Project";
 import User from "../object/User";
 import React from "react"
 import { useParams } from "react-router-dom";
+import Constant from "../utils/Constant";
+import ImgProfile from "../../src/component/ImgProfile";
 
 function Search({navigate, rootUser}){
     let {search} = useParams();
@@ -87,8 +89,14 @@ function Search({navigate, rootUser}){
                 }
                 
                     let div = <div key={index} className = "d-flex p-1 mw-100 justify-content-between" >
-                        <p className="m-2">{object.name == undefined ? object.firstname : object.name}</p> 
-                        <Button className = "right-align" onClick={openProfil} variant="primary">Voir</Button>
+                          <div className="banner border-bottom border-4 border-primary">
+                        {object.profile != undefined ? <img src={Constant.IMAGE_URL+object.banner} className="center-crop w-100 h-100" alt=""/> :  <ImgProfile className="center-crop w-100 h-100" elem={object}></ImgProfile>}
+                        </div>
+                        <div>
+                            <p className="m-4">{object.name == undefined ? object.firstname : object.name}</p>
+                            <p className = "m-4">{object.description}</p> 
+                        </div>
+                        <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
                     if (type == "") return div;
                     if (type == "project" && object instanceof Project) return div;
