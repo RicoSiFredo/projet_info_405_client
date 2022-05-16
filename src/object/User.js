@@ -24,6 +24,7 @@ export default class User extends Object405 {
     notifList = new ListEats(["target", "view"], this);
     friendsList = new ListEats("friends", this);
     commentList = new ListEats("is_comment", this, CompareEats.compareInt("date", CompareEats.DESC));
+    historyList = new ListEats("history", this, CompareEats.compareInt("date", CompareEats.DESC));
     logged = false;
 
     constructor(){ 
@@ -220,6 +221,25 @@ export default class User extends Object405 {
                 note: note
                 
 
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+    getAllHistory(failed, success){
+        super.makeRequest(
+            "user/get/history",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
             },
             function(error){
                 if(failed!=undefined){

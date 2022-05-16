@@ -3,6 +3,7 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import Constant from "../utils/Constant";
 import Data from "../utils/Data";
 import Field from "./Field";
+import HistoryElem from "./HistoryElem";
 
 function HistoryView({user}){
     let [show, updateShow] = useState(false);
@@ -41,7 +42,7 @@ function HistoryView({user}){
     function changeRole(e){
         updateRole(e.target.value);
     }
-    function sendHistory(){
+    function sendHistory(failed, success){
         user.makeRequest(
             "user/create/history",
             {
@@ -52,8 +53,8 @@ function HistoryView({user}){
                 description: description,
                 price: price,
                 heure: heure,
-                start: start,
-                end: end
+                start: new Date(start).getTime(),
+                end: new Date(end).getTime()
             },
             function(error){
                 if(failed!=undefined){
@@ -81,6 +82,15 @@ function HistoryView({user}){
                     <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
             </div>
+            <div>
+                {
+                    user.historyList.map(function(history, index){
+                        return <HistoryElem history={history}>
+
+                        </HistoryElem>
+                    })
+                }
+            </div>
         </div>
             <Modal show={show} className="highest" onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -97,15 +107,15 @@ function HistoryView({user}){
                     <div>
                         <h5>Votre activité</h5>
                         <Field className={"mt-3"} val={role} changeValue={changeRole} label="Rôle" name="role"></Field>
-                        <Field className={"mt-3"} val={description} changeValue={changeDescription} label="Description" name="description"></Field>
-                        <Field className={"mt-3"} val={heure} changeValue={changeHeure} label="Heure par semaine" name="heure"></Field>
+                        <Field className={"mt-3"} val={description} changeValue={changeDescription} label="Description ( optionnel )" name="description"></Field>
+                        <Field className={"mt-3"} val={heure} changeValue={changeHeure} label="Heure par semaine ( optionnel )" name="heure"></Field>
                         <Field className={"mt-3"} val={price} changeValue={changePrice} label="Salaire mois ( optionnel )" name="price"></Field>
                         <Row className={"mt-3"}>
                             <Col>
-                                <Form.Control type="date" val={start} changeValue={changeStart} name="start" placeholder="Debut" />
+                                <Form.Control type="date" value={start} onChange={changeStart} name="start" placeholder="Debut" />
                             </Col>
                             <Col>
-                                <Form.Control type="date" val={end} changeValue={changeEnd} name="end" placeholder="Fin" />
+                                <Form.Control type="date" value={end} onChange={changeEnd} name="end" placeholder="Fin" />
                             </Col>
                         </Row>
                     </div>

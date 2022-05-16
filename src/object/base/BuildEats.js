@@ -12,6 +12,7 @@ import Notif from "../Notif";
 import Actu from "../Actu";
 import Request from "../Request";
 import Commentaire from "../Commentaire";
+import History from "../History";
 
 
 export default class BuildEats {
@@ -56,6 +57,9 @@ export default class BuildEats {
         }
         else if(json==Commentaire.TYPE||json["_type"]==Commentaire.TYPE){
             res = new Commentaire();
+        }
+        else if(json==History.TYPE||json["_type"]==History.TYPE){
+            res = new History();
         }
         else {
             res = new Object405();

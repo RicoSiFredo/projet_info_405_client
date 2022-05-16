@@ -69,6 +69,7 @@ function Profil({rootUser}){
         user.getNotif();
         user.getAllAction();
         user.getAllComment();
+        user.getAllHistory();
     }, []);
     let canEdit = Data.isMe(user);
     if (Data.isMe(user)){
