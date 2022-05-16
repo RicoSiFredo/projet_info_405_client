@@ -45,8 +45,8 @@ function ManageRole({project}){
 
 
 
-
-    return <div>
+    if (!project.isFinish){
+        return <div>
                 <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
                     <div className="d-flex mt-1">
                         <h4>{"Role"}</h4>
@@ -76,5 +76,20 @@ function ManageRole({project}){
                     </div>
                 </div>
             </div>
+    }else{
+        return <div>
+                <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
+                    <div className="d-flex mt-1">
+                        <h4>{"Roles"}</h4>
+                    </div>
+
+                    <ListRolePerm project={project}>
+
+                    </ListRolePerm>
+
+                </div>
+            </div>
+    }
+    
 }
 export default ManageRole;

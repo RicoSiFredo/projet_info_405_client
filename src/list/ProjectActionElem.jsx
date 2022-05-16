@@ -120,93 +120,99 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     let test = "/message/-1";
     console.log(action.user);
     if (action.user.id_str != user.id_str){
-
-        function showConv(){
-            listConv.reset();
-            listConv.makeRequest(
-                'user/get/conversationWithFriend', 
-                {
-                    id: user.id_str,
-                    id_friend: action.user.id_str 
-                },
-                function(error){
-                },
-                function(response){
-                    test = test + listConv.list[0].convList.list[0].id_str;
-                    console.log(test);
-                    
-                }
-            )
-        }
-        
-        bonus =
-        <div className="align-self-center flex ">
-			<Button onClick={openParam} variant="primary">
-				<ThreeDots></ThreeDots>
-			</Button>
-            <Modal show={show} className="highest" onHide={handleClose} size="lg" centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Paramètres du membre</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Selectionnez l'action
-                    <div className="d-flex justify-content-center mt-2">
-                        {button}
-                        <Button className="m-1" variant="primary" onClick={handleClose}>
-                            Noter
-                        </Button>
-                    
-                        <Link to={test}>
-                            <Button className="m-1" variant="primary" onClick={showConv}>Envoyer un message</Button>
-                        </Link>
-
-                        <Button className="m-1" variant="primary" onClick={openRole}>
-                            Gerer le role
-                        </Button>
-                    </div>
-                    <Alert variant="danger" show={verif} className="mt-3">
-                        <Alert.Heading>Etes-vous sûr de vous ?</Alert.Heading>
-                        <Button className="m-1" variant="primary" onClick={exclure}>
-                                Valider
-                            </Button>
-                            <Button className="m-1" variant="outline-primary" onClick={closeVerif}>
-                                Annuler
-                            </Button>
-                    </Alert>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Retour
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-            <div>
-                <Modal show={showRole} className="highest" onHide={closeRole} size="lg" centered>
+        if (!project.isFinish){
+            
+            function showConv(){
+                listConv.reset();
+                listConv.makeRequest(
+                    'user/get/conversationWithFriend', 
+                    {
+                        id: user.id_str,
+                        id_friend: action.user.id_str 
+                    },
+                    function(error){
+                    },
+                    function(response){
+                        test = test + listConv.list[0].convList.list[0].id_str;
+                        console.log(test);
+                        
+                    }
+                )
+            }
+            
+            bonus =
+            
+            <div className="align-self-center flex ">
+                <Button onClick={openParam} variant="primary">
+                    <ThreeDots></ThreeDots>
+                </Button>
+                <Modal show={show} className="highest" onHide={handleClose} size="lg" centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>Role du membre</Modal.Title>
+                        <Modal.Title>Paramètres du membre</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
-
-                        <ListRole 
-                            project={project}
-                            action={action}
-                        >
-
-                        </ListRole>
+                        Selectionnez l'action
+                        <div className="d-flex justify-content-center mt-2">
+                            {button}
+                            <Button className="m-1" variant="primary" onClick={handleClose}>
+                                Noter
+                            </Button>
                         
-
+                            <Link to={test}>
+                                <Button className="m-1" variant="primary" onClick={showConv}>Envoyer un message</Button>
+                            </Link>
+    
+                            <Button className="m-1" variant="primary" onClick={openRole}>
+                                Gerer le role
+                            </Button>
+                        </div>
+                        <Alert variant="danger" show={verif} className="mt-3">
+                            <Alert.Heading>Etes-vous sûr de vous ?</Alert.Heading>
+                            <Button className="m-1" variant="primary" onClick={exclure}>
+                                    Valider
+                                </Button>
+                                <Button className="m-1" variant="outline-primary" onClick={closeVerif}>
+                                    Annuler
+                                </Button>
+                        </Alert>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={closeRole}>
+                        <Button variant="primary" onClick={handleClose}>
                             Retour
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                <div>
+                    <Modal show={showRole} className="highest" onHide={closeRole} size="lg" centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Role du membre</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+    
+    
+                            <ListRole 
+                                project={project}
+                                action={action}
+                            >
+    
+                            </ListRole>
+                            
+    
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={closeRole}>
+                                Retour
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
             </div>
-        </div>
+        }
+
+        
         
     }else{
+        if (!project.isFinish){
         bonus =
         <div className="align-self-center flex ">
 			<Button onClick={openParam} variant="primary">
@@ -239,6 +245,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                 </Modal.Footer>
             </Modal>
         </div>
+        }
     }
     
     return <SimpleProfile

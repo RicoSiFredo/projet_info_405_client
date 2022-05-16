@@ -28,7 +28,8 @@ function ElemView({parent, list, keyword, canEdit, title, infoNothing, infoNothi
             content = <p className="mb-0 mt-1">{infoNothing}</p>
         }
     }
-    return <div>
+    if (!parent.isFinish){
+        return <div>
         <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
             <div className="d-flex mt-1">
                 <h4>{title}</h4>
@@ -52,5 +53,16 @@ function ElemView({parent, list, keyword, canEdit, title, infoNothing, infoNothi
             </Modal.Footer>
         </Modal>
     </div>
+    }else{
+        return <div>
+        <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
+            <div className="d-flex mt-1">
+                <h4>{title}</h4>
+            </div>
+            {content}
+        </div>
+    </div>
+    }
+    
 }
 export default ElemView;

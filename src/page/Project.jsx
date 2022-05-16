@@ -80,8 +80,21 @@ function ProjectFrame({rootUser, updatePage}){
         handleClose();
     }
     function requestFinish() {
+        project.makeRequest(
+            'project/end',
+            {
+                access_token: Data.accessToken(),
+                id_project: project.id_str
+            },
+            function(error){
+            },
+            function(response){
+                updatePage(PageEnum.Profil);
+            }
+        )
         endClose();
     }
+    
 
     let joinBlock;
     if(!project.isIn()){
@@ -124,7 +137,8 @@ function ProjectFrame({rootUser, updatePage}){
             }
         }
     }
-    return <div className="d-flex justify-content-center flex-row">
+    if (!project.isFinish){
+        return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView elem={project} isProject={true}></ProfilView>
            
@@ -228,6 +242,64 @@ function ProjectFrame({rootUser, updatePage}){
             <ManageRole project={project}></ManageRole>
         </div>
     </div>
+    }else{
+        return <div className="d-flex justify-content-center flex-row">
+        <div className="w-30 left-div">
+            <ProfilView elem={project} isProject={true}></ProfilView>
+           
+            <ElemView 
+                canEdit={false} 
+                parent={project}
+                list={project.tecnoList} 
+                keyword="tecno"
+                title="Technologies"
+                infoNothing="Aucune technologie utilisée"
+                infoNothingEdit="Commencez à ajouter les technologies utilisées par votre projet">
+                    
+            </ElemView>
+        </div>
+        <div className="w-45 center-div">
+            <ActualiteView
+                rootUser={rootUser}
+                user={project}
+                you={false}>
+
+            </ActualiteView>
+        </div>
+        <div className="w-25 right-div">
+
+            <ProjectActionView 
+                typeAction={[ActionEnum.IN_PROJECT]} 
+                updatePage={updatePage} 
+                user={rootUser} 
+                project={project} 
+                actionList={project.actionList}>
+
+            </ProjectActionView>
+            {
+                joinBlock
+            }
+
+            {
+                project.havePermission(PermEnum.MANAGE_MEMBERS) && (
+                    <ProjectActionList 
+                        user={rootUser} 
+                        typeAction={[ActionEnum.USER_ASK_TO_PROJECT]} 
+                        project={project} 
+                        updatePage={updatePage} 
+                        actionList={project.actionList}>
+
+                    </ProjectActionList>
+                )
+            }
+
+            
+
+            <ManageRole project={project}></ManageRole>
+        </div>
+    </div>
+    }
+    
 
 }
 export default ProjectFrame;

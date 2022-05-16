@@ -135,49 +135,71 @@ function ActualiteView({user, you, rootUser}){
             }
         )
     }
-    return (
-        <div>
-            <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
-                <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
-                    <h4>{"Actualités"}</h4>
-                    <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                        <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
-                    </Button>
+    if (!user.isFinish){
+        return (
+            <div>
+                <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
+                    <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
+                        <h4>{"Actualités"}</h4>
+                        <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                            <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
+                        </Button>
+                    </div>
+                    {
+                        user.haveActuList.map((actu, index) =>
+                            <ActuElem
+                                action={user.action}
+                                actu={actu}>
+    
+                            </ActuElem>
+                        )
+                    }
                 </div>
-                {
-                    user.haveActuList.map((actu, index) =>
-                        <ActuElem
-                            action={user.action}
-                            actu={actu}>
-
-                        </ActuElem>
-                    )
-                }
+                <Modal show={show} className="highest" onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Nouvelle actualité</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <div>
+                            {listAction.map((action, index) => 
+                                <Button onClick={()=>selectAction(action)} className="me-2" variant={ action.select ? action.color : "outline-"+action.color }>{action.title}</Button>
+                            )}
+                        </div>
+                        <div>
+                            {res}
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={sendElem}>
+                            Envoyer
+                        </Button>
+                        <Button variant="outline-primary" onClick={handleClose}>
+                            Fermer
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
-            <Modal show={show} className="highest" onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Nouvelle actualité</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div>
-                        {listAction.map((action, index) => 
-                            <Button onClick={()=>selectAction(action)} className="me-2" variant={ action.select ? action.color : "outline-"+action.color }>{action.title}</Button>
-                        )}
+        )
+    }else{
+        return (
+            <div>
+                <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
+                    <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
+                        <h4>{"Actualités"}</h4>
                     </div>
-                    <div>
-                        {res}
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={sendElem}>
-                        Envoyer
-                    </Button>
-                    <Button variant="outline-primary" onClick={handleClose}>
-                        Fermer
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
-    )
+                    {
+                        user.haveActuList.map((actu, index) =>
+                            <ActuElem
+                                action={user.action}
+                                actu={actu}>
+    
+                            </ActuElem>
+                        )
+                    }
+                </div>
+            </div>
+        )
+    }
+    
 }
 export default ActualiteView;

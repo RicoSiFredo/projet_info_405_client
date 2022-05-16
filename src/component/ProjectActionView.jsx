@@ -20,7 +20,8 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     function inviteMember(){   
     }
     console.log(project);
-    return <div>
+    if (!project.isFinish){
+        return <div>
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                 <h4>{"Membres"}</h4>
@@ -51,5 +52,23 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
             </Modal.Footer>
         </Modal>
     </div>
+    }else{
+        return <div>
+        <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
+            <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
+                <h4>{"Membres"}</h4>
+            </div>
+            <ProjectActionList 
+                typeAction={typeAction} 
+                updatePage={updatePage} 
+                user={user} 
+                project={project}
+                actionList={actionList}>
+
+            </ProjectActionList>
+        </div>
+    </div>
+    }
+    
 }
 export default ProjectActionView;
