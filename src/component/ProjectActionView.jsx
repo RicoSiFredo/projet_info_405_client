@@ -17,9 +17,9 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     function handleClose(){
         updateShow(false);
     }
-    function inviteMember(){
-
+    function inviteMember(){   
     }
+    console.log(project);
     return <div>
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">

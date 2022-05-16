@@ -117,7 +117,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     }
     
     
-    let test = "/message/";
+    let test = "/message/-1";
     console.log(action.user);
     if (action.user.id_str != user.id_str){
 

@@ -80,7 +80,6 @@ function ProjectFrame({rootUser, updatePage}){
         handleClose();
     }
     function requestFinish() {
-        project.finished = true;
         endClose();
     }
 

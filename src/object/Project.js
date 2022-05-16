@@ -16,6 +16,8 @@ export default class Project extends Object405 {
     profile = undefined;
     banner = undefined;
     date = undefined;
+    isFinish = undefined;
+    
     
 
     permissionList = new ListEats("", undefined, CompareEats.compareInt("type", CompareEats.ASC), "", true)
@@ -25,6 +27,8 @@ export default class Project extends Object405 {
     tecnoList = new ListEats("use", this);
     actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
     actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
+
+    
     
 
     havePermission(perm){
