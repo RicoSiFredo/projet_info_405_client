@@ -8,12 +8,14 @@ export default class Actu extends Object405 {
     
     static TYPE = "Actu";
 
-    type = undefined;
+    name = undefined;
+    descriptionProject = undefined;
     description = undefined;
     price = undefined;
     heure = undefined;
     start = undefined;
     end = undefined;
+    date = undefined;
 
     compList = new ListEats("for_comp", this, CompareEats.compareInt("date", CompareEats.DESC))
     role = new SimpleEats("for_role", this)
@@ -63,12 +65,14 @@ export default class Actu extends Object405 {
         );
     }
 
-    postuler(message, prix, failed, success){
+    postuler(comment, prix, start, end, failed, success){
         super.makeRequest(
             "actu/postuler",
             {
                 access_token: Data.accessToken(),
-                message: message,
+                message: comment,
+                start: start,
+                end: end,
                 prix: prix,
                 id_actu: this.id_str,
                 id_project: this.parent.id_str

@@ -59,8 +59,8 @@ function HistoryView({user}){
                 description: description,
                 price: price,
                 heure: heure,
-                start: new Date(start).getTime(),
-                end: new Date(end).getTime(),
+                start: Math.ceil(new Date(start).getTime()/1000),
+                end: Math.ceil(new Date(end).getTime()/1000),
                 comp_list: idList
             },
             function(error){
@@ -127,10 +127,16 @@ function HistoryView({user}){
                         <Field className={"mt-3"} val={price} changeValue={changePrice} label="Salaire mois ( optionnel )" name="price"></Field>
                         <Row className={"mt-3"}>
                             <Col>
-                                <Form.Control type="date" value={start} onChange={changeStart} name="start" placeholder="Debut" />
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Début</Form.Label>
+                                    <Form.Control type="date" value={start} onChange={changeStart} name="start" placeholder="Debut" />
+                                </Form.Group>
                             </Col>
                             <Col>
-                                <Form.Control type="date" value={end} onChange={changeEnd} name="end" placeholder="Fin" />
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Fin</Form.Label>
+                                    <Form.Control type="date" value={end} onChange={changeEnd} name="end" placeholder="Fin" />
+                                </Form.Group>
                             </Col>
                         </Row>
                     </div>

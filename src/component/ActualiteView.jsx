@@ -100,10 +100,16 @@ function ActualiteView({user, you, rootUser}){
             <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Salaire mois ( optionnel )" name="name"></Field>
             <Row className={"mt-3"}>
                 <Col>
-                    <Form.Control type="date" value={start} onChange={changeStart} name="start" placeholder="Debut" />
+                    <Form.Group className="mb-3">
+                        <Form.Label>Début</Form.Label>
+                        <Form.Control type="date" value={start} onChange={changeStart} name="start" placeholder="Debut" />
+                    </Form.Group>
                 </Col>
                 <Col>
-                    <Form.Control type="date" value={end} onChange={changeEnd} name="end" placeholder="Fin" />
+                    <Form.Group className="mb-3">
+                        <Form.Label>Fin</Form.Label>
+                        <Form.Control type="date" value={end} onChange={changeEnd} name="end" placeholder="Fin" />
+                    </Form.Group>
                 </Col>
             </Row>
         </div>
@@ -114,6 +120,8 @@ function ActualiteView({user, you, rootUser}){
         for(let i = 0; i < compList.length; i++){
             idList.push(compList[i].id_str);
         }
+        alert(start)
+        alert(Math.ceil(new Date(start).getTime()/1000))
         user.makeRequest(
             '/project/create/actu', 
             {
@@ -122,9 +130,9 @@ function ActualiteView({user, you, rootUser}){
                 description: comment,
                 price: prix,
                 heure: heure,
-                start: new Date(start).getTime(),
-                end: new Date(end).getTime(),
-                id_role: role,
+                start: Math.ceil(new Date(start).getTime()/1000),
+                end: Math.ceil(new Date(end).getTime()/1000),
+                role: role,
                 comp_list: idList
             },
             function(error){

@@ -36,7 +36,6 @@ function LinearCompList({refList, compList}){
         return res;
     }
     let list = []
-    console.log(compList)
     if(Array.isArray(compList)){
         list = compList;
     }

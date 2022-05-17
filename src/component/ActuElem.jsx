@@ -1,16 +1,28 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
-import { Link, Route, Router, Routes, useNavigate } from 'react-router-dom';
-import LinearCompList from "../list/LinearCompList";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import Data from "../utils/Data";
 import Field from "./Field";
+import HistoryElem from "./HistoryElem";
 
 function ActuElem({action, actu}){
     const [show, updateShow] = useState(false);
     
     const [comment, updateComment] = useState("");
+    const [heure, updateHeure] = useState("");
+    const [end, updateEnd] = useState("");
+    const [start, updateStart] = useState("");
     function changeComment(e){
         updateComment(e.target.value);
+    }
+    function changeHeure(e){
+        updateHeure(e.target.value);
+    }
+    function changeStart(e){
+        updateStart(e.target.value);
+    }
+    function changeEnd(e){
+        updateEnd(e.target.value);
     }
     const [prix, updatePrix] = useState("");
     function changePrix(e){
@@ -56,29 +68,16 @@ function ActuElem({action, actu}){
         }
     }
     return <div className={"pb-2 border-top separator pt-3 ps-3 pe-2" }>
-        <div>
+        <div className="d-flex justify-content-between">
             <h4>Offre d'emploi</h4>
-            <Link className="text-decoration-none text-dark" to={"/offre/"+actu.id_str}>
+            <Link className="me-2 float-end text-decoration-none text-dark" to={"/offre/"+actu.id_str}>
                 <Button>Voir l'annonce</Button>
             </Link>
         </div>
         <div>
-            <LinearCompList
-                compList={actu.compList}>
+            <HistoryElem history={actu}>
 
-            </LinearCompList>
-            <p className="mb-2">
-                {"Role : " + actu.role.name}
-            </p>
-            <p className="mb-2">
-                {"Message : " + actu.comment}
-            </p>
-            <p className="mb-2">
-                {"Prix : " + actu.price + " €"}
-            </p>
-            <p className="mb-2">
-                {"Durée : " + actu.duree + " j"}
-            </p>
+            </HistoryElem>
         </div>
         <div>
             {
@@ -90,9 +89,25 @@ function ActuElem({action, actu}){
                 <Modal.Title>Postuler pour cette offre</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <p>Choissiez votre message et le prix désiré</p>
+                <p className="mb-2">Choissiez votre message présenté au recruteur</p>
                 <Field val={comment} changeValue={changeComment} label="Message" name="message"></Field>
-                <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Prix €" name="price"></Field>
+                <p className="mt-3 mb-2">Suggérer une modification ( optionnel )</p>
+                <Field className={"mt-1"} val={heure} changeValue={changeHeure} label="Heure par semaine" name="heure"></Field>
+                <Field className={"mt-3"} val={prix} changeValue={changePrix} label="Salaire mois" name="price"></Field>
+                <Row className={"mt-3"}>
+                <Col>
+                    <Form.Group>
+                        <Form.Label>Début</Form.Label>
+                        <Form.Control type="date" value={start} onChange={changeStart} name="start" placeholder="Debut" />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group>
+                        <Form.Label>Fin</Form.Label>
+                        <Form.Control type="date" value={end} onChange={changeEnd} name="end" placeholder="Fin" />
+                    </Form.Group>
+                </Col>
+            </Row>
             </Modal.Body>
             <Modal.Footer>
                 <button className="btn btn-primary" onClick={handleSubmit}>Postuler</button>
