@@ -1,7 +1,7 @@
 import PageEnum from "../enum/PageEnum";
 import Utils from "../utils/Utils";
 import React from "react"
-import { Bell, BellFill, Search, ThreeDots } from "react-bootstrap-icons";
+import { Bell, BellFill, Search, ThreeDots, EnvelopeFill, Person } from "react-bootstrap-icons";
 import { Badge, Button , Modal} from "react-bootstrap";
 import { useEffect,useState } from "react";
 import ErrorEats from "../object/base/ErrorEats";
@@ -11,6 +11,7 @@ import Eats from "../object/base/Eats";
 import Constant from "../utils/Constant";
 import { useLocation } from 'react-router-dom'
 import { Link } from "react-router-dom";
+import ImgProfile from "../component/ImgProfile";
 
 function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     const location = useLocation();
@@ -41,7 +42,26 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     }
     let button;
     if (user.logged){
-        button = <div>
+        button = <div className="d-flex justify-content-start me-2">
+
+            <Link to={"/message/-1"} className="me-2">
+                <Button variant="primary">
+                    <EnvelopeFill></EnvelopeFill>
+                    <Badge pill className="ms-2" bg="light" text="primary">2</Badge>
+                </Button>
+            </Link>
+
+            <Button onClick={openNotif} className="me-2">
+                <BellFill></BellFill>
+                <Badge pill className="ms-2" bg="light" text="primary">9</Badge>
+            </Button>
+
+            <Link to={"/profil/"+user.id_str}>
+                <Button className="me-2" variant="primary">
+                    <Person></Person>
+                </Button>
+            </Link>
+
             <Button className="me-2" onClick={openParam} variant="primary">
 				<ThreeDots></ThreeDots>
 			</Button>
@@ -57,11 +77,6 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
                         </Button>
                     </Modal.Footer>
                 </Modal>
-
-            <Button onClick={openNotif} className="me-3">
-                <BellFill></BellFill>
-                <Badge pill className="ms-2" bg="light" text="primary">9</Badge>
-            </Button>
         </div>
     }
     else {
