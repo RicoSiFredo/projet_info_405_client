@@ -10,12 +10,54 @@ import PermEnum from "../enum/PermEnum";
 import { Link } from "react-router-dom";
 import ListEats from "../object/base/ListEats";
 import ListRole from "../component/ListeRole";
+import { Rating } from 'react-simple-star-rating'
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [listConv, updateConv] = useState(new ListEats("", undefined));
     let [show, updateShow] = useState(false);
+    const [showNotes, updateNotes] = useState(false);
+    const [rating, setRating] = useState(0)
+    const [newComment, setNewComment] = useState("");
     let [showRole, updateShowRole] = useState(false);
     let [verif, updateShowVerif] = useState(false);
+
+    function handleCloseNote() {
+        updateNotes(false);
+    }
+    function addNote() {
+        updateNotes(true);
+    }
+    const Stars = () => {
+         // initial rating value
+      
+        // Catch Rating value
+        const handleRating = (rate) => {
+          setRating(rate)
+          // other logic
+        }
+      
+        return (
+            <Rating
+                transition
+                onClick={handleRating}
+                ratingValue={rating} /* Available Props */
+                allowHalfIcon={true}
+            />
+        )
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        try{
+            if (newComment != ("")){
+                setNewComment("");
+                user.createComment(action.user.id_str,newComment,rating);    
+            }
+
+        }catch(err){
+            console.log(err);
+        }
+    };
 
     function handleClose() {
         updateShow(false);
@@ -116,7 +158,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
 
     }
     
-    
     let test = "/message/-1";
     console.log(action.user);
     if (action.user.id_str != user.id_str){
@@ -206,6 +247,33 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                         </Modal.Footer>
                     </Modal>
                 </div>
+            </div>
+        }else{
+            bonus =
+            <div className="align-self-center flex ">
+                <Button onClick={addNote} variant="primary">Noter</Button>
+
+                <Modal show={showNotes} className="highest" onHide={handleCloseNote}>
+            <Modal.Header closeButton>
+                <Modal.Title>Ajouter un avis</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div>Note : <Stars />
+                <br />Commentaire : <br />
+                    <textarea className="CommentaireInput" placeholder="Laisser un avis..."
+                    onChange={(e) => setNewComment(e.target.value)}
+                    value={newComment}
+                    ></textarea>
+                </div>
+                
+                
+            </Modal.Body>
+            <Modal.Footer>
+                <button className="btn btn-primary" onClick={handleSubmit}>Envoyer</button>
+                <button className="btn btn-primary" onClick={handleCloseNote}>Fermer</button>
+            </Modal.Footer>
+            
+        </Modal>
             </div>
         }
 
