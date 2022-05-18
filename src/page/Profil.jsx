@@ -46,6 +46,7 @@ function Profil({rootUser}){
                 transition
                 onClick={handleRating}
                 ratingValue={rating} /* Available Props */
+                allowHalfIcon={true}
             />
         )
     }
@@ -145,6 +146,7 @@ function Profil({rootUser}){
                                             readonly={true}
                                             allowHover={false}
                                             ratingValue={obj.note} /* Available Props */
+                                            allowHalfIcon={true}
                                         /> <br />
                                         Commentaire : {obj.text} <br />
                                         écrit par : {obj.auteur.firstname} 
