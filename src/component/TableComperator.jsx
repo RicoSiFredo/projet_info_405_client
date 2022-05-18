@@ -68,7 +68,8 @@ function TableComperator({offre}){
             },
             fun_desc: function(a, b){
                 return scoreStatue(a, b) * -1;
-            }
+            },
+            coef: 1
         },
         {
             name: "Nom",

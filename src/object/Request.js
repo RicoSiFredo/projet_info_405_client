@@ -42,7 +42,7 @@ export default class Request extends CvElem {
 
     getScore(){
         return this.getScoreComp()*this.getCoefComp()*100+
-        this.getScoreStatue()*this.getCoefStatue()*100;
+        this.getScoreStatue()*this.getCoefStatue();
     }
 
     getStatue(){
@@ -66,6 +66,9 @@ export default class Request extends CvElem {
             return 100;
         }
         else if(this.getStatue()==0){
+            return 0;
+        }
+        else {
             return 0;
         }
     }
