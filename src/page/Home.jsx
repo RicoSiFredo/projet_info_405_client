@@ -23,13 +23,8 @@ function Home({user, navigate, updatePage}){
             navigate("/");
             user.logout();
         }
-        button = <div className="d-flex flex-column">
-            <Link to={"/profil/"+user.id_str}>
-                <Button className="m-1 w-100" variant="primary" size="lg">Profil</Button>
-            </Link>
-            <Link to={"/message/-1"}>
-                <Button className="m-1 w-100" variant="primary" size="lg">Messagerie</Button>
-            </Link>
+        button = <div>
+            
         </div>
     }
     return <div className="d-flex justify-content-around">
@@ -60,8 +55,8 @@ function Home({user, navigate, updatePage}){
                                 alt="Second slide"
                                 />
                                 <Carousel.Caption>
-                                <h5>Choisissez un projet</h5>
-                                <p>Selectionnez le en fonction des technologies utilisés par exemple</p>
+                                <h5>Créer un projet</h5>
+                                <p>Concevez et publiez votre projet pour être rejoins par des professionnels</p>
                                 </Carousel.Caption>
                             </Carousel.Item>
                             <Carousel.Item>
