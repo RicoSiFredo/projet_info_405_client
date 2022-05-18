@@ -70,6 +70,7 @@ function Profil({rootUser}){
         user.getAllAction();
         user.getAllComment();
         user.getAllHistory();
+        user.getMoyenne();
     }, []);
     let canEdit = Data.isMe(user);
     if (Data.isMe(user)){

@@ -16,6 +16,7 @@ export default class User extends Object405 {
     description = undefined;
     profile = undefined;
     banner = undefined;
+    moyenne_notes = undefined;
 
     haveActuList = new ListEats("have_actu", this);
     skillList = new ListEats("got_skill", this);
@@ -308,6 +309,33 @@ export default class User extends Object405 {
             },
             function(response){
                 if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+    getMoyenne(failed, success){
+        console.log("test1");
+        console.log(this.id_str);
+        super.makeRequest(
+            "user/get/moyenneNotes",
+            {
+                access_token: Data.accessToken(),
+                sender_id: this.id_str
+            },
+            function(error){
+                console.log("alors? ");
+                if(failed!=undefined){
+                    console.log("test2");
+                    failed(error);
+                }
+            },
+            function(response){
+                console.log("peut etre ? ");
+                console.log(response);
+                console.log(success);
+                if(success!=undefined){
+                    console.log("test3");
                     success(response);
                 }
             }
