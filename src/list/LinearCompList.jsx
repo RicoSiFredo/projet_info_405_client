@@ -58,7 +58,7 @@ function LinearCompList({refList, compList}){
             }
         });
     }
-    return <div className="d-flex flex-wrap">
+    return <div>
         {list.map((comp, index) => 
             <div 
                 key={comp.id_str} 

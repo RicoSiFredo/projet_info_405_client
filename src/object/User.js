@@ -26,6 +26,7 @@ export default class User extends Object405 {
     friendsList = new ListEats("friends", this);
     commentList = new ListEats("is_comment", this, CompareEats.compareInt("date", CompareEats.DESC));
     historyList = new ListEats("history", this, CompareEats.compareInt("date", CompareEats.DESC));
+    cvList = new ListEats(["history","act"], this, CompareEats.compareInt("date", CompareEats.DESC));
     logged = false;
 
     constructor(){ 
@@ -324,22 +325,20 @@ export default class User extends Object405 {
                 sender_id: this.id_str
             },
             function(error){
-                console.log("alors? ");
                 if(failed!=undefined){
-                    console.log("test2");
                     failed(error);
                 }
             },
             function(response){
-                console.log("peut etre ? ");
-                console.log(response);
-                console.log(success);
                 if(success!=undefined){
-                    console.log("test3");
                     success(response);
                 }
             }
         )
     } 
+
+    getCurrentHeure(){
+        return 0;
+    }
 }
 

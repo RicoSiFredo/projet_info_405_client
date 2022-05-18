@@ -1,7 +1,7 @@
-import Object405 from "./base/ObjectEats"
 import SimpleEats from "./base/SimpleEats";
+import CvElem from "./CvElem";
 
-export default class Request extends Object405 {
+export default class Request extends CvElem {
  
     static TYPE = "Request";
 
@@ -41,6 +41,31 @@ export default class Request extends Object405 {
         return this.getScoreComp()*this.getCoefComp()*100;
     }
 
+    getStatue(){
+        let heure = this.user.getCurrentHeure();
+        if(heure==0){
+            return 2;
+        }
+        else if(heure<=18){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    getScoreStatue(){
+        if(this.getStatue()==2){
+            return 250;
+        }
+        else if(this.getStatue()==1){
+            return 100;
+        }
+        else if(this.getStatue()==0){
+            return 0;
+        }
+    }
+
     getScoreComp(){
         let listNeed = this.parent.compList;
         let listHave = this.user.skillList;
@@ -55,5 +80,29 @@ export default class Request extends Object405 {
             }
         }
         return count;
+    }
+
+    getStatueTitle(){
+        if(this.getStatue()==2){
+            return "Libre";
+        }
+        else if(this.getStatue()==1){
+            return "Partiel"
+        }
+        else if(this.getStatue()==0){
+            return "Temps plien"
+        }
+    }
+
+    getStatueBackground(){
+        if(this.getStatue()==2){
+            return "bg-success";
+        }
+        else if(this.getStatue()==1){
+            return "bg-warning";
+        }
+        else if(this.getStatue()==0){
+            return "bg-error";
+        }
     }
 }

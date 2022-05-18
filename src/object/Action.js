@@ -1,8 +1,7 @@
-import CompareEats from "./base/CompareEats";
-import Object405 from "./base/ObjectEats";
 import SimpleEats from "./base/SimpleEats";
+import CvElem from "./CvElem";
 
-export default class Action extends Object405 {
+export default class Action extends CvElem {
 
     static TYPE = "Action";
 

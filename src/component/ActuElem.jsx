@@ -9,9 +9,9 @@ function ActuElem({action, actu}){
     const [show, updateShow] = useState(false);
     
     const [comment, updateComment] = useState("");
-    const [heure, updateHeure] = useState("");
-    const [end, updateEnd] = useState("");
-    const [start, updateStart] = useState("");
+    const [heure, updateHeure] = useState(actu.heure);
+    const [end, updateEnd] = useState(new Date(actu.end * 1000).toISOString().split('T')[0]);
+    const [start, updateStart] = useState(new Date(actu.start * 1000).toISOString().split('T')[0]);
     function changeComment(e){
         updateComment(e.target.value);
     }
@@ -24,7 +24,7 @@ function ActuElem({action, actu}){
     function changeEnd(e){
         updateEnd(e.target.value);
     }
-    const [prix, updatePrix] = useState("");
+    const [prix, updatePrix] = useState(actu.price);
     function changePrix(e){
         updatePrix(e.target.value);
     }
@@ -34,6 +34,9 @@ function ActuElem({action, actu}){
         actu.postuler(
             comment, 
             prix,
+            heure,
+            Math.ceil(new Date(start).getTime()/1000),
+            Math.ceil(new Date(end).getTime()/1000),
             function(error){
                 
             },

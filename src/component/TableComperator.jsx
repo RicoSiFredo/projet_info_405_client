@@ -30,6 +30,19 @@ function scoreComp(a, b){
     }
     return res;
 }
+function scoreStatue(a, b){
+    let res;
+    if(a.getScoreStatue()>b.getScoreStatue()){
+        res = -1;
+    }
+    else if(a.getScoreStatue()<b.getScoreStatue()){
+        res = 1;
+    }
+    else {
+        res = 0;
+    }
+    return res;
+}
 
 function TableComperator({offre}){
     const [colList, updateColList] = useState([
@@ -45,6 +58,16 @@ function TableComperator({offre}){
             },
             fun_desc: function(a, b){
                 return score(a, b) * -1;
+            }
+        },
+        {
+            name: "Statue",
+            sort: SortEnum.ASC,
+            fun_asc: function(a, b){
+                return scoreStatue(a, b) * 1;
+            },
+            fun_desc: function(a, b){
+                return scoreStatue(a, b) * -1;
             }
         },
         {

@@ -65,15 +65,16 @@ export default class Actu extends Object405 {
         );
     }
 
-    postuler(comment, prix, start, end, failed, success){
+    postuler(comment, price, heure, start, end, failed, success){
         super.makeRequest(
             "actu/postuler",
             {
                 access_token: Data.accessToken(),
                 message: comment,
                 start: start,
+                heure: heure,
                 end: end,
-                prix: prix,
+                price: price,
                 id_actu: this.id_str,
                 id_project: this.parent.id_str
             },
