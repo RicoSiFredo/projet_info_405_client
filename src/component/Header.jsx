@@ -1,8 +1,8 @@
 import PageEnum from "../enum/PageEnum";
 import Utils from "../utils/Utils";
 import React from "react"
-import { Bell, BellFill, Search } from "react-bootstrap-icons";
-import { Badge, Button } from "react-bootstrap";
+import { Bell, BellFill, Search, ThreeDots } from "react-bootstrap-icons";
+import { Badge, Button , Modal} from "react-bootstrap";
 import { useEffect,useState } from "react";
 import ErrorEats from "../object/base/ErrorEats";
 import CompareEats from "../object/base/CompareEats";
@@ -10,11 +10,25 @@ import ListEats from "../object/base/ListEats";
 import Eats from "../object/base/Eats";
 import Constant from "../utils/Constant";
 import { useLocation } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     const location = useLocation();
     const [pathname, updatePathname] = useState("/");
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+    let [show, updateShow] = useState(false);
+
+    function handleClose() {
+        updateShow(false);
+    }
+    function openParam() {
+        updateShow(true);
+    }
+
+    function logout(){
+        navigate("/");
+        user.logout();
+    }
 
     useEffect(function(){
         if(!location.pathname.includes("/search/")){
@@ -28,6 +42,22 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     let button;
     if (user.logged){
         button = <div>
+            <Button className="me-2" onClick={openParam} variant="primary">
+				<ThreeDots></ThreeDots>
+			</Button>
+            <Modal show={show} className="highest" onHide={handleClose}>
+                    <Modal.Body className="d-flex justify-content-center">
+                        <Link to={"/"}>
+                            <Button className="m-1" variant="primary" onClick={logout}>Déconnexion</Button>
+                        </Link>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="outline-primary" onClick={handleClose}>
+                            Retour
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
             <Button onClick={openNotif} className="me-3">
                 <BellFill></BellFill>
                 <Badge pill className="ms-2" bg="light" text="primary">9</Badge>

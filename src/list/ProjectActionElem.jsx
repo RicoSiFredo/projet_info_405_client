@@ -167,7 +167,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                             </Button>
                         </div>
                         <Alert variant="danger" show={verif} className="mt-3">
-                            <Alert.Heading>Etes-vous sûr de vous ?</Alert.Heading>
+                            <Alert.Heading>Êtes-vous sûr de vous ?</Alert.Heading>
                             <Button className="m-1" variant="primary" onClick={exclure}>
                                     Valider
                                 </Button>
