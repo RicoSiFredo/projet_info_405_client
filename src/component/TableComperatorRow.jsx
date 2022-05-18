@@ -19,13 +19,17 @@ function TableComperatorRow({offre, index, request}){
             </div>
         </td>
         <td>{request.user.getDisplayName()}</td>
+        <td>{request.user.getAge() + " ans"}</td>
         <td>
             <LinearCompList
+                more={true}
+                request={request}
                 refList={offre.compList}
                 compList={request.user.skillList}>
 
             </LinearCompList>
         </td>
+        <td>{request.user.getTotalHeure() + " h"}</td>
     </tr>
 }
 export default TableComperatorRow;

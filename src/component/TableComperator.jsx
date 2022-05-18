@@ -30,12 +30,38 @@ function scoreComp(a, b){
     }
     return res;
 }
+function scoreAge(a, b){
+    let res;
+    if(a.getScoreAge()>b.getScoreAge()){
+        res = -1;
+    }
+    else if(a.getScoreAge()<b.getScoreAge()){
+        res = 1;
+    }
+    else {
+        res = 0;
+    }
+    return res;
+}
 function scoreStatue(a, b){
     let res;
     if(a.getScoreStatue()>b.getScoreStatue()){
         res = -1;
     }
     else if(a.getScoreStatue()<b.getScoreStatue()){
+        res = 1;
+    }
+    else {
+        res = 0;
+    }
+    return res;
+}
+function scoreExperience(a, b){
+    let res;
+    if(a.getScoreExperience()>b.getScoreExperience()){
+        res = -1;
+    }
+    else if(a.getScoreExperience()<b.getScoreStatue()){
         res = 1;
     }
     else {
@@ -61,8 +87,8 @@ function TableComperator({offre}){
             }
         },
         {
-            name: "Statue",
-            sort: SortEnum.ASC,
+            name: "Status",
+            sort: SortEnum.UNDEFINED,
             fun_asc: function(a, b){
                 return scoreStatue(a, b) * 1;
             },
@@ -76,6 +102,17 @@ function TableComperator({offre}){
             sort: SortEnum.CANT
         },
         {
+            name: "Age",
+            sort: SortEnum.UNDEFINED,
+            fun_asc: function(a, b){
+                return scoreAge(a, b) * 1;
+            },
+            fun_desc: function(a, b){
+                return scoreAge(a, b) * -1;
+            },
+            coef: 1
+        },
+        {
             name: "Compétences",
             sort: SortEnum.UNDEFINED,
             fun_asc: function(a, b){
@@ -83,6 +120,17 @@ function TableComperator({offre}){
             },
             fun_desc: function(a, b){
                 return scoreComp(a, b) * -1;
+            },
+            coef: 1
+        },
+        {
+            name: "Expérience",
+            sort: SortEnum.UNDEFINED,
+            fun_asc: function(a, b){
+                return scoreExperience(a, b) * 1;
+            },
+            fun_desc: function(a, b){
+                return scoreExperience(a, b) * -1;
             },
             coef: 1
         }

@@ -33,16 +33,33 @@ export default class Request extends CvElem {
         }
     }
 
+    getCoefExperience(){
+        return this.getCoef("Expérience");
+    }
+    getCoefAge(){
+        return this.getCoef("Age");
+    }
     getCoefComp(){
         return this.getCoef("Compétences");
     }
     getCoefStatue(){
-        return this.getCoef("Statue");
+        return this.getCoef("Status");
     }
 
     getScore(){
         return this.getScoreComp()*this.getCoefComp()*100+
-        this.getScoreStatue()*this.getCoefStatue();
+        this.getScoreStatue()*this.getCoefStatue()+
+        this.getScoreExperience()*this.getCoefExperience()+
+        this.getScoreAge()*this.getCoefAge() * 10;
+    }
+    
+    getScoreAge(){
+        let age = 100 - this.user.getAge();
+        return age;
+    }
+
+    getScoreExperience(){
+        return this.user.getTotalHeure();
     }
 
     getStatue(){

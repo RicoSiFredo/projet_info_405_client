@@ -1,5 +1,8 @@
 import React from "react";
-function LinearCompList({refList, compList}){
+import { useState } from "react";
+import { CaretDownFill, CaretRightFill } from "react-bootstrap-icons";
+function LinearCompList({more=false, request, refList, compList}){
+    const [show, updateShow] = useState(false);
     function inRef(comp){
         let found = false;
         let i = 0;
@@ -58,14 +61,38 @@ function LinearCompList({refList, compList}){
             }
         });
     }
-    return <div>
-        {list.map((comp, index) => 
-            <div 
-                key={comp.id_str} 
-                className={"round-50p d-inline ps-2 pe-2 pt-1 pb-1 "+getBackground(comp)+" mt-1 mb-1 me-2 text-white"}>
-                {comp.name}
-            </div>
-        )}
-    </div>
+    if(!more){
+        return <div>
+            {list.map((comp, index) => 
+                <div 
+                    key={comp.id_str} 
+                    className={"round-50p d-inline ps-2 pe-2 pt-1 pb-1 "+getBackground(comp)+" mt-1 mb-1 me-2 text-white"}>
+                    {comp.name}
+                </div>
+            )}
+        </div>
+    }
+    else {
+        let icon;
+        if(!show){
+            icon = <CaretRightFill className="text-white mb-1 me-1"></CaretRightFill>;
+        }
+        else {
+            icon = <CaretDownFill className="text-white me-1 mb-1"></CaretDownFill>;
+        }
+        return <div className="d-flex">
+            {list.map((comp, index) => 
+                <div 
+                    onClick={()=>{updateShow(!show)}}
+                    key={comp.id_str} 
+                    className={"round-50p ps-2 pe-3 pt-1 pb-1 "+getBackground(comp)+" mt-1 mb-1 me-2"}>
+                    
+                    {icon}
+                    <span className="text-white">{comp.name}</span>
+                    {show&&<p className="text-white ms-1 mb-1">dffdf</p>}
+                </div>
+            )}
+        </div>
+    }
 }
 export default LinearCompList;

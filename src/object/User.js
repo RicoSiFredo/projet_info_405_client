@@ -346,8 +346,19 @@ export default class User extends Object405 {
                 heure += cv.heure;
             }
         }
-        console.log(heure)
         return heure;
+    }
+    getTotalHeure(){
+        let heure = 0;
+        for(let i=0;i<this.cvList.size();i++){
+            let cv = this.cvList.get(i);
+            let duration = ( cv.end - cv.start ) / 604800.0 * cv.heure;
+            heure += duration;
+        }
+        return parseInt(heure, 10);
+    }
+    getAge(){
+        return 18
     }
 }
 
