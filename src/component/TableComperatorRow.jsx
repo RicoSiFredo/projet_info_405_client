@@ -1,7 +1,14 @@
 import React from "react";
+import { useState } from "react";
+import { Modal } from "react-bootstrap";
 import LinearCompList from "../list/LinearCompList";
 function TableComperatorRow({offre, index, request}){
-    console.log(request.user.cvList)
+
+    const [show, updateShow] = useState(false);
+    function handleClose() {
+        updateShow(false);
+    }
+
     return <tr>
         <th scope="row">{index}</th>
         <td>{request.getScore()}</td>

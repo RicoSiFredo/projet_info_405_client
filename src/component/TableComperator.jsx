@@ -139,7 +139,7 @@ function TableComperator({offre}){
                 <tbody>
                     {
                         list.map((request, index) =>
-                            <TableComperatorRow 
+                            request && <TableComperatorRow 
                                 offre={offre} 
                                 index={index+1} 
                                 request={request}/>

@@ -338,7 +338,16 @@ export default class User extends Object405 {
     } 
 
     getCurrentHeure(){
-        return 0;
+        let heure = 0;
+        for(let i=0;i<this.cvList.size();i++){
+            let cv = this.cvList.get(i);
+            let dateCc = Math.ceil(new Date().getTime() / 1000);
+            if(cv.start<=dateCc&&cv.end>=dateCc){
+                heure += cv.heure;
+            }
+        }
+        console.log(heure)
+        return heure;
     }
 }
 

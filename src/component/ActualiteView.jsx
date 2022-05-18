@@ -120,8 +120,6 @@ function ActualiteView({user, you, rootUser}){
         for(let i = 0; i < compList.length; i++){
             idList.push(compList[i].id_str);
         }
-        alert(start)
-        alert(Math.ceil(new Date(start).getTime()/1000))
         user.makeRequest(
             '/project/create/actu', 
             {

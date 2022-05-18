@@ -36,9 +36,13 @@ export default class Request extends CvElem {
     getCoefComp(){
         return this.getCoef("Compétences");
     }
+    getCoefStatue(){
+        return this.getCoef("Statue");
+    }
 
     getScore(){
-        return this.getScoreComp()*this.getCoefComp()*100;
+        return this.getScoreComp()*this.getCoefComp()*100+
+        this.getScoreStatue()*this.getCoefStatue()*100;
     }
 
     getStatue(){
@@ -83,14 +87,15 @@ export default class Request extends CvElem {
     }
 
     getStatueTitle(){
+        let end = parseInt(this.user.getCurrentHeure(), 10) + " h"
         if(this.getStatue()==2){
             return "Libre";
         }
         else if(this.getStatue()==1){
-            return "Partiel"
+            return "Partiel - " + end;
         }
         else if(this.getStatue()==0){
-            return "Temps plien"
+            return "Temps plien - " + end;
         }
     }
 

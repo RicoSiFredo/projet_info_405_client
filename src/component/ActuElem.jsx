@@ -62,6 +62,7 @@ function ActuElem({action, actu}){
             if(actu.requestList.get(i).user.id_str == Data.getUserId()){
                 asked = true;
             }
+            i += 1
         }
         if(asked){
             footer = <p>Vous avez déjà postulé</p>
