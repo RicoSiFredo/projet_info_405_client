@@ -16,21 +16,13 @@ import HistoryView from "../component/HistoryView";
 function Profil({rootUser}){
     const {id} = useParams();
     const [user, updateUser] = useState(new User());
-    const [show, updateShow] = useState(false);
-    const [rating, setRating] = useState(0)
-    const [newComment, setNewComment] = useState("");
+    const [rating, setRating] = useState(0);
     
 
     user.id_str = id;
     function update(){
         updateUser(Eats.fakeUpdate(user));
         // fait croire à un changement
-    }
-    function handleClose() {
-        updateShow(false);
-    }
-    function addNote() {
-        updateShow(true);
     }
     const Stars = () => {
          // initial rating value
@@ -50,19 +42,6 @@ function Profil({rootUser}){
             />
         )
     }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        
-        try{
-            if (newComment != ("")){
-                setNewComment("");
-                rootUser.createComment(user.id_str,newComment,rating);    
-            }
-
-        }catch(err){
-            console.log(err);
-        }
-    };
     user.update = update;
     useEffect(function(){
         user.getAllSkill();
@@ -135,7 +114,6 @@ function Profil({rootUser}){
                     
             </ElemView>
             
-            <button className="btn btn-primary" onClick={addNote}>Ajouter un avis</button>
             <div>Commentaires : 
                 {
                     user.commentList.list.map((obj, index) => {
@@ -176,29 +154,6 @@ function Profil({rootUser}){
 
             </UserProjectView>
         </div>
-
-
-        <Modal show={show} className="highest" onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Ajouter un avis</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>Note : <Stars />
-                <br />Commentaire : <br />
-                    <textarea className="CommentaireInput" placeholder="Laisser un avis..."
-                    onChange={(e) => setNewComment(e.target.value)}
-                    value={newComment}
-                    ></textarea>
-                </div>
-                
-                
-            </Modal.Body>
-            <Modal.Footer>
-                <button className="btn btn-primary" onClick={handleSubmit}>Envoyer</button>
-                <button className="btn btn-primary" onClick={handleClose}>Fermer</button>
-            </Modal.Footer>
-            
-        </Modal>
     </div>
     }
     

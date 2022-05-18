@@ -16,7 +16,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [listConv, updateConv] = useState(new ListEats("", undefined));
     let [show, updateShow] = useState(false);
     const [showNotes, updateNotes] = useState(false);
-    const [rating, setRating] = useState(0)
+    const [rating, setRating] = useState(0);
     const [newComment, setNewComment] = useState("");
     let [showRole, updateShowRole] = useState(false);
     let [verif, updateShowVerif] = useState(false);
