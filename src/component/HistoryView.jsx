@@ -6,6 +6,8 @@ import Field from "./Field";
 import HistoryElem from "./HistoryElem";
 import SelectCompetence from "./SelectCompetence";
 import { Download, FiletypePdf } from "react-bootstrap-icons";
+import jsPDF from 'jspdf';
+
 
 function HistoryView({user}){
     let [show, updateShow] = useState(false);
@@ -90,6 +92,17 @@ function HistoryView({user}){
     function handleClose() {
         updateShow(false);
     }
+
+    function exportPDF(){
+        var doc = new jsPDF();
+        doc.text(20, 20, 'Voila ton cévé enculé');
+        doc.addFont('helvetica', 'normal');
+        doc.text(20, 60, 'Bien sur que non ça marche pas');
+        doc.text(20, 100, 'mdr.');
+
+        doc.save("MonCV.pdf");
+
+    }
     return <div>
         <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex justify-content-between">
@@ -114,12 +127,12 @@ function HistoryView({user}){
                             
                         </Modal.Body>
                         <Modal.Footer>
-                        <Button className="d-flex align-items-center m-1" variant="primary">
+                        <Button className="d-flex align-items-center m-1" variant="primary" onClick={exportPDF}>
                                 Exporter
                                 <FiletypePdf className="ms-2"></FiletypePdf>
                             </Button>
                             <Button variant="outline-primary" onClick={closeExport}>
-                                Retour
+                                Fermer
                             </Button>
                         </Modal.Footer>
                     </Modal>
@@ -187,5 +200,7 @@ function HistoryView({user}){
                 </Modal.Footer>
             </Modal>
     </div>
+
+    
 }
 export default HistoryView;
