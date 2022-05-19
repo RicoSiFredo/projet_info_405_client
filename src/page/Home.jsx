@@ -5,36 +5,10 @@ import { Link } from "react-router-dom";
 import Holder from 'react-holder';
 
 function Home({user, navigate, updatePage}){
-    let button;
-    if(!user.logged){
-        function login(){
-            navigate("/login");
-        }
-        function register(){
-            navigate("/register");
-        }
-        button = <div >
-            <Button className="m-1" variant="primary" size="lg" onClick={login}>Connexion</Button>
-            <Button className="m-1" variant="primary" size="lg" onClick={register}>Inscription</Button>
-        </div>
-    }
-    else {
-        function logout(){
-            navigate("/");
-            user.logout();
-        }
-        button = <div>
-            
-        </div>
-    }
+
     return <div className="d-flex justify-content-around">
-                <div className="card mt-3 ms-3 d-flex align-items-center p-2">
-                    <h2 className="m-3">Page d'accueil</h2>
-                    {button}
-                </div>
                 
-                
-                    <div className="card mt-3 me-3 w-75">
+                    <div className="card mt-4 me-5 ms-5 w-100">
                         <Carousel variant="dark">
                             <Carousel.Item>
                                 <img
@@ -51,7 +25,7 @@ function Home({user, navigate, updatePage}){
                             <Carousel.Item>
                                 <img
                                 className="d-block w-100"
-                                src="holder.js/800x550?text=Selectionnez un projet&bg=eee"
+                                src="holder.js/800x550?text=Votre projet&bg=eee"
                                 alt="Second slide"
                                 />
                                 <Carousel.Caption>
