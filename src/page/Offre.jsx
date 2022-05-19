@@ -16,17 +16,9 @@ function Offre({rootUser}){
     }
     offre.update = update;
     return <div>
-        <p>GATEAU LA GES TION CIRITQUE</p>
         <TableComperator offre={offre}>
 
         </TableComperator>
-        {
-            offre.requestList.map((request, index) => 
-                <div>
-                    <p>{request.user.firstname}</p>
-                </div>
-            )
-        }
     </div>
 }
 export default Offre;

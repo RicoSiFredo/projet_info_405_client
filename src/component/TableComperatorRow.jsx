@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import LinearCompList from "../list/LinearCompList";
+import Utils from "../utils/Utils";
 function TableComperatorRow({offre, index, request}){
 
     const [show, updateShow] = useState(false);
@@ -42,7 +43,7 @@ function TableComperatorRow({offre, index, request}){
 
             </LinearCompList>
         </td>
-        <td>{request.user.getTotalHeure() + " h"}</td>
+        <td>{request.user.getTotalHeure() + " h" + " / "+Utils.getDate(request.user.getTotalExp(), 1)}</td>
     </tr>
 }
 export default TableComperatorRow;
