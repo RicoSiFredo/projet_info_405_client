@@ -127,7 +127,8 @@ function Profil({rootUser}){
                     
             </ElemView>
             
-            <div>Commentaires : 
+            <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
+            Commentaires : 
                 {
                     user.commentList.list.map((obj, index) => {
                         let url = "/project/" + obj.projet.id_str;
