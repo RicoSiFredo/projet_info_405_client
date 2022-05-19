@@ -19,10 +19,12 @@ export default class Utils {
     static array_month_fr = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     static getDate(date, type, bonus=""){
         function toDate(date){
+            let array_month_fr = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
             try {
                 let dateObj = new Date(date*1000)
-                return dateObj.getDate()+" "+this.array_month_fr[dateObj.getMonth()]+" "+dateObj.getFullYear();
+                return dateObj.getDate()+" "+array_month_fr[dateObj.getMonth()]+" "+dateObj.getFullYear();
             } catch(e){
+                console.log(e)
                 return ""
             }
         }
