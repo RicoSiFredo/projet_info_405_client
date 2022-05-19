@@ -66,17 +66,17 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
 				<ThreeDots></ThreeDots>
 			</Button>
             <Modal show={show} className="highest" onHide={handleClose}>
-                    <Modal.Body className="d-flex justify-content-center">
-                        <Link to={"/"}>
-                            <Button className="m-1" variant="primary" onClick={logout}>Déconnexion</Button>
-                        </Link>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="outline-primary" onClick={handleClose}>
-                            Retour
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
+                <Modal.Body className="d-flex justify-content-center">
+                    <Link to={"/"}>
+                        <Button className="m-1" variant="primary" onClick={logout}>Déconnexion</Button>
+                    </Link>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="outline-primary" onClick={handleClose}>
+                        Retour
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     }
     else {

@@ -5,9 +5,18 @@ import Data from "../utils/Data";
 import Field from "./Field";
 import HistoryElem from "./HistoryElem";
 import SelectCompetence from "./SelectCompetence";
+import { Download, FiletypePdf } from "react-bootstrap-icons";
 
 function HistoryView({user}){
     let [show, updateShow] = useState(false);
+    let [showExport, updateShowExport] = useState(false);
+
+    function closeExport() {
+        updateShowExport(false);
+    }
+    function openExport() {
+        updateShowExport(true);
+    }
 
     let [name, updateName] = useState("");
     let [descriptionProject, updateDescriptionProject] = useState("");
@@ -83,11 +92,38 @@ function HistoryView({user}){
     }
     return <div>
         <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
-            <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
-                <h4>{"Curriculum vitæ"}</h4>
-                <Button onClick={addHistory} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                    <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
-                </Button>
+            <div className="d-flex justify-content-between">
+                <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
+                    <h4>{"Curriculum vitæ"}</h4>
+                    <Button onClick={addHistory} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                        <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
+                    </Button>
+                </div>
+                <div className="d-flex align-items-center me-3">
+                    <Button  onClick={openExport} variant="primary">
+                        <Download></Download>
+                    </Button>
+                    <Modal show={showExport} className="highest" onHide={closeExport}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Exporter mon CV</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body className="d-flex justify-content-center">
+
+                            Cette fonction permet de generer et de telecharger un document au format .pdf. <br></br>
+                            Nous nous basons sur vos activités présentes dans la section "Curriculum vitæ"
+                            
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button className="d-flex align-items-center m-1" variant="primary">
+                                Exporter
+                                <FiletypePdf className="ms-2"></FiletypePdf>
+                            </Button>
+                            <Button variant="outline-primary" onClick={closeExport}>
+                                Retour
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
             </div>
             <div>
                 {
