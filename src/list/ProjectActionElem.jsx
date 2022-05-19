@@ -57,6 +57,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         }catch(err){
             console.log(err);
         }
+        handleCloseNote();
     };
 
     function handleClose() {
