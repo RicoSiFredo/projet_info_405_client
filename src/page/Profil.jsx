@@ -130,7 +130,7 @@ function Profil({rootUser}){
             <div>Commentaires : 
                 {
                     user.commentList.list.map((obj, index) => {
-                        let url = "/project/" + obj.id_str;
+                        let url = "/project/" + obj.projet.id_str;
                                 return (
                                     <div className="Commentaires">
                                         Note : <Rating
