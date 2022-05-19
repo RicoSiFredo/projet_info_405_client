@@ -13,6 +13,7 @@ export default class Commentaire extends Object405 {
     text = undefined;
     note = undefined;
     auteur = new SimpleEats("send_comment", this);
+    projet = new SimpleEats("is_from", this);
     date = undefined;
 
     constructor(){ 

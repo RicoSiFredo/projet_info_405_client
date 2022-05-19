@@ -127,7 +127,8 @@ function Profil({rootUser}){
                                             allowHalfIcon={true}
                                         /> <br />
                                         Commentaire : {obj.text} <br />
-                                        écrit par : {obj.auteur.firstname} 
+                                        écrit par : {obj.auteur.firstname} <br />
+                                        sur le projet : {obj.projet.name}
                                     </div>            
                                 )
                             
