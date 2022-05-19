@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, Component, PropTypes} from "react";
+import ReactDOM from "react-dom";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import Constant from "../utils/Constant";
 import Data from "../utils/Data";
@@ -7,6 +8,7 @@ import HistoryElem from "./HistoryElem";
 import SelectCompetence from "./SelectCompetence";
 import { Download, FiletypePdf } from "react-bootstrap-icons";
 import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 function HistoryView({user}){
@@ -93,17 +95,21 @@ function HistoryView({user}){
         updateShow(false);
     }
 
-    function exportPDF(){
-        var doc = new jsPDF();
-        doc.text(20, 20, 'Voila ton cévé enculé');
-        doc.addFont('helvetica', 'normal');
-        doc.text(20, 60, 'Bien sur que non ça marche pas');
-        doc.text(20, 100, 'mdr.');
 
-        doc.save("MonCV.pdf");
+
+
+    function exportPDF(){
+
+        html2canvas(document.querySelector("#exp")).then(canvas => {
+            document.body.appendChild(canvas)
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF();
+            pdf.addImage(imgData, "PNG", 0, 0);
+            pdf.save("MonCV.pdf");
+        });
 
     }
-    return <div>
+    return <div id="exp">
         <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex justify-content-between">
                 <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
@@ -123,7 +129,8 @@ function HistoryView({user}){
                         <Modal.Body className="d-flex justify-content-center">
 
                             Cette fonction permet de generer et de telecharger un document au format .pdf. <br></br>
-                            Nous nous basons sur vos activités présentes dans la section "Curriculum vitæ"
+                            Nous nous basons sur vos activités présentes dans la section "Curriculum vitæ"<br></br>
+                            Cette operation peut prendre quelques secondes
                             
                         </Modal.Body>
                         <Modal.Footer>
