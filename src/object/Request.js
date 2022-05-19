@@ -6,7 +6,7 @@ export default class Request extends CvElem {
     static TYPE = "Request";
 
     message = undefined;
-    prix = undefined;
+    price = undefined;
 
     user = new SimpleEats("req_user", this);
 
@@ -45,12 +45,21 @@ export default class Request extends CvElem {
     getCoefStatue(){
         return this.getCoef("Status");
     }
+    getCoefSalaire(){
+        return this.getCoef("Salaire");
+    }
 
     getScore(){
         return this.getScoreComp()*this.getCoefComp()*100+
         this.getScoreStatue()*this.getCoefStatue()+
+        this.getScoreSalaire()*this.getCoefSalaire()+
         this.getScoreExperience()*this.getCoefExperience()+
         this.getScoreAge()*this.getCoefAge() * 10;
+    }
+
+    getScoreSalaire(){
+        let salaireDiff = this.parent.price - this.price;
+        return salaireDiff;
     }
     
     getScoreAge(){

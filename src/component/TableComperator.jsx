@@ -31,6 +31,19 @@ function scoreComp(a, b){
     }
     return res;
 }
+function scoreSalaire(a, b){
+    let res;
+    if(a.getScoreSalaire()>b.getScoreSalaire()){
+        res = -1;
+    }
+    else if(a.getScoreSalaire()<b.getScoreSalaire()){
+        res = 1;
+    }
+    else {
+        res = 0;
+    }
+    return res;
+}
 function scoreAge(a, b){
     let res;
     if(a.getScoreAge()>b.getScoreAge()){
@@ -86,6 +99,11 @@ function TableComperator({offre}){
         ),
         new ComparatorCol(
             "Nom"
+        ),
+        new ComparatorCol(
+            "Salaire",
+            SortEnum.UNDEFINED,
+            scoreSalaire
         ),
         new ComparatorCol(
             "Age",

@@ -8,7 +8,19 @@ function TableComperatorRow({offre, index, request}){
     function handleClose() {
         updateShow(false);
     }
-
+    let diff = "";
+    let price = request.price;
+    if(request.price==undefined){
+        price = offre.price
+    }
+    if(offre.price!=price){
+        if(offre.price>price){
+            diff = <span className="text-success">(- {offre.price-price} €)</span>
+        }
+        else {
+            diff = <span className="text-danger">(+ {price-offre.price} €)</span>
+        }
+    }
     return <tr>
         <th scope="row">{index}</th>
         <td>{request.getScore()}</td>
@@ -19,6 +31,7 @@ function TableComperatorRow({offre, index, request}){
             </div>
         </td>
         <td>{request.user.getDisplayName()}</td>
+        <td>{price + " € "}{diff}</td>
         <td>{request.user.getAge() + " ans"}</td>
         <td>
             <LinearCompList
