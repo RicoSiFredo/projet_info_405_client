@@ -56,6 +56,22 @@ function ComplexComp({compList, request, updateSelected, openned, comp, getBackg
             }
         }
     }
+    function getTotalExp(){
+        let duree = 0;
+        for(let i=0; i<list.length; i++){
+            let cv = list[i];
+            duree += cv.getDuree();
+        }
+        return Utils.getDate(Utils.currentDate() - duree, 1);
+    }
+    function getTotalHeure(){
+        let heure = 0;
+        for(let i=0; i<list.length; i++){
+            let cv = list[i];
+            heure += cv.getTotalHeure();
+        }
+        return heure
+    }
     return <div>
         <div 
             onClick={()=>{open()}}
@@ -73,7 +89,10 @@ function ComplexComp({compList, request, updateSelected, openned, comp, getBackg
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <h5>Pour la compétence {comp.name} :</h5>
+                    <div className="pb-2">
+                        <h5>Compétence {comp.name}</h5>
+                        <h5 className="mb-1">Expérience : {getTotalHeure()} h / {getTotalExp()}</h5>
+                    </div>
                     {
                         list.map((cvElem, index)=>
                             <CvElemView

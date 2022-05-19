@@ -37,19 +37,19 @@ export default class Utils {
             if(diff>604800*52){
                 let num = Math.ceil(diff/(86400*7*52));
                 if(num<=1){
-                    return bonus+"+ "+num+" an";
+                    return bonus+"+ de "+num+" an";
                 }
                 else{
-                    return bonus+"+ "+num+" ans";
+                    return bonus+"+ de "+num+" ans";
                 }
             }
             else if(diff>604800){
                 let num = Math.ceil(diff/(86400*7));
                 if(num<=1){
-                    return bonus+"+ "+num+" semaine";
+                    return bonus+"+ de "+num+" semaine";
                 }
                 else{
-                    return bonus+"+ "+num+" semaines";
+                    return bonus+"+ de "+num+" semaines";
                 }
             }
             else {
@@ -58,10 +58,10 @@ export default class Utils {
                     return "Aujourd'hui"
                 }
                 else if(num<=1){
-                    return bonus+"+ "+num+" jour";
+                    return bonus+"+ de "+num+" jour";
                 }
                 else{
-                    return bonus+"+ "+num+" jours";
+                    return bonus+"+ de "+num+" jours";
                 }
             }
         }

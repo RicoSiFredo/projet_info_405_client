@@ -21,6 +21,9 @@ export default class CvElem extends Object405 {
         }
         return res;
     }
+    getDuree(){
+        return this.end - this.start
+    }
     getSemaine(){
         let duree = this.end - this.start;
         return duree / (60 * 60 * 24 * 7);

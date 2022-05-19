@@ -18,7 +18,7 @@ function CvElemView({cvElem, user}){
     function openDescriptionProject(){
         updateShowDescriptionProject(!showDescriptionProject);
     }
-    return <div className="pt-2 border-top separator">
+    return <div className="pt-2 pb-2 border-top separator">
         <div className="mb-1" onClick={openDescriptionProject}>
             <span>{icon}{cvElem.name}</span>
         </div>
