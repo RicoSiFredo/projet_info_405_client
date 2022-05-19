@@ -10,7 +10,8 @@ import PermEnum from "../enum/PermEnum";
 import { Link } from "react-router-dom";
 import ListEats from "../object/base/ListEats";
 import ListRole from "../component/ListeRole";
-import { Rating } from 'react-simple-star-rating'
+import { Rating } from 'react-simple-star-rating';
+
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [listConv, updateConv] = useState(new ListEats("", undefined));

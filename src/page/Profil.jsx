@@ -12,6 +12,9 @@ import Eats from "../object/base/Eats";
 import { Modal } from "react-bootstrap";
 import { Rating } from 'react-simple-star-rating'
 import HistoryView from "../component/HistoryView";
+import Constant from "../utils/Constant";
+import ImgProfile from "../component/ImgProfile";
+import { Link } from "react-router-dom";
 
 function Profil({rootUser}){
     const {id} = useParams();
@@ -71,6 +74,7 @@ function Profil({rootUser}){
             Commentaires : <br /><br />
                 {
                     user.commentList.list.map((obj, index) => {
+                        let url = "/project/" + obj.projet.id_str;
                         return (
                             <div>
                                 Note : <Rating
@@ -79,8 +83,15 @@ function Profil({rootUser}){
                                     ratingValue={obj.note} /* Available Props */
                                 /> <br />
                                 Commentaire : {obj.text} <br />
-                                écrit par : {obj.auteur.firstname}  <br /><br /><br />
-                                
+                                écrit par : {obj.auteur.firstname}  <br />
+                                sur le projet : 
+                                <Link className="text-decoration-none text-dark" to={url}>
+                                        <h5 className=" click mb-1">{obj.projet.name}</h5>
+                                </Link>
+                                <Link className="text-decoration-none text-dark" to={url}>
+                                    <img src={Constant.BASE_IMAGE + "project_empty.png"} className="profil bg-light bg-light mx-auto d-block" alt=""/>
+                                 </Link>
+                                 <br /><br /><br />
                             </div>            
                         )
                     })
@@ -119,7 +130,7 @@ function Profil({rootUser}){
             <div>Commentaires : 
                 {
                     user.commentList.list.map((obj, index) => {
-
+                        let url = "/project/" + obj.id_str;
                                 return (
                                     <div className="Commentaires">
                                         Note : <Rating
@@ -130,7 +141,9 @@ function Profil({rootUser}){
                                         /> <br />
                                         Commentaire : {obj.text} <br />
                                         écrit par : {obj.auteur.firstname} <br />
-                                        sur le projet : {obj.projet.name}
+                                        sur le projet : <Link className="text-decoration-none text-dark" to={url}>
+                                                            <h5 className=" click mb-1">{obj.projet.name}</h5>
+                                                        </Link> 
                                     </div>            
                                 )
                             
