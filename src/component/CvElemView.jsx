@@ -18,7 +18,7 @@ function CvElemView({cvElem, user}){
     function openDescriptionProject(){
         updateShowDescriptionProject(!showDescriptionProject);
     }
-    return <div>
+    return <div className="pt-2 border-top separator">
         <div className="mb-1" onClick={openDescriptionProject}>
             <span>{icon}{cvElem.name}</span>
         </div>
@@ -33,8 +33,8 @@ function CvElemView({cvElem, user}){
         <p className="mb-1">{cvElem.description}</p>
         <p className="mb-1">Début : {Utils.getDate(cvElem.start, 0)}</p>
         <p className="mb-1">Fin : {Utils.getDate(cvElem.end, 0)}</p>
-        <p className="mb-1">Heure hebdomadaire 35</p>
-        <p className="mb-1">Expérience : 250h / + de 5 semaines</p>
+        <p className="mb-1">Heure hebdomadaire : {cvElem.heure}</p>
+        <h5 className="mb-1">Expérience : {cvElem.getTotalHeure()} h / {cvElem.getTotalExp()}</h5>
     </div>
 }
 export default CvElemView;

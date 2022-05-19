@@ -1,3 +1,4 @@
+import Utils from "../utils/Utils";
 import Object405 from "./base/ObjectEats";
 
 export default class CvElem extends Object405 {
@@ -19,5 +20,17 @@ export default class CvElem extends Object405 {
             res = found;
         }
         return res;
+    }
+    getSemaine(){
+        let duree = this.end - this.start;
+        return duree / (60 * 60 * 24 * 7);
+    }
+    getTotalHeure(){
+        let semaine = this.getSemaine()
+        return Math.ceil(semaine * this.heure);
+    }
+    getTotalExp(){
+        let duree = (this.end - this.start);
+        return Utils.getDate(Utils.currentDate() - duree, 1);
     }
 } 
