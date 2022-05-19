@@ -141,9 +141,14 @@ function Profil({rootUser}){
                                         /> <br />
                                         Commentaire : {obj.text} <br />
                                         écrit par : {obj.auteur.firstname} <br />
-                                        sur le projet : <Link className="text-decoration-none text-dark" to={url}>
-                                                            <h5 className=" click mb-1">{obj.projet.name}</h5>
-                                                        </Link> 
+                                        sur le projet : 
+                                        <Link className="text-decoration-none text-dark" to={url}>
+                                                <h5 className=" click mb-1">{obj.projet.name}</h5>
+                                        </Link>
+                                        <Link className="text-decoration-none text-dark" to={url}>
+                                            <img src={Constant.BASE_IMAGE + "project_empty.png"} className="profil bg-light bg-light mx-auto d-block" alt=""/>
+                                        </Link>
+                                        <br /><br /><br />
                                     </div>            
                                 )
                             
