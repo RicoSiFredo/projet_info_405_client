@@ -1,3 +1,5 @@
+import CompareEats from "./base/CompareEats";
+import ListEats from "./base/ListEats";
 import SimpleEats from "./base/SimpleEats";
 import CvElem from "./CvElem";
 
@@ -17,6 +19,7 @@ export default class Action extends CvElem {
     user = new SimpleEats("do", this);
     role = new SimpleEats("got_role", this);
     by = new SimpleEats("by", this);
+    compList = new ListEats("for_comp", this, CompareEats.compareInt("date", CompareEats.DESC))
 
     havePermission(perm){
         let res = false;

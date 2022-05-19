@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SortEnum from "../enum/SortEnum";
+import ComparatorCol from "../object/comparator/ComparatorCol";
 import TableComperatorCoef from "./TableComperatorCoef";
 import TableComperatorCol from "./TableComperatorCol";
 import TableComperatorRow from "./TableComperatorRow";
@@ -72,68 +73,35 @@ function scoreExperience(a, b){
 
 function TableComperator({offre}){
     const [colList, updateColList] = useState([
-        {
-            name: "#",
-            sort: SortEnum.CANT
-        },
-        {
-            name: "Score",
-            sort: SortEnum.ASC,
-            fun_asc: function(a, b){
-                return score(a, b) * 1;
-            },
-            fun_desc: function(a, b){
-                return score(a, b) * -1;
-            }
-        },
-        {
-            name: "Status",
-            sort: SortEnum.UNDEFINED,
-            fun_asc: function(a, b){
-                return scoreStatue(a, b) * 1;
-            },
-            fun_desc: function(a, b){
-                return scoreStatue(a, b) * -1;
-            },
-            coef: 1
-        },
-        {
-            name: "Nom",
-            sort: SortEnum.CANT
-        },
-        {
-            name: "Age",
-            sort: SortEnum.UNDEFINED,
-            fun_asc: function(a, b){
-                return scoreAge(a, b) * 1;
-            },
-            fun_desc: function(a, b){
-                return scoreAge(a, b) * -1;
-            },
-            coef: 1
-        },
-        {
-            name: "Compétences",
-            sort: SortEnum.UNDEFINED,
-            fun_asc: function(a, b){
-                return scoreComp(a, b) * 1;
-            },
-            fun_desc: function(a, b){
-                return scoreComp(a, b) * -1;
-            },
-            coef: 1
-        },
-        {
-            name: "Expérience",
-            sort: SortEnum.UNDEFINED,
-            fun_asc: function(a, b){
-                return scoreExperience(a, b) * 1;
-            },
-            fun_desc: function(a, b){
-                return scoreExperience(a, b) * -1;
-            },
-            coef: 1
-        }
+        new ComparatorCol("#"),
+        new ComparatorCol(
+            "Score",
+            SortEnum.ASC,
+            score
+        ),
+        new ComparatorCol(
+            "Status",
+            SortEnum.UNDEFINED,
+            scoreStatue
+        ),
+        new ComparatorCol(
+            "Nom"
+        ),
+        new ComparatorCol(
+            "Age",
+            SortEnum.UNDEFINED,
+            scoreAge
+        ),
+        new ComparatorCol(
+            "Compétences",
+            SortEnum.UNDEFINED,
+            scoreComp
+        ),
+        new ComparatorCol(
+            "Expérience",
+            SortEnum.UNDEFINED,
+            scoreExperience
+        )
     ]);
 
     let selectCol;
@@ -150,10 +118,10 @@ function TableComperator({offre}){
         list.push(request)
     }
     if(selectCol.sort==SortEnum.ASC){
-        list.sort(selectCol.fun_asc);
+        list.sort(selectCol.compAsc);
     }
     else {
-        list.sort(selectCol.fun_desc);
+        list.sort(selectCol.compDesc);
     }
     return <div className="d-flex">
         <div className="w-25">

@@ -1,4 +1,5 @@
 import Data from "../utils/Data";
+import Utils from "../utils/Utils";
 import CompareEats from "./base/CompareEats";
 import ForeignEats from "./base/ForeignEats";
 import ListEats from "./base/ListEats";
@@ -356,6 +357,33 @@ export default class User extends Object405 {
             heure += duration;
         }
         return parseInt(heure, 10);
+    }
+    getFirstExp(comp){
+        let res = Utils.currentDate();
+        for(let i=0;i<this.cvList.size();i++){
+            if(this.cvList.get(i).start<res&&this.cvList.get(i).have(comp)){
+                res = this.cvList.get(i).start;
+            }
+        }
+        return res
+    }
+    getLastExp(comp){
+        let res = 0;
+        for(let i=0;i<this.cvList.size();i++){
+            if(this.cvList.get(i).end>res&&this.cvList.get(i).have(comp)){
+                res = this.cvList.get(i).end;
+            }
+        }
+        return res
+    }
+    getDuringExp(comp){
+        let res = 0;
+        for(let i=0;i<this.cvList.size();i++){
+            if(this.cvList.get(i).have(comp)){
+                res += this.cvList.get(i).end - this.cvList.get(i).start;
+            }
+        }
+        return res
     }
     getAge(){
         return 18

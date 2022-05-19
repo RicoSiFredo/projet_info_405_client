@@ -2,7 +2,8 @@
 import CompareEats from "./base/CompareEats";
 import ListEats from "./base/ListEats";
 import Object405 from "./base/ObjectEats";
-export default class History extends Object405 {
+import CvElem from "./CvElem";
+export default class History extends CvElem {
     static TYPE = "History";
     name = undefined;
     descriptionProject = undefined;
