@@ -14,6 +14,8 @@ import React from "react"
 import { useParams } from "react-router-dom";
 import Constant from "../utils/Constant";
 import ImgProfile from "../../src/component/ImgProfile";
+import { Rating } from 'react-simple-star-rating'
+
 
 function Search({navigate, rootUser}){
     let {search} = useParams();
@@ -47,6 +49,7 @@ function Search({navigate, rootUser}){
             }
         )
     }
+
 
     function eventMin(e){
         updateMin(e.target.value);
@@ -87,6 +90,21 @@ function Search({navigate, rootUser}){
                         navigate("/profil/" + object.id_str);
                     }
                 }
+
+                function rating(object){
+                        object.makeRequest(
+                            '/user/get/moyenneNotes', 
+                            {
+                                sender_id: object.id_str,
+                            },
+                            function(error){
+                            },
+                            function(response){
+                            }
+                        )
+                        console.log("aled"+ object.moyenne)
+                        return object.moyenne
+                }
                 
                     let div = <div key={index} className = "d-flex m-2 p-1 justify-content-between" >
                             <div className="banner border-bottom border-4 border-primary">
@@ -95,7 +113,11 @@ function Search({navigate, rootUser}){
                         <div>
                             <p className="m-4">{object.name == undefined ? object.firstname : object.name}</p>
                             <p className = "mt-4 m-2">{object.description}</p> 
-                            <p className = "mt-4 m-2">{object.moyenne}</p>
+                            <Rating
+                                            readonly={true}
+                                            allowHover={false}
+                                            ratingValue={rating(object)} /* Available Props */
+                                            allowHalfIcon={true}/>
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
