@@ -108,7 +108,7 @@ function HistoryView({user}){
         pdf.setFont("helvetica","bold");
         pdf.text(10,10,'Curriculum vitæ de '+ user.getDisplayName())
         pdf.setFont("helvetica","italic");
-        pdf.text(10,20,user.description);
+        pdf.text(10,20,""+user.description);
 
         pdf.line(10,25,200,25)
 
@@ -164,7 +164,7 @@ function HistoryView({user}){
                         <Modal.Header closeButton>
                             <Modal.Title>Exporter mon CV</Modal.Title>
                             <div id="imgProfil" className="profil bg-light bg-light">   
-                                <img src={Constant.BASE_IMAGE + "profile_empty.png"} className="center-crop w-100 h-100" alt=""/>
+                                <ImgProfile elem={user}></ImgProfile>
                             </div>
                         </Modal.Header>
 
