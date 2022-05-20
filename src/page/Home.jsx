@@ -12,7 +12,7 @@ function Home({user, navigate}){
                     <Carousel.Item>
                         <img 
                             className="homeBanner"
-                            src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/4632d829-5da9-456b-8f81-aaa50b75e52e.jpg"}
+                            src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/38e35b05-a01d-4bc9-a5e7-168304e3ed72.png"}
                             alt="First slide"
                         />
                             <div class="centered"><p className="titleOverImg">Bienvenue</p></div>
