@@ -36,6 +36,7 @@ function ProjectFrame({rootUser, updatePage}){
         project.getAllTecno();
         project.getAllPermission();
         project.getHaveActuList();
+        project.getAllMembers();
     }, []);
     let canEdit = false;
     let [show, updateShow] = useState(false);
