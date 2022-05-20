@@ -1,10 +1,46 @@
-import { Button, Carousel } from "react-bootstrap";
-import PageEnum from "../enum/PageEnum";
+import { Carousel } from "react-bootstrap";
 import React from "react"
-import { Link } from "react-router-dom";
-import Constant from "../utils/Constant";
+import { useEffect, useState } from "react";
+import Data from "../utils/Data";
+import ListEats from "../object/base/ListEats";
+import CompareEats from "../object/base/CompareEats";
+import Eats from "../object/base/Eats";
 
 function Home({user, navigate}){
+
+    const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+
+    useEffect(function(){
+        getProject();
+    }, [])
+    list.update = function(){
+        updateList(Eats.fakeUpdate(list))
+    }
+    function getProject(){
+        list.makeRequest(
+            "fetch/project",
+            {
+                access_token: Data.accessToken(),
+            },
+            function(error){
+            },
+            function(response){
+            }
+        )
+    }
+
+    let content = <div>
+        <p>{list.size}</p>
+    {
+        list.map(function(object, index){
+            return <div key={object.id_str}>
+                <p>{object.name}</p>
+            </div> 
+        })
+    }
+    </div>
+
+
     return <div>
             <div className="d-flex justify-content-around">
             <div className="card mt-4 me-5 ms-5 w-100">
@@ -50,6 +86,11 @@ function Home({user, navigate}){
         </div>
         <div className="card m-5">
             <h2>ICI METTRE LISTE DE PROJET</h2>
+
+            <div>
+            {content}
+            </div>
+
         </div>
         </div>
 }

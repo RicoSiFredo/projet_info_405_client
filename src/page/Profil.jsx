@@ -9,11 +9,9 @@ import { useParams } from "react-router-dom";
 import User from "../object/User";
 import { useState } from "react";
 import Eats from "../object/base/Eats";
-import { Modal } from "react-bootstrap";
 import { Rating } from 'react-simple-star-rating'
 import HistoryView from "../component/HistoryView";
 import Constant from "../utils/Constant";
-import ImgProfile from "../component/ImgProfile";
 import { Link } from "react-router-dom";
 
 function Profil({rootUser}){
