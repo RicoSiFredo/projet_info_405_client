@@ -1,4 +1,4 @@
-import { CaretDownFill, CaretUpFill, CaretRight, FilterSquareFill, FilterSquare, TrashFill } from "react-bootstrap-icons";
+import { CaretDownFill, CaretUpFill, CaretRight, FilterSquareFill, FilterSquare, TrashFill, ListStars } from "react-bootstrap-icons";
 import React from "react";
 import SortEnum from "../enum/SortEnum";
 import { Button, Modal } from "react-bootstrap";
@@ -82,7 +82,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                 {
                     col.fileter&&
                     <Button onClick={(e)=>selectFileter(e)} variant="primary" className="pt-0 pb-1 pe-1 ps-1 me-2">
-                        <FilterSquareFill className="text-white"></FilterSquareFill>
+                        <ListStars className="text-white"></ListStars>
                     </Button>
                 }
                 {col.name}
