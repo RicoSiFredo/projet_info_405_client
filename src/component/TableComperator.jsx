@@ -118,7 +118,8 @@ function TableComperator({offre}){
         new ComparatorCol(
             "Expérience",
             SortEnum.UNDEFINED,
-            scoreExperience
+            scoreExperience,
+            true
         )
     ]);
 
