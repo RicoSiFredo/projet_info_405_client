@@ -51,8 +51,9 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         
         try{
             if (newComment != ("")){
+                console.log(Data.accessToken());
                 setNewComment("");
-                user.createComment(action.user.id_str,newComment,rating);    
+                user.createComment(action.user.id_str,newComment,project.id_str,rating);    
             }
 
         }catch(err){
@@ -197,10 +198,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                         Selectionnez l'action
                         <div className="d-flex justify-content-center mt-2">
                             {button}
-                            <Button className="m-1" variant="primary" onClick={handleClose}>
-                                Noter
-                            </Button>
-                        
+                            
                             <Link to={test}>
                                 <Button className="m-1" variant="primary" onClick={showConv}>Envoyer un message</Button>
                             </Link>
@@ -251,8 +249,11 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                 </div>
             </div>
         }else{
+            console.log(action.user.id_str);
             bonus =
             <div className="align-self-center flex ">
+                
+
                 <Button onClick={addNote} variant="primary">Noter</Button>
 
                 <Modal show={showNotes} className="highest" onHide={handleCloseNote}>

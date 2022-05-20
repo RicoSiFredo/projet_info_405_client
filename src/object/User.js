@@ -215,13 +215,14 @@ export default class User extends Object405 {
             }
         )
     }
-    createComment(receiverId,commentaire,note,failed, success){
+    createComment(receiverId,commentaire,projectId,note,failed, success){
         super.makeRequest(
             "user/create/commentaire",
             {
                 access_token: Data.accessToken(), 
                 receiverId: receiverId,
                 commentaire: commentaire,
+                projectId: projectId,
                 note: note
                 
 
