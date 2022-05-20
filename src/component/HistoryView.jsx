@@ -101,49 +101,49 @@ function HistoryView({user}){
     function exportPDF(){
 
         let elem = document.querySelector("#exp");
-        let skill = user.getAllSkill();
+        let imgProfil = document.querySelector("#imgProfil");
+        console.log(imgProfil)
 
+        const pdf = new jsPDF("p", "mm", "a4");
+        pdf.setFont("helvetica","bold");
+        pdf.text(10,10,'Curriculum vitæ de '+ user.getDisplayName())
+        pdf.setFont("helvetica","italic");
+        pdf.text(10,20,user.description);
 
+        pdf.line(10,25,200,25)
+
+        pdf.setFont("helvetica","normal");
+        pdf.setFontSize(14);
+        pdf.text(10,32,"Technologies maitrisées ");
+
+        pdf.setFontSize(12);
+        user.skillList.list.map((obj, i) => {
+            if (i<7){
+                pdf.text(20,40 + (i*7)," - " + obj.name);
+            }else if (i < 2*7){
+                pdf.text(80,40 + ((i-7)*7)," - " + obj.name);
+            }else if (i < 3*7){
+                pdf.text(140,40 + ((i-14)*7)," - " + obj.name);
+            }
+        })
+
+        pdf.line(10,90,200,90)
+
+        pdf.setFont("helvetica","normal");
+        pdf.setFontSize(14);
+        pdf.text(10,97,"Experiences professionnelles");
+        
+        html2canvas(imgProfil).then(canvas => {
+            //document.body.appendChild(canvas)
+            const imgDataProfil = canvas.toDataURL("image/png");
+            pdf.addImage(imgDataProfil,"PNG",180,2);
+        })
 
         html2canvas(elem).then(canvas => {
-            document.body.appendChild(canvas)
+            //document.body.appendChild(canvas)
             const imgDataExp = canvas.toDataURL("image/png");
-
-
-            
-            const pdf = new jsPDF("p", "mm", "a4");
-            pdf.setFont("helvetica","bold");
-            pdf.text(10,10,'Curriculum vitæ de '+ user.getDisplayName())
-            pdf.setFont("helvetica","italic");
-            pdf.text(10,20,user.description);
-
-            pdf.line(10,25,200,25)
-
-            pdf.setFont("helvetica","normal");
-            pdf.setFontSize(14);
-            pdf.text(10,32,"Technologies maitrisées ");
-
-            pdf.setFontSize(12);
-            user.skillList.list.map((obj, i) => {
-                if (i<7){
-                    pdf.text(20,40 + (i*7)," - " + obj.name);
-                }else if (i < 2*7){
-                    pdf.text(80,40 + ((i-7)*7)," - " + obj.name);
-                }else if (i < 3*7){
-                    pdf.text(140,40 + ((i-7)*7)," - " + obj.name);
-                }
-            })
-
-            pdf.line(10,90,200,90)
-
-            pdf.setFont("helvetica","normal");
-            pdf.setFontSize(14);
-            pdf.text(10,97,"Experiences professionnelles");
-            
-            
-
             pdf.addImage(imgDataExp, "PNG", 10, 100);
-            pdf.save("MonCV.pdf");
+            pdf.save("MonCV_" + user.getDisplayName() + ".pdf");
         });
 
     }
@@ -163,12 +163,16 @@ function HistoryView({user}){
                     <Modal show={showExport} className="highest" onHide={closeExport}>
                         <Modal.Header closeButton>
                             <Modal.Title>Exporter mon CV</Modal.Title>
+                            <div id="imgProfil" className="profil bg-light bg-light">   
+                                <img src={Constant.BASE_IMAGE + "profile_empty.png"} className="center-crop w-100 h-100" alt=""/>
+                            </div>
                         </Modal.Header>
+
                         <Modal.Body className="d-flex justify-content-center">
 
-                            Cette fonction permet de generer et de telecharger un document au format .pdf. <br></br>
-                            Nous nous basons sur vos activités présentes dans la section "Curriculum vitæ"<br></br>
-                            Cette operation peut prendre quelques secondes
+                            Cette fonction permet de generer votre CV au format .pdf<br></br>
+                            Nous nous basons sur vos activités présentes dans la section "Curriculum vitæ" de votre profil.<br></br>
+                            Cette operation peut prendre quelques secondes.
                             
                         </Modal.Body>
                         <Modal.Footer>
