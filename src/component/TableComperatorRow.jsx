@@ -28,13 +28,13 @@ function TableComperatorRow({colList, offre, index, request}){
     return <tr>
         <th scope="row">{index}</th>
         <td>{request.getScore()}</td>
+        <td>{request.user.getDisplayName()}</td>
         <td>
             <div 
                 className={"round-50p d-inline ps-2 pe-2 pt-1 pb-1 "+request.getStatueBackground()+" mt-1 mb-1 me-2 text-white"}>
                 {request.getStatueTitle()}
             </div>
         </td>
-        <td>{request.user.getDisplayName()}</td>
         <td>{price + " € "}{diff}</td>
         <td>{(request.user.moyenneFlat()!=-1?(Math.round(100*(request.user.moyenneFlat() / 20.0))/100)+ " / 5 ("+request.user.commentList.size()+") ": "Aucun commentaire") }</td>
         <td>{request.user.getAge() + " ans"}</td>

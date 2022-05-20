@@ -106,12 +106,12 @@ function TableComperator({offre}){
             score
         ),
         new ComparatorCol(
+            "Nom"
+        ),
+        new ComparatorCol(
             "Status",
             SortEnum.UNDEFINED,
             scoreStatue
-        ),
-        new ComparatorCol(
-            "Nom"
         ),
         new ComparatorCol(
             "Salaire",
