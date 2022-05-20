@@ -57,7 +57,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
         
         try{
             if (newComment != ("")){
-                console.log(Data.accessToken());
                 setNewComment("");
                 user.createComment(action.user.id_str,newComment,project.id_str,rating);    
             }
@@ -168,7 +167,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     }
     
     let test = "/message/-1";
-    console.log(action.user);
     if (action.user.id_str != user.id_str){
         if (!project.isFinish){
             
@@ -184,7 +182,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     },
                     function(response){
                         test = test + listConv.list[0].convList.list[0].id_str;
-                        console.log(test);
                         
                     }
                 )
@@ -261,7 +258,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     
                 }
             })
-            console.log(alreadyComment);
             if (!alreadyComment){
                 bonus =
                 <div className="align-self-center flex ">
@@ -292,7 +288,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
             </Modal>
                 </div>
             }else{
-                
+
             }
         }
             
