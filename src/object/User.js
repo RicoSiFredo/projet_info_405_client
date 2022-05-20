@@ -383,7 +383,7 @@ export default class User extends Object405 {
     }
 
     getTotalExp(compList=undefined){
-        if(compList==undefined){
+        if(compList==undefined||compList.length==0){
             let duree = 0;
             for(let i=0;i<this.cvList.size();i++){
                 duree += this.cvList.get(i).end - this.cvList.get(i).start;
@@ -394,23 +394,21 @@ export default class User extends Object405 {
             let duree = 0;
             for(let i=0;i<this.cvList.size();i++){
                 let found = false;
-                let i = 0;
-                while(!found&&i<compList.size()){
-                    let comp = compList.get(i);
+                let j = 0;
+                while(!found&&j<compList.length){
+                    let comp = compList[j];
                     if(this.cvList.get(i).have(comp)){
+                        duree += this.cvList.get(i).end - this.cvList.get(i).start;
                         found = true;
                     }
-                    i += 1;
-                }
-                if(!found){
-                    duree += this.cvList.get(i).end - this.cvList.get(i).start;
+                    j += 1;
                 }
             }
             return Utils.currentDate() - duree;
         }
     }
     getTotalHeure(compList=undefined){
-        if(compList==undefined){
+        if(compList==undefined||compList.length==0){
             let heure = 0;
             for(let i=0;i<this.cvList.size();i++){
                 heure += this.cvList.get(i).getTotalHeure();
@@ -421,16 +419,14 @@ export default class User extends Object405 {
             let heure = 0;
             for(let i=0;i<this.cvList.size();i++){
                 let found = false;
-                let i = 0;
-                while(!found&&i<compList.size()){
-                    let comp = compList.get(i);
+                let j = 0;
+                while(!found&&j<compList.length){
+                    let comp = compList[j];;
                     if(this.cvList.get(i).have(comp)){
+                        heure += this.cvList.get(i).getTotalHeure();
                         found = true;
                     }
-                    i += 1;
-                }
-                if(!found){
-                    heure += this.cvList.get(i).getTotalHeure();
+                    j += 1;
                 }
             }
             return heure

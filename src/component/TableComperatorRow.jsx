@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import LinearCompList from "../list/LinearCompList";
 import Utils from "../utils/Utils";
-function TableComperatorRow({offre, index, request}){
-
+function TableComperatorRow({colList, offre, index, request}){
     const [show, updateShow] = useState(false);
     function handleClose() {
         updateShow(false);
@@ -21,6 +20,10 @@ function TableComperatorRow({offre, index, request}){
         else {
             diff = <span className="text-danger">(+ {price-offre.price} €)</span>
         }
+    }
+    let next = "";
+    if(request.user.getTotalExp(colList[7].array)!=Utils.currentDate()){
+        next = " / "+Utils.getDate(request.user.getTotalExp(colList[7].array), 1)
     }
     return <tr>
         <th scope="row">{index}</th>
@@ -43,7 +46,7 @@ function TableComperatorRow({offre, index, request}){
 
             </LinearCompList>
         </td>
-        <td>{request.user.getTotalHeure() + " h" + " / "+Utils.getDate(request.user.getTotalExp(), 1)}</td>
+        <td>{request.user.getTotalHeure(colList[7].array) + " h" + next}</td>
     </tr>
 }
 export default TableComperatorRow;

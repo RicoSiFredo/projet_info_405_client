@@ -179,6 +179,7 @@ function TableComperator({offre}){
                         list.map((request, index) =>
                             request && <TableComperatorRow 
                                 offre={offre} 
+                                colList={colList}
                                 index={index+1} 
                                 request={request}/>
                         )

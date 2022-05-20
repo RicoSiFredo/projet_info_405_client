@@ -1,4 +1,4 @@
-import { CaretDownFill, CaretUpFill, CaretRight, FilterSquareFill, FilterSquare } from "react-bootstrap-icons";
+import { CaretDownFill, CaretUpFill, CaretRight, FilterSquareFill, FilterSquare, TrashFill } from "react-bootstrap-icons";
 import React from "react";
 import SortEnum from "../enum/SortEnum";
 import { Button, Modal } from "react-bootstrap";
@@ -27,7 +27,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
             }
             return resCol;
         }
-        function performClick(){
+        function performClick(e){
             let col = getCol();
             if(col.sort!=SortEnum.CANT){
                 if(col.sort==SortEnum.UNDEFINED){
@@ -47,23 +47,29 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                 updateColList([...colList]);
             }
         }
-        function selectFileter(){
+        function deleteFileter(e){
+            e.stopPropagation();
+            let col = getCol();
+            col.array = [];
+            updateColList([...colList]);
+        }
+        function selectFileter(e){
+            e.stopPropagation();
             updateShow(true)
         }
-        function handleClose(){
+        function handleClose(e){
             updateShow(false)
         }
-        function updateComp(id){
+        function updateComp(comp){
             let col = getCol();
-            if(col.array.includes(id)){
-                col.array = col.array.filter(item => item!=id);
+            if(col.array.includes(comp)){
+                col.array = col.array.filter(item => !item.equals(comp));
                 updateColList([...colList])
             }
             else{
-                col.array.push(id);
+                col.array.push(comp);
                 updateColList([...colList])
             }
-            //updateColList([...colList]);
         }
         function updateAll(){
             let col = getCol();
@@ -71,16 +77,22 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
             updateColList([...colList]);
         }
         let selectAll = col.array!=undefined && col.array.length == 0;
-        return <th onClick={performClick} scope="col">
-            <div>
+        return <th scope="col">
+            <div onClick={performClick} >
                 {
                     col.fileter&&
-                    <Button onClick={selectFileter} variant="primary" className="pt-0 pb-1 pe-1 ps-1 me-2">
+                    <Button onClick={(e)=>selectFileter(e)} variant="primary" className="pt-0 pb-1 pe-1 ps-1 me-2">
                         <FilterSquareFill className="text-white"></FilterSquareFill>
                     </Button>
                 }
                 {col.name}
                 {icon}
+                {
+                    (col.fileter&&col.array.length!=0)&&
+                    <Button onClick={(e)=>deleteFileter(e)} variant="danger" className="pt-0 pb-1 pe-1 ps-1 ms-2">
+                        <TrashFill className="text-white"></TrashFill>
+                    </Button>
+                }
             </div>
             <div>
                 <Modal show={show} className="highest" onHide={handleClose}>
@@ -100,7 +112,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                             offre.compList.map((comp, i)=>
                                 <div key={"comp_"+i}>
                                     <label>
-                                        <input type="checkbox" checked={col.array!=undefined&&col.array.includes(comp.id_str)} onChange={()=>updateComp(comp.id_str)} name={"comp_checkbox_"+comp.id_str}>
+                                        <input type="checkbox" checked={col.array!=undefined&&col.array.includes(comp)} onChange={()=>updateComp(comp)} name={"comp_checkbox_"+comp.id_str}>
                                         </input>
                                         {" "+comp.name}
                                     </label>
@@ -109,7 +121,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                         }
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={updateComp}>Fermer</Button>
+                        <Button onClick={handleClose}>Fermer</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
