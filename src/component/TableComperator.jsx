@@ -119,7 +119,8 @@ function TableComperator({offre}){
             "Expérience",
             SortEnum.UNDEFINED,
             scoreExperience,
-            true
+            true,
+            []
         )
     ]);
 
@@ -163,6 +164,7 @@ function TableComperator({offre}){
                         {
                             colList.map((col, index) =>
                                 <TableComperatorCol
+                                    offre={offre}
                                     updateColList={updateColList}
                                     colList={colList}
                                     col={col}>

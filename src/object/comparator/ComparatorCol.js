@@ -6,11 +6,13 @@ export default class ComparatorCol {
     compAsc = undefined;
     compDesc = undefined;
     fileter = undefined;
-    constructor(name, sort=SortEnum.CANT, score=()=>0, fileter) {
+    array = undefined;
+    constructor(name, sort=SortEnum.CANT, score=()=>0, fileter, array) {
         this.name = name;
         this.sort = sort;
         this.coef = 1;
         this.fileter = fileter;
+        this.array = array;
         this.compAsc = function(a, b){
             return score(a, b) * 1;
         };

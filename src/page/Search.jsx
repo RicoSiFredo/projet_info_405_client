@@ -16,7 +16,6 @@ import Constant from "../utils/Constant";
 import ImgProfile from "../../src/component/ImgProfile";
 import { Rating } from 'react-simple-star-rating'
 
-
 function Search({navigate, rootUser}){
     let {search} = useParams();
     if(search==undefined){
