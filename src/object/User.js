@@ -18,6 +18,7 @@ export default class User extends Object405 {
     profile = undefined;
     banner = undefined;
     moyenne = undefined;
+    birth = undefined;
 
     haveActuList = new ListEats("have_actu", this);
     skillList = new ListEats("got_skill", this);

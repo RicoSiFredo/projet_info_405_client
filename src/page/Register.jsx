@@ -27,7 +27,7 @@ function Register({back, user, navigate}){
                 password: password,
                 firstname: firstname,
                 lastname: lastname,
-                birth: birth,
+                birth: (Date.parse(birth))/1000,
             },
             function(error){
                 updateError(ErrorEats.WENT_WRONG)
