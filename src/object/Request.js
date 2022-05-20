@@ -42,6 +42,9 @@ export default class Request extends CvElem {
     getCoefComp(){
         return this.getCoef("Compétences");
     }
+    getCoefCommentaire(){
+        return this.getCoef("Commentaire");
+    }
     getCoefStatue(){
         return this.getCoef("Status");
     }
@@ -53,6 +56,7 @@ export default class Request extends CvElem {
         return this.getScoreComp()*this.getCoefComp()*100+
         this.getScoreStatue()*this.getCoefStatue()+
         this.getScoreSalaire()*this.getCoefSalaire()+
+        this.getScoreCommentaire()*this.getCoefCommentaire()+
         this.getScoreExperience()*this.getCoefExperience()+
         this.getScoreAge()*this.getCoefAge() * 10;
     }
@@ -65,6 +69,10 @@ export default class Request extends CvElem {
     getScoreAge(){
         let age = 100 - this.user.getAge();
         return age;
+    }
+    
+    getScoreCommentaire(){
+        return this.user.moyenneFlat() * 20 + this.user.commentList.size() * 10;
     }
 
     getScoreExperience(){

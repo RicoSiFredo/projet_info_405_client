@@ -407,7 +407,16 @@ export default class User extends Object405 {
             return Utils.currentDate() - duree;
         }
     }
+    getAge(){
+        if(this.birth==undefined){
+            return 19
+        }
+        else {
+            return Math.ceil((Utils.currentDate() - this.birth)/31536000);
+        }
+    }
     getTotalHeure(compList=undefined){
+        console.log(compList)
         if(compList==undefined||compList.length==0){
             let heure = 0;
             for(let i=0;i<this.cvList.size();i++){

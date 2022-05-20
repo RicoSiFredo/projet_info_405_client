@@ -97,7 +97,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
             <div>
                 <Modal show={show} className="highest" onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Ajouter un role</Modal.Title>
+                        <Modal.Title>Ajouter un filtre</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <h5>Appliquer le calcule uniquement sur les compétences</h5>

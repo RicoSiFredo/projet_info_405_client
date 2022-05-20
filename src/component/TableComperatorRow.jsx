@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+import { EyeFill } from "react-bootstrap-icons";
 import LinearCompList from "../list/LinearCompList";
 import Utils from "../utils/Utils";
+import CommentRow from "./CommentRow";
 function TableComperatorRow({colList, offre, index, request}){
     const [show, updateShow] = useState(false);
     function handleClose() {
@@ -22,7 +24,7 @@ function TableComperatorRow({colList, offre, index, request}){
         }
     }
     let next = "";
-    if(request.user.getTotalExp(colList[7].array)!=Utils.currentDate()){
+    if(request.user.getTotalExp(colList[8].array)!=Utils.currentDate()){
         next = " / "+Utils.getDate(request.user.getTotalExp(colList[7].array), 1)
     }
     return <tr>
@@ -36,7 +38,11 @@ function TableComperatorRow({colList, offre, index, request}){
             </div>
         </td>
         <td>{price + " € "}{diff}</td>
-        <td>{(request.user.moyenneFlat()!=-1?(Math.round(100*(request.user.moyenneFlat() / 20.0))/100)+ " / 5 ("+request.user.commentList.size()+") ": "Aucun commentaire") }</td>
+        <td>
+            <CommentRow request={request}>
+
+            </CommentRow>
+        </td>
         <td>{request.user.getAge() + " ans"}</td>
         <td>
             <LinearCompList
@@ -47,7 +53,7 @@ function TableComperatorRow({colList, offre, index, request}){
 
             </LinearCompList>
         </td>
-        <td>{request.user.getTotalHeure(colList[7].array) + " h" + next}</td>
+        <td>{request.user.getTotalHeure(colList[8].array) + " h" + next}</td>
     </tr>
 }
 export default TableComperatorRow;

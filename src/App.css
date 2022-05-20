@@ -40,6 +40,15 @@
   cursor: pointer;
   border-radius: 50%;
 }
+.profil-tinylow{
+  z-index: 999;
+  height: 30px;
+  margin-top: 2px;
+  width: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 50%;
+}
 .height-38{
   height: 38px;
 }
