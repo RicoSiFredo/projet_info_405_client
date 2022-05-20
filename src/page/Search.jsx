@@ -90,22 +90,6 @@ function Search({navigate, rootUser}){
                         navigate("/profil/" + object.id_str);
                     }
                 }
-
-                function rating(object){
-                        object.makeRequest(
-                            '/user/get/moyenneNotes', 
-                            {
-                                sender_id: object.id_str,
-                            },
-                            function(error){
-                            },
-                            function(response){
-                            }
-                        )
-                        console.log("aled"+ object.moyenne)
-                        return object.moyenne
-                }
-                
                     let div = <div key={index} className = "d-flex m-2 p-1 justify-content-between" >
                             <div className="banner border-bottom border-4 border-primary">
                                 {object.profile != undefined ? <img src={Constant.IMAGE_URL+object.profile} className="center-crop w-100 h-100" alt=""/> :  <ImgProfile className="center-crop w-100 h-100" elem={object}></ImgProfile>}
@@ -116,7 +100,7 @@ function Search({navigate, rootUser}){
                             <Rating
                                             readonly={true}
                                             allowHover={false}
-                                            ratingValue={rating(object)} /* Available Props */
+                                            ratingValue={object.moyenne} /* Available Props */
                                             allowHalfIcon={true}/>
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
