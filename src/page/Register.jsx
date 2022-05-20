@@ -27,7 +27,7 @@ function Register({back, user, navigate}){
                 password: password,
                 firstname: firstname,
                 lastname: lastname,
-                birth: birth
+                birth: birth,
             },
             function(error){
                 updateError(ErrorEats.WENT_WRONG)
@@ -73,9 +73,9 @@ function Register({back, user, navigate}){
         <Form.Group className="mb-3" controlId="register_password">
             <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Mot de passe" />
         </Form.Group>
-        <div>
+        <Form.Group className="mb-3" controlId="register_birth">
             <DatePicker onChange={onChange} value={birth} />
-        </div>
+        </Form.Group>
     </div>
     return <div>
         <Form405
