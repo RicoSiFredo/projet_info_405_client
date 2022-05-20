@@ -129,12 +129,10 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
 
     return (
         <nav className="navbar navbar-dark bg-dark justify-content-between">            <button className='ms-3 btn btn-primary me-3' onClick={back}>Retour</button>
-            <Link to={"/"}>
-                <div className="navbar-brand ps-2 click">
-                    <img src={Constant.BASE_IMAGE + "logo_usmb.png"} width="30" height="30" className="align-top" alt=""/>
-                    <h4 className="p-3 d-inline">Projet 405</h4>
-                </div>
-            </Link>
+            <div className="navbar-brand ps-2 click" onClick={home}>
+                <img src={Constant.BASE_IMAGE + "logo_usmb.png"} width="30" height="30" className="align-top" alt=""/>
+                <h4 className="p-3 d-inline">Projet 405</h4>
+            </div>
             <div>
                 <div className="input-group">
                     <div>

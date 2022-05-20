@@ -1,4 +1,4 @@
-import { CaretDownFill, CaretUpFill, CaretRight, FilterSquareFill } from "react-bootstrap-icons";
+import { CaretDownFill, CaretUpFill, CaretRight } from "react-bootstrap-icons";
 import React from "react";
 import SortEnum from "../enum/SortEnum";
 function TableComperatorCol({col, updateColList, colList, selectCol}){
@@ -44,13 +44,8 @@ function TableComperatorCol({col, updateColList, colList, selectCol}){
                 updateColList([...colList]);
             }
         }
-        console.log(col)
         return <th onClick={performClick} scope="col">
             <div>
-                {
-                    col.fileter&&
-                    <FilterSquareFill className="text-primary mb-1 me-2"></FilterSquareFill>
-                }
                 {col.name}
                 {icon}
             </div>
