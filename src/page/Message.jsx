@@ -47,7 +47,7 @@ function Message({message,own,updatePage}){
                 <div className="messageTop">
                     <img
                         className="messageImg"
-                        src="profile_empty.png"
+                        src={Constant.BASE_IMAGE + "profile_empty.png"}
                         alt=""
                     />
                     <p className="messageText">{message.text}</p>
