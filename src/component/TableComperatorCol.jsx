@@ -76,7 +76,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
             col.array = [];
             updateColList([...colList]);
         }
-        let selectAll = col.array!=undefined && col.array.length == 0;
+        let selectAll = col.array != undefined && col.array.length == 0;
         return <th scope="col">
             <div onClick={performClick} >
                 {

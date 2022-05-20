@@ -432,5 +432,18 @@ export default class User extends Object405 {
             return heure
         }
     }
+    
+    moyenneFlat(){
+        let res = 0;
+        for(let i=0;i<this.commentList.size();i++){
+            res += this.commentList.get(i).note;
+        }
+        if(this.commentList.size()!=0){
+            return res/this.commentList.size();
+        }
+        else {
+            return -1;
+        }
+    }
 }
 

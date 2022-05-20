@@ -75,7 +75,20 @@ function scoreExperience(a, b){
     if(a.getScoreExperience()>b.getScoreExperience()){
         res = -1;
     }
-    else if(a.getScoreExperience()<b.getScoreStatue()){
+    else if(a.getScoreExperience()<b.getScoreExperience()){
+        res = 1;
+    }
+    else {
+        res = 0;
+    }
+    return res;
+}
+function scoreCommentaire(a, b){
+    let res;
+    if(a.getScoreCommentaire()>b.getScoreCommentaire()){
+        res = -1;
+    }
+    else if(a.getScoreCommentaire()<b.getScoreCommentaire()){
         res = 1;
     }
     else {
@@ -104,6 +117,11 @@ function TableComperator({offre}){
             "Salaire",
             SortEnum.UNDEFINED,
             scoreSalaire
+        ),
+        new ComparatorCol(
+            "Commentaire",
+            SortEnum.UNDEFINED,
+            scoreCommentaire
         ),
         new ComparatorCol(
             "Age",

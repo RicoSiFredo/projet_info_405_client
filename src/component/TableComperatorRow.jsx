@@ -36,6 +36,7 @@ function TableComperatorRow({colList, offre, index, request}){
         </td>
         <td>{request.user.getDisplayName()}</td>
         <td>{price + " € "}{diff}</td>
+        <td>{(request.user.moyenneFlat()!=-1?(Math.round(100*(request.user.moyenneFlat() / 20.0))/100)+ " / 5 ("+request.user.commentList.size()+") ": "Aucun commentaire") }</td>
         <td>{request.user.getAge() + " ans"}</td>
         <td>
             <LinearCompList
