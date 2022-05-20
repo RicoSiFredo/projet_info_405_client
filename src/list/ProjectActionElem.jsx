@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import ListEats from "../object/base/ListEats";
 import ListRole from "../component/ListeRole";
 import { Rating } from 'react-simple-star-rating';
+import { useEffect } from "react";
 
 
 function ProjectActionElem({user, updatePage, typeAction, project, action}){
@@ -21,6 +22,11 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [newComment, setNewComment] = useState("");
     let [showRole, updateShowRole] = useState(false);
     let [verif, updateShowVerif] = useState(false);
+    let alreadyComment = false;
+
+    useEffect(function(){
+        action.user.getAllComment();
+    }, []);
 
     function handleCloseNote() {
         updateNotes(false);
@@ -249,36 +255,47 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                 </div>
             </div>
         }else{
-            console.log(action.user.id_str);
-            bonus =
-            <div className="align-self-center flex ">
+            action.user.commentList.list.map((obj, index) => {
+                if (obj.auteur.id_str == user.id_str && project.id_str == obj.projet.id_str){
+                    alreadyComment = true;
+                    
+                }
+            })
+            console.log(alreadyComment);
+            if (!alreadyComment){
+                bonus =
+                <div className="align-self-center flex ">
+                    
+
+                    <Button onClick={addNote} variant="primary">Noter</Button>
+
+                    <Modal show={showNotes} className="highest" onHide={handleCloseNote}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Ajouter un avis</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>Note : <Stars />
+                    <br />Commentaire : <br />
+                        <textarea className="CommentaireInput" placeholder="Laisser un avis..."
+                        onChange={(e) => setNewComment(e.target.value)}
+                        value={newComment}
+                        ></textarea>
+                    </div>
+                    
+                    
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className="btn btn-primary" onClick={handleSubmit}>Envoyer</button>
+                    <button className="btn btn-primary" onClick={handleCloseNote}>Fermer</button>
+                </Modal.Footer>
                 
-
-                <Button onClick={addNote} variant="primary">Noter</Button>
-
-                <Modal show={showNotes} className="highest" onHide={handleCloseNote}>
-            <Modal.Header closeButton>
-                <Modal.Title>Ajouter un avis</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>Note : <Stars />
-                <br />Commentaire : <br />
-                    <textarea className="CommentaireInput" placeholder="Laisser un avis..."
-                    onChange={(e) => setNewComment(e.target.value)}
-                    value={newComment}
-                    ></textarea>
+            </Modal>
                 </div>
+            }else{
                 
-                
-            </Modal.Body>
-            <Modal.Footer>
-                <button className="btn btn-primary" onClick={handleSubmit}>Envoyer</button>
-                <button className="btn btn-primary" onClick={handleCloseNote}>Fermer</button>
-            </Modal.Footer>
-            
-        </Modal>
-            </div>
+            }
         }
+            
 
         
         
