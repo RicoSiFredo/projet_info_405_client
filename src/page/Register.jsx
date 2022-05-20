@@ -7,12 +7,14 @@ import HTTP from "../utils/HTTP";
 import React from "react"
 import Response from "../utils/Response";
 import Form405 from "../component/Form405";
+import DatePicker from 'react-date-picker';
 
 function Register({back, user, navigate}){
     const [email, updateEmail] = useState("");
     const [firstname, updateFirstname] = useState("");
     const [lastname, updateLastname] = useState("");
     const [password, updatePassword] = useState(""); 
+    const [birth, onChange] = useState(new Date());
     // variable qui correspond à l'erreur
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
     function register(){
@@ -24,7 +26,8 @@ function Register({back, user, navigate}){
                 email: email,
                 password: password,
                 firstname: firstname,
-                lastname: lastname
+                lastname: lastname,
+                birth: birth
             },
             function(error){
                 updateError(ErrorEats.WENT_WRONG)
@@ -70,6 +73,9 @@ function Register({back, user, navigate}){
         <Form.Group className="mb-3" controlId="register_password">
             <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Mot de passe" />
         </Form.Group>
+        <div>
+            <DatePicker onChange={onChange} value={birth} />
+        </div>
     </div>
     return <div>
         <Form405
