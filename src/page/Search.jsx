@@ -95,6 +95,7 @@ function Search({navigate, rootUser}){
                         <div>
                             <p className="m-4">{object.name == undefined ? object.firstname : object.name}</p>
                             <p className = "mt-4 m-2">{object.description}</p> 
+                            <p className = "mt-4 m-2">{object.moyenne}</p>
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
