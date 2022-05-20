@@ -9,7 +9,7 @@ import SelectCompetence from "./SelectCompetence";
 import { Download, FiletypePdf } from "react-bootstrap-icons";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-
+import ImgProfile from "./ImgProfile";
 
 function HistoryView({user}){
     let [show, updateShow] = useState(false);
@@ -100,16 +100,54 @@ function HistoryView({user}){
 
     function exportPDF(){
 
-        html2canvas(document.querySelector("#exp")).then(canvas => {
+        let elem = document.querySelector("#exp");
+        let skill = user.getAllSkill();
+
+
+
+        html2canvas(elem).then(canvas => {
             document.body.appendChild(canvas)
-            const imgData = canvas.toDataURL("image/png");
-            const pdf = new jsPDF();
-            pdf.addImage(imgData, "PNG", 0, 0);
+            const imgDataExp = canvas.toDataURL("image/png");
+
+
+            
+            const pdf = new jsPDF("p", "mm", "a4");
+            pdf.setFont("helvetica","bold");
+            pdf.text(10,10,'Curriculum vitæ de '+ user.getDisplayName())
+            pdf.setFont("helvetica","italic");
+            pdf.text(10,20,user.description);
+
+            pdf.line(10,25,200,25)
+
+            pdf.setFont("helvetica","normal");
+            pdf.setFontSize(14);
+            pdf.text(10,32,"Technologies maitrisées ");
+
+            pdf.setFontSize(12);
+            user.skillList.list.map((obj, i) => {
+                if (i<7){
+                    pdf.text(20,40 + (i*7)," - " + obj.name);
+                }else if (i < 2*7){
+                    pdf.text(80,40 + ((i-7)*7)," - " + obj.name);
+                }else if (i < 3*7){
+                    pdf.text(140,40 + ((i-7)*7)," - " + obj.name);
+                }
+            })
+
+            pdf.line(10,90,200,90)
+
+            pdf.setFont("helvetica","normal");
+            pdf.setFontSize(14);
+            pdf.text(10,97,"Experiences professionnelles");
+            
+            
+
+            pdf.addImage(imgDataExp, "PNG", 10, 100);
             pdf.save("MonCV.pdf");
         });
 
     }
-    return <div id="exp">
+    return <div>
         <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex justify-content-between">
                 <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
@@ -145,7 +183,7 @@ function HistoryView({user}){
                     </Modal>
                 </div>
             </div>
-            <div>
+            <div id="exp">
                 {
                     user.historyList.map(function(history, index){
                         return <HistoryElem history={history}>
