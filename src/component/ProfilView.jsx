@@ -192,7 +192,7 @@ function ProfilView({rootUser, elem, isProject=false}){
             </div>
         }
     }else{
-        if (rootUser == elem.id_str){
+        if (rootUser.id_str == elem.id_str){
             return <div>
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
                 <div className="banner border-bottom border-4 border-primary position-relative">
