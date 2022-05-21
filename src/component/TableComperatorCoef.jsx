@@ -23,7 +23,7 @@ function TableComperatorCoef({col, updateColList, colList, selectCol}){
         }
         updateColList([...colList]);
     }
-    return <div className={"border-bottom-sep pb-3 mb-3"}>
+    return <div className={"border-top-sep pt-3 pb-3"}>
         <h5>
             <label for={col.name} className="form-label">{col.name}</label>
         </h5>

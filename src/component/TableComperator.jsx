@@ -210,8 +210,8 @@ function TableComperator({offre}){
         selectRequest.startConv(offre);
     }
     console.log(offre.action.user)
-    return <div className="d-flex  h-100 ">
-        <div className="w-25 h-100 border-right-comapretor">
+    return <div className="d-flex  h-100">
+        <div className="w-25 h-100 overflow-auto border-right-comapretor o">
             <div className="p-3 bg-light border-bottom-comapretor">
                 <div className="d-flex justify-content-between">
                     <div className="d-flex">
@@ -265,7 +265,8 @@ function TableComperator({offre}){
                 </div>
             }
             <div className="bg-light p-3">
-
+                <h4>Choix des coefficients</h4>
+                <p>Pour calculer le score, nous appliquons un coefficient à chaque colonne. Vous pouvez les personnaliser pour trouver la personne qui correspond le mieux à votre demande.</p>
                 {
                     colList.map((col, index) =>
                         ( col.sort!=SortEnum.CANT &&

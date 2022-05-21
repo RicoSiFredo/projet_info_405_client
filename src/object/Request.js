@@ -6,6 +6,8 @@ export default class Request extends CvElem {
  
     static TYPE = "Request";
 
+    refuse = undefined;
+    pinned = undefined;
     message = undefined;
     price = undefined;
 
@@ -25,16 +27,45 @@ export default class Request extends CvElem {
         return col;
     }
 
+    pin(){
+        this.makeRequest(
+            "request/pin",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
+    refuse(){
+        this.makeRequest(
+            "request/refuse",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
+
     startConv(offre){
-        if(this.conversation.isFinished()){
-            alert("EXIST")
+        if(this.conversation.init){
         }
         else {
-            alert("NO")
             this.makeRequest(
                 "user/create/conversation",
                 {
-                    "senderId": Data.getUserId(),
+                    "senderId": offre.action.user.id_str,
                     "receiverId": this.user.id_str,
                     "request": this.id_str
                 },
@@ -78,7 +109,7 @@ export default class Request extends CvElem {
     }
 
     getScore(){
-        return this.getScoreComp()*this.getCoefComp()*100+
+        return this.getScoreComp()*this.getCoefComp() +
         this.getScoreStatue()*this.getCoefStatue()*5+
         this.getScoreSalaire()*this.getCoefSalaire()+
         this.getScoreCommentaire()*this.getCoefCommentaire()+
@@ -141,7 +172,8 @@ export default class Request extends CvElem {
             for(let j = 0; j < listHave.size(); j++){
                 let have = listHave.get(j);
                 if(need.equals(have)){
-                    count++;
+                    count += 250;
+                    count += this.user.getTotalHeure([have])
                 }
             }
         }
