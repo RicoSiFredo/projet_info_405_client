@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { EyeFill } from "react-bootstrap-icons";
+import { EyeFill, PinFill } from "react-bootstrap-icons";
 import LinearCompList from "../list/LinearCompList";
 import Utils from "../utils/Utils";
 import CommentRow from "./CommentRow";
@@ -50,6 +50,12 @@ function TableComperatorRow({updateSelect, select, colList, offre, index, reques
         <th scope="row">
             <input onChange={selectThis} checked={select==request.id_str} type={"checkbox"}>
             </input> 
+            {
+                (request.pinned&&!request.accept)&&
+                <PinFill>
+
+                </PinFill>
+            }
         </th>
         <th scope="row">{index}</th>
         <td>{request.getScore()}</td>

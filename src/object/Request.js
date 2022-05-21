@@ -10,6 +10,7 @@ export default class Request extends CvElem {
     pinned = undefined;
     message = undefined;
     price = undefined;
+    accept = undefined;
 
     user = new SimpleEats("req_user", this);
     conversation = new SimpleEats("local_conv", this);
@@ -42,9 +43,54 @@ export default class Request extends CvElem {
             }
         )
     }
+    unpin(){
+        this.makeRequest(
+            "request/unpin",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
+    unrefuseFunc(){
+        this.makeRequest(
+            "request/unrefuse",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
     refuseFunc(){
         this.makeRequest(
             "request/refuse",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
+    acceptFunc(){
+        this.makeRequest(
+            "request/accept",
             {   
                 "access_token": Data.accessToken(),
                 "id_request": this.id_str
@@ -118,8 +164,14 @@ export default class Request extends CvElem {
     }
 
     getScoreSalaire(){
-        let salaireDiff = this.parent.price - this.price;
-        return salaireDiff;
+        let res;
+        if(this.price==undefined){
+            res = 0;
+        }
+        else {
+            res = this.parent.price - this.price;
+        }
+        return res
     }
     
     getScoreAge(){

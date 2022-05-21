@@ -26,6 +26,27 @@ export default class Actu extends Object405 {
         super();
     }
 
+    invite(user_id, failed, success){
+        super.makeRequest(
+            "actu/invite",
+            {
+                access_token: Data.accessToken(),
+                actu_id: this.id_str,
+                user_id: user_id
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        );
+    }
+
     getRequestAll(failed, success){
         super.makeRequest(
             "actu/get/request",

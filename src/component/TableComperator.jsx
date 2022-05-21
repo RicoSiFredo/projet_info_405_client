@@ -1,13 +1,19 @@
 import { Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SortEnum from "../enum/SortEnum";
 import ComparatorCol from "../object/comparator/ComparatorCol";
 import ImgProfile from "./ImgProfile";
 import TableComperatorCoef from "./TableComperatorCoef";
 import TableComperatorCol from "./TableComperatorCol";
 import TableComperatorRow from "./TableComperatorRow";
-import { TrashFill } from "react-bootstrap-icons";
 import LinearCompList from "../list/LinearCompList";
+import Utils from "../utils/Utils";
+import { Modal } from "react-bootstrap";
+import Field from "./Field";
+import Eats from "../object/base/Eats";
+import Data from "../utils/Data";
+import ListEats from "../object/base/ListEats";
+import CompareEats from "../object/base/CompareEats";
 
 function score(a, b){
     let res;
@@ -102,6 +108,36 @@ function scoreCommentaire(a, b){
 }
 
 function TableComperator({offre}){
+    const [show, updateShow] = useState(false);
+    const [value, updateValue] = useState("");
+    const [listUser, updateListUser] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+    listUser.update = function(){
+        updateListUser(Eats.fakeUpdate(listUser))
+    }
+    function handleClose() {
+        updateShow(false);
+    }
+    useEffect(function(){
+        listUser.reset();
+        if(value.length==0){
+
+        }
+        else {
+            listUser.makeRequest(
+                "search/user",
+                {
+                    access_token: Data.accessToken(),
+                    name: value
+                },
+                function(err){
+
+                },
+                function(result){
+
+                }
+            )
+        }
+    }, [value])
     const [colList, updateColList] = useState([
         new ComparatorCol(""),
         new ComparatorCol("#"),
@@ -212,25 +248,80 @@ function TableComperator({offre}){
     function pin(){
         selectRequest.pin();
     }
+    function unpin(){
+        selectRequest.unpin();
+    }
+    function accept(){
+        selectRequest.acceptFunc();
+    }
     function refuse(){
         selectRequest.refuseFunc();
+    }
+    function unrefuse(){
+        selectRequest.unrefuseFunc();
+    }
+    function inviteElem(){
+        updateValue("")
+        updateShow(true);
+    }
+    function changeValue(e){
+        updateValue(e.target.value);
     }
     let buttonContent;
     if(selectRequest==undefined){
 
     }
+    else if(selectRequest.accept==true){
+        buttonContent = <div>
+            <p>A été accepté pour rejoindre le projet suite à sa demande.</p>
+            <div className="d-flex">
+                <Button className="flex-even" disabled variant="success">Accpeter</Button>
+            </div>
+        </div>
+    }
     else if(selectRequest.refuse==true){
         buttonContent = <div className="d-flex">
-            <Button className="flex-even" onClick={refuse} variant="danger">Annuler le refue</Button>
+            <Button className="flex-even" onClick={unrefuse} variant="danger">Annuler le refue</Button>
         </div>
     }
     else {
         buttonContent = <div className="d-flex">
             <Button className="flex-even me-2" onClick={startConv} variant="primary">Converser</Button>
-            <Button className="flex-even me-2" onClick={pin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
-            <Button className="flex-even me-2" variant="success">Accepter</Button>
+            <Button className="flex-even me-2" onClick={!selectRequest.pinned?pin:unpin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
+            <Button className="flex-even me-2" variant="success" onClick={accept}>Accepter</Button>
             <Button className="flex-even" onClick={refuse} variant="danger">Refuser</Button>
         </div>
+    }
+    function requested(user_id){
+        let found = false;
+        let i = 0;
+        while(!found&&i<offre.requestList.size()){
+            found = offre.requestList.get(i).user.id_str==user_id;
+            i += 1;
+        }
+        return found;
+    }
+    function inviteMec(user_id){
+        offre.invite(user_id);
+    }
+    function getCustomContent(user_id){
+        let res = undefined;
+        if(requested(user_id)){
+            res = <div>
+                <p className="mb-0">Cet utilisateur à déjà été invité.</p>
+            </div>
+        }
+        else if(user_id==Data.getUserId()){
+            res = undefined;
+        }
+        else {
+            res = <div className="d-flex">
+                <Button onClick={()=>inviteMec(user_id)} className="mt-2">
+                    Inviter
+                </Button>
+            </div>
+        }
+        return res;
     }
     return <div className="d-flex  h-100">
         <div className="w-25 h-100 overflow-auto border-right-comapretor o">
@@ -249,13 +340,16 @@ function TableComperator({offre}){
                         </div>
                     </div>}
                 </div>
+                    <div className="mb-2 mt-2">
+                {Utils.getDate(offre.start, 0) + " / " + Utils.getDate(offre.end, 0)} {offre.heure!=""&&(" - "+offre.heure+"h")}{(offre.price!="")&&(" - "+offre.price+"€")}
+                    </div>
                 <div>
                     <p className="mt-2">{offre.description}</p>
                     <LinearCompList
                         compList={offre.compList}>
 
                     </LinearCompList>
-                    <Button variant="primary" className="mt-3">
+                    <Button variant="primary" className="mt-3" onClick={inviteElem}>
                         Inviter    
                     </Button>
                 </div>
@@ -329,6 +423,38 @@ function TableComperator({offre}){
                 </tbody>
             </table>
         </div>
+        <Modal show={show} className="highest" onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Inviter un utilisateur</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Field val={value} changeValue={changeValue} label={"Rechercher un utilisateur"}></Field>
+                {
+                    listUser.map((user, index) =>
+                        <div className={"d-flex mt-3 border-top separator pt-2"} key={"user_"+index}>
+                            <div className="text-decoration-none text-dark">
+                                <div className="profil-tiny bg-light bg-light">
+                                    <ImgProfile elem={user}></ImgProfile>
+                                </div>
+                            </div>
+                            <div className="ms-3 d-flex align-items-center">
+                                <div className="text-decoration-none text-dark">
+                                    <h5 className=" click mb-1">{user.getDisplayName()}</h5>
+                                    {
+                                        getCustomContent(user.id_str)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={handleClose}>
+                    Fermer
+                </Button>
+            </Modal.Footer>
+        </Modal>
     </div>
 }
 export default TableComperator;

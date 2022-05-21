@@ -27,8 +27,6 @@ function Search({navigate, rootUser}){
     const [moy, updateMoy] = useState("");
     const [min, updateMin] = useState("");
     const [max, updateMax] = useState("");
-
-    console.log(type);
     useEffect(function(){
         chercher();
     }, [search])
