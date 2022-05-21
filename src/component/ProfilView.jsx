@@ -97,7 +97,7 @@ function ProfilView({elem, isProject=false}){
                 <ProfilField multipleLine={true} user={elem} isProject={isProject} label={"Description"} name={"description"} canEdit={canEdit} value={elem.description}></ProfilField>
             </div>
         </div>
-        }else{
+        }else if (elem.isFinish && elem.description != ""){
             field = <div>
             <div className="mt-3 ms-3 me-2">
                 <ProfilField tag="h4" user={elem} isProject={isProject} label={"Nom"} name={"name"} canEdit={false} value={elem.name}></ProfilField>
@@ -107,6 +107,12 @@ function ProfilView({elem, isProject=false}){
             </div>
         </div>
 
+        }else{
+            field = <div>
+            <div className="mt-3 ms-3 me-2">
+                <ProfilField tag="h4" user={elem} isProject={isProject} label={"Nom"} name={"name"} canEdit={false} value={elem.name}></ProfilField>
+            </div>
+        </div>
         }
     }
     else {
