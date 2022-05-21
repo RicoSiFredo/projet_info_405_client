@@ -209,16 +209,35 @@ function TableComperator({offre}){
     function startConv(){
         selectRequest.startConv(offre);
     }
-    console.log(offre.action.user)
+    function pin(){
+        selectRequest.pin();
+    }
+    function refuse(){
+        selectRequest.refuseFunc();
+    }
+    let buttonContent;
+    if(selectRequest==undefined){
+
+    }
+    else if(selectRequest.refuse==true){
+        buttonContent = <div className="d-flex">
+            <Button className="flex-even" onClick={refuse} variant="danger">Annuler le refue</Button>
+        </div>
+    }
+    else {
+        buttonContent = <div className="d-flex">
+            <Button className="flex-even me-2" onClick={startConv} variant="primary">Converser</Button>
+            <Button className="flex-even me-2" onClick={pin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
+            <Button className="flex-even me-2" variant="success">Accepter</Button>
+            <Button className="flex-even" onClick={refuse} variant="danger">Refuser</Button>
+        </div>
+    }
     return <div className="d-flex  h-100">
         <div className="w-25 h-100 overflow-auto border-right-comapretor o">
             <div className="p-3 bg-light border-bottom-comapretor">
                 <div className="d-flex justify-content-between">
                     <div className="d-flex">
                         <h2>{"Offre"}</h2>
-                        <Button variant="danger" className="pt-0 pb-1 pe-3 ps-3 ms-2">
-                            <TrashFill className="text-white"></TrashFill>
-                        </Button>
                     </div>
                     {offre.action.user!=undefined&&
                     <div className="d-flex ps-1 pe-2 border border-dark rounded  pt-1">
@@ -228,8 +247,7 @@ function TableComperator({offre}){
                         <div className="d-flex ms-2 mb-0 justify-content-center align-items-center">
                             <h6>{offre.action.user.getDisplayName()}</h6>
                         </div>
-                    </div>
-}
+                    </div>}
                 </div>
                 <div>
                     <p className="mt-2">{offre.description}</p>
@@ -256,12 +274,7 @@ function TableComperator({offre}){
                     <div>
                         <p className="mt-2">{selectRequest.message}</p>
                     </div>
-                    <div className="d-flex">
-                        <Button className="flex-even me-2" onClick={startConv} variant="primary">Converser</Button>
-                        <Button className="flex-even me-2" variant="warning">Epingler</Button>
-                        <Button className="flex-even me-2" variant="success">Accepter</Button>
-                        <Button className="flex-even" variant="danger">Refuser</Button>
-                    </div>
+                    {buttonContent}
                 </div>
             }
             <div className="bg-light p-3">

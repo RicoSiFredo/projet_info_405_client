@@ -42,7 +42,7 @@ export default class Request extends CvElem {
             }
         )
     }
-    refuse(){
+    refuseFunc(){
         this.makeRequest(
             "request/refuse",
             {   

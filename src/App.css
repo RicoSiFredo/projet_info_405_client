@@ -40,6 +40,15 @@
   
   cursor: pointer;
 }
+.refuse-bg{
+  background-color: #FFD5D6;
+}
+.accept-bg{
+  background-color: #F1FFD1;
+}
+.pin-bg{
+  background-color: #FEFDDF;
+}
 .h-38px{
   height: 38px !important;
 }

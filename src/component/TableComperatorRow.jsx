@@ -36,7 +36,17 @@ function TableComperatorRow({updateSelect, select, colList, offre, index, reques
     if(request.user.getTotalExp(colList[9].array)!=Utils.currentDate()){
         next = " / "+Utils.getDate(request.user.getTotalExp(colList[7].array), 1)
     }
-    return <tr className={"click"} onClick={selectThis}>
+    let classTr = "";
+    if(request.accept==true){
+        classTr = "accept-bg"
+    }
+    else if(request.refuse==true){
+        classTr = "refuse-bg"
+    }
+    else if(request.pinned==true){
+        classTr = "pin-bg"
+    }
+    return <tr className={"click "+classTr} onClick={selectThis}>
         <th scope="row">
             <input onChange={selectThis} checked={select==request.id_str} type={"checkbox"}>
             </input> 
