@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import Constant from "../utils/Constant";
 import ImgProfile from "../component/ImgProfile";
 import ProfilViewHome from "../component/ProfilViewHome";
-import {HideOn} from "react-hide-on-scroll";
+
 
 function Home({user, navigate}){
 
