@@ -23,6 +23,15 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     let [showRole, updateShowRole] = useState(false);
     let [verif, updateShowVerif] = useState(false);
     let alreadyComment = false;
+    let isMember = false;
+
+    {
+        project.actionList.list.map((obj, index) => {
+            if (obj.user.id_str == user.id_str){
+                isMember = true;
+            }
+        })
+    }
 
     useEffect(function(){
         action.user.getAllComment();
@@ -169,7 +178,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     let test = "/message/-1";
     if (action.user.id_str != user.id_str){
         if (!project.isFinish){
-            
             function showConv(){
                 listConv.reset();
                 listConv.makeRequest(
@@ -258,7 +266,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     
                 }
             })
-            if (!alreadyComment){
+            if (!alreadyComment && isMember){
                 bonus =
                 <div className="align-self-center flex ">
                     
@@ -288,12 +296,8 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
             </Modal>
                 </div>
             }else{
-
             }
-        }
-            
-
-        
+        }  
         
     }else{
         if (!project.isFinish){

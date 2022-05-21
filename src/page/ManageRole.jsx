@@ -6,9 +6,18 @@ import Data from "../utils/Data";
 import Field from "../component/Field";
 import Constant from "../utils/Constant";
 
-function ManageRole({project}){
+function ManageRole({rootUser, project}){
     const [create, updateCreate] = useState(false);
     const [val, updateVal] = useState("");
+    let isMember = false;
+
+    {
+        project.actionList.list.map((obj, index) => {
+            if (obj.user.id_str == rootUser.id_str){
+                isMember = true;
+            }
+        })
+    }
 
     function addElem() {
         updateCreate(true);
@@ -45,7 +54,7 @@ function ManageRole({project}){
 
 
 
-    if (!project.isFinish){
+    if (!project.isFinish && isMember){
         return <div>
                 <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
                     <div className="d-flex mt-1 border-bottom mb-2 pb-2">
@@ -80,7 +89,7 @@ function ManageRole({project}){
         return <div>
                 <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
                     <div className="d-flex mt-1">
-                        <h4>{"Roles"}</h4>
+                        <h4>{"Role"}</h4>
                     </div>
 
                     <ListRolePerm project={project}>

@@ -250,7 +250,7 @@ function ProjectFrame({rootUser, updatePage}){
 
             
 
-            <ManageRole project={project}></ManageRole>
+            <ManageRole rootUser={rootUser} project={project}></ManageRole>
         </div>
     </div>
     }else{
@@ -308,7 +308,7 @@ function ProjectFrame({rootUser, updatePage}){
 
             
 
-            <ManageRole project={project}></ManageRole>
+            <ManageRole rootUser={rootUser} project={project}></ManageRole>
         </div>
     </div>
     }
