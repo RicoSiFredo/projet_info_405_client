@@ -92,7 +92,7 @@ function Messenger({user}){
             <div className="chatMenu">
                 <div className="card chatMenuWrapper">
                         {conversations.map((c) => (
-                            <Link to={"/message/"+c.id_str}>
+                            <Link className='text-decoration-none text-dark' to={"/message/"+c.id_str}>
                                 <ConversationView key={c.id_str} conversation={c}/>
                             </Link>
                         ))}
@@ -102,12 +102,14 @@ function Messenger({user}){
     
             <div className="chatBox">
                 <div className="chatBoxWrapper">
-                    <h2>Conversation avec untel mettre le nom du mec putain</h2>
+                    
                     {
                         (currentChat.id_str != -1) ?
                     (<>
                     <div className="chatBoxTop">
+                    <h2>Conversation avec inserer le nom du mec putain</h2>
                     {currentChat.message_list.list.slice().reverse().map((m) => (
+                        
                             <Message key={m.id_str} message={m} own={m.auteur.id_str === user.id_str}/>
                         ))}
                     </div>
@@ -126,7 +128,7 @@ function Messenger({user}){
     
             <div className="chatOnline">
                 <div className="chatOnlineWrapper">
-                    <h1></h1>
+                    <h1>fdefderf</h1>
                 </div>
             </div>
 

@@ -25,24 +25,26 @@ function ConversationView({conversation,updatePage}){
             if (image !== undefined){
                 return(
                     <div className="conversation">
+                        
                         <img
                         className="conversationImg"
                         src={ProfilPic}
                         alt=""
                         />
-                        <span className="conversationName">{friend.firstname}</span>
+                        <span className="conversationName">{friend.getDisplayName()}</span>
                     </div>
 
                 )
             }else{
                 return(
                     <div className="conversation">
+                        
                         <img
                         className="conversationImg"
                         src={Constant.BASE_IMAGE+"profile_empty.png"}
                         alt=""
                         />
-                        <span className="conversationName">{friend.firstname}</span>
+                        <span className="conversationName">{friend.getDisplayName()}</span>
                     </div>
 
                 )
