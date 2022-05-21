@@ -137,16 +137,14 @@ function ProfilView({rootUser, elem, isProject=false}){
         </div>
     }
     if (isProject){
-        if (!elem.isFinish){
-            {
-                elem.actionList.list.map((obj, index) => {
-                    if (obj.user.id_str == rootUser.id_str){
-                        isMember = true;
-                    }
-                })
-            }
-            console.log(isMember);
-            if (isMember){
+        {
+            elem.actionList.list.map((obj, index) => {
+                if (obj.user.id_str == rootUser.id_str){
+                    isMember = true;
+                }
+            })
+        }
+        if (!elem.isFinish && isMember){
                 return <div>
                 <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
                     <div className="banner border-bottom border-4 border-primary position-relative">
@@ -187,21 +185,6 @@ function ProfilView({rootUser, elem, isProject=false}){
                     title="Erreur">
                 </ErrorShow>
             </div>
-        }else{
-            return <div>
-                <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
-                    <div className="banner border-bottom border-4 border-primary position-relative">
-                        {elem.banner &&
-                        <img src={Constant.IMAGE_URL+elem.banner} className="center-crop w-100 h-100" alt=""/>}
-                    </div>
-                    <div className="profil bg-light bg-light" onClick={addProfil}>   
-                        <ImgProfile elem={elem}></ImgProfile>
-                    </div>
-                    {field}
-                </div>
-            </div>
-        }
-            
         }else{
             return <div>
                 <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
