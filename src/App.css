@@ -370,15 +370,12 @@
     padding-left: 20px;
     padding-right: 20px;
     box-shadow: 0 0px 20px 0 rgba(0,0,0,0.2);
-    background-color: #F2EBE5;
+    background-color: #DD8EA4;
     transition: 0.3s;
 }
-.bg-item{
-  padding-left: 20px;
-  padding-right: 20px;
+.ombre{
   box-shadow: 0 0px 20px 0 rgba(0,0,0,0.2);
-  background-color: #647295;
-  transition: 0.3s;
 }
-
-
+.bg-home{
+  background-color: #F2E9EB;
+}

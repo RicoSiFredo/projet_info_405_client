@@ -48,7 +48,7 @@ function ProfilViewHome({elem, isProject=false}){
         </div>
     }
     return <div>
-        <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
+        <div className="card bg-light bg-gradient overflow-hidden ombre">
             <div className="banner border-bottom border-4 border-primary position-relative">
                 {elem.banner &&
                 <img src={Constant.IMAGE_URL+elem.banner} className="center-crop w-100 h-100" alt=""/>}

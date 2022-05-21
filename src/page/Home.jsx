@@ -131,7 +131,7 @@ function Home({user, navigate}){
                     
                 </div>
 
-                <div className="m-5 p-2 bg-car" >
+                <div className="m-5 p-2" >
                     <h2 className="m-2 mb-4">Découvrir des projets</h2>
 
                     <div className="ms-3 me-3 mb-3">
@@ -142,7 +142,7 @@ function Home({user, navigate}){
 
                 </div>
 
-                <div className="m-5 p-2 bg-car">
+                <div className="m-5 p-2">
                     <h2 className="m-2 mb-4">Découvrir des professionnels</h2>
 
                     <div className="ms-3 me-3 mb-3">
