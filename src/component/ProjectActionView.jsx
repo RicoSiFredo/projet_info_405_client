@@ -12,6 +12,15 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     const [show, updateShow] = useState(false);
     const [val, updateVal] = useState("");
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
+    let isMember = false;
+    {
+        project.actionList.list.map((obj, index) => {
+            if (obj.user.id_str == user.id_str){
+                isMember = true;
+            }
+        })
+    }
+
     function addElem(){
         updateVal("");
         updateError(ErrorEats.NO_ERROR);
@@ -24,7 +33,7 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     }
     //console.log(project.conv.id_str);
     let conversation = "/message/" + project.conv.id_str;
-    if (!project.isFinish){
+    if (!project.isFinish && isMember){
         return <div>
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">

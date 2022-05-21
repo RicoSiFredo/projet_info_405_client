@@ -21,6 +21,7 @@ import { GearFill } from "react-bootstrap-icons";
 function ProjectFrame({rootUser, updatePage}){
     const {id} = useParams();
     const [project, updateProject] = useState(new Project());
+    let isMember = false;
     project.id_str = id;
     function update(){
         updateProject(Eats.fakeUpdate(project));
@@ -139,7 +140,14 @@ function ProjectFrame({rootUser, updatePage}){
             }
         }
     }
-    if (!project.isFinish){
+    {
+        project.actionList.list.map((obj, index) => {
+            if (obj.user.id_str == rootUser.id_str){
+                isMember = true;
+            }
+        })
+    }
+    if (!project.isFinish && isMember){
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView rootUser={rootUser} elem={project} isProject={true}></ProfilView>
