@@ -15,10 +15,15 @@ const SIZE_ERROR = 0;
 const BAD_EXT_ERROR = 1;
 const FAILED_ERROR = 2;
 
-function ProfilView({elem, isProject=false}){
+function ProfilView({rootUser, elem, isProject=false}){
     let canEdit = true; 
+    if (rootUser != undefined){
+        if (elem.id_str != rootUser.id_str){
+            canEdit = false;
+        }
+    }
+    
     const [error, setError] = useState(NONE_ERROR);
-
     function openFilePicker(elemId) {
         var elem = document.getElementById(elemId);
         if(elem && document.createEvent) {

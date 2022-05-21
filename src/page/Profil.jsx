@@ -57,7 +57,7 @@ function Profil({rootUser}){
     if (Data.isMe(user)){
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
-            <ProfilView elem={user} isProject={false}></ProfilView>
+            <ProfilView rootUser={rootUser} elem={user} isProject={false}></ProfilView>
             <ElemView 
                 canEdit={canEdit} 
                 parent={user}
@@ -113,7 +113,7 @@ function Profil({rootUser}){
     }else{
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
-            <ProfilView elem={user} isProject={false}></ProfilView>
+            <ProfilView rootUser={rootUser} elem={user} isProject={false}></ProfilView>
             <ElemView 
                 canEdit={canEdit} 
                 parent={user}

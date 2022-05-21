@@ -142,7 +142,7 @@ function ProjectFrame({rootUser, updatePage}){
     if (!project.isFinish){
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
-            <ProfilView elem={project} isProject={true}></ProfilView>
+            <ProfilView rootUser={rootUser} elem={project} isProject={true}></ProfilView>
            
             <ElemView 
                 canEdit={canEdit} 

@@ -136,6 +136,8 @@ function ProfilField({user, isProject, label, name, canEdit, value, className=""
             return <div>
                 <p>{val}</p>
             </div>
+        }else{
+            return <div></div>
         }
     }
 }
