@@ -22,7 +22,6 @@ function ProjectFrame({rootUser, updatePage}){
     const {id} = useParams();
     const [project, updateProject] = useState(new Project());
     project.id_str = id;
-    let isMember = false;
     function update(){
         updateProject(Eats.fakeUpdate(project));
         // fait croire à un changement
@@ -139,16 +138,6 @@ function ProjectFrame({rootUser, updatePage}){
                 </div>
             }
         }
-    }
-    console.log("rootUser");
-    console.log(rootUser.id_str);
-    
-    {
-        project.actionList.list.map((obj, index) => {
-            if (obj.user.id_str == rootUser.id_str){
-                isMember = true;
-            }
-        })
     }
     if (!project.isFinish){
         return <div className="d-flex justify-content-center flex-row">
