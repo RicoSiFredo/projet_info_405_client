@@ -46,7 +46,7 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
         profil = <img src={Constant.IMAGE_URL+user.profile} className="imageHeader" alt=""/>
     }
     else {
-        profil = <img src={Constant.BASE_IMAGE + "profile_empty.png"} className="center-crop w-100 h-100" alt=""/>
+        profil = <img src={Constant.BASE_IMAGE + "profile_empty.png"} className="imageHeader" alt=""/>
     }
 
     let button;
