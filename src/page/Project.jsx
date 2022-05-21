@@ -248,11 +248,12 @@ function ProjectFrame({rootUser, updatePage}){
     }else{
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
-            <ProfilView elem={project} isProject={true}></ProfilView>
+            <ProfilView rootUser={rootUser} elem={project} isProject={true}></ProfilView>
            
             <ElemView 
                 canEdit={false} 
                 parent={project}
+                rootUser={rootUser}
                 list={project.tecnoList} 
                 keyword="tecno"
                 title="Technologies"
@@ -275,6 +276,7 @@ function ProjectFrame({rootUser, updatePage}){
                 typeAction={[ActionEnum.IN_PROJECT]} 
                 updatePage={updatePage} 
                 user={rootUser} 
+                rootUser={rootUser}
                 project={project} 
                 actionList={project.actionList}>
 

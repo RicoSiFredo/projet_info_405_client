@@ -18,12 +18,21 @@ const FAILED_ERROR = 2;
 function ProfilView({rootUser, elem, isProject=false}){
     let canEdit = true; 
     let isMember = false;
+    console.log("rootUser");
+    console.log(rootUser);
     if (rootUser != undefined){
         if (!isProject){
             if (elem.id_str != rootUser.id_str){
                 canEdit = false;
             }
-        }   
+        }  
+        {
+            elem.actionList.list.map((obj, index) => {
+                if (obj.user.id_str == rootUser.id_str){
+                    isMember = true;
+                }
+            })
+        } 
     }
 
     const [error, setError] = useState(NONE_ERROR);
@@ -96,14 +105,6 @@ function ProfilView({rootUser, elem, isProject=false}){
     }
     let field;
     if(isProject){
-        {
-            elem.actionList.list.map((obj, index) => {
-                if (obj.user.id_str == rootUser.id_str){
-                    isMember = true;
-                }
-            })
-        }
-        console.log(isMember);
         if (!elem.isFinish && isMember){
             field = <div>
             <div className="mt-3 ms-3 me-2">
