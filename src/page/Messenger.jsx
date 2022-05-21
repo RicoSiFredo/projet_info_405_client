@@ -9,6 +9,7 @@ import Eats from "../object/base/Eats";
 import Conversation from "../object/Conversation";
 import React from "react"
 import { useParams, Link } from "react-router-dom";
+import {  } from "react-bootstrap-icons";
 
 
 function Messenger({user}){
@@ -134,8 +135,8 @@ function Messenger({user}){
             <Modal.Header closeButton>
                 <Modal.Title>Démarrer une nouvelle discussion</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <h1>Amis</h1>
+            <Modal.Body >
+                <h6 className='mb-3'>Selectionner la personne avec qui vous souhaiter converser.</h6>
                 {
                 listFriends.map((obj, index) => {
                     const createConv = (e) => {
@@ -144,16 +145,14 @@ function Messenger({user}){
                         try{
                                 user.createConversation(obj.id_str);
                                     
-                
                         }catch(err){
                             console.log(err);
                         }
                     };
-                        if (obj.id_str !== user.id_str){
+                        if (obj.id_str !== user.id_str && obj.firstname != undefined){
                             return (
-                                <div>
-                                    {obj.firstname}
-                                    <button type="button" className="btn btn-primary" onClick={createConv}>Créer une nouvelle conversation</button>
+                                <div className="mt-1 ms-3 mb-2 d-flex justify-content-between align-items-center">
+                                    <Button variant="outline-primary" onClick={createConv}>{obj.getDisplayName()} </Button>
                                 </div>
         
                             )

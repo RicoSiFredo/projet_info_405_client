@@ -56,7 +56,7 @@ function NotifList({user, rootUser, you, list}){
         let res;
         if(typeLay==TYPE.ADD){
             return <div>
-                <p>Prout</p>
+                
             </div>
         }
         else if(typeLay==TYPE.NOTIF){
