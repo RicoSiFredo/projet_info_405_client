@@ -24,6 +24,7 @@ function Search({navigate, rootUser}){
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
 
     const [type, updateType] = useState("");
+    const [moy, updateMoy] = useState("");
     const [min, updateMin] = useState("");
     const [max, updateMax] = useState("");
 
@@ -59,21 +60,25 @@ function Search({navigate, rootUser}){
 
     return <div className = "d-flex m-2 p-4">
 
-            <div>
+            <div className="me-5">
                 <p>Filtre de recherche</p>
 
-                <Form.Select className="w-50 p-2" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
+                <Form.Select className="w-85 m-2 p-2" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
                     <option value="">Type</option>
                     <option value="project">Projet</option>
                     <option value="user">Utilisateur</option>
                 </Form.Select>
 
-                <Form.Group className="w-50 p-1" controlId="min">
-                    <Form.Control value={min} onInput={eventMin} type="text" placeholder="Note minimum" />
-                </Form.Group>
-                <Form.Group className="w-50 p-1" controlId="max">
-                    <Form.Control value={max} onInput={eventMax} type="text" placeholder="Note maximum" />
-                </Form.Group>
+                <Form.Select className="w-85 m-2 p-2" aria-label="moy" value={moy} onChange={(e) => updateMoy(e.target.value)}>
+                    <option value="0">Nombres d'étoiles</option>
+                    <option value="20">1 étoile ou plus</option>
+                    <option value="40">2 étoile ou plus</option>
+                    <option value="60">3 étoile ou plus</option>
+                    <option value="80">4 étoile ou plus</option>
+                    <option value="100">5 étoile</option>
+                </Form.Select>
+
+                
 
             </div>
             <div>
@@ -104,9 +109,9 @@ function Search({navigate, rootUser}){
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
-                    if (type == "") return div;
+                    if (type == "" && object.moyenne >= moy) return div;
                     if (type == "project" && object instanceof Project) return div;
-                    if (type == "user" && object instanceof User) return div;
+                    if (type == "user" && object instanceof User && object.moyenne >= moy) return div;
 
             })
         }
