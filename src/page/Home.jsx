@@ -12,17 +12,6 @@ import ProfilViewHome from "../component/ProfilViewHome";
 
 function Home({user, navigate}){
 
-
-
-
-//++++++++++++++++++++++++++++++++++++++++++
-
-
-
-//+++++++++++++++++++++++++++++++++++++++++++
-
-
-
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
     const [limite, updateLimite] = useState(10);
 
@@ -50,41 +39,68 @@ function Home({user, navigate}){
             updateLimite(limite+10)
         }
     }
-    let content = 
-        <Carousel.Item className="d-flex center">
-            <div className="d-flex justify-content-center w-100 mb-5" >
-    {
-        list.map(function(object, index){
-            if (index < 3){
-                return <Link to={"/project/"+object.id_str} className="text-decoration-none ms-3 me-3 w-25" key={object.id_str}>
-                                <ProfilViewHome elem={object} isProject={true}></ProfilViewHome>
-                        </Link>
-            }
-        })
-    }
-    </div>
-    </Carousel.Item>
+
+    
+    function splitArrayIntoChunksOfLen(arr, len) {
+        var chunks = [], i = 0, n = arr.length;
+        while (i < n) {
+          chunks.push(arr.slice(i, i += len));
+        }
+        return chunks;
+      }
+
     
 
+    function buildCarousel(){
+        console.log("+++++ appel ++++++")
+        console.log(list.list)
+        let listGroup=splitArrayIntoChunksOfLen(list.list,3);
 
+        for(var i = 0; i < listGroup.length; i++){
+            console.log(listGroup[i])
+            let group = listGroup[i];
 
-    let buttonPlus;
-    if (limite < list.size()){
-        buttonPlus = <Button variant="primary d-flex align-items-center" onClick={expendLimit} >
-            Afficher plus
-            <img className="img-btn ms-2" src={Constant.BASE_IMAGE + "plus.png"}/>
-        </Button>
-    }else{
-        buttonPlus = <Button variant="primary d-flex align-items-center" disabled onClick={expendLimit} >
-        Afficher plus
-        <img className="img-btn ms-2" src={Constant.BASE_IMAGE + "plus.png"}/>
-        </Button> 
+            if(group.length >= 3){
+                return buildCarouselItem(group);
+            }
+        } 
     }
 
+
+    function buildCarouselItem(troisProjets){
+        //prends en parametre une liste de projets (3)
+        //renvoie trois projets dans une div dans un carousel.item
+        
+        return <Carousel.Item className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center w-100 mb-5">
+          
+            <Link to={"/project/"+troisProjets[0].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisProjets[0].id_str}>
+                <ProfilViewHome elem={troisProjets[0]} isProject={true}></ProfilViewHome>
+            </Link>
+                
+            <Link to={"/project/"+troisProjets[1].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisProjets[1].id_str}>
+                <ProfilViewHome elem={troisProjets[1]} isProject={true}></ProfilViewHome>
+            </Link>
+                            
+            <Link to={"/project/"+troisProjets[2].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisProjets[2].id_str}>
+                <ProfilViewHome elem={troisProjets[2]} isProject={true}></ProfilViewHome>
+            </Link>
+            
+            </div>
+        </Carousel.Item>
+
+    }
+
+    let listGroup=splitArrayIntoChunksOfLen(list.list,3);
+    let test = listGroup[0];
+    let content
+    if (test != undefined)
+        content = buildCarousel();
+
+
+
+
     return <div>
-
-
-
             <div className="d-flex justify-content-around">
             <div className="card mt-4 me-5 ms-5 w-100">
                 <Carousel fade >
@@ -134,7 +150,7 @@ function Home({user, navigate}){
                 
 
                 <Carousel variant="dark">
-                    {content}
+                  {content}
                 </Carousel>
 
             </div>
