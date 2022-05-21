@@ -22,7 +22,7 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     }
     function inviteMember(){   
     }
-    console.log(project.conv.id_str);
+    //console.log(project.conv.id_str);
     let conversation = "/message/" + project.conv.id_str;
     if (!project.isFinish){
         return <div>
@@ -32,11 +32,11 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
                 <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
                     <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
-                <Link to={conversation} className="me-2">
-                <Button variant="primary">
-                    <EnvelopeFill></EnvelopeFill>
-                </Button>
-            </Link>
+                <Link to={conversation} className="ms-2">
+                    <Button variant="primary" className="pt-0 ps-2 pe-2">
+                        <EnvelopeFill className="mt-0"></EnvelopeFill>
+                    </Button>
+                </Link>
             </div>
             <ProjectActionList 
                 typeAction={typeAction} 
