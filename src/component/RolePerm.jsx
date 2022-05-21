@@ -4,7 +4,7 @@ import React from "react"
 
 function RolePerm({role, project}){
     return <div>
-        <p>{role.name}</p>
+        <h5>{role.name}</h5>
         {
             project.permissionList.map(function(obj, index){
                 function updatePerm(){
@@ -36,7 +36,7 @@ function RolePerm({role, project}){
                 }
                 return <div key={"role-"+role.id_str+"-perm-"+obj.id_str}>
                     <label>
-                        <input class="form-check-input" 
+                        <input className="form-check-input me-1" 
                                 type="checkbox" 
                                 id="flexCheckIndeterminate" 
                                 onChange={updatePerm} 

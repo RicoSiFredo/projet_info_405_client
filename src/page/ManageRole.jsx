@@ -48,7 +48,7 @@ function ManageRole({project}){
     if (!project.isFinish){
         return <div>
                 <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
-                    <div className="d-flex mt-1">
+                    <div className="d-flex mt-1 border-bottom mb-2 pb-2">
                         <h4>{"Role"}</h4>
                         <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
                             <img className="img-btn" src={Constant.BASE_IMAGE + "plus.png"}/>
@@ -56,7 +56,7 @@ function ManageRole({project}){
                     </div>
 
                     <ListRolePerm project={project}>
-
+                   
                     </ListRolePerm>
 
                     
