@@ -61,6 +61,7 @@ function Profil({rootUser}){
             <ElemView 
                 canEdit={canEdit} 
                 parent={user}
+                rootUser={rootUser}
                 list={user.skillList} 
                 keyword="skill"
                 title="Compétences"
@@ -117,6 +118,7 @@ function Profil({rootUser}){
             <ElemView 
                 canEdit={canEdit} 
                 parent={user}
+                rootUser={rootUser}
                 list={user.skillList} 
                 keyword="skill"
                 title="Compétences"
