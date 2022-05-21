@@ -28,7 +28,7 @@ function ElemView({parent, rootUser, list, keyword, canEdit, title, infoNothing,
             content = <p className="mb-0 mt-1">{infoNothing}</p>
         }
     }
-    if (rootUser._type == "Project"){
+    if (parent._type == "Project"){
         if (!parent.isFinish){
             return <div>
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
@@ -64,42 +64,49 @@ function ElemView({parent, rootUser, list, keyword, canEdit, title, infoNothing,
             </div>
         </div>
         }
-    }else{
-        if (parent.id_str == rootUser.id_str){
-            return <div>
-            <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
-                <div className="d-flex mt-1">
-                    <h4>{title}</h4>
-                    <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                        <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
-                    </Button>
+    }else if (parent._type = "User"){
+        if (rootUser != undefined){
+            if (parent.id_str == rootUser.id_str){
+                return <div>
+                <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
+                    <div className="d-flex mt-1">
+                        <h4>{title}</h4>
+                        <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                            <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
+                        </Button>
+                    </div>
+                    {content}
                 </div>
-                {content}
+                <Modal show={show} className="highest" onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Ajouter une compétence</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <AddElem handleClose={handleClose} keyword={keyword} elem={parent}></AddElem>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Fermer
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
-            <Modal show={show} className="highest" onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Ajouter une compétence</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <AddElem handleClose={handleClose} keyword={keyword} elem={parent}></AddElem>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
-                        Fermer
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
+            }else{
+                return <div>
+                <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
+                    <div className="d-flex mt-1">
+                        <h4>{title}</h4>
+                    </div>
+                    {content}
+                </div>
+            </div>
+            }
         }else{
-            return <div>
-            <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
-                <div className="d-flex mt-1">
-                    <h4>{title}</h4>
-                </div>
-                {content}
-            </div>
-        </div>
+            return null;
         }
+        
+    }else{
+        return null;
     }
     
     
