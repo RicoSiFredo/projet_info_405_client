@@ -24,8 +24,7 @@ export default class Project extends Object405 {
     roleList = new ListEats("own_role", undefined, CompareEats.compareInt("date", CompareEats.DESC))
     tecnoList = new ListEats("use", this);
     actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
-    memberList = new ListEats("members", this);
-    conv= new SimpleEats("conv", this);
+    conv= new SimpleEats("belong_to", this);
 
     havePermission(perm){
         let res;

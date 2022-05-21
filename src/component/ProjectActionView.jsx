@@ -5,6 +5,9 @@ import ProjectActionList from "../list/ProjectActionList";
 import ErrorEats from "../object/base/ErrorEats";
 import Constant from "../utils/Constant";
 import AddMembers from "./AddMembers";
+import { Link } from "react-router-dom";
+import { Bell, BellFill, Search, ThreeDots, EnvelopeFill, Person } from "react-bootstrap-icons";
+
 function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     const [show, updateShow] = useState(false);
     const [val, updateVal] = useState("");
@@ -19,7 +22,8 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
     }
     function inviteMember(){   
     }
-    console.log(project);
+    console.log(project.conv.id_str);
+    let conversation = "/message/" + project.conv.id_str;
     if (!project.isFinish){
         return <div>
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
@@ -28,6 +32,11 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
                 <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
                     <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
+                <Link to={conversation} className="me-2">
+                <Button variant="primary">
+                    <EnvelopeFill></EnvelopeFill>
+                </Button>
+            </Link>
             </div>
             <ProjectActionList 
                 typeAction={typeAction} 
