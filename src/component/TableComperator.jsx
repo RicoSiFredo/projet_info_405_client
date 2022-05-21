@@ -113,7 +113,7 @@ function TableComperator({offre}){
             [],
             true,
             "Score",
-            "Score description"
+            "Ce score synthétise les differentes qualités du candidat. Il évolu en fonction des coefficient que vous avez choisi."
         ),
         new ComparatorCol(
             "Nom"
@@ -126,7 +126,7 @@ function TableComperator({offre}){
             [],
             true,
             "Status",
-            "Status description"
+            "Le status représente le temps qu'un candidat est prêt a investir dès maintenant pour votre projet."
         ),
         new ComparatorCol(
             "Salaire",
@@ -136,7 +136,7 @@ function TableComperator({offre}){
             [],
             true,
             "Salaire",
-            "Salaire description"
+            "Salaire demandé par le candidat pour exercer ce poste."
         ),
         new ComparatorCol(
             "Commentaire",
@@ -146,7 +146,7 @@ function TableComperator({offre}){
             [],
             true,
             "Commentaire",
-            "Commentaire description"
+            "Dans la colonne commentaire apparaissent les differents avis laissés à propos du candidat."
         ),
         new ComparatorCol(
             "Age",
@@ -156,7 +156,7 @@ function TableComperator({offre}){
             [],
             true,
             "Age",
-            "Age description"
+            "Age du candidat"
         ),
         new ComparatorCol(
             "Compétences",
@@ -166,7 +166,7 @@ function TableComperator({offre}){
             [],
             true,
             "Compétences",
-            "Compétences description"
+            "Dans la colonne compétences apparaissent les differentes téchnologies que le candidat déclare maitriser. Cliquez sur l'une d'entre elles pour décourvir l'experience du candidat."
         ),
         new ComparatorCol(
             "Expérience",
@@ -176,7 +176,7 @@ function TableComperator({offre}){
             [],
             true,
             "Expérience",
-            "Expérience description"
+            "Expérience du candidat, exrpimé en valeur de temps. Vous pouvez selctionner des filtres pour retenir qu'une ou plusieurs compétences."
         )
     ]);
     const [select, updateSelect] = useState("")
