@@ -13,7 +13,6 @@ import ProfilViewHome from "../component/ProfilViewHome";
 function Home({user, navigate}){
 
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
-    const [limite, updateLimite] = useState(10);
 
     useEffect(function(){
         getProject();
@@ -34,12 +33,6 @@ function Home({user, navigate}){
         )
     }
 
-    function expendLimit(){
-        if (limite < list.size()){
-            updateLimite(limite+10)
-        }
-    }
-
     
     function splitArrayIntoChunksOfLen(arr, len) {
         var chunks = [], i = 0, n = arr.length;
@@ -50,22 +43,22 @@ function Home({user, navigate}){
       }
 
     
+    let listGroup=splitArrayIntoChunksOfLen(list.list,3);
 
-    function buildCarousel(){
-        console.log("+++++ appel ++++++")
-        console.log(list.list)
-        let listGroup=splitArrayIntoChunksOfLen(list.list,3);
+    let carouselProject;
+    if (listGroup != undefined){
+        carouselProject = <Carousel fade variant="dark">
+            {
+                listGroup.map(function(group,i){
 
-        for(var i = 0; i < listGroup.length; i++){
-            console.log(listGroup[i])
-            let group = listGroup[i];
-
-            if(group.length >= 3){
-                return buildCarouselItem(group);
+                    if(group.length >= 3){
+                        return buildCarouselItem(group);
+                    }
+                    
+                })
             }
-        } 
+        </Carousel>
     }
-
 
     function buildCarouselItem(troisProjets){
         //prends en parametre une liste de projets (3)
@@ -91,19 +84,11 @@ function Home({user, navigate}){
 
     }
 
-    let listGroup=splitArrayIntoChunksOfLen(list.list,3);
-    let test = listGroup[0];
-    let content
-    if (test != undefined)
-        content = buildCarousel();
-
-
-
 
     return <div>
             <div className="d-flex justify-content-around">
             <div className="card mt-4 me-5 ms-5 w-100">
-                <Carousel fade >
+                <Carousel >
                     <Carousel.Item>
                         <img 
                             className="homeBanner"
@@ -147,12 +132,9 @@ function Home({user, navigate}){
             <h2 className="m-2 mb-4">Découvrir des projets</h2>
 
             <div className="ms-3 me-3 mb-3">
-                
-
-                <Carousel variant="dark">
-                  {content}
-                </Carousel>
-
+               
+                {carouselProject}
+              
             </div>
 
         </div>
