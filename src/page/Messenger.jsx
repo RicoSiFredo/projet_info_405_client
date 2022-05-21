@@ -90,20 +90,19 @@ function Messenger({user}){
     return (
         <div className="Messenger">
             <div className="chatMenu">
-                <div className="chatMenuWrapper">
-                    <input placeholder="Rechercher des amis" className="chatMenuInput" />
+                <div className="card chatMenuWrapper">
                         {conversations.map((c) => (
                             <Link to={"/message/"+c.id_str}>
                                 <ConversationView key={c.id_str} conversation={c}/>
                             </Link>
                         ))}
-                    <button className="btn btn-primary" onClick={addConv}>Nouvelle conversation</button>
+                    <Button variant="outline-primary" onClick={addConv}>Nouvelle conversation</Button>
                 </div>
             </div>
     
             <div className="chatBox">
                 <div className="chatBoxWrapper">
-                    <h1>Boite de dialogue</h1>
+                    <h2>Conversation avec untel mettre le nom du mec putain</h2>
                     {
                         (currentChat.id_str != -1) ?
                     (<>
@@ -113,7 +112,7 @@ function Messenger({user}){
                         ))}
                     </div>
                     <div className="chatBoxBottom">
-                        <textarea className="chatMessageInput" placeholder="ecrivez quelque chose..."
+                        <textarea className="chatMessageInput" placeholder="Saisir ici votre message"
                         onChange={(e) => setNewMessage(e.target.value)}
                         value={newMessage}
                         ></textarea>
@@ -144,7 +143,7 @@ function Messenger({user}){
                         
                         try{
                                 user.createConversation(obj.id_str);
-                                    
+                                
                         }catch(err){
                             console.log(err);
                         }
