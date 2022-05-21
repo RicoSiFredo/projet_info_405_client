@@ -13,6 +13,7 @@ import { Rating } from 'react-simple-star-rating'
 import HistoryView from "../component/HistoryView";
 import Constant from "../utils/Constant";
 import { Link } from "react-router-dom";
+import ProfilViewHome from "../component/ProfilViewHome";
 
 function Profil({rootUser}){
     const {id} = useParams();
@@ -69,28 +70,33 @@ function Profil({rootUser}){
                 infoNothingEdit="Commencer à ajouter des compétences">
                     
             </ElemView>
-            <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
-            Commentaires : <br /><br />
+            <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-3">
+            <h4>Commentaires</h4>
+            <p>Il s'agit des avis laissés par d'autre professionnels au sujet de votre travail</p>
                 {
                     user.commentList.list.map((obj, index) => {
                         let url = "/project/" + obj.projet.id_str;
                         return (
-                            <div>
-                                Note : <Rating
-                                    readonly={true}
-                                    allowHover={false}
-                                    ratingValue={obj.note} /* Available Props */
-                                /> <br />
-                                Commentaire : {obj.text} <br />
-                                écrit par : {obj.auteur.firstname}  <br />
-                                sur le projet : 
-                                <Link className="text-decoration-none text-dark" to={url}>
-                                        <h5 className=" click mb-1">{obj.projet.name}</h5>
-                                </Link>
-                                <Link className="text-decoration-none text-dark" to={url}>
-                                    <img src={Constant.BASE_IMAGE + "project_empty.png"} className="profil bg-light bg-light mx-auto d-block" alt=""/>
-                                 </Link>
-                                 <br /><br /><br />
+                            <div className="border-top border-dark pt-2 mt-2">
+                                <p><strong>{obj.auteur.getDisplayName()}</strong> à émis un avis sur votre travail au sein du projet : {obj.projet.name}</p>
+                                
+                                <div className="d-flex justify-content-center">
+                                            <Rating
+                                                readonly={true}
+                                                allowHover={false}
+                                                ratingValue={obj.note} /* Available Props */
+                                            />
+                                </div>
+
+                                <p className="mt-3">Observation : {obj.text} </p>
+                                
+                                <div className="mb-2 h-50">
+                                    
+                                    <Link className="text-decoration-none text-dark" to={url}>
+                                        <ProfilViewHome elem={obj.projet} isProject={true}></ProfilViewHome>
+                                    </Link>
+            
+                                </div>
                             </div>            
                         )
                     })
@@ -128,29 +134,35 @@ function Profil({rootUser}){
                     
             </ElemView>
             
-            <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
-            Commentaires : 
+            <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-3">
+            <h4>Commentaires</h4>
+            <p>Il s'agit des avis laissés par d'autre professionnels au sujet du travail de {user.firstname}</p>
                 {
                     user.commentList.list.map((obj, index) => {
                         let url = "/project/" + obj.projet.id_str;
                                 return (
-                                    <div className="Commentaires">
-                                        Note : <Rating
-                                            readonly={true}
-                                            allowHover={false}
-                                            ratingValue={obj.note} /* Available Props */
-                                            allowHalfIcon={true}
-                                        /> <br />
-                                        Commentaire : {obj.text} <br />
-                                        écrit par : {obj.auteur.firstname} <br />
-                                        sur le projet : 
-                                        <Link className="text-decoration-none text-dark" to={url}>
-                                                <h5 className=" click mb-1">{obj.projet.name}</h5>
-                                        </Link>
-                                        <Link className="text-decoration-none text-dark" to={url}>
-                                            <img src={Constant.BASE_IMAGE + "project_empty.png"} className="profil bg-light bg-light mx-auto d-block" alt=""/>
-                                        </Link>
-                                        <br /><br /><br />
+                                    <div className="border-top border-dark pt-2 mt-2">
+                                        <p><strong>{obj.auteur.getDisplayName()}</strong> à émis un avis sur votre travail au sein du projet : {obj.projet.name}</p>
+                                        
+                                        <div className="d-flex justify-content-center">
+                                            <Rating
+                                                readonly={true}
+                                                allowHover={false}
+                                                ratingValue={obj.note} /* Available Props */
+                                                allowHalfIcon={true}
+                                            />
+                                        </div>
+
+                                        <p className="mt-3">Observation : {obj.text} </p>
+                                        
+                                        <div className="mb-2 h-50">
+                                    
+                                            <Link className="text-decoration-none text-dark" to={url}>
+                                                <ProfilViewHome elem={obj.projet} isProject={true}></ProfilViewHome>
+                                            </Link>
+                    
+                                        </div>
+                                        
                                     </div>            
                                 )
                             
