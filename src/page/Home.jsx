@@ -88,7 +88,7 @@ function Home({user, navigate}){
     return <div>
                 <div className="d-flex justify-content-around">
                     
-                    <div className="card mt-4 me-5 ms-5 w-100">
+                    <div className="card w-100">
                         <Carousel >
                             <Carousel.Item>
                                 <img 
@@ -143,7 +143,7 @@ function Home({user, navigate}){
                 </div>
 
                 <div className="m-5 p-2">
-                    <h2 className="m-2 mb-4">Découvrir des professionnels</h2>
+                    <h2 className="m-2 mb-4">Découvrir des offres d'emploi </h2>
 
                     <div className="ms-3 me-3 mb-3">
                     
