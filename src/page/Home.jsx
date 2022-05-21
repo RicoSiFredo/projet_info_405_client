@@ -7,11 +7,24 @@ import CompareEats from "../object/base/CompareEats";
 import Eats from "../object/base/Eats";
 import { Link } from "react-router-dom";
 import Constant from "../utils/Constant";
+import ImgProfile from "../component/ImgProfile";
+import ProfilViewHome from "../component/ProfilViewHome";
 
 function Home({user, navigate}){
 
+
+
+
+//++++++++++++++++++++++++++++++++++++++++++
+
+
+
+//+++++++++++++++++++++++++++++++++++++++++++
+
+
+
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
-    const [limite, updateLimite] = useState(5);
+    const [limite, updateLimite] = useState(10);
 
     useEffect(function(){
         getProject();
@@ -34,31 +47,47 @@ function Home({user, navigate}){
 
     function expendLimit(){
         if (limite < list.size()){
-            updateLimite(limite+5)
+            updateLimite(limite+10)
         }
     }
-    let content = <div>
-        
+    let content = 
+        <Carousel.Item className="d-flex center">
+            <div className="d-flex justify-content-center w-100 mb-5" >
     {
         list.map(function(object, index){
-            if (index < limite){
-                return <Link to={"/project/"+object.id_str} className="text-decoration-none">
-                    <div key={object.id_str} className="card p-2 text-dark">
-                    
-                        <h4>{object.name}</h4>
-                        <p className="ms-3 text-secondary">{object.description}</p>
-                        </div>
-                    </Link>
+            if (index < 3){
+                return <Link to={"/project/"+object.id_str} className="text-decoration-none ms-3 me-3 w-25" key={object.id_str}>
+                                <ProfilViewHome elem={object} isProject={true}></ProfilViewHome>
+                        </Link>
             }
         })
     }
     </div>
+    </Carousel.Item>
+    
 
+
+
+    let buttonPlus;
+    if (limite < list.size()){
+        buttonPlus = <Button variant="primary d-flex align-items-center" onClick={expendLimit} >
+            Afficher plus
+            <img className="img-btn ms-2" src={Constant.BASE_IMAGE + "plus.png"}/>
+        </Button>
+    }else{
+        buttonPlus = <Button variant="primary d-flex align-items-center" disabled onClick={expendLimit} >
+        Afficher plus
+        <img className="img-btn ms-2" src={Constant.BASE_IMAGE + "plus.png"}/>
+        </Button> 
+    }
 
     return <div>
+
+
+
             <div className="d-flex justify-content-around">
             <div className="card mt-4 me-5 ms-5 w-100">
-                <Carousel variant="dark">
+                <Carousel fade >
                     <Carousel.Item>
                         <img 
                             className="homeBanner"
@@ -102,11 +131,12 @@ function Home({user, navigate}){
             <h2 className="m-2 mb-4">Découvrir des projets</h2>
 
             <div className="ms-3 me-3 mb-3">
-            {content}
-            <Button variant="outline-primary d-flex align-items-center" onClick={expendLimit}>
-                Afficher plus
-                <img className="img-btn ms-2" src={Constant.BASE_IMAGE + "plus.png"}/>
-            </Button>
+                
+
+                <Carousel variant="dark">
+                    {content}
+                </Carousel>
+
             </div>
 
         </div>

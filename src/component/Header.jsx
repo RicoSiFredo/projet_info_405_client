@@ -51,7 +51,11 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
 
     let button;
     if (user.logged){
-        button = <div className="d-flex justify-content-start me-2">
+        button = <div className="d-flex justify-content-start align-items-center me-2">
+
+            <Link to={"/profil/"+user.id_str} className="me-2">
+                    {profil}
+            </Link>
 
             <Link to={"/message/-1"}>
                 <Button className="me-2" variant="primary" >
@@ -67,12 +71,7 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
                 </Button>
             </div>
 
-            <Link to={"/profil/"+user.id_str}>
-                <Button className="me-2 p-0" variant="primary">
-                    {profil}
-                </Button>
-            </Link>
-
+            <div>
             <Button className="me-2" onClick={openParam} variant="primary">
 				<ThreeDots></ThreeDots>
 			</Button>
@@ -88,6 +87,7 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
                     </Button>
                 </Modal.Footer>
             </Modal>
+            </div>
         </div>
     }
     else {
