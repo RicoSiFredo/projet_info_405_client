@@ -24,7 +24,8 @@ export default class Project extends Object405 {
     roleList = new ListEats("own_role", undefined, CompareEats.compareInt("date", CompareEats.DESC))
     tecnoList = new ListEats("use", this);
     actionList = new ListEats("act", this, CompareEats.compareInt("date", CompareEats.DESC));
-    memberList = new ListEats("do", this);
+    memberList = new ListEats("members", this);
+    conv= new SimpleEats("conv", this);
 
     havePermission(perm){
         let res;
@@ -186,9 +187,25 @@ export default class Project extends Object405 {
                 }
             },
             function(response){
-                console.log("--------------");
-                console.log(response);
-                console.log(success);
+                if(success!=undefined){
+                    success(response);
+                    
+                }
+            }
+        )
+    }
+    getConv(failed, success){
+        super.makeRequest(
+            "user/get/conversationProject",
+            {
+                idProject: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
                 if(success!=undefined){
                     success(response);
                     
