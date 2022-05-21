@@ -1,10 +1,12 @@
-import { Carousel } from "react-bootstrap";
+import { Button, Carousel } from "react-bootstrap";
 import React from "react"
 import { useEffect, useState } from "react";
 import Data from "../utils/Data";
 import ListEats from "../object/base/ListEats";
 import CompareEats from "../object/base/CompareEats";
 import Eats from "../object/base/Eats";
+import { Link } from "react-router-dom";
+import Constant from "../utils/Constant";
 
 function Home({user, navigate}){
 
@@ -29,13 +31,28 @@ function Home({user, navigate}){
         )
     }
 
+    var limite = 5;
+    function expendLimit(){
+
+        if (limite < list.size())
+            limite += 5;
+
+        list.update();
+        
+    }
     let content = <div>
-        <p>{list.size}</p>
+        
     {
         list.map(function(object, index){
-            return <div key={object.id_str}>
-                <p>{object.name}</p>
-            </div> 
+            if (index < limite){
+                return <Link to={"/project/"+object.id_str} className="text-decoration-none">
+                    <div key={object.id_str} className="card p-2 text-dark">
+                    
+                        <h4>{object.name}</h4>
+                        <p className="ms-3 text-secondary">{object.description}</p>
+                        </div>
+                    </Link>
+            }
         })
     }
     </div>
@@ -85,10 +102,14 @@ function Home({user, navigate}){
             </div>
         </div>
         <div className="card m-5">
-            <h2>ICI METTRE LISTE DE PROJET</h2>
+            <h2 className="m-2 mb-4">Découvrir des projets</h2>
 
-            <div>
+            <div className="ms-3 me-3 mb-3">
             {content}
+            <Button variant="outline-primary d-flex align-items-center" onClick={expendLimit}>
+                Afficher plus
+                <img className="img-btn ms-2" src={Constant.BASE_IMAGE + "plus.png"}/>
+            </Button>
             </div>
 
         </div>

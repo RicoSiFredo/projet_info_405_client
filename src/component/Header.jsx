@@ -40,25 +40,36 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     function openNotif(){
         updateNotif(!notif);
     }
+
+    let profil;
+    if(user.profile){
+        profil = <img src={Constant.IMAGE_URL+user.profile} className="imageHeader" alt=""/>
+    }
+    else {
+        profil = <img src={Constant.BASE_IMAGE + "profile_empty.png"} className="center-crop w-100 h-100" alt=""/>
+    }
+
     let button;
     if (user.logged){
         button = <div className="d-flex justify-content-start me-2">
 
-            <Link to={"/message/-1"} className="me-2">
-                <Button variant="primary">
+            <Link to={"/message/-1"}>
+                <Button className="me-2" variant="primary" >
                     <EnvelopeFill></EnvelopeFill>
                     <Badge pill className="ms-2" bg="light" text="primary">2</Badge>
                 </Button>
             </Link>
 
-            <Button onClick={openNotif} className="me-2">
-                <BellFill></BellFill>
-                <Badge pill className="ms-2" bg="light" text="primary">9</Badge>
-            </Button>
+            <div>
+                <Button onClick={openNotif} className="me-2">
+                    <BellFill></BellFill>
+                    <Badge pill className="ms-2" bg="light" text="primary">9</Badge>
+                </Button>
+            </div>
 
             <Link to={"/profil/"+user.id_str}>
-                <Button className="me-2" variant="primary">
-                    <Person></Person>
+                <Button className="me-2 p-0" variant="primary">
+                    {profil}
                 </Button>
             </Link>
 
