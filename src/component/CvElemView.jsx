@@ -15,7 +15,8 @@ function CvElemView({cvElem, user}){
         icon = <CaretDownFill className="text-black me-1 mb-1"></CaretDownFill>;
     }
 
-    function openDescriptionProject(){
+    function openDescriptionProject(e){
+        e.stopPropagation()
         updateShowDescriptionProject(!showDescriptionProject);
     }
     return <div className="pt-2 pb-2 border-top separator">

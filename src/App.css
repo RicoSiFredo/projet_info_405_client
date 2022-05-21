@@ -26,10 +26,19 @@
 .loader{
   height: 200px;
 }
+.border-right-comapretor{
+  border-right: #212529 solid 2px;
+}
+.border-bottom-comapretor{
+  border-bottom: #212529 solid 2px;
+}
 .click{
   text-decoration: none;
   
   cursor: pointer;
+}
+.flex-even {
+  flex: 1;
 }
 .profil-tiny{
   z-index: 999;

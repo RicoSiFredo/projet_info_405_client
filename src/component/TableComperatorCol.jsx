@@ -1,8 +1,11 @@
-import { CaretDownFill, CaretUpFill, CaretRight, FilterSquareFill, FilterSquare, TrashFill, ListStars } from "react-bootstrap-icons";
+import { CaretDownFill, CaretUpFill, CaretRight, FilterSquareFill, FilterSquare, TrashFill, ListStars, QuestionCircle } from "react-bootstrap-icons";
 import React from "react";
 import SortEnum from "../enum/SortEnum";
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
+const mark = {
+    "name": ["Score", "Status", "Salaire", "Commentaire", "Compétences", "Expérience"]
+}
 function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
     const [show, updateShow] = useState(false)
     if(col!=undefined){
@@ -86,6 +89,8 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                     </Button>
                 }
                 {col.name}
+                {mark.name.includes(col.name)&&<QuestionCircle className="ms-1 me-1">
+                    </QuestionCircle>}
                 {icon}
                 {
                     (col.fileter&&col.array.length!=0)&&

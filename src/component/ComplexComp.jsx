@@ -12,7 +12,8 @@ function ComplexComp({compList, request, updateSelected, openned, comp, getBackg
     else {
         icon = <CaretDownFill className="text-white me-1 mb-1"></CaretDownFill>;
     }
-    function open(){
+    function open(e){
+        e.stopPropagation()
         if(!openned){
             updateSelected(comp.id_str);
         }
@@ -21,7 +22,8 @@ function ComplexComp({compList, request, updateSelected, openned, comp, getBackg
         }
     }
     const [show, updateShow] = useState(false);
-    function handleClose(){
+    function handleClose(e){
+        e.stopPropagation()
         updateShow(false);
     }
     let contentExp;
@@ -72,9 +74,12 @@ function ComplexComp({compList, request, updateSelected, openned, comp, getBackg
         }
         return heure
     }
+    function prevent(e){
+        e.stopPropagation()
+    }
     return <div>
         <div 
-            onClick={()=>{open()}}
+            onClick={open}
             key={comp.id_str} 
             className={"round-50p ps-2 pe-3 pt-1 pb-1 "+getBackground(comp)+" mt-1 mb-1 me-2"}>
             
@@ -83,33 +88,35 @@ function ComplexComp({compList, request, updateSelected, openned, comp, getBackg
             {openned&&contentExp}
             
         </div>
-        <Modal show={show} className="highest" onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Liste des activités professionnelle</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div>
-                    <div className="pb-2">
-                        <h5>Compétence {comp.name}</h5>
-                        <h5 className="mb-1">Expérience : {getTotalHeure()} h / {getTotalExp()}</h5>
+        <div onClick={prevent}>
+            <Modal show={show} className="highest" onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Liste des activités professionnelle</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>
+                        <div className="pb-2">
+                            <h5>Compétence {comp.name}</h5>
+                            <h5 className="mb-1">Expérience : {getTotalHeure()} h / {getTotalExp()}</h5>
+                        </div>
+                        {
+                            list.map((cvElem, index)=>
+                                <CvElemView
+                                    user={request.user}
+                                    cvElem={cvElem}>
+                                    
+                                </CvElemView>
+                            )
+                        }
                     </div>
-                    {
-                        list.map((cvElem, index)=>
-                            <CvElemView
-                                user={request.user}
-                                cvElem={cvElem}>
-                                
-                            </CvElemView>
-                        )
-                    }
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
-                    Fermer
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>
+                        Fermer
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </div>
     </div>
 
     /*

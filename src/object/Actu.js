@@ -17,6 +17,7 @@ export default class Actu extends Object405 {
     end = undefined;
     date = undefined;
 
+    action = new SimpleEats("for_regie", this);
     compList = new ListEats("for_comp", this, CompareEats.compareInt("date", CompareEats.DESC))
     role = new SimpleEats("for_role", this)
     requestList = new ListEats("actu_req", this, CompareEats.compareInt("date", CompareEats.DESC))

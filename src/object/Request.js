@@ -1,3 +1,4 @@
+import Data from "../utils/Data";
 import SimpleEats from "./base/SimpleEats";
 import CvElem from "./CvElem";
 
@@ -9,6 +10,7 @@ export default class Request extends CvElem {
     price = undefined;
 
     user = new SimpleEats("req_user", this);
+    conversation = new SimpleEats("local_conv", this);
 
     getCol(name){
         let col = undefined;
@@ -21,6 +23,29 @@ export default class Request extends CvElem {
             }
         }
         return col;
+    }
+
+    startConv(offre){
+        if(this.conversation.isFinished()){
+            alert("EXIST")
+        }
+        else {
+            alert("NO")
+            this.makeRequest(
+                "user/create/conversation",
+                {
+                    "senderId": Data.getUserId(),
+                    "receiverId": this.user.id_str,
+                    "request": this.id_str
+                },
+                function(error){
+                    
+                },
+                function(result){
+
+                }
+            )
+        }
     }
 
     getCoef(name){
@@ -54,7 +79,7 @@ export default class Request extends CvElem {
 
     getScore(){
         return this.getScoreComp()*this.getCoefComp()*100+
-        this.getScoreStatue()*this.getCoefStatue()+
+        this.getScoreStatue()*this.getCoefStatue()*5+
         this.getScoreSalaire()*this.getCoefSalaire()+
         this.getScoreCommentaire()*this.getCoefCommentaire()+
         this.getScoreExperience()*this.getCoefExperience()+

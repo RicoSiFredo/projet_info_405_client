@@ -5,7 +5,7 @@ import { EyeFill } from "react-bootstrap-icons";
 import LinearCompList from "../list/LinearCompList";
 import Utils from "../utils/Utils";
 import CommentRow from "./CommentRow";
-function TableComperatorRow({colList, offre, index, request}){
+function TableComperatorRow({updateSelect, select, colList, offre, index, request}){
     const [show, updateShow] = useState(false);
     function handleClose() {
         updateShow(false);
@@ -23,11 +23,24 @@ function TableComperatorRow({colList, offre, index, request}){
             diff = <span className="text-danger">(+ {price-offre.price} €)</span>
         }
     }
+    function selectThis(e){
+        e.stopPropagation()
+        if(select==request.id_str){
+            updateSelect("");
+        }
+        else {
+            updateSelect(request.id_str);
+        }
+    }
     let next = "";
-    if(request.user.getTotalExp(colList[8].array)!=Utils.currentDate()){
+    if(request.user.getTotalExp(colList[9].array)!=Utils.currentDate()){
         next = " / "+Utils.getDate(request.user.getTotalExp(colList[7].array), 1)
     }
-    return <tr>
+    return <tr onClick={selectThis}>
+        <th scope="row">
+            <input onChange={selectThis} checked={select==request.id_str} type={"checkbox"}>
+            </input> 
+        </th>
         <th scope="row">{index}</th>
         <td>{request.getScore()}</td>
         <td>{request.user.getDisplayName()}</td>
@@ -53,7 +66,7 @@ function TableComperatorRow({colList, offre, index, request}){
 
             </LinearCompList>
         </td>
-        <td>{request.user.getTotalHeure(colList[8].array) + " h" + next}</td>
+        <td>{request.user.getTotalHeure(colList[9].array) + " h" + next}</td>
     </tr>
 }
 export default TableComperatorRow;
