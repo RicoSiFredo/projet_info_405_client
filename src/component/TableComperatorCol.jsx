@@ -7,6 +7,14 @@ const mark = {
     "name": ["Score", "Status", "Salaire", "Commentaire", "Compétences", "Expérience"]
 }
 function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
+    const [showHint, updateShowHint] = useState(false)
+    function openHint(e){
+        e.stopPropagation();
+        updateShowHint(true)
+    }
+    function handleCloseHint(e){
+        updateShowHint(false)
+    }
     const [show, updateShow] = useState(false)
     if(col!=undefined){
         let icon;
@@ -81,7 +89,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
         }
         let selectAll = col.array != undefined && col.array.length == 0;
         return <th scope="col">
-            <div onClick={performClick} >
+            <div className={col.sort!=SortEnum.CANT&&"click"} onClick={performClick} >
                 {
                     col.fileter&&
                     <Button onClick={(e)=>selectFileter(e)} variant="primary" className="pt-0 pb-1 pe-1 ps-1 me-2">
@@ -89,8 +97,10 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                     </Button>
                 }
                 {col.name}
-                {mark.name.includes(col.name)&&<QuestionCircle className="ms-1 me-1">
-                    </QuestionCircle>}
+                {col.hint&&
+                    <QuestionCircle onClick={openHint} className="ms-1 click me-1">
+                    </QuestionCircle>
+               }
                 {icon}
                 {
                     (col.fileter&&col.array.length!=0)&&
@@ -127,6 +137,20 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                     </Modal.Body>
                     <Modal.Footer>
                         <Button onClick={handleClose}>Fermer</Button>
+                    </Modal.Footer>
+                </Modal>
+            </div>
+            
+            <div>
+                <Modal show={showHint} className="highest" onHide={handleCloseHint}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{col.hintTitle}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p className="mb-0">{col.hintDescription}</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={handleCloseHint}>Fermer</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

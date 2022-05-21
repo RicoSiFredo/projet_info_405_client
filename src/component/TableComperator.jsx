@@ -108,7 +108,12 @@ function TableComperator({offre}){
         new ComparatorCol(
             "Score",
             SortEnum.ASC,
-            score
+            score,
+            false,
+            [],
+            true,
+            "Score",
+            "Score description"
         ),
         new ComparatorCol(
             "Nom"
@@ -116,34 +121,62 @@ function TableComperator({offre}){
         new ComparatorCol(
             "Status",
             SortEnum.UNDEFINED,
-            scoreStatue
+            scoreStatue,
+            false,
+            [],
+            true,
+            "Status",
+            "Status description"
         ),
         new ComparatorCol(
             "Salaire",
             SortEnum.UNDEFINED,
-            scoreSalaire
+            scoreSalaire,
+            false,
+            [],
+            true,
+            "Salaire",
+            "Salaire description"
         ),
         new ComparatorCol(
             "Commentaire",
             SortEnum.UNDEFINED,
-            scoreCommentaire
+            scoreCommentaire,
+            false,
+            [],
+            true,
+            "Commentaire",
+            "Commentaire description"
         ),
         new ComparatorCol(
             "Age",
             SortEnum.UNDEFINED,
-            scoreAge
+            scoreAge,
+            false,
+            [],
+            true,
+            "Age",
+            "Age description"
         ),
         new ComparatorCol(
             "Compétences",
             SortEnum.UNDEFINED,
-            scoreComp
+            scoreComp,
+            false,
+            [],
+            true,
+            "Compétences",
+            "Compétences description"
         ),
         new ComparatorCol(
             "Expérience",
             SortEnum.UNDEFINED,
             scoreExperience,
             true,
-            []
+            [],
+            true,
+            "Expérience",
+            "Expérience description"
         )
     ]);
     const [select, updateSelect] = useState("")
@@ -231,19 +264,22 @@ function TableComperator({offre}){
                     </div>
                 </div>
             }
-            {
-                colList.map((col, index) =>
-                    ( col.sort!=SortEnum.CANT &&
-                    col.name!="Score" ) && <TableComperatorCoef
-                        updateColList={updateColList}
-                        colList={colList}
-                        updateSelect={updateSelect}
-                        select={select}
-                        col={col}>
+            <div className="bg-light p-3">
 
-                    </TableComperatorCoef>
-                )
-            }
+                {
+                    colList.map((col, index) =>
+                        ( col.sort!=SortEnum.CANT &&
+                        col.name!="Score" ) && <TableComperatorCoef
+                            updateColList={updateColList}
+                            colList={colList}
+                            updateSelect={updateSelect}
+                            select={select}
+                            col={col}>
+
+                        </TableComperatorCoef>
+                    )
+                }
+            </div>
         </div>
         <div className="w-100">
             <table class="table table-striped">

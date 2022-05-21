@@ -36,7 +36,7 @@ function TableComperatorRow({updateSelect, select, colList, offre, index, reques
     if(request.user.getTotalExp(colList[9].array)!=Utils.currentDate()){
         next = " / "+Utils.getDate(request.user.getTotalExp(colList[7].array), 1)
     }
-    return <tr onClick={selectThis}>
+    return <tr className={"click"} onClick={selectThis}>
         <th scope="row">
             <input onChange={selectThis} checked={select==request.id_str} type={"checkbox"}>
             </input> 

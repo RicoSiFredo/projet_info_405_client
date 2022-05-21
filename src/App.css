@@ -32,10 +32,19 @@
 .border-bottom-comapretor{
   border-bottom: #212529 solid 2px;
 }
+.border-bottom-sep{
+  border-bottom: #ABBCCD solid 1px;
+}
 .click{
   text-decoration: none;
   
   cursor: pointer;
+}
+.h-38px{
+  height: 38px !important;
+}
+.width-input{
+  width: 55px !important;
 }
 .flex-even {
   flex: 1;
