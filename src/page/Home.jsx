@@ -11,6 +11,7 @@ import Constant from "../utils/Constant";
 function Home({user, navigate}){
 
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+    const [limite, updateLimite] = useState(5);
 
     useEffect(function(){
         getProject();
@@ -31,14 +32,10 @@ function Home({user, navigate}){
         )
     }
 
-    var limite = 5;
     function expendLimit(){
-
-        if (limite < list.size())
-            limite += 5;
-
-        list.update();
-        
+        if (limite < list.size()){
+            updateLimite(limite+5)
+        }
     }
     let content = <div>
         
