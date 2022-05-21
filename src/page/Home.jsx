@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Constant from "../utils/Constant";
 import ImgProfile from "../component/ImgProfile";
 import ProfilViewHome from "../component/ProfilViewHome";
+import {HideOn} from "react-hide-on-scroll";
 
 function Home({user, navigate}){
 
@@ -44,10 +45,9 @@ function Home({user, navigate}){
 
     
     let listGroup=splitArrayIntoChunksOfLen(list.list,3);
-
     let carouselProject;
     if (listGroup != undefined){
-        carouselProject = <Carousel fade variant="dark">
+        carouselProject = <Carousel fade variant="dark" interval={3000}>
             {
                 listGroup.map(function(group,i){
 
@@ -86,58 +86,72 @@ function Home({user, navigate}){
 
 
     return <div>
-            <div className="d-flex justify-content-around">
-            <div className="card mt-4 me-5 ms-5 w-100">
-                <Carousel >
-                    <Carousel.Item>
-                        <img 
-                            className="homeBanner"
-                            src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/38e35b05-a01d-4bc9-a5e7-168304e3ed72.png"}
-                            alt="First slide"
-                        />
-                            <div class="centered"><p className="titleOverImg">Bienvenue</p></div>
-                        <Carousel.Caption>
-                            <h4>Pour commencer créer vous un compte</h4>
-                            <h6>Personnalisez votre profil pour être le plus attractif possible<br></br>Montrez vos compétences</h6>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="homeBanner"
-                            src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/1f38497b-9c84-4da3-8cc2-a73661224da6.png"}
-                            alt="Second slide"
-                        />
-                            <div class="centered"><p className="titleOverImg">Votre projet</p></div>
-                        <Carousel.Caption>
-                            <h4>Créer un projet</h4>
-                            <h6>Concevez et publiez votre projet pour être rejoins par des professionnels</h6>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="homeBanner"
-                            src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/5671235c-6421-4450-bd32-92fba7496448.png"}
-                            alt="Third slide"
-                        />
-                            <div class="centered"><p className="titleOverImg">Postuler !</p></div>
-                        <Carousel.Caption>
-                            <h4>Proposez-vous dans un projet</h4>
-                            <h6>Si votre profil interesse le chef de projet, vous ferez partie de la team</h6>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
-            </div>
-        </div>
-        <div className="card m-5">
-            <h2 className="m-2 mb-4">Découvrir des projets</h2>
+                <div className="d-flex justify-content-around">
+                    
+                    <div className="card mt-4 me-5 ms-5 w-100">
+                        <Carousel >
+                            <Carousel.Item>
+                                <img 
+                                    className="homeBanner"
+                                    src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/38e35b05-a01d-4bc9-a5e7-168304e3ed72.png"}
+                                    alt="First slide"
+                                />
+                                    <div class="centered"><p className="titleOverImg">Bienvenue</p></div>
+                                <Carousel.Caption>
+                                    <h4>Pour commencer créer vous un compte</h4>
+                                    <h6>Personnalisez votre profil pour être le plus attractif possible<br></br>Montrez vos compétences</h6>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img
+                                    className="homeBanner"
+                                    src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/1f38497b-9c84-4da3-8cc2-a73661224da6.png"}
+                                    alt="Second slide"
+                                />
+                                    <div class="centered"><p className="titleOverImg">Votre projet</p></div>
+                                <Carousel.Caption>
+                                    <h4>Créer un projet</h4>
+                                    <h6>Concevez et publiez votre projet pour être rejoins par des professionnels</h6>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <img
+                                    className="homeBanner"
+                                    src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/5671235c-6421-4450-bd32-92fba7496448.png"}
+                                    alt="Third slide"
+                                />
+                                    <div class="centered"><p className="titleOverImg">Postuler !</p></div>
+                                <Carousel.Caption>
+                                    <h4>Proposez-vous dans un projet</h4>
+                                    <h6>Si votre profil interesse le chef de projet, vous ferez partie de la team</h6>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                        </Carousel>
+                    </div>
+                    
+                </div>
 
-            <div className="ms-3 me-3 mb-3">
-               
-                {carouselProject}
-              
-            </div>
+                <div className="m-5 p-2 bg-car" >
+                    <h2 className="m-2 mb-4">Découvrir des projets</h2>
 
-        </div>
-        </div>
+                    <div className="ms-3 me-3 mb-3">
+                    
+                        {carouselProject}
+                    
+                    </div>
+
+                </div>
+
+                <div className="m-5 p-2 bg-car">
+                    <h2 className="m-2 mb-4">Découvrir des professionnels</h2>
+
+                    <div className="ms-3 me-3 mb-3">
+                    
+                        {carouselProject}
+                    
+                    </div>
+
+                </div>
+            </div>
 }
 export default Home;
