@@ -9,7 +9,7 @@ import ErrorEats from "../object/base/ErrorEats";
 import Response from "../utils/Response";
 import Constant from "../utils/Constant";
 
-function UserProjectView({user, navigate}){
+function UserProjectView({user, rootUser, navigate}){
     const [show, updateShow] = useState(false);
     const [val, updateVal] = useState("");
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
@@ -48,7 +48,8 @@ function UserProjectView({user, navigate}){
     function handleChange(e){
         updateVal(e.target.value);
     }
-    return <div>
+    if (rootUser.id_str == user.id_str){
+        return <div>
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                 <h4>{"Projets"}</h4>
@@ -84,5 +85,22 @@ function UserProjectView({user, navigate}){
             </Modal.Footer>
         </Modal>
     </div>
+    }else{
+        return <div>
+        <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
+            <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
+                <h4>{"Projets"}</h4>
+            </div>
+            <UserProjectList 
+                typeAction={[ActionEnum.IN_PROJECT]} 
+                user={user} 
+                navigate={navigate} 
+                actionList={user.actionList}>
+
+            </UserProjectList>
+        </div>
+    </div>
+    }
+    
 }
 export default UserProjectView;

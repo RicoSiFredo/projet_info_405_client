@@ -105,7 +105,8 @@ function Profil({rootUser}){
         </div>
         <div className="w-25 right-div">
             <UserProjectView 
-                user={user}>
+                user={user}
+                rootUser={rootUser}>
 
             </UserProjectView>
         </div>
@@ -172,7 +173,8 @@ function Profil({rootUser}){
         </div>
         <div className="w-25 right-div">
             <UserProjectView 
-                user={user}>
+                user={user}
+                rootUser={rootUser}>
 
             </UserProjectView>
         </div>
