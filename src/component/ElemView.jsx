@@ -8,6 +8,7 @@ import Constant from "../utils/Constant";
 
 function ElemView({parent, rootUser, list, keyword, canEdit, title, infoNothing, infoNothingEdit}){
     let [show, updateShow] = useState(false);
+    let isMember = false;
     function handleClose() {
         updateShow(false);
     }
@@ -29,7 +30,14 @@ function ElemView({parent, rootUser, list, keyword, canEdit, title, infoNothing,
         }
     }
     if (parent._type == "Project"){
-        if (!parent.isFinish){
+        {
+            parent.actionList.list.map((obj, index) => {
+                if (obj.user.id_str == rootUser.id_str){
+                    isMember = true;
+                }
+            })
+        }
+        if (!parent.isFinish && isMember){
             return <div>
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-2">
                 <div className="d-flex mt-1">

@@ -96,7 +96,15 @@ function ProfilView({rootUser, elem, isProject=false}){
     }
     let field;
     if(isProject){
-        if (!elem.isFinish){
+        {
+            elem.actionList.list.map((obj, index) => {
+                if (obj.user.id_str == rootUser.id_str){
+                    isMember = true;
+                }
+            })
+        }
+        console.log(isMember);
+        if (!elem.isFinish && isMember){
             field = <div>
             <div className="mt-3 ms-3 me-2">
                 <ProfilField tag="h4" user={elem} isProject={isProject} label={"Nom"} name={"name"} canEdit={canEdit} value={elem.name}></ProfilField>
@@ -115,6 +123,15 @@ function ProfilView({rootUser, elem, isProject=false}){
             </div>
         </div>
 
+        }else if (!elem.isFinish && !isMember){
+            field = <div>
+            <div className="mt-3 ms-3 me-2">
+                <ProfilField tag="h4" user={elem} isProject={isProject} label={"Nom"} name={"name"} canEdit={false} value={elem.name}></ProfilField>
+            </div>
+            <div className="mt-3 mb-2 ms-3 me-2">
+                <ProfilField multipleLine={true} user={elem} isProject={isProject} label={"Description"} name={"description"} canEdit={false} value={elem.description}></ProfilField>
+            </div>
+        </div>
         }else{
             field = <div>
             <div className="mt-3 ms-3 me-2">
