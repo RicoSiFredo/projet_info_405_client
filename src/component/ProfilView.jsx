@@ -18,11 +18,13 @@ const FAILED_ERROR = 2;
 function ProfilView({rootUser, elem, isProject=false}){
     let canEdit = true; 
     if (rootUser != undefined){
-        if (elem.id_str != rootUser.id_str){
-            canEdit = false;
-        }
+        if (!isProject){
+            if (elem.id_str != rootUser.id_str){
+                canEdit = false;
+            }
+        }   
     }
-    
+
     const [error, setError] = useState(NONE_ERROR);
     function openFilePicker(elemId) {
         var elem = document.getElementById(elemId);
@@ -133,8 +135,9 @@ function ProfilView({rootUser, elem, isProject=false}){
             </div>
         </div>
     }
-    if (!elem.isFinish){
-        return <div>
+    if (isProject){
+        if (!elem.isFinish){
+            return <div>
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
                 <div className="banner border-bottom border-4 border-primary position-relative">
                     {elem.banner &&
@@ -174,19 +177,77 @@ function ProfilView({rootUser, elem, isProject=false}){
                 title="Erreur">
             </ErrorShow>
         </div>
+        }else{
+            return <div>
+                <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
+                    <div className="banner border-bottom border-4 border-primary position-relative">
+                        {elem.banner &&
+                        <img src={Constant.IMAGE_URL+elem.banner} className="center-crop w-100 h-100" alt=""/>}
+                    </div>
+                    <div className="profil bg-light bg-light" onClick={addProfil}>   
+                        <ImgProfile elem={elem}></ImgProfile>
+                    </div>
+                    {field}
+                </div>
+            </div>
+        }
     }else{
-        return <div>
+        if (rootUser == elem.id_str){
+            return <div>
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
                 <div className="banner border-bottom border-4 border-primary position-relative">
                     {elem.banner &&
                     <img src={Constant.IMAGE_URL+elem.banner} className="center-crop w-100 h-100" alt=""/>}
+                    <Button onClick={addBanner} className="p-absolute bottom-right ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                        <PenFill></PenFill>
+                    </Button>
+                    <input onChange={handleFileBannerInput} type={"file"} id="file-banner" className="d-none"/>
                 </div>
                 <div className="profil bg-light bg-light" onClick={addProfil}>   
                     <ImgProfile elem={elem}></ImgProfile>
+                    <input onChange={handleFileProfilInput} type={"file"} id="file-profil" className="d-none"/>
                 </div>
                 {field}
             </div>
+            <ErrorShow 
+                handleClose={resetError}
+                show={error==SIZE_ERROR}
+                close="Fermer"
+                info="Un fichier ne peut excéder 8 MB."
+                title="Fichier trop volumineux">
+                
+            </ErrorShow>
+            <ErrorShow 
+                handleClose={resetError}
+                show={error==BAD_EXT_ERROR}
+                close="Fermer"
+                info="Le fichier ne peut être que de type .png, .jpg ou .jpeg."
+                title="Mauvaise extension de fichier">
+                
+            </ErrorShow>
+            <ErrorShow
+                handleClose={resetError}
+                show={error==FAILED_ERROR}
+                close="Fermer"
+                info="Une erreur est survenue lors de l'envoi du fichier."
+                title="Erreur">
+            </ErrorShow>
         </div>
+        }else{
+            return <div>
+                <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden">
+                    <div className="banner border-bottom border-4 border-primary position-relative">
+                        {elem.banner &&
+                        <img src={Constant.IMAGE_URL+elem.banner} className="center-crop w-100 h-100" alt=""/>}
+                    </div>
+                    <div className="profil bg-light bg-light" onClick={addProfil}>   
+                        <ImgProfile elem={elem}></ImgProfile>
+                    </div>
+                    {field}
+                </div>
+            </div>
+        }
     }
+        
 }
 export default ProfilView;
