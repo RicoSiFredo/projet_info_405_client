@@ -159,7 +159,7 @@ function Search({navigate, rootUser}){
                             <ProfilViewHome elem={object} isProject={object instanceof Project} note={note}></ProfilViewHome>
                         </div>;
                     } else {
-                        div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
+                        div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click">
                             <ActuElem className = "w-100" isHome={true} action={1} actu={object}></ActuElem>
                         </div>;
                     }
