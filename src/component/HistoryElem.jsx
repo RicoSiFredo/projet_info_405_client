@@ -4,6 +4,9 @@ import LinearCompList from "../list/LinearCompList";
 import Actu from "../object/Actu";
 import History from "../object/History";
 import Role from "../object/Role";
+import { Button } from "react-bootstrap";
+import { PenFill } from "react-bootstrap-icons";
+
 function HistoryElem({history}){
     let array_month_fr = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     function toDate(date){
@@ -20,6 +23,7 @@ function HistoryElem({history}){
             updateVisi(!visi);
         }
     }
+    console.log(history);
     console.log(history.compList)
     let display;
     if(history.descriptionProject!=""){
@@ -63,7 +67,12 @@ function HistoryElem({history}){
     return (
         <div className={"d-flex justify-content-between " + className}>
             <div className="d-flex flex-column">
-                <h5>{role}</h5>
+                <div className="d-flex align-items-center">
+                    <h5>{role}</h5>
+                    <Button className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                        <PenFill></PenFill>
+                    </Button>
+                </div>
                 <div className="mb-2">
                     {content}
                 </div>
@@ -71,7 +80,6 @@ function HistoryElem({history}){
                 <div className="mt-1 mb-2">
                     <LinearCompList
                         compList={history.compList}>
-
                     </LinearCompList>
                 </div>
             </div>
