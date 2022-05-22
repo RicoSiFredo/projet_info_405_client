@@ -49,7 +49,7 @@ function Search({navigate, rootUser}){
     let filtreEtoile;
     if(type=="user") {
         
-        filtreEtoile = <Form.Select className="w-85 m-2 p-2" aria-label="moy" value={moy} onChange={(e) => updateMoy(e.target.value)}>
+        filtreEtoile = <Form.Select className="w-85 mt-2 p-2" aria-label="moy" value={moy} onChange={(e) => updateMoy(e.target.value)}>
         <option value="0">Nombres d'étoiles</option>
         <option value="20">1 étoile ou plus</option>
         <option value="40">2 étoile ou plus</option>
@@ -86,7 +86,7 @@ function Search({navigate, rootUser}){
             <div className="me-5 w-25">
                 <p>Filtre de recherche</p>
 
-                <Form.Select className="w-85 m-2 p-2" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
+                <Form.Select className="w-85 p-2" aria-label="type" value={type} onChange={(e) => updateType(e.target.value)}>
                     <option value="">Type</option>
                     <option value="project">Projet</option>
                     <option value="user">Utilisateur</option>
