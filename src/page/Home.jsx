@@ -88,16 +88,20 @@ function Home({user, navigate}){
     let bouton;
     if (user.logged){
         bouton = <Link to={"/profil/"+user.id_str} className="text-decoration-none">
-            <Button variant="outline-primary" className="pb-2">
+            <Button variant="primary" className="pb-2">
                 <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
             </Button>
         </Link>
     }else{
-        bouton =  <Button variant="outline-primary" className="pb-2">
+        bouton =  <Button variant="primary" className="pb-2">
                     <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
     }
     
+    let homeText = <p className="titleOverImg">Trouvez les meilleurs offres <br></br> d'emploi pour votre business.</p>
+    
+    
+
     return <div>
                 <div className="d-flex justify-content-around">
                     
@@ -110,7 +114,7 @@ function Home({user, navigate}){
                                     alt="First slide"
                                 />
                                     <div className="centered">
-                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                        {homeText}
                                     </div>
                                 <Carousel.Caption>  
                                     <h4>Pour commencer créer vous un compte</h4>
@@ -124,7 +128,7 @@ function Home({user, navigate}){
                                     alt="Second slide"
                                 />
                                     <div className="centered">
-                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                        {homeText}
                                     </div>
                                 <Carousel.Caption>
                                     <div className="">
@@ -141,7 +145,7 @@ function Home({user, navigate}){
                                     alt="Third slide"
                                 />
                                     <div className="centered">
-                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                        {homeText}
                                     </div>
                                 <Carousel.Caption>
                                     <h4>Postuler !</h4>
