@@ -208,11 +208,11 @@ function TableComperatorUser({user}){
         buttonContent = <div>
             <p>Vous faites désormais partie du projet !</p>
             <div className="d-flex">
-                <Button className="flex-even" disabled variant="success">Accpeter</Button>
+                <Button className="flex-even" disabled variant="success">Accepter</Button>
             </div>
         </div>
     }
-    else if(selectRequest.invited==true&&selectRequest.refuse==true){
+    else if(selectRequest.invited==true&&selectRequest.refuse_user==true){
         buttonContent = <div className="d-flex">
             <Button disabled={user.fermer===true} className="flex-even" onClick={unrefuse} variant="danger">Annuler le refus</Button>
         </div>

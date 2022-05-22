@@ -198,7 +198,7 @@ function TableComperator({offre}){
             "Compétences",
             SortEnum.UNDEFINED,
             scoreComp,
-            false,
+            true,
             [],
             true,
             "Compétences",
@@ -227,7 +227,23 @@ function TableComperator({offre}){
     for (let i = 0; i < offre.requestList.size(); i++){
         let request = offre.requestList.get(i);
         request.colList = colList;
-        list.push(request)
+        let found = false;
+        let j = 0;
+        if(colList[8].array.length==0){
+            found = true;
+        }
+        else {
+            while(!found&&j<colList[8].array.length){
+                let skill = colList[8].array[j];
+                if(request.user.have(skill)){
+                    found = true;
+                }
+                j += 1;
+            }
+        }
+        if(found){
+            list.push(request)
+        }
     }
     if(selectCol.sort==SortEnum.ASC){
         list.sort(selectCol.compAsc);
@@ -289,6 +305,14 @@ function TableComperator({offre}){
     let buttonContent;
     if(selectRequest==undefined){
 
+    }
+    else if(selectRequest.refuse_user==true){
+        buttonContent = <div>
+            <p>L'utilisateur a refusé votre invitation.</p>
+            <div className="d-flex">
+                <Button className="flex-even" disabled variant="success">Réinviter</Button>
+            </div>
+        </div>
     }
     else if(selectRequest.accept==true){
         buttonContent = <div>

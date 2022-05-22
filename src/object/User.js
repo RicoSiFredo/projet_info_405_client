@@ -36,6 +36,26 @@ export default class User extends Object405 {
         super();
     }
 
+    have(comp){
+        let res;
+        if(comp==undefined){
+            res = true;
+        }
+        else {
+            let found = false;
+            let i = 0;
+            while(i<this.skillList.size()&&!found){
+                let compCC = this.skillList.get(i);
+                if(compCC.equals(comp)){
+                    found = true;
+                }
+                i += 1;
+            }
+            res = found;
+        }
+        return res;
+    }
+
     getDisplayName(){
         return this.firstname + " " + this.lastname;
     }

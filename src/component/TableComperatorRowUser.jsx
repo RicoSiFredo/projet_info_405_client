@@ -40,7 +40,7 @@ function TableComperatorRowUser({updateSelect, select, colList, offre, index, re
     if(request.accept==true){
         classTr = "accept-bg"
     }
-    else if(request.refuse==true){
+    else if(request.refuse==true||request.refuse_user==true){
         classTr = "refuse-bg"
     }
     else if(request.pinned_user==true){

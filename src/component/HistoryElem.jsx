@@ -34,6 +34,7 @@ function HistoryElem({history}){
         className = "pb-2 border-top separator pt-2 ps-3 pe-2"
     }
     let role;
+    console.log(history)
     if(history.role instanceof Role){
         role = history.role.name;
     }

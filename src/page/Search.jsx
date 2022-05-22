@@ -99,7 +99,6 @@ function Search({navigate, rootUser}){
                         navigate("/profil/" + object.id_str);
                     }
                 }
-                console.log(object);
                     let note;
                     let boolComp = false;
 
@@ -141,7 +140,7 @@ function Search({navigate, rootUser}){
                         </div>;
                     } else {
                         div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
-                            <ActuElem action={1} actu={object}></ActuElem>
+                            <ActuElem isHome={true} action={1} actu={object}></ActuElem>
                         </div>;
                     }
 

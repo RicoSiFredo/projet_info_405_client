@@ -416,7 +416,6 @@ export default class Request extends CvElem {
     }
     getStatueRetardDiff(){
         let res = undefined;
-        this.end = 1655226114;
         if(this.end!=undefined&&this.end!=0&&this.parent.end!=0&&this.parent.end!=undefined&&this.end!=this.parent.end){
             let diff = this.end - this.parent.end;
             diff = Math.floor(diff/60/60/24); 
