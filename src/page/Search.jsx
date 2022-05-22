@@ -110,7 +110,7 @@ function Search({navigate, rootUser}){
                         </div>;
                     if (type == "" && (object.moyenne >= moy || object.moyenne == undefined)) return div;
                     if (type == "project" && object instanceof Project) return div;
-                    if (type == "user" && object instanceof User && object.moyenne >= moy) return div;
+                    if (type == "user" && object instanceof User && (object.moyenne >= moy || object.moyenne == undefined)) return div;
 
             })
         }
