@@ -14,6 +14,7 @@ import ProfilViewHome from "../component/ProfilViewHome";
 function Home({user, navigate}){
 
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
+    const [listOffre, updateListOffre] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
 
     useEffect(function(){
         getProject();
@@ -34,7 +35,28 @@ function Home({user, navigate}){
         )
     }
 
+    useEffect(function(){
+        getOffres();
+    }, [])
+    listOffre.update = function(){
+        updateListOffre(Eats.fakeUpdate(listOffre))
+    }
+    function getOffres(){
+        listOffre.makeRequest(
+            "get/offre",
+            {
+                access_token: Data.accessToken(),
+            },
+            function(error){
+            },
+            function(response){
+            }
+        )
+    }
     
+    console.log("caca")
+    console.log(listOffre)
+
     function splitArrayIntoChunksOfLen(arr, len) {
         var chunks = [], i = 0, n = arr.length;
         while (i < n) {
