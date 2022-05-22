@@ -40,6 +40,7 @@ function Search({navigate, rootUser}){
             function(error){
             },
             function(response){
+                console.log(response)
             }
         )
     }
@@ -70,6 +71,14 @@ function Search({navigate, rootUser}){
             updateCompList={updateTecnoList}
             type = "tecno">
         </SelectCompetence>
+    } else if(type == "offre") {
+        filtreSkill =
+        <SelectCompetence  
+        className="w-85 m-2 p-2"
+        compList={compList}
+        updateCompList={updateCompList}
+        type = "skill">
+    </SelectCompetence>;
     }
 
     return  <div className = "d-flex m-2 p-4">
@@ -125,6 +134,17 @@ function Search({navigate, rootUser}){
                         })) {
                             boolComp = true;    
                         }
+                    } else {
+                        if(compList.every(function(s) {
+                            for(let i = 0; i < object.compList.getList().length; i++ ) {
+                                if (s.name == object.compList.getList()[i].name) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        })) {
+                            boolComp = true;    
+                        }
                     }
 
                     if (object.moyenne == undefined) {
@@ -136,18 +156,18 @@ function Search({navigate, rootUser}){
                     let div;
                     if(object instanceof Project || object instanceof User) {
                         div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
-                        <ProfilViewHome elem={object} isProject={object instanceof Project} note={note}></ProfilViewHome>
+                            <ProfilViewHome elem={object} isProject={object instanceof Project} note={note}></ProfilViewHome>
                         </div>;
                     } else {
                         div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
-                            <ActuElem isHome={true} action={1} actu={object}></ActuElem>
+                            <ActuElem className = "w-100" isHome={true} action={1} actu={object}></ActuElem>
                         </div>;
                     }
 
                     if (type == "" && note >= moy && boolComp) return div;
                     if (type == "project" && object instanceof Project && boolComp) return div;
                     if (type == "user" && object instanceof User && note >= moy && boolComp) return div;
-                    if (type == "offre") return div;
+                    if (type == "offre" && object instanceof Actu && boolComp) return div;
                     
 
             })
