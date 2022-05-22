@@ -17,7 +17,7 @@ function Messenger({user}){
     const [show, updateShow] = useState(false);
     const [currentChat, setCurrentChat] = useState(new Conversation());
     currentChat.id_str = id
-    let amis = "";
+    let amis = "le groupe de projet";
     function update(){
         setCurrentChat(Eats.fakeUpdate(currentChat));
         // fait croire à un changement
