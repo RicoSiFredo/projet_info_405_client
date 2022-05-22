@@ -177,7 +177,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     
     let test = "/message/-1";
     if (action.user.id_str != user.id_str){
-        if (!project.isFinish){
+        if (!project.isFinish && isMember){
             function showConv(){
                 listConv.reset();
                 listConv.makeRequest(
