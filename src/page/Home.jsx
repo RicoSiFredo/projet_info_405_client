@@ -131,17 +131,17 @@ function Home({user, navigate}){
         return <Carousel.Item className="d-flex justify-content-center">
             <div className="d-flex justify-content-center w-100 mb-5">
           
-            <Link to={"/project/"+troisOffres[0].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisOffres[0].id_str}>
-                <ActuElem action={1} actu={troisOffres[0]}></ActuElem>
-            </Link>
+ 
+                <ActuElem isHome={true} action={1} actu={troisOffres[0]}></ActuElem>
+          
                 
-            <Link to={"/project/"+troisOffres[1].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisOffres[1].id_str}>
-                <ActuElem action={1} actu={troisOffres[1]}></ActuElem>
-            </Link>
+          
+                <ActuElem isHome={true} action={1} actu={troisOffres[1]}></ActuElem>
+
                             
-            <Link to={"/project/"+troisOffres[2].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisOffres[2].id_str}>
-                <ActuElem action={1} actu={troisOffres[2]}></ActuElem>
-            </Link>
+            
+                <ActuElem isHome={true} action={1} actu={troisOffres[2]}></ActuElem>
+            
             
             </div>
         </Carousel.Item>
