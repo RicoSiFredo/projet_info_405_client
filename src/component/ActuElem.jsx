@@ -125,7 +125,7 @@ function ActuElem({action, actu, isHome=false}){
         </div>
     }else{ //sur le home
         res = <Link className="text-decoration-none ms-3 me-3 w-25" to={"/offre/"+actu.id_str}>
-            <div className={"card bg-light bg-gradient overflow-hidden ombre p-2" }>
+            <div className={"card bg-light bg-gradient overflow-hidden ombre p-3" }>
                 <div className="d-flex justify-content-between">
                     <h3>{actu.project.name}</h3>
                     <div className="profil-tiny bg-light">
@@ -138,7 +138,7 @@ function ActuElem({action, actu, isHome=false}){
 
                     </HistoryElem>
                 </div>
-                <div className="d-flex justify-content-center p-2">
+                <div className="d-flex justify-content-center p-2 pb-0">
                     {footer}
                 </div>
                 <Modal show={show} className="highest" onHide={handleClose}>
