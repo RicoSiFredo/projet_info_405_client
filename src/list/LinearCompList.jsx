@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CaretDownFill, CaretRightFill } from "react-bootstrap-icons";
 import Utils from "../utils/Utils";
 import ComplexComp from "../component/ComplexComp";
+
 function LinearCompList({more=false, request, refList, compList}){
     const [selected, updateSelected] = useState("");
     function inRef(comp){
