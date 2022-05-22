@@ -104,7 +104,7 @@ function Search({navigate, rootUser}){
                         note = object.moyenne
                     }
 
-                    let div = <div key={index} className = "Hgris border d-flex m-2 p-1 justify-content-between" >
+                    let div = <div key={index} className = "Hgris border d-flex m-2 p-1 justify-content-between" onClick={openProfil} >
                             <div className="banner border-4 border-primary profil-tiny bg-light dixdix">
                                 
                                 <ImgProfile elem={object}></ImgProfile>
@@ -120,7 +120,7 @@ function Search({navigate, rootUser}){
                     
                             <ElemList list={object.skillList != undefined ? object.skillList : object.tecnoList}></ElemList>
                         </div>
-                        <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
+                        
                     </div>;
                     if (type == "" && note >= moy) return div;
                     if (type == "project" && object instanceof Project) return div;
