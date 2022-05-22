@@ -149,6 +149,9 @@
   font-weight: bolder;
   color: white;
 }
+.dixdix{
+  width: auto;
+}
 .center-crop{
   object-fit: cover;
 }

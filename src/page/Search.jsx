@@ -105,9 +105,9 @@ function Search({navigate, rootUser}){
                     }
 
                     let div = <div key={index} className = "Hgris border d-flex m-2 p-1 justify-content-between" >
-                            <div className="banner border-bottom border-4 border-primary">
+                            <div className="banner border-bottom border-4 border-primary profil-tiny bg-light dixdix">
                                 
-                                {object.profile != undefined ? <img src={Constant.IMAGE_URL+object.profile} className="center-crop w-100 h-100" alt=""/> :  <ImgProfile className="center-crop w-100 h-100" elem={object}></ImgProfile>}
+                                <ImgProfile elem={object}></ImgProfile>
                         </div>
                         <div>
                             <p className="m-4">{object.name == undefined ? object.firstname : object.name}</p>
