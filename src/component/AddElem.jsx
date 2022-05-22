@@ -98,7 +98,7 @@ function AddElem({elem,keyword, handleClose}){
     return <div>
         <div>
             <Form.Group className="mb-3">
-                <Form.Control placeholder="Rechercher une compétence" value={val} onChange={chercherEvent} type="text"/>
+                <Form.Control placeholder="Rechercher une technologie" value={val} onChange={chercherEvent} type="text"/>
             </Form.Group>
             <Button onClick={()=>addRelation(val)} variant="primary">Ajouter</Button>
             <Button className="ms-3" onClick={cancelEdit} variant="primary">Annuler</Button>
