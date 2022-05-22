@@ -17,6 +17,7 @@ function Messenger({user}){
     const [show, updateShow] = useState(false);
     const [currentChat, setCurrentChat] = useState(new Conversation());
     currentChat.id_str = id
+    let amis = "le groupe de projet";
     function update(){
         setCurrentChat(Eats.fakeUpdate(currentChat));
         // fait croire à un changement
@@ -58,10 +59,16 @@ function Messenger({user}){
 
     useEffect(function(){
         if(currentChat!=undefined){
-            currentChat.message_list.reset()
+            currentChat.message_list.reset();
             currentChat.getAllMessages();
         }
     }, [id, ])
+
+    useEffect(function(){
+        currentChat.members.reset();
+        currentChat.getAllMembers();
+    },[id])
+
     useEffect(function(){
         user.getAllConv();
         user.getUserFriends();
@@ -83,7 +90,12 @@ function Messenger({user}){
         }
     };
 
+    const friend = (currentChat.members.list.find((m) => m.id_str !== user.id_str));
 
+    if (friend != undefined){
+        amis = friend.firstname;
+    }
+    
     return (
         <div className="Messenger">
             <div className="chatMenu">
@@ -104,7 +116,7 @@ function Messenger({user}){
                         (currentChat.id_str != -1) ?
                     (<>
                     <div className="chatBoxTop">
-                    <h2>Conversation avec inserer</h2>
+                    <h2>Conversation avec {amis}</h2>
                     {currentChat.message_list.list.slice().reverse().map((m) => (
                         
                             <Message key={m.id_str} message={m} own={m.auteur.id_str === user.id_str}/>

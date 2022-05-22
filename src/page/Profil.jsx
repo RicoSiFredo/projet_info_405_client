@@ -120,7 +120,9 @@ function Profil({rootUser}){
         </div>
         <div className="w-45 center-div">
             <HistoryView 
-                user={user}>
+                user={user}
+                rootUser={rootUser}>
+                
 
             </HistoryView>
         </div>
@@ -191,7 +193,8 @@ function Profil({rootUser}){
         </div>
         <div className="w-45 center-div">
             <HistoryView 
-                user={user}>
+                user={user}
+                rootUser={rootUser}>
 
             </HistoryView>
         </div>

@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import CompareEats from "../object/base/CompareEats";
 import Eats from "../object/base/Eats";
 import ListEats from "../object/base/ListEats";
 import Project from "../object/Project";
 import User from "../object/User";
+import Actu from "../object/Actu";
 import React from "react"
 import { useParams } from "react-router-dom";
-import Constant from "../utils/Constant";
-import ImgProfile from "../../src/component/ImgProfile";
-import { Rating } from 'react-simple-star-rating'
-import ElemList from "../list/ElemList";
 import ProfilViewHome from "../component/ProfilViewHome";
+import ActuElem from "../component/ActuElem";
 import SelectCompetence from "../../src/component/SelectCompetence";
 
 function Search({navigate, rootUser}){
@@ -23,8 +21,6 @@ function Search({navigate, rootUser}){
 
     const [type, updateType] = useState("");
     const [moy, updateMoy] = useState("");
-    const [min, updateMin] = useState("");
-    const [max, updateMax] = useState("");
     const [compList, updateCompList] = useState([]);
     const [tecnoList, updateTecnoList] = useState([]);
 
@@ -44,19 +40,39 @@ function Search({navigate, rootUser}){
             function(error){
             },
             function(response){
-                console.log(response)
             }
         )
     }
 
-    function eventMin(e){
-        updateMin(e.target.value);
-    }
-    function eventMax(e){
-        updateMax(e.target.value);
+    let filtreSkill;
+    let filtreEtoile;
+    if(type=="user") {
+        
+        filtreEtoile = <Form.Select className="w-85 m-2 p-2" aria-label="moy" value={moy} onChange={(e) => updateMoy(e.target.value)}>
+        <option value="0">Nombres d'étoiles</option>
+        <option value="20">1 étoile ou plus</option>
+        <option value="40">2 étoile ou plus</option>
+        <option value="60">3 étoile ou plus</option>
+        <option value="80">4 étoile ou plus</option>
+        <option value="100">5 étoile</option>
+        </Form.Select>;
+        filtreSkill = <SelectCompetence  
+            className="w-85 m-2 p-2"
+            compList={compList}
+            updateCompList={updateCompList}
+            type = "skill">
+        </SelectCompetence>;
+    } else if (type=="project") {
+        filtreSkill = 
+        <SelectCompetence  
+            className="w-85 m-2 p-2"
+            compList={tecnoList}
+            updateCompList={updateTecnoList}
+            type = "tecno">
+        </SelectCompetence>
     }
 
-    return <div className = "d-flex m-2 p-4">
+    return  <div className = "d-flex m-2 p-4">
 
             <div className="me-5">
                 <p>Filtre de recherche</p>
@@ -65,40 +81,14 @@ function Search({navigate, rootUser}){
                     <option value="">Type</option>
                     <option value="project">Projet</option>
                     <option value="user">Utilisateur</option>
+                    <option value="offre">Offre d'emploi</option>
                 </Form.Select>
 
-                <Form.Select className="w-85 m-2 p-2" aria-label="moy" value={moy} onChange={(e) => updateMoy(e.target.value)}>
-                    <option value="0">Nombres d'étoiles</option>
-                    <option value="20">1 étoile ou plus</option>
-                    <option value="40">2 étoile ou plus</option>
-                    <option value="60">3 étoile ou plus</option>
-                    <option value="80">4 étoile ou plus</option>
-                    <option value="100">5 étoile</option>
-                </Form.Select>
-
-                <SelectCompetence  
-                    className="w-85 m-2 p-2"
-                    compList={compList}
-                    updateCompList={updateCompList}
-                    type = "skill">
-                    
-                </SelectCompetence>
-
-                <SelectCompetence  
-                    className="w-85 m-2 p-2"
-                    compList={tecnoList}
-                    updateCompList={updateTecnoList}
-                    type = "tecno">
-                </SelectCompetence>
-
-                
-
-                
+                {filtreEtoile}
+                {filtreSkill}
 
             </div>
             <div>
-                
-
 
         {
             list.map(function(object, index) {
@@ -109,7 +99,7 @@ function Search({navigate, rootUser}){
                         navigate("/profil/" + object.id_str);
                     }
                 }
-                    console.log(compList);
+                console.log(object);
                     let note;
                     let boolComp = false;
 
@@ -125,7 +115,7 @@ function Search({navigate, rootUser}){
                             boolComp = true;    
                         }
                         
-                    } else {
+                    } else if (object instanceof Project) {
                         if(tecnoList.every(function(s) {
                             for(let i = 0; i < object.tecnoList.getList().length; i++ ) {
                                 if (s.name == object.tecnoList.getList()[i].name) {
@@ -143,14 +133,22 @@ function Search({navigate, rootUser}){
                     } else {
                         note = object.moyenne
                     }
-
-                    let div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
-                                <ProfilViewHome elem={object} isProject={object instanceof Project} note={note}></ProfilViewHome>
-                            </div>
+                    
+                    let div;
+                    if(object instanceof Project || object instanceof User) {
+                        div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
+                        <ProfilViewHome elem={object} isProject={object instanceof Project} note={note}></ProfilViewHome>
+                        </div>;
+                    } else {
+                        div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
+                            <ActuElem action={1} actu={object}></ActuElem>
+                        </div>;
+                    }
 
                     if (type == "" && note >= moy && boolComp) return div;
                     if (type == "project" && object instanceof Project && boolComp) return div;
                     if (type == "user" && object instanceof User && note >= moy && boolComp) return div;
+                    if (type == "offre") return div;
                     
 
             })

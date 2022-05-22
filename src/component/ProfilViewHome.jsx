@@ -39,7 +39,7 @@ function ProfilViewHome({elem, isProject=false , note}){
             <div className="mt-3 mb-2 ms-3 me-2">
                 <h6>{elem.description}</h6>
             </div>
-            <div className="ms-3 mb-3">
+            <div className="ms-3 mb-3 pt-2">
                 <LinearCompList compList={elem.tecnoList != undefined ? elem.tecnoList : elem.tecnoList}></LinearCompList>
 
             </div>

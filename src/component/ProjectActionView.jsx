@@ -39,9 +39,6 @@ function ProjectActionView({actionList, project, user, typeAction, updatePage}){
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                 <h4>{"Membres"}</h4>
-                <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                    <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
-                </Button>
                 <Link to={conversation} className="ms-2">
                     <Button variant="primary" className="pt-0 ps-2 pe-2">
                         <EnvelopeFill className="mt-0"></EnvelopeFill>

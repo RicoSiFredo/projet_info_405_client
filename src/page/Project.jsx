@@ -124,18 +124,12 @@ function ProjectFrame({rootUser, updatePage}){
             joinBlock = <p>Vous avez demandé à rejoindre ce projet</p>
         }
         else {
-            if(!edit){
-                joinBlock = <div>
-                    <Button onClick={join}>Rejoindre le projet</Button>
-                </div>
-            } else {
+            if(edit){
                 function changeComment(e){
                     updateComment(e.target.value);
                 }
                 joinBlock = <div>
                     <Field name="comment" label={"Commentaire"} changeValue={changeComment} val={comment}></Field>
-                    <Button onClick={joinSend}>Rejoindre le projet</Button>
-                    <Button onClick={join}>Annuler</Button>
                 </div>
             }
         }
