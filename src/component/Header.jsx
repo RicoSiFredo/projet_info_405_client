@@ -11,7 +11,6 @@ import Eats from "../object/base/Eats";
 import Constant from "../utils/Constant";
 import { useLocation } from 'react-router-dom'
 import { Link } from "react-router-dom";
-import ImgProfile from "../component/ImgProfile";
 
 function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     const location = useLocation();
@@ -27,8 +26,9 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
     }
 
     function logout(){
+        handleClose();
         navigate("/");
-        user.logout();
+        user.logout();   
     }
 
     useEffect(function(){
