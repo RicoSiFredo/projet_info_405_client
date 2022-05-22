@@ -239,6 +239,27 @@ export default class User extends Object405 {
             }
         )
     }
+    getBase(failed, success){
+        let obj = this;
+        super.makeRequest(
+            "user/get",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                console.log(obj);
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
     getAllHistory(failed, success){
         let obj = this;
         super.makeRequest(

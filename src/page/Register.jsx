@@ -14,7 +14,7 @@ function Register({back, user, navigate}){
     const [firstname, updateFirstname] = useState("");
     const [lastname, updateLastname] = useState("");
     const [password, updatePassword] = useState(""); 
-    const [birth, onChange] = useState(new Date());
+    const [birth, updateBirth] = useState("");
     // variable qui correspond à l'erreur
     const [error, updateError] = useState(ErrorEats.NO_ERROR);
     function register(){
@@ -27,7 +27,7 @@ function Register({back, user, navigate}){
                 password: password,
                 firstname: firstname,
                 lastname: lastname,
-                birth: (Date.parse(birth))/1000,
+                birth: Math.ceil(new Date(birth).getTime()/1000),
             },
             function(error){
                 updateError(ErrorEats.WENT_WRONG)
@@ -60,6 +60,9 @@ function Register({back, user, navigate}){
     function eventFirstname(e){
         updateFirstname(e.target.value);
     }
+    function changeBirth(e){
+        updateBirth(e.target.value);
+    }
     let content = <div>
         <Form.Group className="mb-3" controlId="register_email">
             <Form.Control value={firstname} onInput={eventFirstname} type="text" placeholder="Prénom" />
@@ -73,8 +76,9 @@ function Register({back, user, navigate}){
         <Form.Group className="mb-3" controlId="register_password">
             <Form.Control value={password}  onInput={eventPassword} type="password" placeholder="Mot de passe" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="register_birth">
-            <DatePicker onChange={onChange} value={birth} />
+        <Form.Group className="mb-3">
+            <Form.Label>Date de naissance</Form.Label>
+            <Form.Control type="date" value={birth} onChange={changeBirth} name="birth" placeholder="Date de naissance" />
         </Form.Group>
     </div>
     return <div>

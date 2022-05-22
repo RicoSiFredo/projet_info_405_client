@@ -192,11 +192,23 @@ function HistoryView({user}){
             </div>
             <div id="exp">
                 {
+                    user.historyList.size()!=0?
                     user.historyList.map(function(history, index){
                         return <HistoryElem history={history}>
 
                         </HistoryElem>
-                    })
+                    }):
+                    (<div className="d-flex pb-2 ps-3 pe-2">
+                        <p className="mb-1">
+                            {
+                                Data.isMe(user.id_str)
+                                ?
+                                "Commencez à ajouter des activités professionnelles pour vous rendre attractif pour d'autre projet."
+                                :
+                                "Cet utilisateur n'a aucune activité."
+                            }
+                        </p>
+                    </div>)
                 }
             </div>
         </div>

@@ -30,7 +30,10 @@ function ProfilField({user, isProject, label, name, canEdit, value, className=""
         }
     }, [value])
 
-    if((canEdit&&val=="")||edit){
+    if(!canEdit&&(val==""||val==undefined)){
+        return <div></div>
+    }
+    else if((canEdit&&(val==""||val==undefined))||edit){
         // Si l'utilisateur est en train de changé ces données
         function edit(){
             let url = "";
@@ -64,6 +67,9 @@ function ProfilField({user, isProject, label, name, canEdit, value, className=""
             )
         }
         function changeValue(e){
+            if((val==""||val==undefined)){
+                updateEdit(true);
+            }
             updateVal(e.target.value);
             // Change la valeur du texte
         }

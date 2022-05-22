@@ -46,6 +46,7 @@ function Profil({rootUser}){
     }
     user.update = update;
     useEffect(function(){
+        user.getBase()
         user.getAllSkill();
         user.getAllProject();
         user.getNotif();
@@ -86,7 +87,6 @@ function Profil({rootUser}){
             </ElemView>
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-3">
             <h4>Commentaires</h4>
-
                 {text}
                 {
                     user.commentList.list.map((obj, index) => {
@@ -133,7 +133,8 @@ function Profil({rootUser}){
         </div>
     </div>
 
-    }else{
+    }
+    else{
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
             <ProfilView rootUser={rootUser} elem={user} isProject={false}></ProfilView>
@@ -188,15 +189,11 @@ function Profil({rootUser}){
             
 
         </div>
-        
         <div className="w-45 center-div">
-            <NotifList
-                rootUser={rootUser}
-                user={user}
-                you={false}
-                list={user.notifList}>
+            <HistoryView 
+                user={user}>
 
-            </NotifList>
+            </HistoryView>
         </div>
         <div className="w-25 right-div">
             <UserProjectView 
