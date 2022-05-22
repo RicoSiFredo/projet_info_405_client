@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Constant from "../utils/Constant";
 import ImgProfile from "../component/ImgProfile";
 import ProfilViewHome from "../component/ProfilViewHome";
+import ActuElem from "../component/ActuElem";
 
 
 function Home({user, navigate}){
@@ -51,7 +52,6 @@ function Home({user, navigate}){
                 console.log(error);
             },
             function(response){
-                console.log("dffddf");
                 console.log(response);
             }
         )
@@ -88,9 +88,11 @@ function Home({user, navigate}){
         carouselOffre = <Carousel fade variant="dark" interval={3000}>
             {
                 listGroupOffre.map(function(group,i){
-
+                    console.log("bite")
+                    console.log(group)
                     if(group.length >= 3){
-                        return buildCarouselItem(group);
+
+                        return buildCarouselItemOffre(group);
                     }
                     
                 })
@@ -122,6 +124,29 @@ function Home({user, navigate}){
 
     }
 
+    function buildCarouselItemOffre(troisOffres){
+        //prends en parametre une liste de projets (3)
+        //renvoie trois projets dans une div dans un carousel.item
+        
+        return <Carousel.Item className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center w-100 mb-5">
+          
+            <Link to={"/project/"+troisOffres[0].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisOffres[0].id_str}>
+                <ActuElem action={1} actu={troisOffres[0]}></ActuElem>
+            </Link>
+                
+            <Link to={"/project/"+troisOffres[1].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisOffres[1].id_str}>
+                <ActuElem action={1} actu={troisOffres[1]}></ActuElem>
+            </Link>
+                            
+            <Link to={"/project/"+troisOffres[2].id_str} className="text-decoration-none ms-3 me-3 w-25" key={troisOffres[2].id_str}>
+                <ActuElem action={1} actu={troisOffres[2]}></ActuElem>
+            </Link>
+            
+            </div>
+        </Carousel.Item>
+
+    }
 
     let bouton;
     if (user.logged){

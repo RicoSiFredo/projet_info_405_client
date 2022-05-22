@@ -42,20 +42,7 @@ function ProfilViewHome({elem, isProject=false , note}){
         </div>
     }
     else {
-        if (elem instanceof Actu){
-            field = <div>
-                        <div className="mt-3 ms-3 me-2">
-                            <h4 className="me-3">{elem.name}</h4>
-                        </div>
-                        <div className="mt-3 mb-3 ms-3 me-2">
-                            <h6>{elem.description}</h6>
-                        </div>
-                        <div className="ms-5">
-                            <ElemList list={elem.skillList != undefined ? elem.skillList : elem.tecnoList}></ElemList>
-
-                        </div>
-                    </div>
-        }else{
+        
             field = <div>
                         <div className="mt-3 ms-3 me-2 d-flex align-items-end">
                             <h4 className="me-3">{elem. getDisplayName()}</h4>
@@ -69,11 +56,11 @@ function ProfilViewHome({elem, isProject=false , note}){
                             <h6>{elem.description}</h6>
                         </div>
                         <div className="ms-3 mb-3">
-                            <LinearCompList compList={elem.skillList != undefined ? elem.skillList : elem.tecnoList}></LinearCompList>
+                            
 
                         </div>
                     </div>
-        }
+        
   
     }
     return <div className="w-100">
