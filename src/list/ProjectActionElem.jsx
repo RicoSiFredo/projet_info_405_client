@@ -20,6 +20,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [showNotes, updateNotes] = useState(false);
     const [rating, setRating] = useState(0);
     const [newComment, setNewComment] = useState("");
+    const [lien, updateLien] = useState("/message/");
     let [showRole, updateShowRole] = useState(false);
     let [verif, updateShowVerif] = useState(false);
     let alreadyComment = false;
@@ -175,7 +176,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
 
     }
     
-    let test = "/message/-1";
     if (action.user.id_str != user.id_str){
         if (!project.isFinish && isMember){
             function showConv(){
@@ -189,11 +189,11 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     function(error){
                     },
                     function(response){
-                        test = test + listConv.list[0].convList.list[0].id_str;
-                        
+                        updateLien("/message/"+listConv.list[0].convList.list[0].id_str);
                     }
                 )
             }
+            
             
             bonus =
             
@@ -209,9 +209,9 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                         Selectionnez l'action
                         <div className="d-flex justify-content-center mt-2">
                             {button}
-                            
-                            <Link to={test}>
-                                <Button className="m-1" variant="primary" onClick={showConv}>Envoyer un message</Button>
+                            {showConv()}
+                            <Link to={lien}>
+                            <Button className="m-1" variant="primary">Envoyer un message</Button>
                             </Link>
     
                             <Button className="m-1" variant="primary" onClick={openRole}>
