@@ -11,9 +11,14 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import ImgProfile from "./ImgProfile";
 
-function HistoryView({user}){
+function HistoryView({rootUser, user}){
     let [show, updateShow] = useState(false);
     let [showExport, updateShowExport] = useState(false);
+    let isMember = false;
+
+    if (user.id_str == rootUser.id_str){
+        isMember=true;
+    }
 
     function closeExport() {
         updateShowExport(false);
@@ -147,19 +152,26 @@ function HistoryView({user}){
         });
 
     }
+    let addCv = null;
+    let DL = null;
+    if (isMember){
+        addCv = <Button onClick={addHistory} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
+                    <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
+                </Button>;
+        DL = <Button  onClick={openExport} variant="primary">
+                <Download></Download>
+            </Button>
+    }
+
     return <div>
         <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex justify-content-between">
                 <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                     <h4>{"Curriculum vitæ"}</h4>
-                    <Button onClick={addHistory} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                        <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
-                    </Button>
+                    {addCv}
                 </div>
                 <div className="d-flex align-items-center me-3">
-                    <Button  onClick={openExport} variant="primary">
-                        <Download></Download>
-                    </Button>
+                    {DL}
                     <Modal show={showExport} className="highest" onHide={closeExport}>
                         <Modal.Header closeButton>
                             <Modal.Title>Exporter mon CV</Modal.Title>
