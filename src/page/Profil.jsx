@@ -54,6 +54,20 @@ function Profil({rootUser}){
         user.getAllHistory();
         user.getMoyenne();
     }, []);
+
+    let text;
+    if(user.commentList.size() == 0){
+        text = <p>Aucun commentaires pour l'instant</p>
+    }else{
+        if(canEdit){
+            text = <p>Il s'agit des avis laissés par d'autre professionnels au sujet de votre travail</p>
+        }else{
+            text = <p>Il s'agit des avis laissés par d'autre professionnels au sujet du travail de {user.firstname}</p>
+        }
+    }
+
+
+    
     let canEdit = Data.isMe(user);
     if (Data.isMe(user)){
         return <div className="d-flex justify-content-center flex-row">
@@ -72,7 +86,8 @@ function Profil({rootUser}){
             </ElemView>
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-3">
             <h4>Commentaires</h4>
-            <p>Il s'agit des avis laissés par d'autre professionnels au sujet de votre travail</p>
+
+                {text}
                 {
                     user.commentList.list.map((obj, index) => {
                         let url = "/project/" + obj.projet.id_str;
@@ -136,7 +151,7 @@ function Profil({rootUser}){
             
             <div className="card mt-2 ms-2 bg-light bg-gradient overflow-hidden pt-2 ps-3 pb-3 pe-3">
             <h4>Commentaires</h4>
-            <p>Il s'agit des avis laissés par d'autre professionnels au sujet du travail de {user.firstname}</p>
+            {text}
                 {
                     user.commentList.list.map((obj, index) => {
                         let url = "/project/" + obj.projet.id_str;
