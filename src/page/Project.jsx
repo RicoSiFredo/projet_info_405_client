@@ -147,7 +147,7 @@ function ProjectFrame({rootUser, updatePage}){
             <ProfilView rootUser={rootUser} elem={project} isProject={true}></ProfilView>
            
             <ElemView 
-                canEdit={canEdit} 
+                canEdit={project.action.root} 
                 parent={project}
                 rootUser={rootUser}
                 list={project.tecnoList} 
