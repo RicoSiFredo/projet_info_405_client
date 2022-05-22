@@ -214,7 +214,7 @@ function TableComperatorUser({user}){
     }
     else if(selectRequest.invited==true&&selectRequest.refuse_user==true){
         buttonContent = <div className="d-flex">
-            <Button disabled={user.fermer===true} className="flex-even" onClick={unrefuse} variant="danger">Annuler le refus</Button>
+            <Button disabled={user.fermer===true} className="flex-even" onClick={unrefuse} variant="danger">Annuler le refue</Button>
         </div>
     }
     else if(selectRequest.refuse==true){

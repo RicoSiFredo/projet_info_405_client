@@ -105,8 +105,7 @@ export default class Actu extends CvElem {
                 heure: heure,
                 end: end,
                 price: price,
-                id_actu: this.id_str,
-                id_project: this.parent.id_str
+                id_actu: this.id_str
             },
             function(error){
                 if(failed!=undefined){
