@@ -85,6 +85,19 @@ function Home({user, navigate}){
     }
 
 
+    let bouton;
+    if (user.logged){
+        bouton = <Link to={"/profil/"+user.id_str} className="text-decoration-none">
+            <Button variant="outline-primary" className="pb-2">
+                <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
+            </Button>
+        </Link>
+    }else{
+        bouton =  <Button variant="outline-primary" className="pb-2">
+                    <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
+                </Button>
+    }
+    
     return <div>
                 <div className="d-flex justify-content-around">
                     
@@ -99,7 +112,7 @@ function Home({user, navigate}){
                                     <div className="centered">
                                         <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
                                     </div>
-                                <Carousel.Caption>
+                                <Carousel.Caption>  
                                     <h4>Pour commencer créer vous un compte</h4>
                                     <h6>Personnalisez votre profil pour être le plus attractif possible<br></br>Montrez vos compétences</h6>
                                 </Carousel.Caption>
@@ -114,7 +127,10 @@ function Home({user, navigate}){
                                         <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
                                     </div>
                                 <Carousel.Caption>
-                                    <h4>Créer un projet</h4>
+                                    <div className="">
+                                        <h4>Créer un projet {bouton}</h4>
+                                        
+                                    </div>
                                     <h6>Concevez et publiez votre projet pour être rejoins par des professionnels</h6>
                                 </Carousel.Caption>
                             </Carousel.Item>
