@@ -19,7 +19,7 @@ export default class Project extends Object405 {
     isFinish = undefined;
 
     permissionList = new ListEats("", undefined, CompareEats.compareInt("type", CompareEats.ASC), "", true)
-    haveActuList = new ListEats("have_actu", this)
+    haveActuList = new ListEats("have_actu", this, CompareEats.compareInt("date", CompareEats.DESC))
 
     roleList = new ListEats("own_role", undefined, CompareEats.compareInt("date", CompareEats.DESC))
     tecnoList = new ListEats("use", this);
