@@ -50,7 +50,7 @@ function ElemView({parent, rootUser, list, keyword, canEdit, title, infoNothing,
             </div>
             <Modal show={show} className="highest" onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Ajouter une compétence</Modal.Title>
+                    <Modal.Title>Ajouter une technologie</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <AddElem handleClose={handleClose} keyword={keyword} elem={parent}></AddElem>
