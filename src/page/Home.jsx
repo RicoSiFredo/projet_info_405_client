@@ -161,7 +161,7 @@ function Home({user, navigate}){
                 </Button>
     }
     
-    let homeText = <p className="titleOverImg">Trouvez les meilleurs offres d'emploi <br></br> pour votre carrière.</p>
+    let homeText = <p className="titleOverImg mb-5 me-5">Trouvez les meilleurs offres d'emploi pour votre carrière.</p>
     
     
 
