@@ -159,7 +159,7 @@ function Home({user, navigate}){
 
                 <div className="m-5 p-2" >
                     <h2 className="m-2 mb-4">Découvrir des projets</h2>
-                    <p>
+                    <p className="ms-4 me-4">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
@@ -174,7 +174,7 @@ function Home({user, navigate}){
 
                 <div className="m-5 p-2">
                     <h2 className="m-2 mb-4">Découvrir des offres d'emploi </h2>
-                    <p>
+                    <p className="ms-4 me-4">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     
