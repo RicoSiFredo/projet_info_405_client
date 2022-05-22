@@ -14,6 +14,7 @@ import Eats from "../object/base/Eats";
 import Data from "../utils/Data";
 import ListEats from "../object/base/ListEats";
 import CompareEats from "../object/base/CompareEats";
+import { Link } from "react-router-dom";
 
 function score(a, b){
     let res;
@@ -394,14 +395,16 @@ function TableComperator({offre}){
                         <h2>{"Offre"}</h2>
                     </div>
                     {offre.action.user!=undefined&&
-                    <div className="d-flex ps-1 pe-2 border border-dark rounded  pt-1 pb-1">
-                        <div className="justify-content-center align-items-center profil-tiny bg-light bg-light">
-                            <ImgProfile elem={offre.action.user}></ImgProfile>
+                    <Link className="text-decoration-none" to={"/profil/"+offre.action.user.id_str}>
+                        <div className="d-flex ps-1 pe-2 border text-decoration-none text-dark border-dark rounded  pt-1 pb-1">
+                            <div className="justify-content-center align-items-center profil-tiny bg-light bg-light">
+                                <ImgProfile elem={offre.action.user}></ImgProfile>
+                            </div>
+                            <div className="d-flex ms-2 mb-0 justify-content-center align-items-center text-decoration-none ">
+                                <h6>{offre.action.user.getDisplayName()}</h6>
+                            </div>
                         </div>
-                        <div className="d-flex ms-2 mb-0 justify-content-center align-items-center">
-                            <h6>{offre.action.user.getDisplayName()}</h6>
-                        </div>
-                    </div>}
+                    </Link>}
                 </div>
                     <div className="mb-2 mt-2">
                         {Utils.getOffreLigne(offre)}

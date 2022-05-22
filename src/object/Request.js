@@ -299,10 +299,10 @@ export default class Request extends CvElem {
     getScore(){
         return this.getScoreComp()*this.getCoefComp() +
         this.getScoreStatue()*this.getCoefStatue()*5+
-        this.getScoreSalaire()*this.getCoefSalaire()+
-        this.getScoreCommentaire()*this.getCoefCommentaire()+
+        this.getScoreSalaire()*this.getCoefSalaire()*10+
+        this.getScoreCommentaire()*this.getCoefCommentaire()*5+
         this.getScoreExperience()*this.getCoefExperience()+
-        this.getScoreAge()*this.getCoefAge() * 10;
+        this.getScoreAge()*this.getCoefAge() * 10 * 5;
     }
 
     getScoreSalaire(){
