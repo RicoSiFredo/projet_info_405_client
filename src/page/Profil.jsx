@@ -14,6 +14,8 @@ import HistoryView from "../component/HistoryView";
 import Constant from "../utils/Constant";
 import { Link } from "react-router-dom";
 import ProfilViewHome from "../component/ProfilViewHome";
+import { EnvelopeFill } from "react-bootstrap-icons";
+import { Button } from "react-bootstrap";
 
 function Profil({rootUser}){
     const {id} = useParams();
@@ -127,6 +129,16 @@ function Profil({rootUser}){
             </HistoryView>
         </div>
         <div className="w-25 right-div">
+            <div className="card pb-2 pt-2 ps-3 pe-2 mt-2 me-2 bg-light bg-gradient overflow-hidden d-flex justify-content-start" >
+                <div className="d-flex">
+                    <h4>Demande et invitation</h4>
+                    <Link to={"/offre_user/"+user.id_str}>
+                        <Button className="ms-2 mb-1 p-2 d-flex align-items-center justify-content-center" variant="primary">
+                            <EnvelopeFill></EnvelopeFill>
+                        </Button>
+                    </Link>
+                </div>
+            </div>
             <UserProjectView 
                 user={user}
                 rootUser={rootUser}>
@@ -199,6 +211,16 @@ function Profil({rootUser}){
             </HistoryView>
         </div>
         <div className="w-25 right-div">
+            <div className="card pb-2 pt-2 ps-3 pe-2 mt-2 me-2 bg-light bg-gradient overflow-hidden d-flex justify-content-start" >
+                <div className="d-flex">
+                    <h4>Demande et invitation</h4>
+                    <Link to={"offre_user/"+user.id_str}>
+                        <Button className="ms-2 mb-1 p-2 d-flex align-items-center justify-content-center" variant="primary">
+                            <EnvelopeFill></EnvelopeFill>
+                        </Button>
+                    </Link>
+                </div>
+            </div>
             <UserProjectView 
                 user={user}
                 rootUser={rootUser}>
