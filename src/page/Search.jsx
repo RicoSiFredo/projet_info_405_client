@@ -160,7 +160,7 @@ function Search({navigate, rootUser}){
                         </div>;
                     } else {
                         div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between">
-                            <ActuElem isHome={true} action={1} actu={object}></ActuElem>
+                            <ActuElem action={1} actu={object}></ActuElem>
                         </div>;
                     }
 
