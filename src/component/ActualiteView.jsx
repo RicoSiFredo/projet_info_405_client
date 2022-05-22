@@ -172,7 +172,7 @@ function ActualiteView({user, you, rootUser}){
                         user.haveActuList.size()==0
                         ?
                         <div className="d-flex ps-3 pe-2">
-                            <p>Ce projet ne présente auncune actualités</p>
+                            <p>Ce projet ne présente aucunes actualités</p>
                         </div>
                         :
                         user.haveActuList.map((actu, index) =>
