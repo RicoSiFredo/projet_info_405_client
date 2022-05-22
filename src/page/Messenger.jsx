@@ -128,7 +128,6 @@ function Messenger({user}){
     
             <div className="chatOnline">
                 <div className="chatOnlineWrapper">
-                    <h1>fdefderf</h1>
                 </div>
             </div>
 
