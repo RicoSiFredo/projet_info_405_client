@@ -88,16 +88,20 @@ function Home({user, navigate}){
     let bouton;
     if (user.logged){
         bouton = <Link to={"/profil/"+user.id_str} className="text-decoration-none">
-            <Button variant="outline-primary" className="pb-2">
+            <Button variant="primary" className="pb-2">
                 <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
             </Button>
         </Link>
     }else{
-        bouton =  <Button variant="outline-primary" className="pb-2">
+        bouton =  <Button variant="primary" className="pb-2">
                     <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
     }
     
+    let homeText = <p className="titleOverImg">Trouvez les meilleurs offres <br></br> d'emploi pour votre business.</p>
+    
+    
+
     return <div>
                 <div className="d-flex justify-content-around">
                     
@@ -110,7 +114,7 @@ function Home({user, navigate}){
                                     alt="First slide"
                                 />
                                     <div className="centered">
-                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                        {homeText}
                                     </div>
                                 <Carousel.Caption>  
                                     <h4>Pour commencer créer vous un compte</h4>
@@ -124,7 +128,7 @@ function Home({user, navigate}){
                                     alt="Second slide"
                                 />
                                     <div className="centered">
-                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                        {homeText}
                                     </div>
                                 <Carousel.Caption>
                                     <div className="">
@@ -141,7 +145,7 @@ function Home({user, navigate}){
                                     alt="Third slide"
                                 />
                                     <div className="centered">
-                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                        {homeText}
                                     </div>
                                 <Carousel.Caption>
                                     <h4>Postuler !</h4>
@@ -155,7 +159,7 @@ function Home({user, navigate}){
 
                 <div className="m-5 p-2" >
                     <h2 className="m-2 mb-4">Découvrir des projets</h2>
-                    <p>
+                    <p className="ms-4 me-4">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
@@ -170,7 +174,7 @@ function Home({user, navigate}){
 
                 <div className="m-5 p-2">
                     <h2 className="m-2 mb-4">Découvrir des offres d'emploi </h2>
-                    <p>
+                    <p className="ms-4 me-4">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum soluta eum quam unde corrupti facere magnam ea ut perspiciatis? Molestiae repellat assumenda neque at recusandae optio voluptatum nisi exercitationem unde.
                     
