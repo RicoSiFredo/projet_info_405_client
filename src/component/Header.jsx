@@ -60,14 +60,12 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
             <Link to={"/message/-1"}>
                 <Button className="me-2" variant="primary" >
                     <EnvelopeFill></EnvelopeFill>
-                    <Badge pill className="ms-2" bg="light" text="primary">2</Badge>
                 </Button>
             </Link>
 
             <div>
                 <Button onClick={openNotif} className="me-2">
                     <BellFill></BellFill>
-                    <Badge pill className="ms-2" bg="light" text="primary">9</Badge>
                 </Button>
             </div>
 
