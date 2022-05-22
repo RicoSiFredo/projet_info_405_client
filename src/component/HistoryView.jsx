@@ -59,6 +59,7 @@ function HistoryView({user}){
     }
     function sendHistory(failed, success){
         let idList = []
+        handleClose();
         for(let i = 0; i < compList.length; i++){
             idList.push(compList[i].id_str);
         }

@@ -92,7 +92,7 @@ function Search({navigate, rootUser}){
                         navigate("/profil/" + object.id_str);
                     }
                 }
-                    let div = <div key={index} className = "border d-flex m-2 p-1 justify-content-between" >
+                    let div = <div key={index} className = "Hgris border d-flex m-2 p-1 justify-content-between" >
                             <div className="banner border-bottom border-4 border-primary">
                                 
                                 {object.profile != undefined ? <img src={Constant.IMAGE_URL+object.profile} className="center-crop w-100 h-100" alt=""/> :  <ImgProfile className="center-crop w-100 h-100" elem={object}></ImgProfile>}
