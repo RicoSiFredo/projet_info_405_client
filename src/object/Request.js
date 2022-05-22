@@ -6,6 +6,7 @@ export default class Request extends CvElem {
  
     static TYPE = "Request";
 
+    invited = undefined;
     refuse = undefined;
     pinned = undefined;
     message = undefined;
@@ -253,7 +254,7 @@ export default class Request extends CvElem {
             return "bg-warning";
         }
         else if(this.getStatue()==0){
-            return "bg-error";
+            return "bg-danger";
         }
     }
 }

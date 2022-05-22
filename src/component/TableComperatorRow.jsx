@@ -52,7 +52,7 @@ function TableComperatorRow({updateSelect, select, colList, offre, index, reques
             </input> 
             {
                 (request.pinned&&!request.accept)&&
-                <PinFill>
+                <PinFill className="mb-1 ms-2">
 
                 </PinFill>
             }

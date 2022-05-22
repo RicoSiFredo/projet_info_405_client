@@ -279,14 +279,25 @@ function TableComperator({offre}){
             </div>
         </div>
     }
+    else if(selectRequest.invited==true&&selectRequest.refuse==true){
+        buttonContent = <div className="d-flex">
+            <Button className="flex-even" onClick={unrefuse} variant="success">Réinviter</Button>
+        </div>
+    }
     else if(selectRequest.refuse==true){
         buttonContent = <div className="d-flex">
             <Button className="flex-even" onClick={unrefuse} variant="danger">Annuler le refue</Button>
         </div>
     }
-    else {
+    else if(selectRequest.invited==true){
         buttonContent = <div className="d-flex">
-            <Button className="flex-even me-2" onClick={startConv} variant="primary">Converser</Button>
+            <Button className="flex-even me-2" onClick={!selectRequest.pinned?pin:unpin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
+            <Button className="flex-even" onClick={refuse} variant="danger">Annuler l'invitation</Button>
+        </div>
+    }
+    else {
+        //<Button className="flex-even me-2" onClick={startConv} variant="primary">Converser</Button>
+        buttonContent = <div className="d-flex">
             <Button className="flex-even me-2" onClick={!selectRequest.pinned?pin:unpin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
             <Button className="flex-even me-2" variant="success" onClick={accept}>Accepter</Button>
             <Button className="flex-even" onClick={refuse} variant="danger">Refuser</Button>
