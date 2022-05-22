@@ -44,6 +44,7 @@ function ActuElem({action, actu}){
 
             }
         );
+        handleClose()
     }
     function handleClose() {
         updateShow(false);
@@ -65,7 +66,7 @@ function ActuElem({action, actu}){
             i += 1
         }
         if(asked){
-            footer = <p>Vous avez déjà postulé</p>
+            footer = <p className="mb-1">Vous avez déjà postulé</p>
         }
         else {
             footer = <Button onClick={postuler} className="mt-0 mb-2" variant="primary">Postuler</Button>
