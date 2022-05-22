@@ -92,6 +92,15 @@ function Search({navigate, rootUser}){
                         navigate("/profil/" + object.id_str);
                     }
                 }
+
+                    let note;
+
+                    if (object.moyenne == undefined) {
+                        note = 0;
+                    } else {
+                        note = object.moyenne
+                    }
+
                     let div = <div key={index} className = "Hgris border d-flex m-2 p-1 justify-content-between" >
                             <div className="banner border-bottom border-4 border-primary">
                                 
@@ -103,14 +112,14 @@ function Search({navigate, rootUser}){
                             <Rating
                                             readonly={true}
                                             allowHover={false}
-                                            ratingValue={object.moyenne} /* Available Props */
+                                            ratingValue={note} /* Available Props */
                                             allowHalfIcon={true}/>
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
-                    if (type == "" && (object.moyenne >= moy || object.moyenne == undefined)) return div;
+                    if (type == "" && note >= moy) return div;
                     if (type == "project" && object instanceof Project) return div;
-                    if (type == "user" && object instanceof User && (object.moyenne >= moy || object.moyenne == undefined)) return div;
+                    if (type == "user" && object instanceof User && note >= moy) return div;
 
             })
         }
