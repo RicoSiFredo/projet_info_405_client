@@ -97,7 +97,7 @@ function ActuElem({action, actu, isHome=false}){
                     <Modal.Title>Postuler pour cette offre</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p className="mb-2">Choissiez votre message présenté au recruteur</p>
+                    <p className="mb-2">Choisissez votre message présenté au recruteur</p>
                     <Field val={comment} changeValue={changeComment} label="Message" name="message"></Field>
                     <p className="mt-3 mb-2">Suggérer une modification ( optionnel )</p>
                     <Field className={"mt-1"} val={heure} changeValue={changeHeure} label="Heure par semaine" name="heure"></Field>
@@ -146,7 +146,7 @@ function ActuElem({action, actu, isHome=false}){
                         <Modal.Title>Postuler pour cette offre</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <p className="mb-2">Choissiez votre message présenté au recruteur</p>
+                        <p className="mb-2">Choisissez votre message présenté au recruteur</p>
                         <Field val={comment} changeValue={changeComment} label="Message" name="message"></Field>
                         <p className="mt-3 mb-2">Suggérer une modification ( optionnel )</p>
                         <Field className={"mt-1"} val={heure} changeValue={changeHeure} label="Heure par semaine" name="heure"></Field>
