@@ -149,10 +149,6 @@
   font-weight: bolder;
   color: white;
 }
-.dixdix{
-  cursor: pointer;
-  width: auto;
-}
 .center-crop{
   object-fit: cover;
 }

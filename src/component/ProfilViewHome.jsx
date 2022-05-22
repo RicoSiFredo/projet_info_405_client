@@ -47,7 +47,7 @@ function ProfilViewHome({elem, isProject=false}){
             </div>
         </div>
     }
-    return <div>
+    return <div className="w-100">
         <div className="card bg-light bg-gradient overflow-hidden ombre">
             <div className="banner border-bottom border-4 border-primary position-relative">
                 {elem.banner &&

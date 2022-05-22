@@ -17,6 +17,7 @@ import ImgProfile from "../../src/component/ImgProfile";
 import { Rating } from 'react-simple-star-rating'
 import ElemList from "../list/ElemList";
 import Elem from "../list/Elem";
+import ProfilViewHome from "../component/ProfilViewHome";
 
 function Search({navigate, rootUser}){
     let {search} = useParams();
@@ -104,24 +105,13 @@ function Search({navigate, rootUser}){
                         note = object.moyenne
                     }
 
-                    let div = <div key={index} className = "Hgris border d-flex m-2 p-1 justify-content-between" onClick={openProfil} >
-                            <div className="banner border-4 border-primary profil-tiny bg-light dixdix">
+                    let div = <div key={index} className = "w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
+                                    <ProfilViewHome  elem={object} isProject={object instanceof Project}></ProfilViewHome>
+                            </div>
                                 
-                                <ImgProfile elem={object}></ImgProfile>
-                        </div>
-                        <div>
-                            <p className="m-4">{object.name == undefined ? object.firstname : object.name}</p>
-                            <p className = "mt-4 m-2">{object.description}</p> 
-                            <Rating
-                                readonly={true}
-                                allowHover={false}
-                                ratingValue={note} /* Available Props */
-                                allowHalfIcon={true}/>
-                    
-                            <ElemList list={object.skillList != undefined ? object.skillList : object.tecnoList}></ElemList>
-                        </div>
-                        
-                    </div>;
+            
+                  
+
                     if (type == "" && note >= moy) return div;
                     if (type == "project" && object instanceof Project) return div;
                     if (type == "user" && object instanceof User && note >= moy) return div;
