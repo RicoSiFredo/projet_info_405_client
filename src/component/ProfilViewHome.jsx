@@ -45,7 +45,7 @@ function ProfilViewHome({elem, isProject=false , note}){
         if (elem instanceof Actu){
             field = <div>
                         <div className="mt-3 ms-3 me-2">
-                            <h4 className="me-3">{elem. name}</h4>
+                            <h4 className="me-3">{elem.name}</h4>
                         </div>
                         <div className="mt-3 mb-3 ms-3 me-2">
                             <h6>{elem.description}</h6>
@@ -68,7 +68,7 @@ function ProfilViewHome({elem, isProject=false , note}){
                         <div className="mt-3 mb-3 ms-3 me-2">
                             <h6>{elem.description}</h6>
                         </div>
-                        <div className="ms-5">
+                        <div className="ms-3 mb-3">
                             <LinearCompList compList={elem.skillList != undefined ? elem.skillList : elem.tecnoList}></LinearCompList>
 
                         </div>
