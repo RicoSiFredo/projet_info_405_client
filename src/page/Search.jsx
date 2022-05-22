@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import Field from "../component/Field";
-import PageEnum from "../enum/PageEnum";
 import CompareEats from "../object/base/CompareEats";
 import Eats from "../object/base/Eats";
-import ErrorEats from "../object/base/ErrorEats";
 import ListEats from "../object/base/ListEats";
-import Data from "../utils/Data";
-import Response from "../utils/Response";
 import Project from "../object/Project";
 import User from "../object/User";
 import React from "react"
@@ -16,8 +11,8 @@ import Constant from "../utils/Constant";
 import ImgProfile from "../../src/component/ImgProfile";
 import { Rating } from 'react-simple-star-rating'
 import ElemList from "../list/ElemList";
-import Elem from "../list/Elem";
 import ProfilViewHome from "../component/ProfilViewHome";
+import SelectCompetence from "../../src/component/SelectCompetence";
 
 function Search({navigate, rootUser}){
     let {search} = useParams();
@@ -30,6 +25,8 @@ function Search({navigate, rootUser}){
     const [moy, updateMoy] = useState("");
     const [min, updateMin] = useState("");
     const [max, updateMax] = useState("");
+    const [compList, updateCompList] = useState([]);
+
     useEffect(function(){
         chercher();
     }, [search])
@@ -50,8 +47,6 @@ function Search({navigate, rootUser}){
             }
         )
     }
-
-
 
     function eventMin(e){
         updateMin(e.target.value);
@@ -80,6 +75,12 @@ function Search({navigate, rootUser}){
                     <option value="100">5 étoile</option>
                 </Form.Select>
 
+                <SelectCompetence  
+                    className="w-85 m-2 p-2"
+                    compList={compList}
+                    updateCompList={updateCompList}>
+                </SelectCompetence>
+
                 
 
             </div>
@@ -96,8 +97,23 @@ function Search({navigate, rootUser}){
                         navigate("/profil/" + object.id_str);
                     }
                 }
-
+                    console.log(compList);
                     let note;
+                    let boolComp = false;
+
+                    if(object instanceof User) {
+                        if(compList.every(function(s) {
+                            for(let i = 0; i < object.skillList.getList().length; i++ ) {
+                                if (s.name == object.skillList.getList()[i].name) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        })) {
+                            boolComp = true;    
+                        }
+                        
+                    }
 
                     if (object.moyenne == undefined) {
                         note = 0;
@@ -112,9 +128,9 @@ function Search({navigate, rootUser}){
             
                   
 
-                    if (type == "" && note >= moy) return div;
+                    if (type == "" && note >= moy && boolComp) return div;
                     if (type == "project" && object instanceof Project) return div;
-                    if (type == "user" && object instanceof User && note >= moy) return div;
+                    if (type == "user" && object instanceof User && note >= moy && boolComp) return div;
                     
 
             })
