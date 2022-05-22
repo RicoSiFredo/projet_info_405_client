@@ -37,13 +37,17 @@ function HistoryElem({history}){
         role = history.role;
     }
     let content;
+    let endDate = "";
+    if(history.end!=undefined&&history.end!=0){
+        endDate = " / " + toDate(history.end)
+    }
     if(history instanceof History){
         content = <div>
             <div className="">
                 <span className="me-1" onClick={openDesc}>
                     {display}
                     {history.name}
-                </span> - {toDate(history.start) + " / " + toDate(history.end)} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
+                </span> - {toDate(history.start)+endDate} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
             </div>
             <p className={visi?"d-block mb-0":"d-none"}>{history.descriptionProject}</p>
         </div>
@@ -51,7 +55,7 @@ function HistoryElem({history}){
     else {
         content = <div>
             <div className="">
-                {toDate(history.start) + " / " + toDate(history.end)} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
+                {toDate(history.start)+endDate} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
             </div>
             <p className={visi?"d-block":"d-none"}>{history.descriptionProject}</p>
         </div>

@@ -334,6 +334,10 @@ function TableComperator({offre}){
         }
         return res;
     }
+    let endDate = "";
+    if(offre.end!=0){
+        endDate = " / " + Utils.getDate(offre.end, 0)
+    }
     return <div className="d-flex  h-100">
         <div className="w-25 h-100 overflow-auto border-right-comapretor o">
             <div className="p-3 bg-light border-bottom-comapretor">
@@ -352,7 +356,7 @@ function TableComperator({offre}){
                     </div>}
                 </div>
                     <div className="mb-2 mt-2">
-                {Utils.getDate(offre.start, 0) + " / " + Utils.getDate(offre.end, 0)} {offre.heure!=""&&(" - "+offre.heure+"h")}{(offre.price!="")&&(" - "+offre.price+"€")}
+                {Utils.getDate(offre.start, 0)+endDate} {offre.heure!=""&&(" - "+offre.heure+"h")}{(offre.price!="")&&(" - "+offre.price+"€")}
                     </div>
                 <div>
                     <p className="mt-2">{offre.description}</p>

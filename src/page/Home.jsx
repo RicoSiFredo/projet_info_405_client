@@ -48,14 +48,14 @@ function Home({user, navigate}){
                 access_token: Data.accessToken(),
             },
             function(error){
+                console.log(error);
             },
             function(response){
+                console.log("dffddf");
+                console.log(response);
             }
         )
     }
-    
-    console.log("caca")
-    console.log(listOffre)
 
     function splitArrayIntoChunksOfLen(arr, len) {
         var chunks = [], i = 0, n = arr.length;

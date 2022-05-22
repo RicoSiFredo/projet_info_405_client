@@ -81,4 +81,18 @@ export default class Utils {
     static currentDate(){
         return Math.ceil(new Date().getTime()/1000);
     }
+    static getOffreLigne(offre){
+        let endDate = "";
+        if(offre.end!=0){
+            endDate = " / " + Utils.getDate(offre.end, 0)
+        }
+        let str = Utils.getDate(offre.start, 0)+endDate
+        if(offre.heure!=""&&offre.heure!=0&&offre.heure!=undefined){
+            str += " - "+offre.heure+"h"
+        }
+        if(offre.price!=""&&offre.price!=0&&offre.price!=undefined){
+            str += " - "+offre.price+"€"
+        }
+        return str;
+    }
 }

@@ -62,8 +62,10 @@ function TableComperatorRow({updateSelect, select, colList, offre, index, reques
         <td>{request.user.getDisplayName()}</td>
         <td>
             <div 
-                className={"round-50p d-inline ps-2 pe-2 pt-1 pb-1 "+request.getStatueBackground()+" mt-1 mb-1 me-2 text-white"}>
-                {request.getStatueTitle()}
+                className={"round-50p ps-2 pe-2 pt-1 pb-1 "+request.getStatueBackground()+" mt-1 mb-1 me-2 text-white"}>
+                <p className="mb-0">{request.getStatueTitle()}</p>
+                <p className="mb-0">{request.getStatueAvance()}{request.getStatueAvanceDiff()}</p>
+                <p className="mb-0">{request.getStatueRetard()}{request.getStatueRetardDiff()}</p>
             </div>
         </td>
         <td>{price + " € "}{diff}</td>

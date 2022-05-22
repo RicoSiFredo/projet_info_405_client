@@ -1,4 +1,5 @@
 import Data from "../utils/Data";
+import Utils from "../utils/Utils";
 import SimpleEats from "./base/SimpleEats";
 import CvElem from "./CvElem";
 
@@ -233,6 +234,48 @@ export default class Request extends CvElem {
         return count;
     }
 
+    getStatueAvance(){
+        let res = "";
+        if(this.start!=undefined&&this.start!=0){
+            res = "Commence le "+Utils.getDate(this.start, 0);
+        }
+        return res;
+    }
+    getStatueAvanceDiff(){
+        let res = undefined;
+        if(this.start!=undefined&&this.start!=0){
+            let diff = this.start - this.parent.start;
+            diff = diff/60/60/24; 
+            if(diff >= 0){
+                res = <span className="ms-1">( + {diff} j )</span>
+            }
+            else {
+                res = <span className="ms-1"> - {diff} j</span>
+            }
+        }
+        return res;
+    }
+    getStatueRetardDiff(){
+        let res = undefined;
+        if(this.end!=undefined&&this.end!=0){
+            let diff = this.end - this.parent.end;
+            diff = diff/60/60/24; 
+            if(diff >= 0){
+                res = <span className="ms-1">( + {diff} j )</span>
+            }
+            else {
+                res = <span className="ms-1"> - {diff} j</span>
+            }
+        }
+        return res;
+    }
+    getStatueRetard(){
+        let res = "";
+        if(this.end!=undefined&&this.end!=0){
+            res = "Commence le "+Utils.getDate(this.end, 0);
+        }
+        return res;
+    }
     getStatueTitle(){
         let end = parseInt(this.user.getCurrentHeure(), 10) + " h"
         if(this.getStatue()==2){
