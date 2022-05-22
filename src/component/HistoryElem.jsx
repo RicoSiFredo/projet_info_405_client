@@ -58,8 +58,8 @@ function HistoryElem({history}){
         </div>
     }
     return (
-        <div class={"d-flex justify-content-between " + className}>
-            <div class="d-flex flex-column">
+        <div className={"d-flex justify-content-between " + className}>
+            <div className="d-flex flex-column">
                 <h5>{role}</h5>
                 <div>
                     {content}

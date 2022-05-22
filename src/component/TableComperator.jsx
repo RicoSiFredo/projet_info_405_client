@@ -390,7 +390,7 @@ function TableComperator({offre}){
             </div>
         </div>
         <div className="w-100">
-            <table class="table table-striped">
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         {
