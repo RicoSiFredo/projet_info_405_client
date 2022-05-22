@@ -242,7 +242,7 @@ export default class Request extends CvElem {
             return "Partiel - " + end;
         }
         else if(this.getStatue()==0){
-            return "Temps plien - " + end;
+            return "Temps plein - " + end;
         }
     }
 

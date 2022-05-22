@@ -15,6 +15,8 @@ import { useParams } from "react-router-dom";
 import Constant from "../utils/Constant";
 import ImgProfile from "../../src/component/ImgProfile";
 import { Rating } from 'react-simple-star-rating'
+import ElemList from "../list/ElemList";
+import Elem from "../list/Elem";
 
 function Search({navigate, rootUser}){
     let {search} = useParams();
@@ -47,6 +49,7 @@ function Search({navigate, rootUser}){
             }
         )
     }
+
 
 
     function eventMin(e){
@@ -114,12 +117,14 @@ function Search({navigate, rootUser}){
                                             allowHover={false}
                                             ratingValue={note} /* Available Props */
                                             allowHalfIcon={true}/>
+                            <ElemList list={object.skillList}></ElemList>
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
                     if (type == "" && note >= moy) return div;
                     if (type == "project" && object instanceof Project) return div;
                     if (type == "user" && object instanceof User && note >= moy) return div;
+                    
 
             })
         }
