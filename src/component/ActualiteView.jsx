@@ -15,12 +15,12 @@ function ActualiteView({user, you, rootUser}){
         type: 0,
         title: "Post",
         color: "warning",
-        select: true
+        select: false
     }, {
         type: 1,
         title: "Offre",
         color: "danger",
-        select: false
+        select: true
     }]); 
     let ccAction; 
     for(let i = 0; i < listAction.length; i++){
@@ -82,7 +82,7 @@ function ActualiteView({user, you, rootUser}){
         </div>
     }
     else if(action.type==1){
-        res = <div className="mt-3 mb-0">
+        res = <div className="mb-0">
             <h5>Nouvelle offre</h5>
             <SelectCompetence
                 compList={compList}
@@ -140,7 +140,15 @@ function ActualiteView({user, you, rootUser}){
                 console.log(response)
             }
         )
+        handleClose();
     }
+    /*
+    <div>
+        {listAction.map((action, index) => 
+            <Button onClick={()=>selectAction(action)} className="me-2" variant={ action.select ? action.color : "outline-"+action.color }>{action.title}</Button>
+        )}
+    </div>
+    */
     if (!user.isFinish){
         return (
             <div>
@@ -152,6 +160,12 @@ function ActualiteView({user, you, rootUser}){
                         </Button>
                     </div>
                     {
+                        user.haveActuList.size()==0
+                        ?
+                        <div className="d-flex ps-3 pe-2">
+                            <p>Ce projet ne présente auncune actualités</p>
+                        </div>
+                        :
                         user.haveActuList.map((actu, index) =>
                             <ActuElem
                                 action={user.action}
@@ -166,11 +180,6 @@ function ActualiteView({user, you, rootUser}){
                         <Modal.Title>Nouvelle actualité</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div>
-                            {listAction.map((action, index) => 
-                                <Button onClick={()=>selectAction(action)} className="me-2" variant={ action.select ? action.color : "outline-"+action.color }>{action.title}</Button>
-                            )}
-                        </div>
                         <div>
                             {res}
                         </div>

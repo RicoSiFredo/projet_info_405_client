@@ -45,7 +45,7 @@ function HistoryElem({history}){
                     {history.name}
                 </span> - {toDate(history.start) + " / " + toDate(history.end)} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
             </div>
-            <p className={visi?"d-block mb-2":"d-none"}>{history.descriptionProject}</p>
+            <p className={visi?"d-block mb-0":"d-none"}>{history.descriptionProject}</p>
         </div>
     }
     else {
@@ -53,17 +53,17 @@ function HistoryElem({history}){
             <div className="">
                 {toDate(history.start) + " / " + toDate(history.end)} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
             </div>
-            <p className={visi?"d-block mb-2":"d-none"}>{history.descriptionProject}</p>
+            <p className={visi?"d-block":"d-none"}>{history.descriptionProject}</p>
         </div>
     }
     return (
         <div className={"d-flex justify-content-between " + className}>
             <div className="d-flex flex-column">
                 <h5>{role}</h5>
-                <div>
+                <div className="mb-2">
                     {content}
                 </div>
-                {history.description!=""&&<p className="mb-2 mt-1">{history.description}</p>}
+                {history.description!=""&&<p className="mb-2">{history.description}</p>}
                 <div className="mt-1 mb-2">
                     <LinearCompList
                         compList={history.compList}>
