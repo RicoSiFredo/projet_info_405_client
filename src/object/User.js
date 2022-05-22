@@ -20,6 +20,7 @@ export default class User extends Object405 {
     moyenne = undefined;
     birth = undefined;
 
+    requestList = new ListEats("req_user", this, CompareEats.compareInt("date", CompareEats.DESC));
     haveActuList = new ListEats("have_actu", this);
     skillList = new ListEats("got_skill", this);
     actionList = new ListEats("do", this, CompareEats.compareInt("date", CompareEats.DESC));
@@ -239,6 +240,27 @@ export default class User extends Object405 {
             }
         )
     }
+
+    getOffreAll(failed, success){
+        super.makeRequest(
+            "user/get/offre",
+            {
+                access_token: Data.accessToken(),
+                id: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        )
+    }
+
     getBase(failed, success){
         let obj = this;
         super.makeRequest(

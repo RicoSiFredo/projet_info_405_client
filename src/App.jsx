@@ -24,6 +24,7 @@ import Header from './component/Header';
 import NotifList from './list/NotifList';
 import { Link, Route, Router, Routes, useNavigate } from 'react-router-dom';
 import Offre from './page/Offre';
+import OffreUser from './page/OffreUser';
 
 const NOTIF_FETCH = 15000
 
@@ -173,6 +174,7 @@ function App() {
             <Route path="/search/:search" element={<Search navigate={navigate} rootUser={user}></Search>}></Route>
             <Route path="/search" element={<Search navigate={navigate} rootUser={user}></Search>}></Route>
             <Route exact path="/offre/:id" element={<Offre navigate={navigate} rootUser={user}></Offre>}></Route>
+            <Route exact path="/offre_user/:id" element={<OffreUser navigate={navigate} rootUser={user}></OffreUser>}></Route>
             <Route exact path="/" element={<Home navigate={navigate} user={user} updatePage={updatePage}></Home>}></Route>
         </Routes>
     </div>

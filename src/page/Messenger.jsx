@@ -24,12 +24,11 @@ function Messenger({user}){
     currentChat.update = update;
 
     const [newMessage,setNewMessage] = useState("");
-    const [name, updateName] = useState("");
     const [listFriends, updateList] = useState(new ListEats("", undefined));
 
     useEffect(function(){
         showFriends();
-    }, [name])
+    }, [])
 
     function addConv() {
         updateShow(true);
@@ -38,8 +37,6 @@ function Messenger({user}){
     listFriends.update = function(){
         updateList(Eats.fakeUpdate(listFriends))
     }
-
-    
 
     function showFriends(){
         listFriends.reset();
@@ -64,7 +61,7 @@ function Messenger({user}){
             currentChat.message_list.reset()
             currentChat.getAllMessages();
         }
-    }, [currentChat, ])
+    }, [id, ])
     useEffect(function(){
         user.getAllConv();
         user.getUserFriends();
@@ -107,7 +104,7 @@ function Messenger({user}){
                         (currentChat.id_str != -1) ?
                     (<>
                     <div className="chatBoxTop">
-                    <h2>Conversation avec inserer le nom du mec putain</h2>
+                    <h2>Conversation avec inserer</h2>
                     {currentChat.message_list.list.slice().reverse().map((m) => (
                         
                             <Message key={m.id_str} message={m} own={m.auteur.id_str === user.id_str}/>

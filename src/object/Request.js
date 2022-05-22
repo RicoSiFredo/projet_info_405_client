@@ -98,9 +98,10 @@ export default class Request extends CvElem {
                 "id_request": this.id_str
             },
             function(error){
-                
+                console.log(error)
             },
             function(result){
+                console.log(result)
                 
             }
         )
@@ -203,18 +204,20 @@ export default class Request extends CvElem {
     }
 
     getScoreStatue(){
+        let res = (- Math.abs(this.getStatueAvanceDiffDay()) - Math.abs(this.getStatueRetardDiffDay())) * 3;
         if(this.getStatue()==2){
-            return 250;
+            res += 250;
         }
         else if(this.getStatue()==1){
-            return 100;
+            res +=  100;
         }
         else if(this.getStatue()==0){
-            return 0;
+            res +=  0;
         }
         else {
-            return 0;
+            res +=  0;
         }
+        return res;
     }
 
     getScoreComp(){
@@ -236,43 +239,61 @@ export default class Request extends CvElem {
 
     getStatueAvance(){
         let res = "";
-        if(this.start!=undefined&&this.start!=0){
+        if(this.start!=undefined&&this.start!=0&&this.start!=this.parent.start){
             res = "Commence le "+Utils.getDate(this.start, 0);
         }
         return res;
     }
+    getStatueAvanceDiffDay(){
+        let diff = 0;
+        if(this.start!=undefined&&this.start!=0&&this.parent.start!=0&&this.parent.start!=undefined&&this.start!=this.parent.start){
+            diff = this.start - this.parent.start;
+            diff = diff/60/60/24;
+        }
+        return diff;
+    }
     getStatueAvanceDiff(){
         let res = undefined;
-        if(this.start!=undefined&&this.start!=0){
+        if(this.start!=undefined&&this.start!=0&&this.parent.start!=0&&this.parent.start!=undefined&&this.start!=this.parent.start){
             let diff = this.start - this.parent.start;
             diff = diff/60/60/24; 
-            if(diff >= 0){
+            if(diff > 0){
                 res = <span className="ms-1">( + {diff} j )</span>
             }
-            else {
+            else if(diff < 0){
                 res = <span className="ms-1"> - {diff} j</span>
             }
         }
         return res;
     }
+    
+    getStatueRetardDiffDay (){
+        let diff = 0;
+        if(this.end!=undefined&&this.end!=0&&this.parent.end!=0&&this.parent.end!=undefined&&this.end!=this.parent.end){
+            diff = this.end - this.parent.end;
+            diff = diff/60/60/24;
+        }
+        return diff;
+    }
     getStatueRetardDiff(){
         let res = undefined;
-        if(this.end!=undefined&&this.end!=0){
+        this.end = 1655226114;
+        if(this.end!=undefined&&this.end!=0&&this.parent.end!=0&&this.parent.end!=undefined&&this.end!=this.parent.end){
             let diff = this.end - this.parent.end;
             diff = diff/60/60/24; 
-            if(diff >= 0){
+            if(diff > 0){
                 res = <span className="ms-1">( + {diff} j )</span>
             }
-            else {
-                res = <span className="ms-1"> - {diff} j</span>
+            else if(diff < 0){
+                res = <span className="ms-1">( - {diff} j )</span>
             }
         }
         return res;
     }
     getStatueRetard(){
         let res = "";
-        if(this.end!=undefined&&this.end!=0){
-            res = "Commence le "+Utils.getDate(this.end, 0);
+        if(this.end!=undefined&&this.end!=0&&this.end!=this.parent.end){
+            res = "Fini le "+Utils.getDate(this.end, 0);
         }
         return res;
     }

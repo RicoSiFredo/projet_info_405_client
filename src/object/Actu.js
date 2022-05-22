@@ -8,6 +8,7 @@ export default class Actu extends Object405 {
     
     static TYPE = "Actu";
 
+    fermer = undefined;
     name = undefined;
     descriptionProject = undefined;
     description = undefined;
@@ -27,6 +28,8 @@ export default class Actu extends Object405 {
     }
 
     invite(user_id, failed, success){
+        console.log(this)
+        let obj = this;
         super.makeRequest(
             "actu/invite",
             {
@@ -35,11 +38,14 @@ export default class Actu extends Object405 {
                 user_id: user_id
             },
             function(error){
+                console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }
             },
             function(response){
+                console.log(response)
+                console.log(obj)
                 if(success!=undefined){
                     success(response);
                 }
@@ -111,5 +117,25 @@ export default class Actu extends Object405 {
                 }
             }
         )
+    }
+
+    fermerFunc(failed, success){
+        super.makeRequest(
+            "actu/fermer",
+            {
+                access_token: Data.accessToken(),
+                id_actu: this.id_str
+            },
+            function(error){
+                if(failed!=undefined){
+                    failed(error);
+                }
+            },
+            function(response){
+                if(success!=undefined){
+                    success(response);
+                }
+            }
+        );
     }
 }

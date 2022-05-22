@@ -107,7 +107,7 @@ function scoreCommentaire(a, b){
     return res;
 }
 
-function TableComperator({offre}){
+function TableComperatorUser({user}){
     const [show, updateShow] = useState(false);
     const [value, updateValue] = useState("");
     const [listUser, updateListUser] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
@@ -224,8 +224,8 @@ function TableComperator({offre}){
         }
     }
     let list = []
-    for (let i = 0; i < offre.requestList.size(); i++){
-        let request = offre.requestList.get(i);
+    for (let i = 0; i < user.requestList.size(); i++){
+        let request = user.requestList.get(i);
         request.colList = colList;
         list.push(request)
     }
@@ -236,14 +236,14 @@ function TableComperator({offre}){
         list.sort(selectCol.compDesc);
     }
     let selectRequest = undefined;
-    for(let i = 0; i < offre.requestList.size(); i++){
-        let request = offre.requestList.get(i);
+    for(let i = 0; i < user.requestList.size(); i++){
+        let request = user.requestList.get(i);
         if(request.id_str==select){
             selectRequest = request;
         }
     }
     function startConv(){
-        selectRequest.startConv(offre);
+        selectRequest.startConv(user);
     }
     function pin(){
         selectRequest.pin();
@@ -258,7 +258,7 @@ function TableComperator({offre}){
         selectRequest.refuseFunc();
     }
     function fermer(){
-        offre.fermerFunc();
+        user.fermerFunc();
     }
     function unrefuse(){
         selectRequest.unrefuseFunc();
@@ -271,9 +271,9 @@ function TableComperator({offre}){
         updateValue(e.target.value);
     }
     let buttonActuContent;
-    if(offre.fermer===true){
+    if(user.fermer===true){
         buttonActuContent = <div>
-            <p className="mb-3">L'offre est fermée.</p>
+            <p className="mb-3">L'user est fermée.</p>
             <div className="d-flex">
                 <Button className="flex-even me-2" onClick={inviteElem} disabled variant="primary">Inviter</Button>
                 <Button className="flex-even" onClick={fermer} variant="danger" disabled>Fermer</Button>
@@ -300,39 +300,39 @@ function TableComperator({offre}){
     }
     else if(selectRequest.invited==true&&selectRequest.refuse==true){
         buttonContent = <div className="d-flex">
-            <Button disabled={offre.fermer===true} className="flex-even" onClick={unrefuse} variant="success">Réinviter</Button>
+            <Button disabled={user.fermer===true} className="flex-even" onClick={unrefuse} variant="success">Réinviter</Button>
         </div>
     }
     else if(selectRequest.refuse==true){
         buttonContent = <div className="d-flex">
-            <Button disabled={offre.fermer===true} className="flex-even" onClick={unrefuse} variant="danger">Annuler le refue</Button>
+            <Button disabled={user.fermer===true} className="flex-even" onClick={unrefuse} variant="danger">Annuler le refue</Button>
         </div>
     }
     else if(selectRequest.invited==true){
         buttonContent = <div className="d-flex">
-            <Button disabled={offre.fermer===true} className="flex-even me-2" onClick={!selectRequest.pinned?pin:unpin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
-            <Button disabled={offre.fermer===true} className="flex-even" onClick={refuse} variant="danger">Annuler l'invitation</Button>
+            <Button disabled={user.fermer===true} className="flex-even me-2" onClick={!selectRequest.pinned?pin:unpin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
+            <Button disabled={user.fermer===true} className="flex-even" onClick={refuse} variant="danger">Annuler l'invitation</Button>
         </div>
     }
     else {
         //<Button className="flex-even me-2" onClick={startConv} variant="primary">Converser</Button>
         buttonContent = <div className="d-flex">
-            <Button disabled={offre.fermer===true} className="flex-even me-2" onClick={!selectRequest.pinned?pin:unpin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
-            <Button className="flex-even me-2" variant="success" disabled={offre.fermer===true} onClick={accept}>Accepter</Button>
-            <Button disabled={offre.fermer===true} className="flex-even" onClick={refuse} variant="danger">Refuser</Button>
+            <Button disabled={user.fermer===true} className="flex-even me-2" onClick={!selectRequest.pinned?pin:unpin} variant="warning">{!selectRequest.pinned?"Epingler":"Dépingler"}</Button>
+            <Button className="flex-even me-2" variant="success" disabled={user.fermer===true} onClick={accept}>Accepter</Button>
+            <Button disabled={user.fermer===true} className="flex-even" onClick={refuse} variant="danger">Refuser</Button>
         </div>
     }
     function requested(user_id){
         let found = false;
         let i = 0;
-        while(!found&&i<offre.requestList.size()){
-            found = offre.requestList.get(i).user.id_str==user_id;
+        while(!found&&i<user.requestList.size()){
+            found = user.requestList.get(i).user.id_str==user_id;
             i += 1;
         }
         return found;
     }
     function inviteMec(user_id){
-        offre.invite(user_id);
+        user.invite(user_id);
     }
     function getCustomContent(user_id){
         let res = undefined;
@@ -354,33 +354,33 @@ function TableComperator({offre}){
         return res;
     }
     let endDate = "";
-    if(offre.end!=0){
-        endDate = " / " + Utils.getDate(offre.end, 0)
+    if(user.end!=0){
+        endDate = " / " + Utils.getDate(user.end, 0)
     }
     return <div className="d-flex  h-100">
         <div className="w-25 h-100 overflow-auto border-right-comapretor o">
             <div className="p-3 bg-light border-bottom-comapretor">
                 <div className="d-flex justify-content-between">
                     <div className="d-flex">
-                        <h2>{"Offre"}</h2>
+                        <h2>{"user"}</h2>
                     </div>
-                    {offre.action.user!=undefined&&
+                    {user.action.user!=undefined&&
                     <div className="d-flex ps-1 pe-2 border border-dark rounded  pt-1 pb-1">
                         <div className="justify-content-center align-items-center profil-tiny bg-light bg-light">
-                            <ImgProfile elem={offre.action.user}></ImgProfile>
+                            <ImgProfile elem={user.action.user}></ImgProfile>
                         </div>
                         <div className="d-flex ms-2 mb-0 justify-content-center align-items-center">
-                            <h6>{offre.action.user.getDisplayName()}</h6>
+                            <h6>{user.action.user.getDisplayName()}</h6>
                         </div>
                     </div>}
                 </div>
                     <div className="mb-2 mt-2">
-                        {Utils.getOffreLigne(offre)}
+                        {Utils.getuserLigne(user)}
                     </div>
                 <div>
-                    <p className="mt-2">{offre.description}</p>
+                    <p className="mt-2">{user.description}</p>
                     <LinearCompList
-                        compList={offre.compList}>
+                        compList={user.compList}>
 
                     </LinearCompList>
                     <div className="mt-3">
@@ -400,7 +400,7 @@ function TableComperator({offre}){
                         </div>
                     </div>
                     <div>
-                        <p className="mt-2">{Utils.getOffreLigne(offre)}</p>
+                        <p className="mt-2">{Utils.getuserLigne(user)}</p>
                     </div>
                     <div>
                         <p className="mt-2">{selectRequest.message}</p>
@@ -433,7 +433,7 @@ function TableComperator({offre}){
                         {
                             colList.map((col, index) =>
                                 <TableComperatorCol
-                                    offre={offre}
+                                    user={user}
                                     updateSelect={updateSelect}
                                     select={select}
                                     updateColList={updateColList}
@@ -449,7 +449,7 @@ function TableComperator({offre}){
                     {
                         list.map((request, index) =>
                             request && <TableComperatorRow 
-                                offre={offre} 
+                                user={user} 
                                 updateSelect={updateSelect}
                                 select={select}
                                 colList={colList}
@@ -494,4 +494,4 @@ function TableComperator({offre}){
         </Modal>
     </div>
 }
-export default TableComperator;
+export default TableComperatorUser;
