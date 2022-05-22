@@ -55,7 +55,7 @@ function ActuElem({action, actu, isHome=false}){
     }
     let footer;
     if(action.type == 0){
-        footer = <p className="mb-1">Vous posser déjà un rôle.</p>
+        footer = <p className="mb-1">Vous possedez déjà un rôle.</p>
     }
     else {
         let asked = false;
