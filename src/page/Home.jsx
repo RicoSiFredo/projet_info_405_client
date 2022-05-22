@@ -89,8 +89,8 @@ function Home({user, navigate}){
                 <div className="d-flex justify-content-around">
                     
                     <div className="w-100">
-                        <Carousel fade>
-                            <Carousel.Item>
+                        <Carousel fade className="bg-black">
+                            <Carousel.Item >
                                 <img 
                                     className="homeBanner"
                                     src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/38e35b05-a01d-4bc9-a5e7-168304e3ed72.png"}

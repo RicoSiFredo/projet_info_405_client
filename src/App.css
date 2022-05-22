@@ -121,6 +121,10 @@
   width: 100%;
   object-position: center;
   object-fit: cover;
+  background-color: black;
+}
+.bg-black{
+  background-color: black;
 }
 .container {
   position: relative;
@@ -137,6 +141,7 @@
   font-size: 50px;
   font-family: DomaineDisplay,Helvetica Neue,Helvetica,Arial,sans-serif;
   font-weight: bolder;
+  color: white;
 }
 .center-crop{
   object-fit: cover;
