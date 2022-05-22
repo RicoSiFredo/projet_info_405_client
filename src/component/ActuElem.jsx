@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Data from "../utils/Data";
 import Field from "./Field";
 import HistoryElem from "./HistoryElem";
+import ImgProfile from "./ImgProfile";
 
 function ActuElem({action, actu, isHome=false}){
     const [show, updateShow] = useState(false);
@@ -69,7 +70,7 @@ function ActuElem({action, actu, isHome=false}){
             footer = <p className="mb-1">Vous avez déjà postulé</p>
         }
         else {
-            footer = <Button onClick={postuler} className="mt-0 mb-2" variant="primary">Postuler</Button>
+            footer = <Button onClick={postuler} className="mt-0 mb-2" variant="outline-primary">Postuler</Button>
         }
     }
     let res;
@@ -124,21 +125,21 @@ function ActuElem({action, actu, isHome=false}){
         </div>
     }else{ //sur le home
         res = <Link className="text-decoration-none ms-3 me-3 w-25" to={"/offre/"+actu.id_str}>
-            <div className={"card bg-light bg-gradient overflow-hidden ombre p-2" }>
+            <div className={"card bg-light bg-gradient overflow-hidden ombre p-3" }>
                 <div className="d-flex justify-content-between">
-                    <h4>Offre d'emploi</h4>
-
+                    <h3>{actu.project.name}</h3>
+                    <div className="profil-tiny bg-light">
+                        <ImgProfile elem={actu.project} ></ImgProfile>
+                    </div>
                 </div>
-            {actu.project.name}
+                
                 <div>
                     <HistoryElem history={actu}>
 
                     </HistoryElem>
                 </div>
-                <div>
-                    {
-                        footer
-                    }
+                <div className="d-flex justify-content-center p-2 pb-0">
+                    {footer}
                 </div>
                 <Modal show={show} className="highest" onHide={handleClose}>
                     <Modal.Header closeButton>
