@@ -6,12 +6,16 @@ import Eats from "../object/base/Eats";
 import ListEats from "../object/base/ListEats";
 import Field from "./Field";
 
-function SelectCompetence({project, compList, updateCompList, updateRole}){
+function SelectCompetence({project, compList, updateCompList, updateRole, type}){
     const [search, updateSearch] = useState("");
     
     const [list, updateList] = useState(new ListEats("", undefined, CompareEats.compareInt("date", CompareEats.DESC)));
     useEffect(function(){
-        chercher();
+        if(type == "skill") {
+            chercher();
+        } else {
+            chercherTecno();
+        }
     }, [search])
     list.update = function(){
         updateList(Eats.fakeUpdate(list))
@@ -31,6 +35,25 @@ function SelectCompetence({project, compList, updateCompList, updateRole}){
             }
         )
     }
+
+    function chercherTecno() {
+        list.reset();
+        list.makeRequest(
+            'empty/search/tecno',
+            {
+                name: search
+            },
+            function(error){
+            
+            },
+            function(response){
+                
+            }
+        )
+    }
+
+
+
     function selectElem(elem){
         let fait = false;
         let i = 0;

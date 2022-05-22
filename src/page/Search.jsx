@@ -26,6 +26,7 @@ function Search({navigate, rootUser}){
     const [min, updateMin] = useState("");
     const [max, updateMax] = useState("");
     const [compList, updateCompList] = useState([]);
+    const [tecnoList, updateTecnoList] = useState([]);
 
     useEffect(function(){
         chercher();
@@ -78,8 +79,19 @@ function Search({navigate, rootUser}){
                 <SelectCompetence  
                     className="w-85 m-2 p-2"
                     compList={compList}
-                    updateCompList={updateCompList}>
+                    updateCompList={updateCompList}
+                    type = "skill">
+                    
                 </SelectCompetence>
+
+                <SelectCompetence  
+                    className="w-85 m-2 p-2"
+                    compList={tecnoList}
+                    updateCompList={updateTecnoList}
+                    type = "tecno">
+                </SelectCompetence>
+
+                
 
                 
 
@@ -113,6 +125,17 @@ function Search({navigate, rootUser}){
                             boolComp = true;    
                         }
                         
+                    } else {
+                        if(tecnoList.every(function(s) {
+                            for(let i = 0; i < object.tecnoList.getList().length; i++ ) {
+                                if (s.name == object.tecnoList.getList()[i].name) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        })) {
+                            boolComp = true;    
+                        }
                     }
 
                     if (object.moyenne == undefined) {
@@ -124,12 +147,9 @@ function Search({navigate, rootUser}){
                     let div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
                                 <ProfilViewHome elem={object} isProject={object instanceof Project} note={note}></ProfilViewHome>
                             </div>
-                                
-            
-                  
 
                     if (type == "" && note >= moy && boolComp) return div;
-                    if (type == "project" && object instanceof Project) return div;
+                    if (type == "project" && object instanceof Project && boolComp) return div;
                     if (type == "user" && object instanceof User && note >= moy && boolComp) return div;
                     
 
