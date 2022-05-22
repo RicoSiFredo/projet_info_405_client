@@ -30,7 +30,7 @@ export default class Permission extends Object405 {
             res = "Publier des posts"
         }
         else if(en.equals(PermEnum.MANAGE_OFFRE)){
-            res = "Publier des offres d'emploie"
+            res = "Publier des offres d'emploi"
         }
         return res;
     }
