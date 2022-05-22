@@ -129,6 +129,7 @@ function ActuElem({action, actu, isHome=false}){
                     <h4>Offre d'emploi</h4>
 
                 </div>
+            {actu.project.name}
                 <div>
                     <HistoryElem history={actu}>
 

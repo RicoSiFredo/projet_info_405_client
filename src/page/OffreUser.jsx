@@ -11,6 +11,7 @@ function OffreUser({rootUser}){
     user.id_str = id;
     useEffect(function(){
         user.getBase()
+        user.getAllSkill()
         user.getOffreAll()
     }, []);
     function update(){
@@ -18,7 +19,7 @@ function OffreUser({rootUser}){
     }
     user.update = update;
     return <div>
-        <TableComperatorUser offre={user}>
+        <TableComperatorUser user={user}>
 
         </TableComperatorUser>
     </div>

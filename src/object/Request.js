@@ -7,14 +7,17 @@ export default class Request extends CvElem {
  
     static TYPE = "Request";
 
+    pinned_user = undefined;
     invited = undefined;
     refuse = undefined;
+    refuse_user = undefined;
     pinned = undefined;
     message = undefined;
     price = undefined;
     accept = undefined;
 
     user = new SimpleEats("req_user", this);
+    actu = new SimpleEats("actu_req", this);
     conversation = new SimpleEats("local_conv", this);
 
     getCol(name){
@@ -29,7 +32,70 @@ export default class Request extends CvElem {
         }
         return col;
     }
-
+    getPrice(){
+        if(this.price!=undefined&&this.price!=''&&this.price!=0){
+            return parseInt(this.price)
+        }
+        else {
+            return parseInt(this.actu.price)
+        }
+    }
+    getStart(){
+        if(this.start!=undefined&&this.start!=''&&this.start!=0){
+            return parseInt(this.start)
+        }
+        else if(this.actu.start!=undefined&&this.actu.start!=''&&this.actu.start!=0){
+            return parseInt(this.actu.start)
+        }
+        else {
+            return 0
+        }
+    }
+    getEnd(){
+        if(this.end!=undefined&&this.end!=''&&this.end!=0){
+            return parseInt(this.end)
+        }
+        else if(this.actu.end!=undefined&&this.actu.end!=''&&this.actu.end!=0){
+            return parseInt(this.actu.end)
+        }
+        else {
+            return 0
+        }
+    }
+    getNbComp(){
+        let listNeed = this.parent.skillList;
+        let listHave = this.actu.compList;
+        let count = 0;
+        for(let i = 0; i < listNeed.size(); i++){
+            let need = listNeed.get(i);
+            for(let j = 0; j < listHave.size(); j++){
+                let have = listHave.get(j);
+                if(need.equals(have)){
+                    count += 250;
+                }
+            }
+        }
+        return count;
+    }
+    getTaille(){
+        return this.actu.project.actionList.size()
+    }
+    getDuree(){
+        if(this.getEnd()==0){
+            return 5*60*60*24*7*52
+        }
+        else {
+            return this.getEnd() - this.getStart()
+        } 
+    }
+    getHeure(){
+        if(this.heure!=undefined&&this.heure!=''&&this.heure!=0){
+            return parseInt(this.heure)
+        }
+        else {
+            return parseInt(this.actu.heure)
+        }
+    }
     pin(){
         this.makeRequest(
             "request/pin",
@@ -60,6 +126,36 @@ export default class Request extends CvElem {
             }
         )
     }
+    pinUser(){
+        this.makeRequest(
+            "request/pin_user",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
+    unpinUser(){
+        this.makeRequest(
+            "request/unpin_user",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
     unrefuseFunc(){
         this.makeRequest(
             "request/unrefuse",
@@ -78,6 +174,36 @@ export default class Request extends CvElem {
     refuseFunc(){
         this.makeRequest(
             "request/refuse",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
+    unrefuseUserFunc(){
+        this.makeRequest(
+            "request/unrefuse_user",
+            {   
+                "access_token": Data.accessToken(),
+                "id_request": this.id_str
+            },
+            function(error){
+                
+            },
+            function(result){
+                
+            }
+        )
+    }
+    refuseUserFunc(){
+        this.makeRequest(
+            "request/refuse_user",
             {   
                 "access_token": Data.accessToken(),
                 "id_request": this.id_str
@@ -155,6 +281,19 @@ export default class Request extends CvElem {
     }
     getCoefSalaire(){
         return this.getCoef("Salaire");
+    }
+    getCoefTaille(){
+        return this.getCoef("Taille");
+    }
+    getCoefHeure(){
+        return this.getCoef("Heure");
+    }
+    getCoefDate(){
+        return this.getCoef("Date");
+    }
+
+    getScoreUser(){
+        return this.getTaille() * 100 * this.getCoefTaille() + this.getNbComp() * this.getCoefComp() * 5 + ( this.getDuree() * this.getCoefDate() ) / (60*60*24) + this.getHeure() * this.getCoefHeure() * -100 + this.getPrice() * this.getCoefSalaire();
     }
 
     getScore(){
@@ -248,7 +387,7 @@ export default class Request extends CvElem {
         let diff = 0;
         if(this.start!=undefined&&this.start!=0&&this.parent.start!=0&&this.parent.start!=undefined&&this.start!=this.parent.start){
             diff = this.start - this.parent.start;
-            diff = diff/60/60/24;
+            diff = Math.floor(diff/60/60/24);
         }
         return diff;
     }
@@ -256,12 +395,12 @@ export default class Request extends CvElem {
         let res = undefined;
         if(this.start!=undefined&&this.start!=0&&this.parent.start!=0&&this.parent.start!=undefined&&this.start!=this.parent.start){
             let diff = this.start - this.parent.start;
-            diff = diff/60/60/24; 
+            diff = Math.floor(diff/60/60/24); 
             if(diff > 0){
                 res = <span className="ms-1">( + {diff} j )</span>
             }
             else if(diff < 0){
-                res = <span className="ms-1"> - {diff} j</span>
+                res = <span className="ms-1"> {diff} j</span>
             }
         }
         return res;
@@ -271,7 +410,7 @@ export default class Request extends CvElem {
         let diff = 0;
         if(this.end!=undefined&&this.end!=0&&this.parent.end!=0&&this.parent.end!=undefined&&this.end!=this.parent.end){
             diff = this.end - this.parent.end;
-            diff = diff/60/60/24;
+            diff = Math.floor(diff/60/60/24);
         }
         return diff;
     }
@@ -280,12 +419,12 @@ export default class Request extends CvElem {
         this.end = 1655226114;
         if(this.end!=undefined&&this.end!=0&&this.parent.end!=0&&this.parent.end!=undefined&&this.end!=this.parent.end){
             let diff = this.end - this.parent.end;
-            diff = diff/60/60/24; 
+            diff = Math.floor(diff/60/60/24); 
             if(diff > 0){
                 res = <span className="ms-1">( + {diff} j )</span>
             }
             else if(diff < 0){
-                res = <span className="ms-1">( - {diff} j )</span>
+                res = <span className="ms-1">( {diff} j )</span>
             }
         }
         return res;

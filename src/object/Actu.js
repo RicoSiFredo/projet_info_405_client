@@ -3,8 +3,9 @@ import CompareEats from "./base/CompareEats";
 import ListEats from "./base/ListEats";
 import Object405 from "./base/ObjectEats";
 import SimpleEats from "./base/SimpleEats";
+import CvElem from "./CvElem";
 
-export default class Actu extends Object405 {
+export default class Actu extends CvElem {
     
     static TYPE = "Actu";
 
@@ -18,6 +19,7 @@ export default class Actu extends Object405 {
     end = undefined;
     date = undefined;
 
+    project = new SimpleEats("have_actu", this);
     action = new SimpleEats("for_regie", this);
     compList = new ListEats("for_comp", this, CompareEats.compareInt("date", CompareEats.DESC))
     role = new SimpleEats("for_role", this)

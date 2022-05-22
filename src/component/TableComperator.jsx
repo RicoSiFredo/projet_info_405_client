@@ -298,6 +298,11 @@ function TableComperator({offre}){
             </div>
         </div>
     }
+    else if(selectRequest.invited==true&&selectRequest.refuse_user==true){
+        buttonContent = <div className="d-flex">
+            <Button disabled={true} className="flex-even" onClick={unrefuse} variant="success">Réinviter</Button>
+        </div>
+    }
     else if(selectRequest.invited==true&&selectRequest.refuse==true){
         buttonContent = <div className="d-flex">
             <Button disabled={offre.fermer===true} className="flex-even" onClick={unrefuse} variant="success">Réinviter</Button>

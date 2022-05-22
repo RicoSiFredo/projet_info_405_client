@@ -3,6 +3,8 @@ import React from "react";
 import SortEnum from "../enum/SortEnum";
 import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
+import User from "../object/User";
+import ListEats from "../object/base/ListEats";
 const mark = {
     "name": ["Score", "Status", "Salaire", "Commentaire", "Compétences", "Expérience"]
 }
@@ -87,6 +89,13 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
             col.array = [];
             updateColList([...colList]);
         }
+        let compList;
+        if(offre instanceof User){
+            compList = offre.skillList
+        }
+        else {
+            compList = offre.compList
+        }
         let selectAll = col.array != undefined && col.array.length == 0;
         return <th scope="col">
             <div className={col.sort!=SortEnum.CANT&&"click"} onClick={performClick} >
@@ -100,7 +109,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                 {col.hint&&
                     <QuestionCircle onClick={openHint} className="ms-1 click me-1">
                     </QuestionCircle>
-               }
+                }
                 {icon}
                 {
                     (col.fileter&&col.array.length!=0)&&
@@ -124,7 +133,7 @@ function TableComperatorCol({offre, col, updateColList, colList, selectCol}){
                             </label>
                         }
                         {
-                            offre.compList.map((comp, i)=>
+                            compList.map((comp, i)=>
                                 <div key={"comp_"+i}>
                                     <label>
                                         <input type="checkbox" checked={col.array!=undefined&&col.array.includes(comp)} onChange={()=>updateComp(comp)} name={"comp_checkbox_"+comp.id_str}>
