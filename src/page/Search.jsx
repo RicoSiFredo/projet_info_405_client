@@ -113,14 +113,15 @@ function Search({navigate, rootUser}){
                             <p className="m-4">{object.name == undefined ? object.firstname : object.name}</p>
                             <p className = "mt-4 m-2">{object.description}</p> 
                             <Rating
-                                            readonly={true}
-                                            allowHover={false}
-                                            ratingValue={note} /* Available Props */
-                                            allowHalfIcon={true}/>
-                            <ElemList list={object.skillList}></ElemList>
+                                readonly={true}
+                                allowHover={false}
+                                ratingValue={note} /* Available Props */
+                                allowHalfIcon={true}/>
+                    
+                            <ElemList list={object.skillList != undefined ? object.skillList : object.tecnoList}></ElemList>
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
-                        </div>;
+                    </div>;
                     if (type == "" && note >= moy) return div;
                     if (type == "project" && object instanceof Project) return div;
                     if (type == "user" && object instanceof User && note >= moy) return div;
