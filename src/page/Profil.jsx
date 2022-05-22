@@ -58,12 +58,12 @@ function Profil({rootUser}){
 
     let text;
     if(user.commentList.size() == 0){
-        text = <p>Aucun commentaires pour l'instant</p>
+        text = <p className="mb-0">Aucun commentaires pour l'instant</p>
     }else{
         if(canEdit){
-            text = <p>Il s'agit des avis laissés par d'autre professionnels au sujet de votre travail</p>
+            text = <p className="mb-0">Il s'agit des avis laissés par d'autre professionnels au sujet de votre travail</p>
         }else{
-            text = <p>Il s'agit des avis laissés par d'autre professionnels au sujet du travail de {user.firstname}</p>
+            text = <p className="mb-0">Il s'agit des avis laissés par d'autre professionnels au sujet du travail de {user.firstname}</p>
         }
     }
 
