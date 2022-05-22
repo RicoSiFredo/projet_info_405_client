@@ -20,7 +20,7 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     const [showNotes, updateNotes] = useState(false);
     const [rating, setRating] = useState(0);
     const [newComment, setNewComment] = useState("");
-    const [lien, updateLien] = useState("/message/");
+    const [lien, updateLien] = useState("/message/-1");
     let [showRole, updateShowRole] = useState(false);
     let [verif, updateShowVerif] = useState(false);
     let alreadyComment = false;
@@ -177,7 +177,10 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
     }
     
     if (action.user.id_str != user.id_str){
-        if (!project.isFinish && isMember){
+        if (!project.isFinish){
+            if (isMember){
+
+            
             function showConv(){
                 listConv.reset();
                 listConv.makeRequest(
@@ -193,8 +196,6 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     }
                 )
             }
-            
-            
             bonus =
             
             <div className="align-self-center flex ">
@@ -259,6 +260,84 @@ function ProjectActionElem({user, updatePage, typeAction, project, action}){
                     </Modal>
                 </div>
             </div>
+        }else{
+            function showConv(){
+                listConv.reset();
+                listConv.makeRequest(
+                    'user/get/conversationWithFriend', 
+                    {
+                        id: user.id_str,
+                        id_friend: action.user.id_str 
+                    },
+                    function(error){
+                    },
+                    function(response){
+                        updateLien("/message/"+listConv.list[0].convList.list[0].id_str);
+                    }
+                )
+            }
+            bonus =
+            
+            <div className="align-self-center flex ">
+                <Button onClick={openParam} variant="primary">
+                    <ThreeDots></ThreeDots>
+                </Button>
+                <Modal show={show} className="highest" onHide={handleClose} size="lg" centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Paramètres du membre</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Selectionnez l'action
+                        <div className="d-flex justify-content-center mt-2">
+                            {button}
+                            {showConv()}
+                            <Link to={lien}>
+                            <Button className="m-1" variant="primary">Envoyer un message</Button>
+                            </Link>
+                        </div>
+                        <Alert variant="danger" show={verif} className="mt-3">
+                            <Alert.Heading>Êtes-vous sûr de vous ?</Alert.Heading>
+                            <Button className="m-1" variant="primary" onClick={exclure}>
+                                    Valider
+                                </Button>
+                                <Button className="m-1" variant="outline-primary" onClick={closeVerif}>
+                                    Annuler
+                                </Button>
+                        </Alert>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleClose}>
+                            Retour
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <div>
+                    <Modal show={showRole} className="highest" onHide={closeRole} size="lg" centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Role du membre</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+    
+    
+                            <ListRole 
+                                project={project}
+                                action={action}
+                            >
+    
+                            </ListRole>
+                            
+    
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="primary" onClick={closeRole}>
+                                Retour
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            </div>
+        }
+
         }else{
             action.user.commentList.list.map((obj, index) => {
                 if (obj.auteur.id_str == user.id_str && project.id_str == obj.projet.id_str){
