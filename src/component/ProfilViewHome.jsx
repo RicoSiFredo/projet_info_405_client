@@ -12,7 +12,7 @@ import ImgProfile from "./ImgProfile";
 import { Rating } from 'react-simple-star-rating'
 import ElemList from "../list/ElemList";
 import Actu from "../object/Actu";
-import LinearCompList from "../list/ElemList";
+import LinearCompList from "../list/LinearCompList";
 
 const NONE_ERROR = -1;
 const SIZE_ERROR = 0;
