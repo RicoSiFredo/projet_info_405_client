@@ -223,8 +223,8 @@ function Home({user, navigate}){
                 <div className="m-5 p-2" >
                     <h2 className="m-2 mb-4">Découvrir des projets</h2>
                     <p className="ms-4 me-4">
-                    Linker est la meilleure solution web de la galaxie tout entière pour mettre en relation des professionnels de l'informatique avec des entreprise en recherche d'employé compétents et reconnus. Nous permettons de comparer facilement de nombreux profils, qu’il soit candidat ou recruteur. Si je suis un candidat Linker est utile pour trouver la meilleure offre d'emploi. Si je suis une entreprise Linker
-                    est utile pour trouver le meilleur candidat parmis l'océan de proposition. Vous êtes un nouveau sur notre réseau ? Personnaliser votre profil pour vous démarqué lors des prochaines selecions.
+                    Linker est la meilleure solution web de la galaxie toute entière pour mettre en relation des professionnels de l'informatique avec des entreprises en recherche d'employés compétents et reconnus. Nous permettons de comparer facilement de nombreux profils, qu’il soit candidat ou recruteur. Si je suis un candidat, Linker est utile pour trouver la meilleure offre d'emploi. Si je suis une entreprise, Linker
+                    est utile pour trouver le meilleur candidat parmis l'océan de proposition. Vous êtes un nouveau sur notre réseau ? Personnaliser votre profil pour vous démarquer lors des prochaines selecions.
                     </p>
                     <div className="ms-3 me-3 mb-3">
                     
@@ -237,8 +237,8 @@ function Home({user, navigate}){
                 <div className="m-5 p-2">
                     <h2 className="m-2 mb-4">Découvrir des offres d'emploi </h2>
                     <p className="ms-4 me-4">
-                        Vous trouverez ici de nombreuses offres d'emplois proposé par des entreprises de renoms. N'hésitez plus et postulez ! Comparer les differentes offres pour tirer le meilleur parti de vos compétences. 
-                        Négociez votre salaire, votre type de contrat ou encore votre date d'embauche pour satisfaire au mieu vos besoins. Conseil : prenez le temps de comparer les offres dans notre interface étudiée à cet effet.
+                        Vous trouverez ici de nombreuses offres d'emploi proposées par des entreprises de renom. N'hésitez plus et postulez ! Comparez les differentes offres pour tirer le meilleur parti de vos compétences. 
+                        Négociez votre salaire, votre type de contrat ou encore votre date d'embauche pour satisfaire au mieux vos besoins. Conseil : prenez le temps de comparer les offres dans notre interface étudiée à cet effet.
                     </p>
                     <div className="ms-3 me-3 mb-3">
                     
