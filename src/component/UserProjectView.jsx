@@ -48,6 +48,7 @@ function UserProjectView({user, rootUser, navigate}){
     function handleChange(e){
         updateVal(e.target.value);
     }
+    console.log(Data.isMe(user.id_str))
     if (rootUser.id_str == user.id_str){
         return <div>
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
@@ -56,6 +57,14 @@ function UserProjectView({user, rootUser, navigate}){
                 <Button onClick={addElem} className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
                     <img className="img-btn" src={Constant.BASE_IMAGE+"plus.png"}/>
                 </Button>
+            </div>
+            <div className="d-flex pb-2 ps-3 pe-2">
+                <p className="mb-1">
+                    {
+                        user.actionList.size()==0&&
+                        "Commencez à créer un projet pour tester une de vos idées."
+                    }
+                </p>
             </div>
             <UserProjectList 
                 typeAction={[ActionEnum.IN_PROJECT]} 
@@ -90,6 +99,14 @@ function UserProjectView({user, rootUser, navigate}){
         <div className="card mt-2 me-2 bg-light bg-gradient overflow-hidden">
             <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
                 <h4>{"Projets"}</h4>
+            </div>
+            <div className="d-flex mt-1 pb-2 pt-2 ps-3 pe-2">
+                <p className="mb-1">
+                    {
+                        user.actionList.size()==0&&
+                        "Cet utilisateur n'a pas encore de projet."
+                    }
+                </p>
             </div>
             <UserProjectList 
                 typeAction={[ActionEnum.IN_PROJECT]} 

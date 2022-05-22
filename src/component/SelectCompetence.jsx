@@ -63,13 +63,16 @@ function SelectCompetence({project, compList, updateCompList, updateRole}){
     }
     return <div key={`inline-radio`} className="mt-2">
         <Field className={"mt-2 mb-2"} val={search} changeValue={changeSearch} label="Chercher des compétences" name="search_comp"></Field>
-        <LinearCompList
-            compList={compList}>
+        <div className="pt-1 mb-2">
+            <LinearCompList
+                compList={compList}>
 
-        </LinearCompList>
+            </LinearCompList>
+        </div>
         {
             list.map((comp, index) =>
                 <Form.Check
+                    className="mb-0"
                     checked={isSelect(comp)}
                     key={comp.id_str}
                     inline

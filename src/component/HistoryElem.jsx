@@ -37,24 +37,23 @@ function HistoryElem({history}){
         role = history.role;
     }
     let content;
-    console.log(history)
     if(history instanceof History){
         content = <div>
-            <div className="mb-2">
+            <div className="">
                 <span className="me-1" onClick={openDesc}>
                     {display}
                     {history.name}
                 </span> - {toDate(history.start) + " / " + toDate(history.end)} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
             </div>
-            <p className={visi?"d-block":"d-none"}>{history.descriptionProject}</p>
+            <p className={visi?"d-block mb-2":"d-none"}>{history.descriptionProject}</p>
         </div>
     }
     else {
         content = <div>
-            <div className="mb-2">
+            <div className="">
                 {toDate(history.start) + " / " + toDate(history.end)} {history.heure!=""&&(" - "+history.heure+"h")}{(history.price!="")&&(" - "+history.price+"€")}
             </div>
-            <p className={visi?"d-block":"d-none"}>{history.descriptionProject}</p>
+            <p className={visi?"d-block mb-2":"d-none"}>{history.descriptionProject}</p>
         </div>
     }
     return (
@@ -64,11 +63,13 @@ function HistoryElem({history}){
                 <div>
                     {content}
                 </div>
-                {history.description!=""&&<p className="mb-1">{history.description}</p>}
-                <LinearCompList
-                    compList={history.compList}>
+                {history.description!=""&&<p className="mb-2 mt-1">{history.description}</p>}
+                <div className="mt-1 mb-2">
+                    <LinearCompList
+                        compList={history.compList}>
 
-                </LinearCompList>
+                    </LinearCompList>
+                </div>
             </div>
         </div>
     )

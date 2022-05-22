@@ -83,6 +83,7 @@ function HistoryView({user}){
                 }
             },
             function(response){
+                console.log(response)
                 if(success!=undefined){
                     success(response);
                 }
@@ -95,10 +96,6 @@ function HistoryView({user}){
     function handleClose() {
         updateShow(false);
     }
-
-
-
-
     function exportPDF(){
 
         let elem = document.querySelector("#exp");
