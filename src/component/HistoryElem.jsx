@@ -67,12 +67,7 @@ function HistoryElem({history}){
     return (
         <div className={"d-flex justify-content-between " + className}>
             <div className="d-flex flex-column">
-                <div className="d-flex align-items-center">
                     <h5>{role}</h5>
-                    <Button className="ms-2 mb-1 ps-1 pt-1 pb-1 pe-1 d-flex align-items-center justify-content-center" variant="primary">
-                        <PenFill></PenFill>
-                    </Button>
-                </div>
                 <div className="mb-2">
                     {content}
                 </div>
