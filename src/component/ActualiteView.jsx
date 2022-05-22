@@ -22,6 +22,7 @@ function ActualiteView({user, you, rootUser}){
         color: "danger",
         select: true
     }]); 
+    let isMember = false;
     let ccAction; 
     for(let i = 0; i < listAction.length; i++){
         if(listAction[i].select){
@@ -149,7 +150,14 @@ function ActualiteView({user, you, rootUser}){
         )}
     </div>
     */
-    if (!user.isFinish){
+    {
+        user.actionList.list.map((obj, index) => {
+            if (obj.user.id_str == rootUser.id_str){
+                isMember = true;
+            }
+        })
+    }
+    if (!user.isFinish && isMember){
         return (
             <div>
                 <div className="card mt-2 ms-2 me-2 bg-light bg-gradient overflow-hidden">
