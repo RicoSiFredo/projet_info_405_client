@@ -83,6 +83,7 @@ function HistoryView({rootUser, user}){
                 comp_list: idList
             },
             function(error){
+                console.log(error)
                 if(failed!=undefined){
                     failed(error);
                 }

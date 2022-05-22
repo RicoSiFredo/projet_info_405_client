@@ -479,7 +479,6 @@ export default class User extends Object405 {
         }
     }
     getTotalHeure(compList=undefined){
-        console.log(compList)
         if(compList==undefined||compList.length==0){
             let heure = 0;
             for(let i=0;i<this.cvList.size();i++){
