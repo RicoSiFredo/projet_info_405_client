@@ -143,7 +143,7 @@ function Header({user, navigate, search, updateSearch, notif, updateNotif}){
             <Link className="text-decoration-none" to={"/"}>
                 <div className="navbar-brand ps-2 click">
                     <img src={Constant.BASE_IMAGE + "logo_usmb.png"} width="30" height="30" className="align-top" alt=""/>
-                    <h4 className="p-3 d-inline">Projet 405</h4>
+                    <h4 className="p-3 d-inline">LINKER</h4>
                 </div>
             </Link>
             <div>
