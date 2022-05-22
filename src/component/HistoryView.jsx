@@ -109,7 +109,9 @@ function HistoryView({user}){
         pdf.setFont("helvetica","bold");
         pdf.text(10,10,'Curriculum vitæ de '+ user.getDisplayName())
         pdf.setFont("helvetica","italic");
-        pdf.text(10,20,""+user.description);
+        if (user.description != undefined){
+            pdf.text(10,20,""+user.description);
+        }
 
         pdf.line(10,25,200,25)
 
@@ -135,13 +137,13 @@ function HistoryView({user}){
         pdf.text(10,97,"Experiences professionnelles");
         
         html2canvas(imgProfil).then(canvas => {
-            //document.body.appendChild(canvas)
+            
             const imgDataProfil = canvas.toDataURL("image/png");
             pdf.addImage(imgDataProfil,"PNG",180,2);
         })
 
         html2canvas(elem).then(canvas => {
-            //document.body.appendChild(canvas)
+            
             const imgDataExp = canvas.toDataURL("image/png");
             pdf.addImage(imgDataExp, "PNG", 10, 100);
             pdf.save("MonCV_" + user.getDisplayName() + ".pdf");
