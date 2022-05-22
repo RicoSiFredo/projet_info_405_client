@@ -11,6 +11,8 @@ import Data from "../utils/Data";
 import ImgProfile from "./ImgProfile";
 import { Rating } from 'react-simple-star-rating'
 import ElemList from "../list/ElemList";
+import Actu from "../object/Actu";
+import LinearCompList from "../list/ElemList";
 
 const NONE_ERROR = -1;
 const SIZE_ERROR = 0;
@@ -40,23 +42,39 @@ function ProfilViewHome({elem, isProject=false , note}){
         </div>
     }
     else {
-        field = <div>
-            <div className="mt-3 ms-3 me-2 d-flex align-items-end">
-                <h4 className="me-3">{elem. getDisplayName()}</h4>
-                <Rating
-                    readonly={true}
-                    allowHover={false}
-                    ratingValue={note}
-                    allowHalfIcon={true}/>
-            </div>
-            <div className="mt-3 mb-3 ms-3 me-2">
-                <h6>{elem.description}</h6>
-            </div>
-            <div className="ms-5">
-                <ElemList list={elem.skillList != undefined ? elem.skillList : elem.tecnoList}></ElemList>
+        if (elem instanceof Actu){
+            field = <div>
+                        <div className="mt-3 ms-3 me-2">
+                            <h4 className="me-3">{elem. name}</h4>
+                        </div>
+                        <div className="mt-3 mb-3 ms-3 me-2">
+                            <h6>{elem.description}</h6>
+                        </div>
+                        <div className="ms-5">
+                            <ElemList list={elem.skillList != undefined ? elem.skillList : elem.tecnoList}></ElemList>
 
-            </div>
-        </div>
+                        </div>
+                    </div>
+        }else{
+            field = <div>
+                        <div className="mt-3 ms-3 me-2 d-flex align-items-end">
+                            <h4 className="me-3">{elem. getDisplayName()}</h4>
+                            <Rating
+                                readonly={true}
+                                allowHover={false}
+                                ratingValue={note}
+                                allowHalfIcon={true}/>
+                        </div>
+                        <div className="mt-3 mb-3 ms-3 me-2">
+                            <h6>{elem.description}</h6>
+                        </div>
+                        <div className="ms-5">
+                            <LinearCompList compList={elem.skillList != undefined ? elem.skillList : elem.tecnoList}></LinearCompList>
+
+                        </div>
+                    </div>
+        }
+  
     }
     return <div className="w-100">
         <div className="card bg-light bg-gradient overflow-hidden ombre">

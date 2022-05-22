@@ -4,7 +4,7 @@ import User from "../object/User";
 
 function ImgProfile({elem}){
     let profil;
-    console.log(elem)
+
     if(elem.profile){
         profil = <img src={Constant.IMAGE_URL+elem.profile} className="center-crop w-100 h-100" alt=""/>
     }

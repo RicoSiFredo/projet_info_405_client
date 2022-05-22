@@ -82,6 +82,22 @@ function Home({user, navigate}){
         </Carousel>
     }
 
+    let listGroupOffre=splitArrayIntoChunksOfLen(listOffre.list,3);
+    let carouselOffre;
+    if (listGroupOffre != undefined){
+        carouselOffre = <Carousel fade variant="dark" interval={3000}>
+            {
+                listGroupOffre.map(function(group,i){
+
+                    if(group.length >= 3){
+                        return buildCarouselItem(group);
+                    }
+                    
+                })
+            }
+        </Carousel>
+    }
+
     function buildCarouselItem(troisProjets){
         //prends en parametre une liste de projets (3)
         //renvoie trois projets dans une div dans un carousel.item
@@ -203,7 +219,7 @@ function Home({user, navigate}){
                     </p>
                     <div className="ms-3 me-3 mb-3">
                     
-                        {carouselProject}
+                        {carouselOffre}
                     
                     </div>
 
