@@ -108,7 +108,7 @@ function Search({navigate, rootUser}){
                         </div>
                         <Button className = "h-50 m-4" onClick={openProfil} variant="primary">Voir</Button>
                         </div>;
-                    if (type == "" && object.moyenne >= moy) return div;
+                    if (type == "" && (object.moyenne >= moy || object.moyenne == undefined)) return div;
                     if (type == "project" && object instanceof Project) return div;
                     if (type == "user" && object instanceof User && object.moyenne >= moy) return div;
 
