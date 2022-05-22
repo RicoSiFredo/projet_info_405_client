@@ -9,13 +9,15 @@ import Constant from "../utils/Constant";
 import HTTP from "../utils/HTTP";
 import Data from "../utils/Data";
 import ImgProfile from "./ImgProfile";
+import { Rating } from 'react-simple-star-rating'
+import ElemList from "../list/ElemList";
 
 const NONE_ERROR = -1;
 const SIZE_ERROR = 0;
 const BAD_EXT_ERROR = 1;
 const FAILED_ERROR = 2;
 
-function ProfilViewHome({elem, isProject=false}){
+function ProfilViewHome({elem, isProject=false , note}){
     let canEdit = true; 
 
     let key;
@@ -39,11 +41,20 @@ function ProfilViewHome({elem, isProject=false}){
     }
     else {
         field = <div>
-            <div className="mt-3 ms-3 me-2">
-                <h4>{elem. getDisplayName()}</h4>
+            <div className="mt-3 ms-3 me-2 d-flex align-items-end">
+                <h4 className="me-3">{elem. getDisplayName()}</h4>
+                <Rating
+                    readonly={true}
+                    allowHover={false}
+                    ratingValue={note}
+                    allowHalfIcon={true}/>
             </div>
             <div className="mt-3 mb-3 ms-3 me-2">
                 <h6>{elem.description}</h6>
+            </div>
+            <div className="ms-5">
+                <ElemList list={elem.skillList != undefined ? elem.skillList : elem.tecnoList}></ElemList>
+
             </div>
         </div>
     }

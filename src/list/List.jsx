@@ -14,7 +14,7 @@ function List({count, generateKey, type, compute, onbottom}){
     }
 
     let content = Array.from(Array(count()).keys()).map((index) => 
-        <div key={generateKey(index)}>
+        <div className="" key={generateKey(index)}>
             {compute(index)}
         </div>
     );

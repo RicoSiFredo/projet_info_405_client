@@ -105,8 +105,8 @@ function Search({navigate, rootUser}){
                         note = object.moyenne
                     }
 
-                    let div = <div key={index} className = "w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
-                                    <ProfilViewHome  elem={object} isProject={object instanceof Project}></ProfilViewHome>
+                    let div = <div key={index} className = "rounded w-100 Hgris border d-flex m-2 p-1 justify-content-between click" onClick={openProfil}>
+                                    <ProfilViewHome elem={object} isProject={object instanceof Project} note={note}></ProfilViewHome>
                             </div>
                                 
             
