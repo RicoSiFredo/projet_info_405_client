@@ -89,14 +89,16 @@ function Home({user, navigate}){
                 <div className="d-flex justify-content-around">
                     
                     <div className="w-100">
-                        <Carousel >
+                        <Carousel fade>
                             <Carousel.Item>
                                 <img 
                                     className="homeBanner"
                                     src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/38e35b05-a01d-4bc9-a5e7-168304e3ed72.png"}
                                     alt="First slide"
                                 />
-                                    <div className="centered"><p className="titleOverImg">Bienvenue</p></div>
+                                    <div className="centered">
+                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                    </div>
                                 <Carousel.Caption>
                                     <h4>Pour commencer créer vous un compte</h4>
                                     <h6>Personnalisez votre profil pour être le plus attractif possible<br></br>Montrez vos compétences</h6>
@@ -108,7 +110,9 @@ function Home({user, navigate}){
                                     src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/1f38497b-9c84-4da3-8cc2-a73661224da6.png"}
                                     alt="Second slide"
                                 />
-                                    <div className="centered"><p className="titleOverImg">Votre projet</p></div>
+                                    <div className="centered">
+                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                    </div>
                                 <Carousel.Caption>
                                     <h4>Créer un projet</h4>
                                     <h6>Concevez et publiez votre projet pour être rejoins par des professionnels</h6>
@@ -120,10 +124,12 @@ function Home({user, navigate}){
                                     src={"http://os-vps418.infomaniak.ch:1187/l2_info_9_file/image/5671235c-6421-4450-bd32-92fba7496448.png"}
                                     alt="Third slide"
                                 />
-                                    <div className="centered"><p className="titleOverImg">Postuler !</p></div>
+                                    <div className="centered">
+                                        <p className="titleOverImg">Trouvez les meilleurs services freelance pour votre business.</p>
+                                    </div>
                                 <Carousel.Caption>
-                                    <h4>Proposez-vous dans un projet</h4>
-                                    <h6>Si votre profil interesse le chef de projet, vous ferez partie de la team</h6>
+                                    <h4>Postuler !</h4>
+                                    <h6>Proposez-vous dans un projet, si votre profil interesse le chef de projet, vous ferez partie de la team</h6>
                                 </Carousel.Caption>
                             </Carousel.Item>
                         </Carousel>
