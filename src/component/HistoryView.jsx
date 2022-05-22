@@ -228,7 +228,8 @@ function HistoryView({user}){
                             <SelectCompetence
                                 compList={compList}
                                 updateCompList={updateCompList}
-                                project={user}>
+                                project={user}
+                                type = "skill">
 
                             </SelectCompetence>
                         </div>
