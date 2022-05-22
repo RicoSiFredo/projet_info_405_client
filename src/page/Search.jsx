@@ -105,7 +105,7 @@ function Search({navigate, rootUser}){
                     }
 
                     let div = <div key={index} className = "Hgris border d-flex m-2 p-1 justify-content-between" >
-                            <div className="banner border-bottom border-4 border-primary profil-tiny bg-light dixdix">
+                            <div className="banner border-4 border-primary profil-tiny bg-light dixdix">
                                 
                                 <ImgProfile elem={object}></ImgProfile>
                         </div>
