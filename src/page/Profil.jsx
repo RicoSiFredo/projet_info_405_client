@@ -19,7 +19,7 @@ function Profil({rootUser}){
     const {id} = useParams();
     const [user, updateUser] = useState(new User());
     const [rating, setRating] = useState(0);
-    
+    let canEdit = Data.isMe(user);
 
     user.id_str = id;
     function update(){
@@ -69,7 +69,7 @@ function Profil({rootUser}){
 
 
     
-    let canEdit = Data.isMe(user);
+    
     if (Data.isMe(user)){
         return <div className="d-flex justify-content-center flex-row">
         <div className="w-30 left-div">
