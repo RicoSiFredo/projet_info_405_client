@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { Envelope, EyeFill, PinFill } from "react-bootstrap-icons";
+import { Envelope, EnvelopeFill, EyeFill, PinFill } from "react-bootstrap-icons";
 import LinearCompList from "../list/LinearCompList";
 import Utils from "../utils/Utils";
 import CommentRow from "./CommentRow";
@@ -57,8 +57,10 @@ function TableComperatorRow({updateSelect, select, colList, offre, index, reques
                 </PinFill>
             }
             {
-                (request.invited&&
-                <Envelope></Envelope>)
+                (request.invited)&&
+                <EnvelopeFill className="mb-1 ms-2">
+
+                </EnvelopeFill>
             }
         </th>
         <th scope="row">{index}</th>

@@ -204,6 +204,11 @@ function TableComperatorUser({user}){
     if(selectRequest==undefined){
 
     }
+    else if(selectRequest.refuse_user==true){
+        buttonContent = <div className="d-flex">
+            <Button disabled={user.fermer===true} className="flex-even" onClick={unrefuse} variant="success">Redemander</Button>
+        </div>
+    }
     else if(selectRequest.accept==true){
         buttonContent = <div>
             <p>Vous faites désormais partie du projet !</p>
@@ -225,7 +230,7 @@ function TableComperatorUser({user}){
     else if(selectRequest.invited==undefined){
         buttonContent = <div className="d-flex">
             <Button disabled={user.fermer===true} className="flex-even me-2" onClick={!selectRequest.pinned_user?pin:unpin} variant="warning">{!selectRequest.pinned_user?"Epingler":"Dépingler"}</Button>
-            <Button disabled={user.fermer===true} className="flex-even" onClick={accept} variant="success">Accepter</Button>
+            <Button disabled={user.fermer===true} className="flex-even" onClick={refuse} variant="danger">Annuler</Button>
         </div>
     }
     else if(selectRequest.invited==true){

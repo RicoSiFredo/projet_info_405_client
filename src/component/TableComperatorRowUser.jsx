@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { EyeFill, PinFill } from "react-bootstrap-icons";
+import { EnvelopeFill, EyeFill, PinFill } from "react-bootstrap-icons";
 import LinearCompList from "../list/LinearCompList";
 import Utils from "../utils/Utils";
 import CommentRow from "./CommentRow";
@@ -33,9 +33,6 @@ function TableComperatorRowUser({updateSelect, select, colList, offre, index, re
         }
     }
     let next = "";
-    /*if(request.user.getTotalExp(colList[9].array)!=Utils.currentDate()){
-        next = " / "+Utils.getDate(request.user.getTotalExp(colList[7].array), 1)
-    }*/
     let classTr = "";
     if(request.accept==true){
         classTr = "accept-bg"
@@ -97,6 +94,12 @@ function TableComperatorRowUser({updateSelect, select, colList, offre, index, re
                 <PinFill className="mb-1 ms-2">
 
                 </PinFill>
+            }
+            {
+                (request.invited)&&
+                <EnvelopeFill className="mb-1 ms-2">
+
+                </EnvelopeFill>
             }
         </th>
         <th scope="row">{index}</th>
